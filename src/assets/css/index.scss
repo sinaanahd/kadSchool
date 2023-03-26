@@ -1,0 +1,407 @@
+@import "variables";
+@import "mixins";
+@import url(../fonts/font.css);
+html {
+    scroll-behavior: smooth;
+}
+body {
+    padding: 0;
+    margin: 0;
+    direction: rtl;
+    overflow-x: hidden !important;
+    font-size: 14px;
+    font-family: "main-font";
+    line-height: unset !important;
+    width: 100% !important;
+    min-width: 300px;
+    color: #000;
+    background-color: #fff;
+    * {
+        box-sizing: border-box !important;
+        margin: 0;
+        padding: 0;
+    }
+    a {
+        text-decoration: none !important;
+    }
+}
+
+/* universal styles */
+#root {
+    @include flexMixin(column, flex-start, center);
+}
+.mm-width{
+    max-width: 1300px;
+}
+.bgc-wrapper{
+    background-color: $backGround;
+    width: 100%;
+    @include flexMixin(column,flex-start,center);
+    padding: 32px 0;
+}
+a{
+    color: unset;
+}
+@keyframes spinMf {
+    from{
+        transform : rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg)
+    }
+}
+.inside-loader{
+    @include flexMixin(row,center,center);
+    svg{
+        animation: spinMf 1s ease-in-out 0s infinite normal;
+    }
+}
+/* universal styles */
+/* footer */
+.main-footer{
+    width: 100%;
+    @include flexMixin(column,flex-start,center);
+    background-color: $backGround;
+    gap: 20px;
+    padding: 40px 0 0;
+    .icons-wrapper{
+        @include flexMixin(row,center,center);
+        gap: 30px;
+        img{
+            width: 30px;
+            transition: $transition;
+        }
+    }
+    .gradient-signature{
+        width: 100%;
+        margin: 0;
+        @include flexMixin(row,center,center);
+        height: 80px;
+        background: $gradientColor;
+        color: #fff;
+        font-size: 16px;
+    }
+    .icon{
+        overflow: hidden;
+        width: 40px;
+        border: 0px solid $mainColor;
+        transition: $transition;
+        @include flexMixin(row,center,center);
+        height: 40px;
+        border-radius: 50% 0% 50% 50%;
+        &:hover{
+            transform: scale(1.2);
+            border-radius: 50% 0% 50% 50%;
+            border: 2px solid $mainColor;
+            img{
+                animation: spinAndGo .5s ease-in-out 0.1s 1 alternate;
+                width: 20px;
+            }
+        }
+    }
+
+}
+@keyframes spinAndGo {
+    0%{
+        transform: translate(0,0) rotate(0deg);
+    }
+    20%{
+        transform: translate(30px,0) rotate(360deg);
+    }
+    40%{
+        transform: translate(30px, -30px);
+    }
+    60%{
+        transform: translate(-30px, -30px);
+    }
+    80% {
+        transform: translate(-30px, 0px);
+    }
+    100%{
+        transform: translate(0, 0) rotate(720deg);
+    }
+}
+/* footer */
+/* header */
+.main-header{
+    @include flexMixin(row,space-between,center);
+    width: 100%;
+    padding: 20px;
+    border-bottom: 2px solid #d9d9d9;
+    color: $mainColor;
+    margin: 0 0 20px;
+    .logo-wrapper{
+        width: 181px;
+    }
+    .cart-name-wrapper{
+        @include flexMixin(row,center,center);
+        gap: 15px;
+        img{
+            width: 27px;
+        }
+    }
+    .user-name-wrapper{
+        color: $mainColor;
+        @include flexMixin(row,center,center);
+        gap: 5px;
+        min-width: 120px;
+        height: 50px;
+        border: 2px solid $mainColor;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: $transition;
+        &:hover{
+            color: #fff;
+            background-color: $mainColor;
+            img{
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+}
+/* header */
+/* side bar */
+.side-bar-wrapper{
+    flex : 0 0 120px;
+    height: 810px;
+    padding: 100px 0 32px;
+    @include flexMixin(column,space-between,center);
+    background-color: $mainColor;
+    color: #fff;
+    border-radius: 8px;
+    .items{
+        @include flexMixin(column,flex-start,center);
+        width: 100%;
+        gap: 20px;
+    }
+    .side-bar-item{
+        @include flexMixin(column,center,center);
+        gap: 10px;
+        font-size: 12px;
+        transition: $transition;
+        width: 90px;
+        height: 78px;
+    }
+    .active{
+        background-color: #fff;
+        border-radius: 8px;
+        color: $mainColor;
+        box-shadow: $boxShadow;
+    }
+}
+/* side bar */
+
+/* dashboard */
+.dashboard{
+    width: 100%;
+    @include flexMixin(row,space-between,flex-start);
+    gap: 40px;
+    .contetnt-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+    }
+    .orange-wrapper{
+        width: 100%;
+        height: 100px;
+        border: 2px solid $yellowColor;
+        border-radius: 10px;
+    }
+    .events-wrapper{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        margin: 20px 0;
+    }
+    .todays-classes{
+        width: 400px;
+        max-width: 400px;
+        height: 240px;
+        border-radius: 8px;
+        background-color: #fff;
+        padding: 15px;
+        @include flexMixin(column,flex-start,center);
+        box-shadow: $boxShadow;
+        .title{
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            padding: 0 0 10px;
+            border-bottom: 2px solid #c9c9c9;
+        }
+    }
+    .date-and-counter{
+        @include flexMixin(row,flex-end,center);
+        gap: 20px;
+        .counter-wrapper{
+            width: 250px;
+            height: 240px;
+            box-shadow:$boxShadow;
+            background-color: #fff;
+            border-radius: 8px;
+            @include flexMixin(column,center,center);
+            padding: 40px 10px;
+            gap: 40px;
+        }
+        .title{
+            font-size: 20px;
+        }
+        .counter{
+            width: 100%;
+            @include flexMixin(row-reverse,center,center);
+            gap: 10px;
+            color: $yellowColor;
+            .num{
+                color: $mainColor;
+                font-weight: bold;
+                font-size: 20px;
+                @include flexMixin(row,center,center);
+            }
+            .c-wrapper{
+                color: #000;
+                @include flexMixin(column,flex-start,center);
+                font-size: 12px;
+            }
+        }
+        .date{
+            width: 254px;
+            height: 240px;
+            @include flexMixin(column,flex-start,center);
+            border-radius: 8px;
+            box-shadow: $boxShadow;
+            background-color: #fff;
+            overflow: hidden;
+            .month{
+                width: 100%;
+                background-color: $mainColor;
+                color: #fff;
+                height: 74px;
+                @include flexMixin(row,center,center);
+                font-size: 24px;
+            }
+            .day-number{
+                width: 100%;
+                @include flexMixin(row,center,center);
+                height: 65px;
+                color: $mainColor;
+                font-size: 64px;
+                margin: 30px 0 10px;
+            }
+            .week-day{
+                color: $mainColor;
+                font-size: 24px;
+            }
+        }
+    }
+    .calender-wrapper{
+        width: 100%;
+        border-radius: 8px;
+        @include flexMixin(column,flex-start,center);
+        overflow: hidden;
+        box-shadow: $boxShadow;
+        .cal-title{
+            font-size: 20px;
+            width: 100%;
+            height: 82px;
+            background-color: #f0f0f0;
+            @include flexMixin(row,center,center);
+        }
+        .calender{
+            width: 100%;
+            @include flexMixin(row,center,flex-start);
+        }
+        .days{
+            flex: 0 0 116px;
+            @include flexMixin(column , flex-start , center);
+            background-color: #DADADA;
+        }
+        .day{
+            height: 120px;
+            @include flexMixin(column,center,center);
+            font-size: 16px;
+            gap: 5px;
+            .date{
+                font-size: 12px;
+            }
+        }
+        .row{
+            width: 100%;
+            @include flexMixin(row,space-between,center);
+            height: 120px;
+            border-bottom: 2px solid #f0f0f0;
+            gap: 40px;
+            padding: 0 10px;
+        }
+        .events-row-wrapper{
+            width: 100%;
+            @include flexMixin(column,flex-start,center);
+        }
+        .event{
+            @include flexMixin(column , center ,center);
+            gap: 5px;
+            width: 120px;
+        }
+        .class-name{
+            font-size: 20px;
+        }
+        .teacher{
+            font-size: 18px;
+        }
+        .time{
+            font-size: 14px;
+        }
+    }
+}
+
+/* dashboard */
+
+/* courses */
+.courses-section{
+    .main-content{
+        width: 100%;
+        @include flexMixin(row, space-between, flex-start);
+        gap: 40px;
+    }
+    .left-col{
+        @include flexMixin(column,space-between,center);
+        width: 100%;
+    }
+    .courses-wrapper{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        column-gap: 40px;
+        row-gap: 40px;
+        margin: 0 0 40px;
+    }
+    .course{
+        border-radius: 8px;
+        @include flexMixin(column,space-between,center);
+        padding: 5px 5px 20px;
+        background-color: #fff;
+        width: 100%;
+        gap:15px;
+        box-shadow: $boxShadow;
+        img{
+            border-radius: 8px;
+        }
+        .enter-class{
+            @include styler(#fff,$redColor,16px,8px);
+            height: 50px;
+            width: 140px;
+            @include flexMixin(row,center,center);
+        }
+        .recorded-sessions{
+            @include flexMixin(row, center, center);
+            @include styler(#fff, $mainColor, 16px, 8px);
+            height: 50px;
+            width: 155px;
+        }
+    }
+    .buy-course{
+        @include styler(#fff,$yellowColor, 24px,8px);
+        width: 190px;
+        height: 62px;
+        @include flexMixin(row,center,center);
+        margin: 80px 0 0 ;
+    }
+}
+
+/* courses */

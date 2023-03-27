@@ -5,11 +5,23 @@ import SideBar from "../side-bar/side-bar";
 import Calender from "./calender/calender";
 import Counter from "./counter/counter";
 import DateCalender from "./date/date";
+import { Helmet } from "react-helmet";
 class Dashboard extends Component {
   state = {};
   render() {
     return (
       <>
+        <Helmet>
+          <title>داشبورد کاربری کاد</title>
+          <meta
+            name="description"
+            content="صفحه کابری پنل دانش آموزان کاد برای دیدن اطلاعات شخصی"
+          />
+          <meta
+            name="keywords"
+            content="پنل دانش آموزی, کاد, کلاس های اینترنتی دریافت"
+          />
+        </Helmet>
         <Header />
         <section className="bgc-wrapper">
           <div className="dashboard mm-width">

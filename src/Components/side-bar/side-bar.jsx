@@ -7,6 +7,7 @@ import sideBarIcon_blue_2 from "../../assets/images/side-bar-icon-blue-2.svg";
 import sideBarIcon_3 from "../../assets/images/side-bar-icon-3.svg";
 import sideBarIcon_4 from "../../assets/images/side-bar-icon-4.svg";
 import sideBarIcon_5 from "../../assets/images/side-bar-icon-5.svg";
+import sideBarIcon__blue_5 from "../../assets/images/side-bar-icon-blue-5.svg";
 import sideBarIcon_6 from "../../assets/images/side-bar-icon-6.svg";
 
 let location;
@@ -63,15 +64,20 @@ class SideBar extends Component {
             <span className="text">تکالیف و اشکالات</span>
           </Link>
           <Link
-            to="#"
+            to="/Finance"
             className={
-              location === "" ? "active" + " side-bar-item" : "side-bar-item"
+              location === "Finance"
+                ? "active" + " side-bar-item"
+                : "side-bar-item"
             }>
-            <img src={sideBarIcon_5} alt="امور مالی" />
+            <img
+              src={location !== "Finance" ? sideBarIcon_5 : sideBarIcon__blue_5}
+              alt="امور مالی"
+            />
             <span className="text">امور مالی</span>
           </Link>
         </div>
-        <Link to="#" className="setting">
+        <Link to="/Profile" className="setting">
           <img src={sideBarIcon_6} alt="تنظیمات" />
         </Link>
       </div>

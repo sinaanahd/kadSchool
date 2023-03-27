@@ -3,6 +3,7 @@ import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 
 import sampleRectangle from "../../assets/images/sample-rectangle.svg";
+import { Link } from "react-router-dom";
 class Courses extends Component {
   state = {};
   render() {
@@ -18,69 +19,69 @@ class Courses extends Component {
                 <a href="#" className="enter-class">
                   ورود به کلاس
                 </a>
-                <a href="#" className="recorded-sessions">
+                <Link to="/Course/:id" className="recorded-sessions">
                   جلسات ضبط شده
-                </a>
+                </Link>
               </div>
               <div className="course">
                 <img src={sampleRectangle} alt="عکس کلاس" />
                 <a href="#" className="enter-class">
                   ورود به کلاس
                 </a>
-                <a href="#" className="recorded-sessions">
+                <Link to="/Course/:id" className="recorded-sessions">
                   جلسات ضبط شده
-                </a>
+                </Link>
               </div>
               <div className="course">
                 <img src={sampleRectangle} alt="عکس کلاس" />
                 <a href="#" className="enter-class">
                   ورود به کلاس
                 </a>
-                <a href="#" className="recorded-sessions">
+                <Link to="/Course/:id" className="recorded-sessions">
                   جلسات ضبط شده
-                </a>
+                </Link>
               </div>
               <div className="course">
                 <img src={sampleRectangle} alt="عکس کلاس" />
                 <a href="#" className="enter-class">
                   ورود به کلاس
                 </a>
-                <a href="#" className="recorded-sessions">
+                <Link to="/Course/:id" className="recorded-sessions">
                   جلسات ضبط شده
-                </a>
+                </Link>
               </div>
               <div className="course">
                 <img src={sampleRectangle} alt="عکس کلاس" />
                 <a href="#" className="enter-class">
                   ورود به کلاس
                 </a>
-                <a href="#" className="recorded-sessions">
+                <Link to="/Course/:id" className="recorded-sessions">
                   جلسات ضبط شده
-                </a>
+                </Link>
               </div>
               <div className="course">
                 <img src={sampleRectangle} alt="عکس کلاس" />
                 <a href="#" className="enter-class">
                   ورود به کلاس
                 </a>
-                <a href="#" className="recorded-sessions">
+                <Link to="/Course/:id" className="recorded-sessions">
                   جلسات ضبط شده
-                </a>
+                </Link>
               </div>
               <div className="course">
                 <img src={sampleRectangle} alt="عکس کلاس" />
                 <a href="#" className="enter-class">
                   ورود به کلاس
                 </a>
-                <a href="#" className="recorded-sessions">
+                <Link to="/Course/:id" className="recorded-sessions">
                   جلسات ضبط شده
-                </a>
+                </Link>
               </div>
             </div>
           </div>
-          <a href="#" className="buy-course">
+          <Link to="/Topics" className="buy-course">
             خرید دوره
-          </a>
+          </Link>
         </section>
       </>
     );

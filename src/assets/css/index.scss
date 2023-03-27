@@ -357,7 +357,7 @@ a{
 .courses-section{
     .main-content{
         width: 100%;
-        @include flexMixin(row, space-between, flex-start);
+        @include flexMixin(row, flex-start, flex-start);
         gap: 40px;
     }
     .left-col{
@@ -395,13 +395,254 @@ a{
             width: 155px;
         }
     }
-    .buy-course{
-        @include styler(#fff,$yellowColor, 24px,8px);
-        width: 190px;
-        height: 62px;
-        @include flexMixin(row,center,center);
-        margin: 80px 0 0 ;
-    }
+}
+.buy-course{
+    @include styler(#fff,$yellowColor, 24px,8px);
+    width: 190px;
+    height: 62px;
+    @include flexMixin(row,center,center);
+    margin: 80px 0 0 ;
 }
 
 /* courses */
+
+/* recorded courses */
+.recorded-sessions-section{
+    color: $mainColor;
+    .recorded-sessions{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 40px;
+    }
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+    }
+    .link-to-class{
+        font-size: 20px;
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+        &::before{
+            content: "";
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: $yellowColor;
+            
+        }
+    }
+}
+/* recorded courses */
+
+/* Topics Wrapper */
+.topics-wrapper-section{
+    @include flexMixin(column,flex-start,center);
+    width: 100%;
+    .topics-wrapper{
+        @include flexMixin(row,flex-start,flex-start);
+        width: 100%;
+        gap: 40px;
+    }
+    .main-content{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        column-gap: 25px;
+        row-gap: 25px;
+    }
+    .topic{
+        background-color: #fff;
+        border-radius: 16px;
+        box-shadow: $boxShadow;
+        padding: 16px;
+        @include flexMixin(column,flex-start,center);
+        .title{
+            font-size: 24px;
+        }
+        .desc{
+            margin: 9px 0 16px;
+            font-size: 20px;
+        }
+        .price{
+            font-size: 20px;
+        }
+        .buy-topic{
+            width: 100px;
+            height: 42px;
+            font-size: 18px;
+            background-color: $mainColor;
+            border-radius: 8px;
+            @include flexMixin(row,center,center);
+            color: #fff;
+            margin: 20px 0 0;
+        }
+        img{
+            border-radius: 5px;
+            margin: 0 0 10px;
+        }
+    }
+}
+/* Topics Wrapper */
+
+/* financial things */
+.finance-section{
+    width: 100%;
+    @include flexMixin(column,flex-start,center);
+    .finance-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+    }
+    .main-content{
+        width: 100%;
+        margin: 0 40px 0 20px;
+        @include flexMixin(column,flex-start,center);
+        gap: 40px;
+    }
+    h1{
+        width: 100%;
+        font-size: 32px;
+    }
+    .two-color-box{
+        width: 100%;
+        .title-wrapper{
+            height: 82px;
+            background-color: #f0f0f0;
+            @include flexMixin(row,space-between,center);
+            padding: 0 30px 0 20px;
+            border-radius: 8px 8px 0 0;
+            width: 100%;
+            h2{
+                font-size: 20px;
+            }
+        }
+        .descriptions-wrapper{
+            width: 100%;
+            @include flexMixin(column,flex-start,flex-start);
+            background-color: #f3f3f3;
+            border-radius: 0 0 8px 8px;
+            padding: 30px;
+            min-height: 120px;
+            h3{
+                font-size: 16px;
+            }
+        }
+    }
+    .discounts-btn{
+        flex: 0 0 205px;
+        height: 83px;
+        @include styler(#fff,$mainColor,24px,8px);
+        @include flexMixin(row,center,center);
+        margin: 90px 0 0 ;
+    }
+}
+/* financial things */
+
+/* profile */
+.profile-section{
+    width: 100%;
+    @include flexMixin(column,flex-start,center);
+    .profile-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 40px;
+    }
+    .mian-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 40px;
+    }
+    h1{
+        font-size: 26px;
+        width: 100%;
+    }
+    .forms-wrapper{
+        width: 100%;
+        @include flexMixin(row,space-between,flex-start);
+        // gap: 100px;
+    }
+    .col{
+        flex: 0 0 45%;
+        @include flexMixin(column,flex-start,center);
+        gap: 40px;
+    }
+    .constant-datas{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 40px;
+    }
+    .data-wrapper{
+        @include flexMixin(row,flex-start,center);
+        width: 100%;
+        gap: 10px;
+    }
+    .form-box{
+        width: 100%;
+        @include styler(#000,#f4f4f4,12px,8px);
+        padding: 20px;
+        box-shadow: $boxShadow;
+        @include flexMixin(column,flex-start,center);
+        gap: 30px;
+        h2{
+            font-size: 24px;
+            width: 100%;
+        }
+    }
+    .input-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 10px;
+        padding: 0 20px;
+        input{
+            background-color: #fff;
+            outline: 0px solid $mainColor;
+            border-radius: 8px;
+            border: 2px solid $mainColor;
+            height: 48px;
+            width: 100%;
+            padding: 0 15px;
+        }
+    }
+    .options{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+    .option{
+        width: 100%;
+        @include styler($mainColor,#fff , 16px , 8px);
+        border: 2px solid $mainColor;
+        @include flexMixin(row,center,center);
+        font-size: 12px;
+        height: 35px;
+        cursor: pointer;
+    }
+    .upload-documents{
+        @include styler($mainColor,#fff,20px,8px);
+        @include flexMixin(row,center,center);
+        height: 74px;
+        border: 2px solid $mainColor;
+        margin: 0 0 50px;
+        width: 90%;
+    }
+    .upload{
+        align-items: center;
+        cursor: pointer;
+        .label{
+            width: 100%
+        }
+        h2{
+            width: 100%;
+        }
+    }
+    .submit-btn{
+        @include flexMixin(row,center,center);
+        @include styler(#fff,$mainColor,16px,8px);
+        padding: 0 20px;
+        height: 49px;
+        margin: 0 0 20px;
+    }
+}
+/* profile */

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
-
+import { Helmet } from "react-helmet";
 import sampleRectangle from "../../assets/images/sample-rectangle.svg";
 import { Link } from "react-router-dom";
 class Courses extends Component {
@@ -9,6 +9,9 @@ class Courses extends Component {
   render() {
     return (
       <>
+        <Helmet>
+          <title>درس های من</title>
+        </Helmet>
         <Header />
         <section className="courses-section bgc-wrapper">
           <div className="main-content mm-width">

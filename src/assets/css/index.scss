@@ -56,6 +56,9 @@ a{
         animation: spinMf 1s ease-in-out 0s infinite normal;
     }
 }
+img {
+    max-width: 100%;
+}
 /* universal styles */
 /* footer */
 .main-footer{
@@ -140,6 +143,9 @@ a{
             width: 27px;
         }
     }
+    .cart-icon{
+        @include flexMixin(row,center,center);
+    }
     .user-name-wrapper{
         color: $mainColor;
         @include flexMixin(row,center,center);
@@ -157,6 +163,9 @@ a{
                 filter: brightness(0) invert(1);
             }
         }
+    }
+    .menu-icon{
+        display: none;
     }
 }
 /* header */
@@ -646,3 +655,151 @@ a{
     }
 }
 /* profile */
+
+@media  (max-width: 991px) {
+    .main-header {
+        z-index: 100;
+        border-bottom: 0px solid #000;
+        .menu-icon {
+            @include flexMixin(row,center,center);
+            flex: 0 0 25%;
+        }
+        .name{
+            display: none;
+        }
+        .user-name-wrapper{
+            min-width: unset;
+            border: 0px solid $mainColor;
+            height: unset;
+        }
+        .cart-name-wrapper{
+            gap: 20px;
+            flex : 0 0 25%;
+        }
+        .logo-wrapper{
+            flex: 0 0 40%;
+            @include flexMixin(row,center,center);
+            img{
+                width: 150px;
+            }
+        }
+    }
+    .responsive-side-bar-menu-wrapper{
+        background-color: rgba(97, 97, 97, 0.6);
+        width: 100vw;
+        position: fixed;
+        top: 84px;
+        right: 0;
+        height:calc(100vh - 80px);
+        z-index: 99;
+        @include flexMixin(row,flex-start,flex-start);
+        .side-bar-wrapper{
+            @include flexMixin(column,space-between,center);
+            padding:40px 0px 20px;
+            height: 100%;
+            border-radius: 8px 0 0 0;
+            .items{
+                gap: 30px;
+            }
+        }
+    }
+    .side-bar-wrapper{
+        display: none;
+    }
+    .mm-width{
+        padding: 20px 15px;
+    }
+    .profile-section{
+        .profile-wrapper{
+            @include flexMixin(column,flex-start,center);
+        }
+        .mian-content{
+            @include flexMixin(column, flex-start, center);
+        }
+        .forms-wrapper{
+            @include flexMixin(column, flex-start, center);
+            gap: 20px;
+        }
+        .col{
+            flex: 0 0 100%;
+            width: 100%;
+            gap: 20px;
+        }
+        .options{
+            grid-template-columns: repeat(3,1fr);
+        }
+    }
+    .dashboard{
+        .events-wrapper{
+            @include flexMixin(column,flex-start,center);
+            gap: 20px;
+        }
+        .todays-classes{
+            width: 100%;
+        }
+        .date-and-counter{
+            @include flexMixin(column, flex-start, center);
+            width: 100%;
+            .counter-wrapper,.date{
+                width: 100%;
+            }
+        }
+        .calender-wrapper{
+            overflow-x : scroll;
+            align-items: flex-start;
+            .cal-title{
+                width: 1300px;
+                justify-content: flex-start;
+                padding: 0 15px 0 0;
+            }
+            .calender{
+                width: 1300px;
+            }
+        }
+    }
+    .courses-section{
+        .courses-wrapper{
+            grid-template-columns: repeat(2,1fr);
+            column-gap: 20px;
+            row-gap: 20px;
+        }
+    }
+    .topics-wrapper-section{
+        .main-content{
+            grid-template-columns: repeat(2,1fr);
+        }
+        .topic{
+            .title{
+                font-size: 20px;
+            }
+            .desc{
+                font-size: 16px;
+            }
+            .price{
+                font-size: 14px;
+            }
+            .buy-topic{
+                font-size: 14px;
+                height: 30px;
+            }
+        }
+    }
+    .finance-section{
+        .finance-wrapper{
+            @include flexMixin(column,flex-start,center);
+        }
+        .main-content{
+            margin: 0;
+        }
+        .discounts-btn{
+            flex: 0 0 200px;
+            width: 200px;
+            max-height: 60px;
+        }
+    }
+    .main-footer{
+        .gradient-signature{
+            font-size: 12px;
+        }
+    }
+}

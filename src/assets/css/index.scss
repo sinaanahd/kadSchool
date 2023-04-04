@@ -227,14 +227,35 @@ img {
         border-radius: 8px;
         background-color: #fff;
         padding: 15px;
-        @include flexMixin(column,flex-start,center);
+        @include flexMixin(column,flex-start,flex-start);
         box-shadow: $boxShadow;
+        overflow: hidden;
         .title{
             font-size: 16px;
             width: 100%;
             font-weight: bold;
             padding: 0 0 10px;
             border-bottom: 2px solid #c9c9c9;
+        }
+        .classes-wrapper{
+            @include flexMixin(row,flex-start,center);
+            gap: 20px;
+            overflow-x: scroll;
+            height: 100%;
+            padding: 0 0 0 10px;
+            width: 100%;
+        }
+        .single-class{
+            flex: 0 0 140px;
+            height: 120px;
+            @include flexMixin(column,space-between,center);
+            border: 2px solid #A2A2A2;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 20px;
+        }
+        .time-wrapper{
+            font-size: 16px;
         }
     }
     .date-and-counter{
@@ -404,6 +425,48 @@ img {
             width: 155px;
         }
     }
+    .active{
+        .enter-class{
+            position: relative;
+            &::before{
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background-color: $yellowColor;
+                position: absolute;
+                top: -3px;
+                right: -3px;
+                content: "";
+            }
+        }
+    }
+    .no-courses{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        padding: 20px;
+    }
+    .title-for-empty{
+        font-size: 24px;
+        line-height: 35px;
+        margin: 60px 0 100px;
+        text-align: center;
+    }
+    .datas-wrapper{
+        width: 100%;
+        font-size: 20px;
+        line-height: 35px;
+        @include flexMixin(column,flex-start,flex-start);
+        p{
+            margin: 20px 0 0;
+        }
+    }
+    .call-datas{
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+        .label{
+            font-weight: bold;
+        }
+    }
 }
 .buy-course{
     @include styler(#fff,$yellowColor, 24px,8px);
@@ -412,7 +475,26 @@ img {
     @include flexMixin(row,center,center);
     margin: 80px 0 0 ;
 }
-
+.courses-pop-up-wrapper{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(140, 140, 140, 0.7);
+    position: fixed;
+    top: 0;
+    right: 0;
+    @include flexMixin(row,center,center);
+    .main-content{
+        width: 500px;
+        height: 281px;
+        border-radius: 8px;
+        font-size: 20px;
+        background-color: #fff;
+        @include flexMixin(column,center,center);
+        gap: 10px;
+        padding: 0 40px;
+        text-align: justify;
+    }
+}
 /* courses */
 
 /* recorded courses */
@@ -656,6 +738,163 @@ img {
 }
 /* profile */
 
+/* under construction */
+.under-construction-section{
+    .under-construction{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 40px;
+    }
+    .main-content{
+        @include flexMixin(column,center,center);
+        gap: 40px;
+        color: $mainColor;
+        font-size: 20px;
+        text-align: center;
+        width: 100%;
+        h1{
+            width: 700px;
+        }
+    }
+}
+/* under construction */
+
+/* Login */
+.login-wrapper-section{
+    .login-wrapper{
+        width: 100%;
+        @include flexMixin(row,center,flex-start);
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: $boxShadow;
+    }
+    .hero_img{
+        flex: 0 0 50%;
+        background-color: #007DB5B2;
+        border-radius: 8px;
+        padding: 150px;
+    }
+    .forms-wrapper{
+        @include flexMixin(column,flex-start,center);
+        width: 100%;
+        padding: 100px 0;
+        height: 100%;
+    }
+    h1{
+        color: #0C085C;
+        font-size: 32px;
+    }
+    .input{
+        margin: 50px 0 20px;
+        width: 331px;
+        height: 53px;
+        border-radius: 8px;
+        outline: 0px solid #000;
+        border: 2px solid $mainColor;
+        padding: 0 10px;
+        font-family: "main-font";
+    }
+    .button-span{
+        @include flexMixin(row,center,center);
+        height: 45px;
+        @include styler(#fff,$mainColor,16px,8px);
+        padding: 0 25px;
+    }
+}
+/* Login */
+/* contact us */
+.hello-page-section{
+    .hello-page{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 40px;
+    }
+    .main-content{
+        @include flexMixin(column,flex-start,center);
+        width: 100%;
+    }
+    .title{
+        font-size: 24px;
+        width: 100%;
+        margin: 0px 0 0;
+        line-height: 26px;
+    }
+    .sub-titile{
+        font-size: 20px;
+        width: 100%;
+        margin: 0 0 40px;
+    }
+    .help-ways{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        font-size: 16px;
+        gap: 20px;
+    }
+    .ways-to-contact-wrapper{
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+        a{
+            color: #185494;
+        }
+    }
+    .way-title{
+        font-weight: bold;
+    }
+}
+/* contact us */
+
+/* single session */
+.single-session{
+    width: 100%;
+    @include flexMixin(row,flex-start,flex-start);
+    gap: 40px;
+    .main-content{
+        @include flexMixin(column,flex-start,center);
+        width: 100%;
+    }
+    .title{
+        width: 100%;
+        font-size: 20px;
+        margin: 0 0 20px;
+    }
+    .single-details{
+        font-size: 16px;
+        margin: 20px 0 10px;
+        width: 100%;
+        padding: 0 100px;
+    }
+    .single-text{
+        font-size: 14px;
+        text-align: justify;
+        line-height: 27px;
+        width: 100%;
+        padding: 0 100px;
+    }
+    .btns-wrapper{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 25px;
+    }
+    .btn{
+        @include styler(#fff,$mainColor,16px,8px);
+        height: 48px;
+        padding: 0 20px;
+        @include flexMixin(row,center,center);
+        margin: 80px 0 0;
+        border: 2px solid $mainColor;
+        transition: $transition;
+        cursor: pointer;
+        &:hover{
+            background-color: #fff;
+            color: $mainColor;
+
+        }
+    }
+}
+/* single session */
+
+/* responsive */
 @media  (max-width: 991px) {
     .main-header {
         z-index: 100;
@@ -764,6 +1003,14 @@ img {
             row-gap: 20px;
         }
     }
+    .courses-pop-up-wrapper{
+        .main-content{
+            width: 200px;
+            height: auto;
+            font-size: 13px;
+            padding: 50px 10px;
+        }
+    }
     .topics-wrapper-section{
         .main-content{
             grid-template-columns: repeat(2,1fr);
@@ -796,6 +1043,25 @@ img {
             width: 200px;
             max-height: 60px;
         }
+    }
+    .login-wrapper-section {
+        .login-wrapper{
+            @include flexMixin(column,flex-start,center);
+            gap: 40px;
+        }
+        .hero_img{
+            padding: 50px;
+            flex: 0 0 100%;
+            width: 100%;
+        }
+        .forms-wrapper{
+            padding: 0 0 50px;
+        }
+    }
+    .single-session{
+       .single-text,.single-details{
+        padding: 0 10px;
+       }
     }
     .main-footer{
         .gradient-signature{

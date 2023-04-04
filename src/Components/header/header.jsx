@@ -9,6 +9,7 @@ import cross_menu_icon from "../../assets/images/cross-menu.svg";
 class Header extends Component {
   state = {
     menu: false,
+    user: false,
   };
   menu_toggle = () => {
     const menu = !this.state.menu;
@@ -41,9 +42,17 @@ class Header extends Component {
             <span className="cart-icon">
               <img src={cartIcon} alt="رفتن به سبد خرید" />
             </span>
-            <Link to="#" className="user-name-wrapper">
-              <span className="name">نام کاربری</span>
-              <img src={userIcon} alt="نام کاربری" />
+            <Link
+              to={this.state.user ? "#" : "/Login"}
+              className="user-name-wrapper">
+              {this.state.user ? (
+                <>
+                  <span className="name">نام کاربری</span>
+                  <img src={userIcon} alt="نام کاربری" />
+                </>
+              ) : (
+                "ثبت‌نام / ورود"
+              )}
             </Link>
           </div>
         </header>

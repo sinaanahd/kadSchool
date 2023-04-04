@@ -10,6 +10,10 @@ import RecordedCourses from "./Components/recorded-courses/recorded-courses";
 import Topics from './Components/topics/topics';
 import FinancialStuff from './Components/finalcial-stuff/financial-stuff';
 import Profile from './Components/profile/profile';
+import UnderConstruction from './Components/under-construction/under-construction';
+import Login from './Components/login/login';
+import Support from './Components/support-page/support-page';
+import SingleSession from './Components/single-session/single-session';
 import Footer from './Components/footer/footer';
 import './App.css';
 class App extends Component {
@@ -23,6 +27,10 @@ class App extends Component {
         <Route path="/Finance" component={FinancialStuff} />
         <Route path="/Courses" component={Courses} />
         <Route path="/Course/:id" component={RecordedCourses} />
+        <Route path="/SingleSession/:id" component={SingleSession} />
+        <Route path="/UnderConstruction" component={UnderConstruction} />
+        <Route path="/Login" component={Login} />
+        <Route path="/Support" component={Support} />
         <Redirect from="/" exact to="/Dashboard" />
       </Switch>
       <Footer />

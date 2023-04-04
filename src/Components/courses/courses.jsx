@@ -2,10 +2,25 @@ import React, { Component } from "react";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import { Helmet } from "react-helmet";
-import sampleRectangle from "../../assets/images/sample-rectangle.svg";
 import { Link } from "react-router-dom";
+import scrollToTop from "../functions/scroll";
+import Course from "./course/course";
+import PopUp from "./pop-up/pop-up";
+import EmptyCourses from "./empty-course/empty-courses";
 class Courses extends Component {
-  state = {};
+  state = {
+    pop_up: false,
+    courses: true,
+  };
+  open_class_pop_up = (e, entry) => {
+    if (!entry) {
+      this.setState({ pop_up: true });
+      e.preventDefault();
+    }
+  };
+  close_class_pop_up = () => {
+    this.setState({ pop_up: false });
+  };
   render() {
     return (
       <>
@@ -16,76 +31,67 @@ class Courses extends Component {
         <section className="courses-section bgc-wrapper">
           <div className="main-content mm-width">
             <SideBar />
-            <div className="courses-wrapper">
-              <div className="course">
-                <img src={sampleRectangle} alt="عکس کلاس" />
-                <a href="#" className="enter-class">
-                  ورود به کلاس
-                </a>
-                <Link to="/Course/:id" className="recorded-sessions">
-                  جلسات ضبط شده
-                </Link>
+            {this.state.courses ? (
+              <div className="courses-wrapper">
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={true}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={true}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={true}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={true}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={true}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={false}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={false}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={false}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={false}
+                />
+                <Course
+                  open_class_pop_up={this.open_class_pop_up}
+                  active={false}
+                />
               </div>
-              <div className="course">
-                <img src={sampleRectangle} alt="عکس کلاس" />
-                <a href="#" className="enter-class">
-                  ورود به کلاس
-                </a>
-                <Link to="/Course/:id" className="recorded-sessions">
-                  جلسات ضبط شده
-                </Link>
-              </div>
-              <div className="course">
-                <img src={sampleRectangle} alt="عکس کلاس" />
-                <a href="#" className="enter-class">
-                  ورود به کلاس
-                </a>
-                <Link to="/Course/:id" className="recorded-sessions">
-                  جلسات ضبط شده
-                </Link>
-              </div>
-              <div className="course">
-                <img src={sampleRectangle} alt="عکس کلاس" />
-                <a href="#" className="enter-class">
-                  ورود به کلاس
-                </a>
-                <Link to="/Course/:id" className="recorded-sessions">
-                  جلسات ضبط شده
-                </Link>
-              </div>
-              <div className="course">
-                <img src={sampleRectangle} alt="عکس کلاس" />
-                <a href="#" className="enter-class">
-                  ورود به کلاس
-                </a>
-                <Link to="/Course/:id" className="recorded-sessions">
-                  جلسات ضبط شده
-                </Link>
-              </div>
-              <div className="course">
-                <img src={sampleRectangle} alt="عکس کلاس" />
-                <a href="#" className="enter-class">
-                  ورود به کلاس
-                </a>
-                <Link to="/Course/:id" className="recorded-sessions">
-                  جلسات ضبط شده
-                </Link>
-              </div>
-              <div className="course">
-                <img src={sampleRectangle} alt="عکس کلاس" />
-                <a href="#" className="enter-class">
-                  ورود به کلاس
-                </a>
-                <Link to="/Course/:id" className="recorded-sessions">
-                  جلسات ضبط شده
-                </Link>
-              </div>
-            </div>
+            ) : (
+              <EmptyCourses />
+            )}
           </div>
-          <Link to="/Topics" className="buy-course">
+          {/* <Link
+            to="/Topics"
+            className="buy-course"
+            onClick={() => {
+              scrollToTop();
+            }}>
             خرید دوره
-          </Link>
+          </Link> */}
         </section>
+        {this.state.pop_up ? (
+          <PopUp close_pu={this.close_class_pop_up} />
+        ) : (
+          <></>
+        )}
       </>
     );
   }

@@ -6,8 +6,10 @@ import Calender from "./calender/calender";
 import Counter from "./counter/counter";
 import DateCalender from "./date/date";
 import { Helmet } from "react-helmet";
+import TodayClass from "./class/class";
 class Dashboard extends Component {
   state = {};
+
   render() {
     return (
       <>
@@ -32,7 +34,14 @@ class Dashboard extends Component {
                 <div className="todays-classes">
                   <h2 className="title">کلاس های امروز</h2>
                   <div className="classes-wrapper">
-                    <span className="class"></span>
+                    <TodayClass />
+                    <TodayClass />
+                    <TodayClass />
+                    <TodayClass />
+                    <TodayClass />
+                    <TodayClass />
+                    <TodayClass />
+                    <TodayClass />
                   </div>
                 </div>
                 <div className="date-and-counter">

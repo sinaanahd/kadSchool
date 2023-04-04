@@ -9,6 +9,8 @@ import sideBarIcon_4 from "../../assets/images/side-bar-icon-4.svg";
 import sideBarIcon_5 from "../../assets/images/side-bar-icon-5.svg";
 import sideBarIcon__blue_5 from "../../assets/images/side-bar-icon-blue-5.svg";
 import sideBarIcon_6 from "../../assets/images/side-bar-icon-6.svg";
+import sideBarIcon_7 from "../../assets/images/side-bar-icon-7.svg";
+import scrollToTop from "../functions/scroll";
 
 let location;
 class SideBar extends Component {
@@ -20,6 +22,9 @@ class SideBar extends Component {
       <div className="side-bar-wrapper">
         <div className="items">
           <Link
+            onClick={() => {
+              scrollToTop();
+            }}
             to="/Dashboard"
             className={
               location === "Dashboard"
@@ -35,6 +40,9 @@ class SideBar extends Component {
             <span className="text">میز مطالعه</span>
           </Link>
           <Link
+            onClick={() => {
+              scrollToTop();
+            }}
             to="/Courses"
             className={
               location === "Courses"
@@ -48,7 +56,10 @@ class SideBar extends Component {
             <span className="text">درس های من</span>
           </Link>
           <Link
-            to="#"
+            onClick={() => {
+              scrollToTop();
+            }}
+            to="UnderConstruction"
             className={
               location === "" ? "active" + " side-bar-item" : "side-bar-item"
             }>
@@ -56,7 +67,10 @@ class SideBar extends Component {
             <span className="text">درس های رایگان</span>
           </Link>
           <Link
-            to="#"
+            onClick={() => {
+              scrollToTop();
+            }}
+            to="/UnderConstruction"
             className={
               location === "" ? "active" + " side-bar-item" : "side-bar-item"
             }>
@@ -64,7 +78,10 @@ class SideBar extends Component {
             <span className="text">تکالیف و اشکالات</span>
           </Link>
           <Link
-            to="/Finance"
+            onClick={() => {
+              scrollToTop();
+            }}
+            to="/UnderConstruction"
             className={
               location === "Finance"
                 ? "active" + " side-bar-item"
@@ -76,8 +93,29 @@ class SideBar extends Component {
             />
             <span className="text">امور مالی</span>
           </Link>
+          <Link
+            onClick={() => {
+              scrollToTop();
+            }}
+            to="/Support"
+            className={
+              location === "Support"
+                ? "active" + " side-bar-item"
+                : "side-bar-item"
+            }>
+            <img
+              src={location !== "Support" ? sideBarIcon_7 : sideBarIcon_7}
+              alt="امور مالی"
+            />
+            <span className="text">پشتیبانی</span>
+          </Link>
         </div>
-        <Link to="/Profile" className="setting">
+        <Link
+          onClick={() => {
+            scrollToTop();
+          }}
+          to="/Profile"
+          className="setting">
           <img src={sideBarIcon_6} alt="تنظیمات" />
         </Link>
       </div>

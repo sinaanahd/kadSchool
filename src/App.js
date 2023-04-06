@@ -14,6 +14,7 @@ import UnderConstruction from './Components/under-construction/under-constructio
 import Login from './Components/login/login';
 import Support from './Components/support-page/support-page';
 import SingleSession from './Components/single-session/single-session';
+import FreeCourses from './Components/free-courses/free-courses';
 import Footer from './Components/footer/footer';
 import './App.css';
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
         <Route path="/Profile" component={Profile} />
         <Route path="/Finance" component={FinancialStuff} />
         <Route path="/Courses" component={Courses} />
+        <Route path="/FreeCourses" component={FreeCourses} />
         <Route path="/Course/:id" component={RecordedCourses} />
         <Route path="/SingleSession/:id" component={SingleSession} />
         <Route path="/UnderConstruction" component={UnderConstruction} />

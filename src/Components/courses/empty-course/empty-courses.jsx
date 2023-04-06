@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import sampleImg from "../../../assets/images/empty-sample.svg";
+import empty_img from "../../../assets/images/my-courses-photo.svg";
 class EmptyCourses extends Component {
   state = {};
   render() {
     return (
       <div className="no-courses">
-        <img src={sampleImg} />
+        <img src={empty_img} />
         <h1 className="title-for-empty">
           کاد به خودش افتخار میکنه که ما رو دنبال میکنی
           <br />

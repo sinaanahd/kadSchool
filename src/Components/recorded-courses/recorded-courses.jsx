@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
+import { Link } from "react-router-dom";
+import scrollToTop from "../functions/scroll";
 class RecordedCourses extends Component {
   state = {};
   render() {
@@ -15,32 +17,50 @@ class RecordedCourses extends Component {
           <div className="recorded-sessions mm-width">
             <SideBar />
             <div className="main-content">
-              <a href="#" className="link-to-class">
+              <Link
+                onClick={() => scrollToTop()}
+                to="/SingleSession/:id"
+                className="link-to-class">
                 کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{1}
-              </a>
-              <a href="#" className="link-to-class">
+              </Link>
+              <Link
+                onClick={() => scrollToTop()}
+                to="/SingleSession/:id"
+                className="link-to-class">
                 کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{2}
-              </a>
-              <a href="#" className="link-to-class">
+              </Link>
+              <Link
+                onClick={() => scrollToTop()}
+                to="/SingleSession/:id"
+                className="link-to-class">
                 کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{3}
-              </a>
-              <a href="#" className="link-to-class">
+              </Link>
+              <Link
+                onClick={() => scrollToTop()}
+                to="/SingleSession/:id"
+                className="link-to-class">
                 کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{4}
-              </a>
-              <a href="#" className="link-to-class">
+              </Link>
+              <Link
+                onClick={() => scrollToTop()}
+                to="/SingleSession/:id"
+                className="link-to-class">
                 کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{5}
-              </a>
-              <a href="#" className="link-to-class">
+              </Link>
+              <Link
+                onClick={() => scrollToTop()}
+                to="/SingleSession/:id"
+                className="link-to-class">
                 کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{6}
-              </a>
-              <a href="#" className="link-to-class">
+              </Link>
+              <Link
+                onClick={() => scrollToTop()}
+                to="/SingleSession/:id"
+                className="link-to-class">
                 کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{7}
-              </a>
+              </Link>
             </div>
           </div>
-          <a href="#" className="buy-course">
-            خرید دوره
-          </a>
         </section>
       </>
     );

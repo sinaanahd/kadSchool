@@ -894,6 +894,98 @@ img {
 }
 /* single session */
 
+/* free-course */
+.free-courses-wrapper{
+    width: 100%;
+    @include flexMixin(row,flex-start,flex-start);
+    gap: 40px;
+    .main-content{
+        @include flexMixin(column,flex-start,center);
+        width: 100%;
+        gap: 100px;
+    }
+    .title{
+        font-size: 24px;
+        width: 100%;
+    }
+    .boxes-place{
+        width: 1000px;
+        @include flexMixin(column,flex-start,center);
+        gap: 30px;
+    }
+    .sub-title-wrapper{
+        width: 100%;
+        @include flexMixin(row-reverse,flex-end,center);
+        gap: 10px;
+    }
+    .sub-title{
+        font-size: 20px;
+    }
+    .subjects{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 50px;
+    }
+    .subject{
+        @include styler($mainColor,#fff,24px,8px);
+        border : 2px solid #0C084F;
+        width: 200px;
+        height: 200px;
+        @include flexMixin(column,space-between,center);
+        padding: 30px 0;
+    }
+    .fields{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap : 16px;
+        flex-wrap: wrap;
+        align-content: baseline;
+    }
+    .field{
+        @include styler($mainColor, #fff, 20px, 8px);
+        border: 2px solid #0C084F;
+        width: 163px;
+        height: 100px;
+        @include flexMixin(row,center,center);
+    }
+    .kinds{
+        width: 100%;
+        @include flexMixin(row, center, center);
+        gap: 50px;
+    }
+    .kind{
+        @include styler($mainColor, #fff, 24px, 8px);
+        border: 2px solid #0C084F;
+        width: 163px;
+        height: 163px;
+        @include flexMixin(row, center, center);
+    }
+    .f-courses-wrapper{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        row-gap: 15px;
+        column-gap: 15px;
+    }
+    .fcourse{
+        @include flexMixin(column,center,center);
+        width: 100%;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: $boxShadow;
+        padding: 10px 10px 17px;
+        gap: 15px;
+        .view-btn{
+            width: 100px;
+            height: 50px;
+            @include styler(#fff,$redColor,16px,8px);
+            @include flexMixin(row,center,center);
+        }
+    }
+}
+/* free-course */
+
+
 /* responsive */
 @media  (max-width: 991px) {
     .main-header {
@@ -1062,6 +1154,28 @@ img {
        .single-text,.single-details{
         padding: 0 10px;
        }
+    }
+    .free-courses-wrapper {
+        .main-content{
+            gap: 40px;
+        }
+        .boxes-place{
+            width: 100%;
+            align-items: center;
+        }
+        .subjects{
+            @include flexMixin(column,flex-start,center);
+            flex-wrap: wrap;
+            align-content:center;
+        }.fields,.kinds{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            row-gap: 20px;
+            column-gap: 10px;
+        }
+        .f-courses-wrapper{
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
     .main-footer{
         .gradient-signature{

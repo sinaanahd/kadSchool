@@ -5,11 +5,14 @@ import sideBarIcon_blue_1 from "../../assets/images/side-bar-icon-blue-1.svg";
 import sideBarIcon_2 from "../../assets/images/side-bar-icon-2.svg";
 import sideBarIcon_blue_2 from "../../assets/images/side-bar-icon-blue-2.svg";
 import sideBarIcon_3 from "../../assets/images/side-bar-icon-3.svg";
+import sideBarIcon_blue_3 from "../../assets/images/side-bar-icon-blue-3.svg";
 import sideBarIcon_4 from "../../assets/images/side-bar-icon-4.svg";
+import sideBarIcon_blue_4 from "../../assets/images/side-bar-icon-blue-4.svg";
 import sideBarIcon_5 from "../../assets/images/side-bar-icon-5.svg";
 import sideBarIcon__blue_5 from "../../assets/images/side-bar-icon-blue-5.svg";
 import sideBarIcon_6 from "../../assets/images/side-bar-icon-6.svg";
 import sideBarIcon_7 from "../../assets/images/side-bar-icon-7.svg";
+import sideBarIcon_blue_7 from "../../assets/images/side-bar-icon-blue-7.svg";
 import scrollToTop from "../functions/scroll";
 
 let location;
@@ -59,11 +62,18 @@ class SideBar extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to="UnderConstruction"
+            to="FreeCourses"
             className={
-              location === "" ? "active" + " side-bar-item" : "side-bar-item"
+              location === "FreeCourses"
+                ? "active" + " side-bar-item"
+                : "side-bar-item"
             }>
-            <img src={sideBarIcon_3} alt="درس های رایگان" />
+            <img
+              src={
+                location === "FreeCourses" ? sideBarIcon_blue_3 : sideBarIcon_3
+              }
+              alt="درس های رایگان"
+            />
             <span className="text">درس های رایگان</span>
           </Link>
           <Link
@@ -104,7 +114,7 @@ class SideBar extends Component {
                 : "side-bar-item"
             }>
             <img
-              src={location !== "Support" ? sideBarIcon_7 : sideBarIcon_7}
+              src={location !== "Support" ? sideBarIcon_7 : sideBarIcon_blue_7}
               alt="امور مالی"
             />
             <span className="text">پشتیبانی</span>

@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import Header from "../header/header";
 
 import login_img from "../../assets/images/login-img.svg";
+import { Link } from "react-router-dom";
+import scrollToTop from "../functions/scroll";
 class Login extends Component {
   state = {};
   render() {
@@ -28,7 +30,14 @@ class Login extends Component {
                 className="input-text input"
                 placeholder="کد یکبار مصرف"
               />
-              <span className="enter button-span">ورود</span>
+              <Link
+                to="/SignUp"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="enter button-span">
+                ورود
+              </Link>
             </div>
           </div>
         </section>

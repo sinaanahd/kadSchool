@@ -62,7 +62,7 @@ class SideBar extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to="FreeCourses"
+            to="/FreeCourses"
             className={
               location === "FreeCourses"
                 ? "active" + " side-bar-item"

@@ -15,6 +15,7 @@ import Login from './Components/login/login';
 import Support from './Components/support-page/support-page';
 import SingleSession from './Components/single-session/single-session';
 import FreeCourses from './Components/free-courses/free-courses';
+import SignUp from './Components/signup/signup';
 import Footer from './Components/footer/footer';
 import './App.css';
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
         <Route path="/SingleSession/:id" component={SingleSession} />
         <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/Login" component={Login} />
+        <Route path="/SignUp" component={SignUp} />
         <Route path="/Support" component={Support} />
         <Redirect from="/" exact to="/Dashboard" />
       </Switch>

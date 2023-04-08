@@ -6,8 +6,10 @@ import Subjects from "./subjects/subjects";
 import fields from "./fields";
 import Fields from "./fields/fields";
 import Kinds from "./kinds/kinds";
-import arrow from "../../assets/images/circle-arrow-right.svg";
 import FCourses from "./fcoureses/fcourses";
+import arrow from "../../assets/images/circle-arrow-right.svg";
+import seprator from "../../assets/images/seprator.svg";
+
 class FreeCourse extends Component {
   state = {
     step: "subject",
@@ -44,6 +46,9 @@ class FreeCourse extends Component {
       this.setState({ step: "field" });
     }
   };
+  title_back = (step) => {
+    this.setState({ step });
+  };
   render() {
     return (
       <>
@@ -57,11 +62,34 @@ class FreeCourse extends Component {
             <div className="main-content">
               <h1
                 className={
-                  this.state.step === "course" ? "title" : "title three-part"
+                  this.state.step === "course" ? "title three-part" : "title"
                 }>
-                {this.state.step === "course"
-                  ? `درس‌های رایگان > ${this.state.selected_options.field} > ${this.state.selected_options.kind}`
-                  : "درس های رایگان"}
+                {this.state.step === "course" ? (
+                  <>
+                    <span
+                      onClick={() => {
+                        this.title_back("subject");
+                      }}>
+                      درس های رایگان
+                    </span>
+                    <img src={seprator} />
+                    <span
+                      onClick={() => {
+                        this.title_back("field");
+                      }}>
+                      {this.state.selected_options.field}
+                    </span>
+                    <img src={seprator} />
+                    <span
+                      onClick={() => {
+                        this.title_back("kind");
+                      }}>
+                      {this.state.selected_options.kind}
+                    </span>
+                  </>
+                ) : (
+                  "درس های رایگان"
+                )}
               </h1>
               <div className="boxes-place">
                 <span className="sub-title-wrapper">

@@ -803,6 +803,74 @@ img {
     }
 }
 /* Login */
+/* SignUp*/
+.singup-wrapper-section{
+    .signup-wrapper {
+        width: 100%;
+        @include flexMixin(row, center, flex-start);
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: $boxShadow;
+    }
+    .hero_img {
+        flex: 0 0 50%;
+        background-color: #007DB5B2;
+        border-radius: 8px;
+        padding: 150px;
+    }
+
+    .forms-wrapper {
+        @include flexMixin(column, flex-start, center);
+        width: 100%;
+        padding: 100px 0;
+        height: 100%;
+        gap: 30px;
+    }
+    .title{
+        color: #0C085C;
+        font-size: 32px;
+    }
+    input , select{
+        width: 300px;
+        height: 53px;
+        border-radius: 8px;
+        outline: 0px solid $mainColor;
+        border: 2px solid $mainColor;
+        font-family: "main-font";
+        padding: 0 10px;
+    }
+    .agree_to-rules{
+        width: 100%;
+        font-size: 12px;
+        @include flexMixin(row,center,center);
+        gap: 10px;
+        cursor: pointer;  
+    }
+    .check{
+        width: 12px;
+        height: 12px;
+        border-radius: 4px;
+        border: 1px solid #0C084F;   
+    }
+    .checked{
+        background-color: #0C084F;
+    }
+    .submit-btn{
+        @include flexMixin(row,center,center);
+        @include styler(#fff,$mainColor,16px,8px);
+        width: 100px;
+        height: 50px;
+        border: 2px solid $mainColor;
+        cursor: pointer;
+        transition: $transition;
+        &:hover{
+            background-color: #fff;
+            color: $mainColor;
+        }
+    }
+}
+/* SignUp*/
 /* contact us */
 .hello-page-section{
     .hello-page{
@@ -907,6 +975,21 @@ img {
     .title{
         font-size: 24px;
         width: 100%;
+    }
+    .three-part{
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+        color: $mainColor;
+        cursor: pointer;
+        span{
+            transition: all ease-out 0.1s;
+            border: 3px solid $backGround;
+            padding: 0 0 2px;
+            box-sizing: border-box;
+            &:hover{
+                border-bottom: 3px solid $mainColor;
+            }
+        }
     }
     .boxes-place{
         width: 1000px;

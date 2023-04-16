@@ -31,11 +31,13 @@ class App extends Component {
         <Route path="/FreeCourses" component={FreeCourses} />
         <Route path="/Course/:id" component={RecordedCourses} />
         <Route path="/SingleSession/:id" component={SingleSession} />
-        <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/Login" component={Login} />
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Support" component={Support} />
         <Redirect from="/" exact to="/Dashboard" />
+        <Route path="/UnderConstruction" component={UnderConstruction} />
+        <Route path="/not-found" component={UnderConstruction} />
+        <Redirect to="/not-found" />
       </Switch>
       <Footer />
     </>);

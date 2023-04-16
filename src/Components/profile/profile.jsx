@@ -32,29 +32,26 @@ class Profile extends Component {
                     <h2>تغییر مشخصات کاربری</h2>
                     <span className="input-wrapper">
                       <span className="label">رشته تحصیلی:</span>
-                      <span className="options">
-                        <span className="option">ریاضی و فیزیک</span>
-                        <span className="option">تجربی</span>
-                        <span className="option">انسانی</span>
-                        <span className="option">هنر</span>
-                      </span>
+                      <select name="" id="" placeholder="">
+                        <option value="">پایه تحصیلی</option>
+                        <option value="">دهم</option>
+                        <option value="">یازدهم</option>
+                        <option value="">دوازدهم</option>
+                      </select>
                     </span>
                     <span className="input-wrapper">
                       <span className="label">پایه تحصیلی:</span>
-                      <span className="options">
-                        <span className="option">دهم</span>
-                        <span className="option">یازدهم</span>
-                        <span className="option">دوازدهم</span>
-                      </span>
-                    </span>
-                    <span className="input-wrapper">
-                      <span className="label">شهر:</span>
-                      <input type="text" />
+                      <select name="" id="" placeholder="">
+                        <option value="">رشته تحصیلی</option>
+                        <option value="">ریاضی</option>
+                        <option value="">تجربی</option>
+                        <option value="">انسانی</option>
+                      </select>
                     </span>
                     <span className="submit-btn">تغییر مشخصات کاربری</span>
                   </div>
                 </div>
-                <div className="col col-2">
+                {/* <div className="col col-2">
                   <div className="form-box">
                     <h2>تغییر رمز عبور</h2>
                     <span className="input-wrapper">
@@ -77,7 +74,7 @@ class Profile extends Component {
                     </span>
                     <span className="submit-btn">ارسال مدارک</span>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

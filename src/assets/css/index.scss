@@ -167,6 +167,9 @@ img {
     .menu-icon{
         display: none;
     }
+    .reponsive-icon-for-login{
+        display: none;
+    }
 }
 /* header */
 /* side bar */
@@ -244,6 +247,13 @@ img {
             height: 100%;
             padding: 0 0 0 10px;
             width: 100%;
+        }
+        .no-class{
+            width: 100%;
+            height: 100%;
+            @include flexMixin(row,center,center);
+            gap: 10px;
+            font-size: 20px;
         }
         .single-class{
             flex: 0 0 140px;
@@ -684,14 +694,23 @@ img {
         @include flexMixin(column,flex-start,flex-start);
         gap: 10px;
         padding: 0 20px;
-        input{
-            background-color: #fff;
-            outline: 0px solid $mainColor;
-            border-radius: 8px;
-            border: 2px solid $mainColor;
+        // input{
+        //     background-color: #fff;
+        //     outline: 0px solid $mainColor;
+        //     border-radius: 8px;
+        //     border: 2px solid $mainColor;
+        //     height: 48px;
+        //     width: 100%;
+        //     padding: 0 15px;
+        // }
+        select{
+            font-family : "main-font";
             height: 48px;
             width: 100%;
+            outline: 0px solid $mainColor;
+            border: 2px solid $mainColor;
             padding: 0 15px;
+            border-radius: 8px;
         }
     }
     .options{
@@ -761,24 +780,41 @@ img {
 
 /* Login */
 .login-wrapper-section{
+    width: 100vw;
+    height: 100vh;
+    padding:50px 15px 50px;
+    background-color: #EDFBFF;
+    @include flexMixin(column,center,center);
+    overflow: hidden!important;
+    gap: 50px;
+    .main-logo{
+        width: 200px;
+        position: relative;
+        z-index: 2;
+    }
+    .login-bgc{
+        position: absolute;
+        height: 80%;
+        opacity:0.5;
+        z-index: 1;
+        top: 130px;
+        filter: blur(5px);
+    }
     .login-wrapper{
         width: 100%;
+        max-width: 583px;
         @include flexMixin(row,center,flex-start);
         border-radius: 8px;
         overflow: hidden;
-        background-color: #fff;
-        box-shadow: $boxShadow;
-    }
-    .hero_img{
-        flex: 0 0 50%;
-        background-color: #007DB5B2;
-        border-radius: 8px;
-        padding: 150px;
+        background-color: rgba($color: #fff, $alpha: 0.7);
+        z-index: 2;
+        position: relative;
+        border: 2px solid $mainColor;
     }
     .forms-wrapper{
         @include flexMixin(column,flex-start,center);
         width: 100%;
-        padding: 100px 0;
+        padding: 30px 0;
         height: 100%;
     }
     h1{
@@ -800,6 +836,42 @@ img {
         height: 45px;
         @include styler(#fff,$mainColor,16px,8px);
         padding: 0 25px;
+    }
+    select {
+        width: 331px;
+        height: 53px;
+        border-radius: 8px;
+        outline: 0px solid $mainColor;
+        border: 2px solid $mainColor;
+        font-family: "main-font";
+        padding: 0 10px;
+        margin: 20px;
+    }
+    .check {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 1px solid $mainColor;
+        img{
+            display: none;
+        }
+    }
+    .checked {
+        @include flexMixin(row,center,center);
+        border: 0px solid $mainColor;
+        img{
+            display: block;
+            width:100%;
+            transform: scale(1.1);
+        }
+    }
+    .agree_to-rules {
+        width: 100%;
+        font-size: 12px;
+        @include flexMixin(row, center, center);
+        gap: 10px;
+        cursor: pointer;
+        margin: 20px 0;
     }
 }
 /* Login */
@@ -939,6 +1011,35 @@ img {
         width: 100%;
         padding: 0 100px;
     }
+    .no-jozve-wrapper{
+        width: 409px;
+        @include styler(#000,#fff,16px,8px);
+        height: 64px;
+        @include flexMixin(row,flex-start,center);
+        gap: 15px;
+        box-shadow: $boxShadow;
+        overflow: hidden;
+        margin: 50px 0 -50px;
+        position: relative;
+        .blue-box{
+            height: 100%;
+            width: 30px;
+            background-color: #407BFF;
+        }
+        .info{
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+            background-color: #407BFF;
+            padding: 15px;
+        }
+        .cross{
+            position: absolute;
+            top:15px;
+            left: 15px;
+            cursor: pointer;
+        }
+    }
     .btns-wrapper{
         width: 100%;
         @include flexMixin(row,center,center);
@@ -1074,6 +1175,11 @@ img {
     .main-header {
         z-index: 100;
         border-bottom: 0px solid #000;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        left: 0;
+        background-color: #fff;
         .menu-icon {
             @include flexMixin(row,center,center);
             flex: 0 0 25%;
@@ -1097,6 +1203,12 @@ img {
                 width: 150px;
             }
         }
+        .reponsive-icon-for-login {
+            display: block;
+        }
+    }
+    .bgc-wrapper{
+        margin-top: 82px;
     }
     .responsive-side-bar-menu-wrapper{
         background-color: rgba(97, 97, 97, 0.6);
@@ -1219,8 +1331,8 @@ img {
             max-height: 60px;
         }
     }
-    .login-wrapper-section {
-        .login-wrapper{
+    .login-wrapper-section ,.singup-wrapper-section {
+        .login-wrapper , .signup-wrapper{
             @include flexMixin(column,flex-start,center);
             gap: 40px;
         }
@@ -1237,6 +1349,11 @@ img {
        .single-text,.single-details{
         padding: 0 10px;
        }
+        .no-jozve-wrapper{
+            width: 100%;
+            gap: 5px;
+            font-size: 14px;
+        }
     }
     .free-courses-wrapper {
         .main-content{

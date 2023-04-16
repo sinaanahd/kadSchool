@@ -42,7 +42,7 @@ class Counter extends Component {
         <div className="counter">
           <span className="days c-wrapper">
             <span className="num">
-              {this.state.counter.days ? (
+              {this.state.counter.days || this.state.counter.days === 0 ? (
                 this.state.counter.days
               ) : (
                 <LittleLoading />
@@ -53,7 +53,7 @@ class Counter extends Component {
           :
           <span className="hours c-wrapper">
             <span className="num">
-              {this.state.counter.hours ? (
+              {this.state.counter.hours || this.state.counter.hours === 0 ? (
                 this.state.counter.hours
               ) : (
                 <LittleLoading />
@@ -64,7 +64,8 @@ class Counter extends Component {
           :
           <span className="minutes c-wrapper">
             <span className="num">
-              {this.state.counter.minutes ? (
+              {this.state.counter.minutes ||
+              this.state.counter.minutes === 0 ? (
                 this.state.counter.minutes
               ) : (
                 <LittleLoading />
@@ -75,7 +76,8 @@ class Counter extends Component {
           :
           <span className="seconds c-wrapper">
             <span className="num">
-              {this.state.counter.seconds ? (
+              {this.state.counter.seconds ||
+              this.state.counter.seconds === 0 ? (
                 this.state.counter.seconds
               ) : (
                 <LittleLoading />

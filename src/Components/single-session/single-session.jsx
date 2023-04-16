@@ -3,9 +3,18 @@ import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import { Helmet } from "react-helmet";
 
+import iSvg from "../../assets/images/i.svg";
+import crossSvg from "../../assets/images/cross.svg";
 import sampleImg from "../../assets/images/single-sample.svg";
 class SingleSession extends Component {
-  state = {};
+  state = {
+    jozve: false,
+    no_jozve: false,
+  };
+  show_no_content = () => {
+    const no_jozve = !this.state.no_jozve;
+    this.setState({ no_jozve });
+  };
   render() {
     return (
       <>
@@ -35,8 +44,35 @@ class SingleSession extends Component {
                 وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات
                 پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
               </p>
+              {this.state.no_jozve ? (
+                <div className="no-jozve-wrapper">
+                  <span className="blue-box"></span>
+                  <img src={iSvg} alt="info" className="info" />
+                  <p>برای این جلسه جزوه ای قرار داده نشده</p>
+                  <img
+                    src={crossSvg}
+                    alt="بستن"
+                    className="cross"
+                    onClick={() => {
+                      this.show_no_content();
+                    }}
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
               <div className="btns-wrapper">
-                <span className="btn">دانلود جزوه</span>
+                {this.state.jozve ? (
+                  <a className="btn">دانلود جزوه</a>
+                ) : (
+                  <span
+                    onClick={() => {
+                      this.show_no_content();
+                    }}
+                    className="btn">
+                    دانلود جزوه
+                  </span>
+                )}
                 <span className="btn">تکلیف این جلسه</span>
               </div>
             </div>

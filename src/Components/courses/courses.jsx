@@ -35,7 +35,7 @@ class Courses extends Component {
               <div className="courses-wrapper">
                 <Course
                   open_class_pop_up={this.open_class_pop_up}
-                  active={true}
+                  active={false}
                 />
                 <Course
                   open_class_pop_up={this.open_class_pop_up}

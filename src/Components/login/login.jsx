@@ -1,22 +1,32 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
-import Header from "../header/header";
-
-import login_img from "../../assets/images/login-img.svg";
 import { Link } from "react-router-dom";
 import scrollToTop from "../functions/scroll";
+
+import mainLogo from "../../assets/images/main-logo.webp";
+import login_bgc from "../../assets/images/login-img.svg";
+
 class Login extends Component {
   state = {};
+  componentDidMount() {
+    document.querySelector(".main-footer").style.display = "none";
+  }
   render() {
     return (
       <>
         <Helmet>
           <title>ورود به سایت</title>
         </Helmet>
-        <Header />
-        <section className="login-wrapper-section bgc-wrapper">
+        <section className="login-wrapper-section">
+          <img
+            src={login_bgc}
+            alt="عکس پس زمینه برای صفحه ورود"
+            className="login-bgc"
+          />
+          <Link to="/Dashboard" className="main-logo">
+            <img src={mainLogo} alt="وب سایت کاد" />
+          </Link>
           <div className="login-wrapper mm-width">
-            <img src={login_img} className="hero_img" />
             <div className="forms-wrapper">
               <h1>ورود به سایت</h1>
               <input

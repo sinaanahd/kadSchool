@@ -11,6 +11,9 @@ class Login extends Component {
   componentDidMount() {
     document.querySelector(".main-footer").style.display = "none";
   }
+  componentWillUnmount() {
+    document.querySelector(".main-footer").style.display = "flex";
+  }
   render() {
     return (
       <>

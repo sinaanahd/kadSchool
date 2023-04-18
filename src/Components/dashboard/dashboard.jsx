@@ -7,6 +7,7 @@ import DateCalender from "./date/date";
 import { Helmet } from "react-helmet";
 import TodayClass from "./class/class";
 import noClassImg from "../../assets/images/no-class.svg";
+import Calender_2 from "./calender/calender-2";
 class Dashboard extends Component {
   state = {
     classes: true,
@@ -58,7 +59,8 @@ class Dashboard extends Component {
                   <DateCalender />
                 </div>
               </div>
-              <Calender />
+              {/* <Calender /> */}
+              <Calender_2 />
             </div>
           </div>
         </section>

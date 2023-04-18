@@ -11,6 +11,9 @@ class SignUp extends Component {
   componentDidMount() {
     document.querySelector(".main-footer").style.display = "none";
   }
+  componentWillUnmount() {
+    document.querySelector(".main-footer").style.display = "flex";
+  }
   agree_handler = () => {
     const agree = !this.state.agree;
     this.setState({ agree });

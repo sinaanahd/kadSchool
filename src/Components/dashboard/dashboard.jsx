@@ -32,8 +32,11 @@ class Dashboard extends Component {
           <div className="dashboard mm-width">
             <SideBar />
             <div className="contetnt-wrapper">
-              <div className="orange-wrapper"></div>
-              <div className="events-wrapper">
+              <div className="slider-calender">
+                <Counter />
+                <div className="orange-wrapper"></div>
+              </div>
+              {/* <div className="events-wrapper">
                 <div className="todays-classes">
                   <h2 className="title">کلاس های امروز من</h2>
                   {this.state.classes ? (
@@ -54,11 +57,7 @@ class Dashboard extends Component {
                     </div>
                   )}
                 </div>
-                <div className="date-and-counter">
-                  <Counter />
-                  <DateCalender />
-                </div>
-              </div>
+              </div> */}
               {/* <Calender /> */}
               <Calender_2 />
             </div>

@@ -211,10 +211,11 @@ img {
     .contetnt-wrapper{
         width: 100%;
         @include flexMixin(column,flex-start,center);
+        gap: 40px;
     }
     .orange-wrapper{
         width: 100%;
-        height: 100px;
+        height: 160px;
         border: 2px solid $yellowColor;
         border-radius: 10px;
     }
@@ -223,114 +224,127 @@ img {
         @include flexMixin(row,space-between,center);
         margin: 20px 0;
     }
-    .todays-classes{
-        width: 400px;
-        max-width: 400px;
-        height: 240px;
-        border-radius: 8px;
+    // .todays-classes{
+    //     width: 400px;
+    //     max-width: 400px;
+    //     height: 240px;
+    //     border-radius: 8px;
+    //     background-color: #fff;
+    //     padding: 15px;
+    //     @include flexMixin(column,flex-start,flex-start);
+    //     box-shadow: $boxShadow;
+    //     overflow: hidden;
+    //     .title{
+    //         font-size: 16px;
+    //         width: 100%;
+    //         font-weight: bold;
+    //         padding: 0 0 10px;
+    //         border-bottom: 2px solid #c9c9c9;
+    //     }
+    //     .classes-wrapper{
+    //         @include flexMixin(row,flex-start,center);
+    //         gap: 20px;
+    //         overflow-x: scroll;
+    //         height: 100%;
+    //         padding: 0 0 0 10px;
+    //         width: 100%;
+    //     }
+    //     .no-class{
+    //         width: 100%;
+    //         height: 100%;
+    //         @include flexMixin(row,center,center);
+    //         gap: 10px;
+    //         font-size: 20px;
+    //     }
+    //     .single-class{
+    //         flex: 0 0 140px;
+    //         height: 120px;
+    //         @include flexMixin(column,space-between,center);
+    //         border: 2px solid #A2A2A2;
+    //         border-radius: 8px;
+    //         padding: 10px;
+    //         font-size: 20px;
+    //     }
+    //     .time-wrapper{
+    //         font-size: 16px;
+    //     }
+    // }
+    .slider-calender {
+        @include flexMixin(row, space-between, center);
+        width: 100%;
+        gap:40px;
+    }
+    .counter-wrapper{
+        flex: 0 0 280px;
+        height: 160px;
+        box-shadow:$boxShadow;
         background-color: #fff;
-        padding: 15px;
-        @include flexMixin(column,flex-start,flex-start);
-        box-shadow: $boxShadow;
+        border-radius: 8px;
+        @include flexMixin(column,flex-start,center);
+        gap: 0px;
         overflow: hidden;
-        .title{
-            font-size: 16px;
-            width: 100%;
+    }
+    .title{
+        font-size: 22px;
+    }
+    .counter{
+        width: 100%;
+        @include flexMixin(row-reverse,center,flex-start);
+        gap: 10px;
+        color: $yellowColor;
+        font-size: 20px;
+        .num{
+            color: $mainColor;
             font-weight: bold;
-            padding: 0 0 10px;
-            border-bottom: 2px solid #c9c9c9;
-        }
-        .classes-wrapper{
-            @include flexMixin(row,flex-start,center);
-            gap: 20px;
-            overflow-x: scroll;
-            height: 100%;
-            padding: 0 0 0 10px;
-            width: 100%;
-        }
-        .no-class{
-            width: 100%;
-            height: 100%;
+            font-size: 20px;
             @include flexMixin(row,center,center);
-            gap: 10px;
-            font-size: 20px;
+            margin-bottom: -5px;
         }
-        .single-class{
-            flex: 0 0 140px;
-            height: 120px;
-            @include flexMixin(column,space-between,center);
-            border: 2px solid #A2A2A2;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 20px;
-        }
-        .time-wrapper{
-            font-size: 16px;
-        }
-    }
-    .date-and-counter{
-        @include flexMixin(row,flex-end,center);
-        gap: 20px;
-        .counter-wrapper{
-            width: 250px;
-            height: 240px;
-            box-shadow:$boxShadow;
-            background-color: #fff;
-            border-radius: 8px;
-            @include flexMixin(column,center,center);
-            padding: 40px 10px;
-            gap: 40px;
-        }
-        .title{
-            font-size: 20px;
-        }
-        .counter{
-            width: 100%;
-            @include flexMixin(row-reverse,center,center);
-            gap: 10px;
-            color: $yellowColor;
-            .num{
-                color: $mainColor;
-                font-weight: bold;
-                font-size: 20px;
-                @include flexMixin(row,center,center);
-            }
-            .c-wrapper{
-                color: #000;
-                @include flexMixin(column,flex-start,center);
-                font-size: 12px;
-            }
-        }
-        .date{
-            width: 254px;
-            height: 240px;
+        .c-wrapper{
+            color: #000;
             @include flexMixin(column,flex-start,center);
-            border-radius: 8px;
-            box-shadow: $boxShadow;
-            background-color: #fff;
-            overflow: hidden;
-            .month{
-                width: 100%;
-                background-color: $mainColor;
-                color: #fff;
-                height: 74px;
-                @include flexMixin(row,center,center);
-                font-size: 24px;
-            }
-            .day-number{
-                width: 100%;
-                @include flexMixin(row,center,center);
-                height: 65px;
-                color: $mainColor;
-                font-size: 64px;
-                margin: 30px 0 10px;
-            }
-            .week-day{
-                color: $mainColor;
-                font-size: 24px;
-            }
+            font-size: 12px;
         }
     }
+    .date{
+        @include flexMixin(row-reverse,center,center);
+        gap: 10px;
+        font-size: 24px;
+        background-color: $mainColor;
+        color: #fff;
+        width: 100%;
+        height: 56px;
+        margin: 0 0 10px;
+    }
+        // .date{
+        //     width: 254px;
+        //     height: 240px;
+        //     @include flexMixin(column,flex-start,center);
+        //     border-radius: 8px;
+        //     box-shadow: $boxShadow;
+        //     background-color: #fff;
+        //     overflow: hidden;
+        //     .month{
+        //         width: 100%;
+        //         background-color: $mainColor;
+        //         color: #fff;
+        //         height: 74px;
+        //         @include flexMixin(row,center,center);
+        //         font-size: 24px;
+        //     }
+        //     .day-number{
+        //         width: 100%;
+        //         @include flexMixin(row,center,center);
+        //         height: 65px;
+        //         color: $mainColor;
+        //         font-size: 64px;
+        //         margin: 30px 0 10px;
+        //     }
+        //     .week-day{
+        //         color: $mainColor;
+        //         font-size: 24px;
+        //     }
+        // }
     .calender-wrapper{
         width: 100%;
         border-radius: 8px;
@@ -412,6 +426,7 @@ img {
             width: 100%;
             @include flexMixin(row,flex-start,center);
             gap: 20px;
+            flex-wrap: wrap;
         }
         .day{
             @include styler($mainColor , #fff , 16px , 8px);
@@ -454,6 +469,7 @@ img {
             width: calc(100% - 100px);
             height: 100%;
             gap: 20px;
+            flex-wrap: wrap;
             img{
                 max-width: 100%;
                 max-height: 100%;
@@ -1333,9 +1349,16 @@ img {
         }
     }
     .dashboard{
+        .slider-calender{
+            @include flexMixin(column,flex-start,center);
+        }
         .events-wrapper{
             @include flexMixin(column,flex-start,center);
             gap: 20px;
+        }
+        .counter-wrapper{
+            width: 100%;
+            flex: 0 0 160px;
         }
         .todays-classes{
             width: 100%;

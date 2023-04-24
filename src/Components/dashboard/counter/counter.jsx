@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import LittleLoading from "../../reuseables/little-loading";
+import DateCalender from "../date/date";
 class Counter extends Component {
   state = {
     counter: {
@@ -38,6 +39,7 @@ class Counter extends Component {
   render() {
     return (
       <div className="counter-wrapper">
+        <DateCalender />
         <h2 className="title">روز شمار تا کنکور ۱۴۰۲</h2>
         <div className="counter">
           <span className="days c-wrapper">

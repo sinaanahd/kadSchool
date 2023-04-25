@@ -251,13 +251,13 @@ class Calender_2 extends Component {
               className={this.state.day !== "thu" ? "day" : "day active"}>
               پنج‌شنبه
             </span>
-            <span
+            {/* <span
               onClick={() => {
                 this.change_active_date("fri");
               }}
               className={this.state.day !== "fri" ? "day" : "day active"}>
               جمعه
-            </span>
+            </span> */}
           </div>
           <Days my_class={this.state.classes[this.state.day]} />
         </div>

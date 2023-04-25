@@ -85,45 +85,47 @@ img {
         font-size: 16px;
     }
     .icon{
-        overflow: hidden;
         width: 40px;
         border: 0px solid $mainColor;
         transition: $transition;
         @include flexMixin(row,center,center);
         height: 40px;
         border-radius: 50% 0% 50% 50%;
+        img{
+            transition: $transition;
+        }
         &:hover{
-            transform: scale(1.2);
-            border-radius: 50% 0% 50% 50%;
-            border: 2px solid $mainColor;
+            // border-radius: 50% 0% 50% 50%;
+            // border: 2px solid $mainColor;
             img{
-                animation: spinAndGo .5s ease-in-out 0.1s 1 alternate;
-                width: 20px;
+                transform: scale(1.5) rotate(360deg);
+                transition: all ease-in-out 0.5s;
+                // width: 20px;
             }
         }
     }
 
 }
-@keyframes spinAndGo {
-    0%{
-        transform: translate(0,0) rotate(0deg);
-    }
-    20%{
-        transform: translate(30px,0) rotate(360deg);
-    }
-    40%{
-        transform: translate(30px, -30px);
-    }
-    60%{
-        transform: translate(-30px, -30px);
-    }
-    80% {
-        transform: translate(-30px, 0px);
-    }
-    100%{
-        transform: translate(0, 0) rotate(720deg);
-    }
-}
+// @keyframes spinAndGo {
+//     0%{
+//         transform: translate(0,0) rotate(0deg);
+//     }
+//     20%{
+//         transform: translate(50px,0) rotate(360deg);
+//     }
+//     40%{
+//         transform: translate(50px, -50px);
+//     }
+//     60%{
+//         transform: translate(-50px, -50px);
+//     }
+//     80% {
+//         transform: translate(-50px, 0px);
+//     }
+//     100%{
+//         transform: translate(0, 0) rotate(720deg);
+//     }
+// }
 /* footer */
 /* header */
 .main-header{
@@ -193,12 +195,30 @@ img {
         transition: $transition;
         width: 90px;
         height: 78px;
+        &:hover{
+            background-color: rgb(28, 97, 170);
+            border-radius: 8px;
+            box-shadow: $boxShadow;
+            transform: translateY(-2px);
+        }
     }
     .active{
         background-color: #fff;
         border-radius: 8px;
         color: $mainColor;
         box-shadow: $boxShadow;
+        &:hover {
+            background-color: #fff;
+        }
+    }
+    .setting{
+        img{
+            transition: $transition;
+            &:hover{
+                transform: rotate(360deg) scale(1.5);
+                transition: all linear 0.5s;
+            }
+        }
     }
 }
 /* side bar */
@@ -211,7 +231,7 @@ img {
     .contetnt-wrapper{
         width: 100%;
         @include flexMixin(column,flex-start,center);
-        gap: 40px;
+        gap: 16px;
     }
     .orange-wrapper{
         width: 100%;
@@ -405,81 +425,80 @@ img {
     }
     .new-calender-wraper{
         width: 100%;
-        @include flexMixin(column,flex-start,center);
+        @include flexMixin(column,flex-start,flex-start);
         .new-cal-title{
             width: 100%;
-            height: 80px;
-            background-color: #f0f0f0;
-            @include flexMixin(row,center,center);
-            border-radius: 8px 8px 0 0;
-            font-size: 24px;
+            font-size: 20px;
+            margin: 0 0 10px;
         }
         .new-cal-content{
             background-color: #fff;
-            border-radius: 0 0 8px 8px;
-            width: 100%;
-            padding:30px 15px;
-            @include flexMixin(column,flex-start,center);
-            gap: 50px;
+            border-radius: 8px;
+            width: 600px;
+            // height: 320px;
+            padding:18px 9px 25px;
+            @include flexMixin(column,center,center);
+            gap: 12px;
+            box-shadow: $boxShadow;
         }
         .days-wrapper{
             width: 100%;
-            @include flexMixin(row,flex-start,center);
-            gap: 20px;
+            @include flexMixin(row,flex-end,center);
+            gap: 5px;
             flex-wrap: wrap;
         }
         .day{
-            @include styler($mainColor , #fff , 16px , 8px);
-            height: 50px;
-            min-width: 100px;
-            // padding: 0 30px;
+            @include styler(#000 , #fff , 16px , 8px);
+            height: 40px;
+            width: 76px;
             @include flexMixin(row,center,center);
-            border: 2px solid $mainColor;
+            border: 2px solid #5793CE;
             cursor: pointer;
             font-weight: bold;
             transition: $transition;
+            &:hover{
+                background-color: #5793CE;
+                color: #fff;
+            }
         }
         .active{
-            background-color: $mainColor;
+            background-color: #5793CE;
             color: #fff;
         }
         .time-class-wrapper{
             @include flexMixin(column,flex-start,center);
             width: 100%;
-            gap: 30px;
+            gap: 16px;
         }
         .time-class{
             width: 100%;
             @include flexMixin(row,flex-start,center);
             gap: 50px;
-            height: 100px;
         }
         .time{
-            font-size: 20px;
+            font-size: 16px;
             border-radius: 8px;
-            border: 2px solid $mainColor;
-            width: 100px;
-            height: 50%;
-            color: $mainColor;
+            width: 84px;
+            height: 44px;
+            color: #000;
             @include flexMixin(row,center,center);
-            padding: 3px 0 0 ;
+            background-color: #F5F5F5;
         }
         .class-wrapper{
             @include flexMixin(row,flex-start,center);
-            width: calc(100% - 100px);
-            height: 100%;
             gap: 20px;
             flex-wrap: wrap;
-            img{
-                max-width: 100%;
-                max-height: 100%;
-            }
         }
         .class-name{
-            font-size: 24px;
+            font-size: 20px;
         }
         .teachers-name{
-            font-size: 20px;
+            font-size: 16px;
+        }
+        .no-class-for-today{
+            // font-size: 20px;
+            list-style: none;
+            margin: 10px 0;
         }
     }
 }
@@ -487,6 +506,65 @@ img {
 /* dashboard */
 
 /* courses */
+@keyframes shake {
+    0%{
+        transform: rotate(10deg);
+    }
+    50%{
+        transform: rotate(-10deg);
+    }
+    100%{
+        transform: rotate(0);
+    }
+}
+// @keyframes shake {
+//     0%{
+//         transform: translateX(-10px);
+//     }
+//     9%{
+//         transform: translateX(10px);
+//     }
+//     18%{
+//         transform: translateX(-8px);
+//     }
+//     27%{
+//         transform: translateX(8px);
+//     }
+//     36%{
+//         transform: translateX(-6px);
+//     }
+//     45%{
+//         transform: translateX(-6px);
+//     }
+//     54%{
+//         transform: translateX(-4px);
+//     }
+//     63%{
+//         transform: translateX(4px);
+//     }
+//     72%{
+//         transform: translateX(-2px);
+//     }
+//     81%{
+//         transform: translateX(2px);
+//     }
+//     100%{
+//         transform: translateX(0px);
+//     }
+    
+// }
+@keyframes fade {
+    from{
+        // opacity: 0.7;
+        background-color: #fff018;
+        scale: (1);
+    }
+    to{
+        // opacity: 1;
+        background-color: #FFAF18;
+        transform: scale(1.3);
+    }
+}
 .courses-section{
     .main-content{
         width: 100%;
@@ -512,6 +590,7 @@ img {
         width: 100%;
         gap:15px;
         box-shadow: $boxShadow;
+        transition: $transition;
         img{
             border-radius: 8px;
         }
@@ -520,12 +599,32 @@ img {
             height: 50px;
             width: 140px;
             @include flexMixin(row,center,center);
+            transition: $transition;
+            border: 2px solid $redColor;
+            &:hover{
+                color: $redColor;
+                background-color: #fff;
+                animation: shake .2s ease-in-out 0s 2 alternate-reverse;
+            }
+            &::before{
+                animation: fade 1s linear .5s infinite alternate;
+            }
         }
         .recorded-sessions{
             @include flexMixin(row, center, center);
             @include styler(#fff, $mainColor, 16px, 8px);
             height: 50px;
             width: 155px;
+            border: 2px solid $mainColor;
+            &:hover {
+                color: $mainColor;
+                background-color: #fff;
+                animation: shake .2s ease-in-out 0s 2 alternate-reverse;
+            }
+        }
+        &:hover{
+            box-shadow: $boxShadow_reverse;
+            transform: translateY(-5px);
         }
     }
     .active{
@@ -537,9 +636,10 @@ img {
                 border-radius: 50%;
                 background-color: $yellowColor;
                 position: absolute;
-                top: -3px;
-                right: -3px;
+                top: -5px;
+                right: -5px;
                 content: "";
+                transition: $transition;
             }
         }
     }
@@ -1252,11 +1352,23 @@ img {
         box-shadow: $boxShadow;
         padding: 10px 10px 17px;
         gap: 15px;
+        transition: $transition;
+        &:hover{
+            transform: translateY(-5px);
+        }
         .view-btn{
             width: 100px;
             height: 50px;
             @include styler(#fff,$redColor,16px,8px);
             @include flexMixin(row,center,center);
+            border: 2px solid $redColor;
+            cursor: pointer;
+            transition: $transition;
+            &:hover{
+                color: $redColor;
+                background-color: #fff;
+                animation: shake .2s ease-in-out 0s 2 alternate-reverse;
+            }
         }
     }
 }
@@ -1370,18 +1482,45 @@ img {
                 width: 100%;
             }
         }
-        .calender-wrapper{
-            overflow-x : scroll;
-            align-items: flex-start;
-            .cal-title{
-                width: 1300px;
-                justify-content: flex-start;
-                padding: 0 15px 0 0;
+        .new-calender-wraper {
+            .new-cal-content{
+                width: 100%;
+                gap: 14px;
             }
-            .calender{
-                width: 1300px;
+            .days-wrapper{
+                justify-content : flex-start;
+            }
+            .time-class{
+                gap: 10px;
+                flex-wrap: nowrap;
+            }
+            .days-wrapper{
+                gap: 2px;
+            }
+            .day{
+                font-size: 14px;
+                width: 54px;
+                height: 32px;
+            }
+            .class-name{
+                font-size: 18px;
+            }
+            .teachers-name{
+                font-size: 14px;
             }
         }
+        // .calender-wrapper{
+        //     overflow-x : scroll;
+        //     align-items: flex-start;
+        //     .cal-title{
+        //         width: 1300px;
+        //         justify-content: flex-start;
+        //         padding: 0 15px 0 0;
+        //     }
+        //     .calender{
+        //         width: 1300px;
+        //     }
+        // }
     }
     .courses-section{
         .courses-wrapper{
@@ -1455,6 +1594,14 @@ img {
             font-size: 14px;
         }
     }
+    .under-construction-section{ 
+        .main-content{
+            h1{
+                width: 100%;
+                font-size: 20px;
+            }
+        }
+    }
     .free-courses-wrapper {
         .main-content{
             gap: 40px;
@@ -1483,3 +1630,60 @@ img {
         }
     }
 }
+
+
+/* expriment */
+// .scene{
+//     width: 200px;
+//     height: 200px;
+//     perspective: 600px;
+//     position: fixed;
+//     bottom: 10px;
+//     left: 10px;
+//     .cube {
+//         width: 100%;
+//         height: 100%;
+//         position: relative;
+//         transform-style: preserve-3d; 
+//         transition: transform 1s;
+//         transform: translateZ(-100px);
+//     }
+    
+//     .cube__face {
+//         @include flexMixin(row,center,center);
+//         position: absolute;
+//         width: 200px;
+//         height: 200px;
+//     }
+//     .cube__face--front {
+//         transform: rotateY(0deg) translateZ(100px);
+//         background-color: rgba(255, 0, 0, 0.497);
+//     }
+
+//     .cube__face--right {
+//         transform: rotateY(90deg) translateZ(100px);
+//         background-color: rgba(0, 0, 255, 0.613);
+//     }
+
+//     .cube__face--back {
+//         transform: rotateY(180deg) translateZ(100px);
+//         background-color: rgba(255, 0, 255, 0.491);
+//     }
+
+//     .cube__face--left {
+//         transform: rotateY(-90deg) translateZ(100px);
+//         background-color: rgba(0, 128, 0, 0.45);
+//     }
+
+//     .cube__face--top {
+//         transform: rotateX(90deg) translateZ(100px);
+//         background-color: rgba(255, 255, 0, 0.371)
+//     }
+
+//     .cube__face--bottom {
+//         transform: rotateX(-90deg) translateZ(100px);
+//         background-color: rgba(255, 192, 203, 0.342);
+//     }
+// }
+
+/* expriment */

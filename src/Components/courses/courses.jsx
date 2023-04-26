@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
-import scrollToTop from "../functions/scroll";
 import Course from "./course/course";
 import PopUp from "./pop-up/pop-up";
+import withWebsiteData from "../hoc/with-website-data";
 import EmptyCourses from "./empty-course/empty-courses";
 class Courses extends Component {
   state = {
@@ -22,12 +21,13 @@ class Courses extends Component {
     this.setState({ pop_up: false });
   };
   render() {
+    const { user } = this.props;
     return (
       <>
         <Helmet>
           <title>درس های من</title>
         </Helmet>
-        <Header />
+        <Header user={user ? user : false} />
         <section className="courses-section bgc-wrapper">
           <div className="main-content mm-width">
             <SideBar />
@@ -97,4 +97,4 @@ class Courses extends Component {
   }
 }
 
-export default Courses;
+export default withWebsiteData(Courses);

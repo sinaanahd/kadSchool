@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import { Helmet } from "react-helmet";
+import withWebsiteData from "../hoc/with-website-data";
 
 import iSvg from "../../assets/images/i.svg";
 import crossSvg from "../../assets/images/cross.svg";
@@ -16,12 +17,13 @@ class SingleSession extends Component {
     this.setState({ no_jozve });
   };
   render() {
+    const { user } = this.props;
     return (
       <>
         <Helmet>
           <title>جلسه ۲ - موضوع جلسه</title>
         </Helmet>
-        <Header />
+        <Header user={user ? user : false} />
         <section className="bgc-wrapper single-session-section">
           <div className="single-session mm-width">
             <SideBar />
@@ -83,4 +85,4 @@ class SingleSession extends Component {
   }
 }
 
-export default SingleSession;
+export default withWebsiteData(SingleSession);

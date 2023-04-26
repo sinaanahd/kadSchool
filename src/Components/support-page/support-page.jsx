@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
+import withWebsiteData from "../hoc/with-website-data";
 import hello_svg from "../../assets/images/hello-page.svg";
 
 class Support extends Component {
   state = {};
   render() {
+    const { user } = this.props;
     return (
       <>
         <Helmet>
           <title>پشتیبانی</title>
         </Helmet>
-        <Header />
+        <Header user={user ? user : false} />
         <section className="bgc-wrapper hello-page-section">
           <div className="hello-page mm-width">
             <SideBar />
@@ -47,4 +49,4 @@ class Support extends Component {
   }
 }
 
-export default Support;
+export default withWebsiteData(Support);

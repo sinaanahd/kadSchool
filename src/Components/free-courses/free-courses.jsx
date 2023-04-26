@@ -6,6 +6,7 @@ import Subjects from "./subjects/subjects";
 import fields from "./fields";
 import Fields from "./fields/fields";
 import Kinds from "./kinds/kinds";
+import withWebsiteData from "../hoc/with-website-data";
 import FCourses from "./fcoureses/fcourses";
 import arrow from "../../assets/images/circle-arrow-right.svg";
 import seprator from "../../assets/images/seprator.svg";
@@ -50,12 +51,13 @@ class FreeCourse extends Component {
     this.setState({ step });
   };
   render() {
+    const { user } = this.props;
     return (
       <>
         <Helmet>
           <title>درس های رایگان کاد</title>
         </Helmet>
-        <Header />
+        <Header user={user ? user : false} />
         <section className="bgc-wrapper">
           <div className="mm-width free-courses-wrapper">
             <SideBar />
@@ -145,4 +147,4 @@ class FreeCourse extends Component {
   }
 }
 
-export default FreeCourse;
+export default withWebsiteData(FreeCourse);

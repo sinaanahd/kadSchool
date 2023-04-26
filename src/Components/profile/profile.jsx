@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
+import withWebsiteData from "../hoc/with-website-data";
 class Profile extends Component {
   state = {};
   render() {
+    const { user } = this.props;
     return (
       <>
         <Helmet>
           <title>ویرایش پروفایل</title>
         </Helmet>
-        <Header />
+        <Header user={user ? user : false} />
         <section className="bgc-wrapper profile-section">
           <div className="profile-wrapper mm-width">
             <SideBar />
@@ -21,11 +23,13 @@ class Profile extends Component {
                   <div className="constant-datas">
                     <span className="data-wrapper">
                       <span className="label">شماره موبایل:</span>
-                      <span className="data">{129048904}</span>
+                      <span className="data">
+                        <bdi>{user.phone_number}</bdi>
+                      </span>
                     </span>
                     <span className="data-wrapper">
                       <span className="label">نام و نام‌خانوادگی:</span>
-                      <span className="data">{"سینا اناهید"}</span>
+                      <span className="data">{user.name}</span>
                     </span>
                   </div>
                   <div className="form-box">
@@ -84,4 +88,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withWebsiteData(Profile);

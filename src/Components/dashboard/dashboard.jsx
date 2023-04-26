@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
-import Calender from "./calender/calender";
 import Counter from "./counter/counter";
-import DateCalender from "./date/date";
 import { Helmet } from "react-helmet";
-import TodayClass from "./class/class";
-import noClassImg from "../../assets/images/no-class.svg";
 import Calender_2 from "./calender/calender-2";
+import withWebsiteData from "../hoc/with-website-data";
 class Dashboard extends Component {
   state = {
     classes: true,
   };
-
   render() {
+    const { user } = this.props;
     return (
       <>
         <Helmet>
@@ -27,7 +24,7 @@ class Dashboard extends Component {
             content="پنل دانش آموزی, کاد, کلاس های اینترنتی دریافت"
           />
         </Helmet>
-        <Header />
+        <Header user={user ? user : false} />
         <section className="bgc-wrapper">
           <div className="dashboard mm-width">
             <SideBar />
@@ -68,4 +65,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default withWebsiteData(Dashboard);

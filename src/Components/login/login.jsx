@@ -2,14 +2,18 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import scrollToTop from "../functions/scroll";
-
+import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
 import login_bgc from "../../assets/images/login-img.svg";
 
 class Login extends Component {
   state = {};
   componentDidMount() {
+    const { user } = this.props;
     document.querySelector(".main-footer").style.display = "none";
+    if (user) {
+      window.location.href = window.location.href.replace("Login", "Dashboard");
+    }
   }
   componentWillUnmount() {
     document.querySelector(".main-footer").style.display = "flex";
@@ -59,4 +63,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withWebsiteData(Login);

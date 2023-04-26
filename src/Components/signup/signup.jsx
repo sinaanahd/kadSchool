@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
 import login_bgc from "../../assets/images/login-img.svg";
 import checked_img from "../../assets/images/checked.svg";
@@ -10,6 +11,10 @@ class SignUp extends Component {
   };
   componentDidMount() {
     document.querySelector(".main-footer").style.display = "none";
+    const { user } = this.props;
+    if (user) {
+      window.location.href = window.location.href.replace("Login", "Dashboard");
+    }
   }
   componentWillUnmount() {
     document.querySelector(".main-footer").style.display = "flex";
@@ -72,4 +77,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withWebsiteData(SignUp);

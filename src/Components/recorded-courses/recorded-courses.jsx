@@ -4,15 +4,17 @@ import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import { Link } from "react-router-dom";
 import scrollToTop from "../functions/scroll";
+import withWebsiteData from "../hoc/with-website-data";
 class RecordedCourses extends Component {
   state = {};
   render() {
+    const { user } = this.props;
     return (
       <>
         <Helmet>
           <title>کلاس های ضبط شده درس</title>
         </Helmet>
-        <Header />
+        <Header user={user ? user : false} />
         <section className="recorded-sessions-section bgc-wrapper">
           <div className="recorded-sessions mm-width">
             <SideBar />

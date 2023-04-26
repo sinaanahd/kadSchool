@@ -2,17 +2,18 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
-
+import withWebsiteData from "../hoc/with-website-data";
 import dots from "../../assets/images/dots.svg";
 class FinancialStuff extends Component {
   state = {};
   render() {
+    const { user } = this.props;
     return (
       <>
         <Helmet>
           <title>امور مالی</title>
         </Helmet>
-        <Header />
+        <Header user={user ? user : false} />
         <section className="finance-section bgc-wrapper">
           <div className="finance-wrapper mm-width">
             <SideBar />
@@ -57,4 +58,4 @@ class FinancialStuff extends Component {
   }
 }
 
-export default FinancialStuff;
+export default withWebsiteData(FinancialStuff);

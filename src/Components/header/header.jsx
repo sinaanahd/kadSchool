@@ -10,12 +10,18 @@ class Header extends Component {
   state = {
     menu: false,
   };
-  componentDidMount() {
-    console.log(this.props.user);
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
   }
   menu_toggle = () => {
     const menu = !this.state.menu;
     this.setState({ menu });
+    setTimeout(() => {
+      if (this.myRef.current !== null) {
+        this.myRef.current.classList.remove("animate-menu");
+      }
+    }, 100);
   };
   close_menu = () => {
     this.setState({ menu: false });
@@ -68,7 +74,8 @@ class Header extends Component {
         </header>
         {this.state.menu ? (
           <div
-            className="responsive-side-bar-menu-wrapper"
+            className="responsive-side-bar-menu-wrapper animate-menu"
+            ref={this.myRef}
             onClick={() => {
               this.close_menu();
             }}>

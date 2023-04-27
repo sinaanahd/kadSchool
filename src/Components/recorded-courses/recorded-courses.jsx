@@ -5,6 +5,8 @@ import SideBar from "../side-bar/side-bar";
 import { Link } from "react-router-dom";
 import scrollToTop from "../functions/scroll";
 import withWebsiteData from "../hoc/with-website-data";
+
+import dots from "../../assets/images/dots.svg";
 class RecordedCourses extends Component {
   state = {};
   render() {
@@ -12,55 +14,94 @@ class RecordedCourses extends Component {
     return (
       <>
         <Helmet>
-          <title>کلاس های ضبط شده درس</title>
+          <title>جلسات ضبط شده درس</title>
         </Helmet>
         <Header user={user ? user : false} />
         <section className="recorded-sessions-section bgc-wrapper">
           <div className="recorded-sessions mm-width">
             <SideBar />
             <div className="main-content">
-              <Link
-                onClick={() => scrollToTop()}
-                to="/SingleSession/:id"
-                className="link-to-class">
-                کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{1}
-              </Link>
-              <Link
-                onClick={() => scrollToTop()}
-                to="/SingleSession/:id"
-                className="link-to-class">
-                کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{2}
-              </Link>
-              <Link
-                onClick={() => scrollToTop()}
-                to="/SingleSession/:id"
-                className="link-to-class">
-                کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{3}
-              </Link>
-              <Link
-                onClick={() => scrollToTop()}
-                to="/SingleSession/:id"
-                className="link-to-class">
-                کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{4}
-              </Link>
-              <Link
-                onClick={() => scrollToTop()}
-                to="/SingleSession/:id"
-                className="link-to-class">
-                کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{5}
-              </Link>
-              <Link
-                onClick={() => scrollToTop()}
-                to="/SingleSession/:id"
-                className="link-to-class">
-                کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{6}
-              </Link>
-              <Link
-                onClick={() => scrollToTop()}
-                to="/SingleSession/:id"
-                className="link-to-class">
-                کلاس ضبط شده درس <b>{"ریاضی"}</b> جلسه &nbsp;{7}
-              </Link>
+              <h1 className="title">جلسات ضبط شده</h1>
+              <span className="recorded-session-item">
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="session-num">
+                  جلسه {1}
+                </Link>
+                <span className="session-subject">{"ریاضی"}</span>
+                <span className="session-date">تاریخ برگزاری</span>
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="dots">
+                  <img src={dots} alt="بیشتر" width={3} height={19} />
+                </Link>
+              </span>
+              <span className="recorded-session-item even-item">
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="session-num">
+                  جلسه {2}
+                </Link>
+                <span className="session-subject">{"ریاضی"}</span>
+                <span className="session-date">تاریخ برگزاری</span>
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="dots">
+                  <img src={dots} alt="بیشتر" width={3} height={19} />
+                </Link>
+              </span>
+              <span className="recorded-session-item">
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="session-num">
+                  جلسه {3}
+                </Link>
+                <span className="session-subject">{"ریاضی"}</span>
+                <span className="session-date">تاریخ برگزاری</span>
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="dots">
+                  <img src={dots} alt="بیشتر" width={3} height={19} />
+                </Link>
+              </span>
+              <span className="recorded-session-item even-item">
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="session-num">
+                  جلسه {4}
+                </Link>
+                <span className="session-subject">{"ریاضی"}</span>
+                <span className="session-date">تاریخ برگزاری</span>
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="dots">
+                  <img src={dots} alt="بیشتر" width={3} height={19} />
+                </Link>
+              </span>
+              <span className="recorded-session-item">
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="session-num">
+                  جلسه {5}
+                </Link>
+                <span className="session-subject">{"ریاضی"}</span>
+                <span className="session-date">تاریخ برگزاری</span>
+                <Link
+                  onClick={() => scrollToTop()}
+                  to="/SingleSession/:id"
+                  className="dots">
+                  <img src={dots} alt="بیشتر" width={3} height={19} />
+                </Link>
+              </span>
             </div>
           </div>
         </section>
@@ -69,4 +110,4 @@ class RecordedCourses extends Component {
   }
 }
 
-export default RecordedCourses;
+export default withWebsiteData(RecordedCourses);

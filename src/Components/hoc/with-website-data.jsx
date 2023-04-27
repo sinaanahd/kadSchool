@@ -7,20 +7,67 @@ function withWebsiteData(Component) {
   return class withWebsiteData extends Component {
     state = {
       user: local_user,
+      err: {
+        state: false,
+        message: "",
+      },
     };
     componentDidMount() {
       axios
-        .get(`https://daryaftyar.ir/backend/api/kad_user/${341393410}`)
+        .get(`https://daryaftyar.ir/backend/kad_api/user/${341393410}`)
         .then((res) => {
           const user = res.data;
           this.setState({ user });
           localStorage.setItem("user-kad", JSON.stringify(user));
         })
-        .catch((err) => console.log(err));
+        .catch((e) => {
+          this.handle_error(e);
+        });
     }
+    handle_error = (e) => {
+      const err = {
+        state: true,
+        message: e.message,
+        classes: ["err-show ", " error-wrapper"],
+      };
+      this.setState({ err });
+      setTimeout(() => {
+        const err = {
+          state: true,
+          message: e.message,
+          classes: [" error-wrapper"],
+        };
+        this.setState({ err });
+      }, 100);
+      setTimeout(() => {
+        const err = {
+          state: true,
+          message: e.message,
+          classes: ["err-show ", " error-wrapper"],
+        };
+        this.setState({ err });
+      }, 4000);
+      setTimeout(() => {
+        const err = {
+          state: false,
+          message: "",
+          classes: [],
+        };
+        this.setState({ err });
+      }, 5000);
+    };
     render() {
       return (
-        <Component {...this.props} data={this.state} user={this.state.user} />
+        <>
+          <Component {...this.props} data={this.state} user={this.state.user} />
+          {this.state.err.state ? (
+            <div className={this.state.err.classes.map((c) => `${c}`)}>
+              {this.state.err.message}
+            </div>
+          ) : (
+            <></>
+          )}
+        </>
       );
     }
   };

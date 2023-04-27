@@ -34,10 +34,13 @@ body {
     max-width: 1300px;
 }
 .bgc-wrapper{
-    background-color: $backGround;
+    background-image: url("../images/backgroudn-main.svg");
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
     width: 100%;
     @include flexMixin(column,flex-start,center);
-    padding: 32px 0;
+    padding: 32px 0 100px;
 }
 a{
     color: unset;
@@ -60,16 +63,42 @@ img {
     max-width: 100%;
 }
 /* universal styles */
+
+/* error component */
+.error-wrapper{
+    width: 400px;
+    height: 100px;
+    border: 2px solid $redColor;
+    box-shadow: $boxShadow;
+    background-color: #fff;
+    position: fixed;
+    @include flexMixin(row,center,center);
+    top: 16px;
+    padding: 10px 5px;
+    left: clac( 50 % - 200 px );
+    color: $redColor;
+    font-size: 20px;
+    border-radius: 8px;
+    transition: $transition;
+    text-align: center;
+    z-index : 999;
+}
+.err-show{
+    top : -300px;
+}
+/* error component */
+
 /* footer */
 .main-footer{
     width: 100%;
     @include flexMixin(column,flex-start,center);
-    background-color: $backGround;
     gap: 20px;
-    padding: 40px 0 0;
+    position: relative;
     .icons-wrapper{
         @include flexMixin(row,center,center);
         gap: 30px;
+        position: absolute;
+        top: -50px;
         img{
             width: 30px;
             transition: $transition;
@@ -106,26 +135,6 @@ img {
     }
 
 }
-// @keyframes spinAndGo {
-//     0%{
-//         transform: translate(0,0) rotate(0deg);
-//     }
-//     20%{
-//         transform: translate(50px,0) rotate(360deg);
-//     }
-//     40%{
-//         transform: translate(50px, -50px);
-//     }
-//     60%{
-//         transform: translate(-50px, -50px);
-//     }
-//     80% {
-//         transform: translate(-50px, 0px);
-//     }
-//     100%{
-//         transform: translate(0, 0) rotate(720deg);
-//     }
-// }
 /* footer */
 /* header */
 .main-header{
@@ -176,9 +185,9 @@ img {
 /* header */
 /* side bar */
 .side-bar-wrapper{
-    flex : 0 0 120px;
-    height: 810px;
-    padding: 100px 0 32px;
+    flex : 0 0 100px;
+    height: 630px;
+    padding: 20px 0 10px;
     @include flexMixin(column,space-between,center);
     background-color: $mainColor;
     color: #fff;
@@ -186,15 +195,16 @@ img {
     .items{
         @include flexMixin(column,flex-start,center);
         width: 100%;
-        gap: 20px;
+        gap: 15px;
     }
     .side-bar-item{
         @include flexMixin(column,center,center);
-        gap: 10px;
+        gap: 5px;
         font-size: 12px;
         transition: $transition;
-        width: 90px;
-        height: 78px;
+        width: 72px;
+        height: 72px;
+        letter-spacing: -1px;
         &:hover{
             background-color: rgb(28, 97, 170);
             border-radius: 8px;
@@ -227,7 +237,7 @@ img {
 .dashboard{
     width: 100%;
     @include flexMixin(row,space-between,flex-start);
-    gap: 40px;
+    gap: 60px;
     .contetnt-wrapper{
         width: 100%;
         @include flexMixin(column,flex-start,center);
@@ -517,42 +527,6 @@ img {
         transform: rotate(0);
     }
 }
-// @keyframes shake {
-//     0%{
-//         transform: translateX(-10px);
-//     }
-//     9%{
-//         transform: translateX(10px);
-//     }
-//     18%{
-//         transform: translateX(-8px);
-//     }
-//     27%{
-//         transform: translateX(8px);
-//     }
-//     36%{
-//         transform: translateX(-6px);
-//     }
-//     45%{
-//         transform: translateX(-6px);
-//     }
-//     54%{
-//         transform: translateX(-4px);
-//     }
-//     63%{
-//         transform: translateX(4px);
-//     }
-//     72%{
-//         transform: translateX(-2px);
-//     }
-//     81%{
-//         transform: translateX(2px);
-//     }
-//     100%{
-//         transform: translateX(0px);
-//     }
-    
-// }
 @keyframes fade {
     from{
         // opacity: 0.7;
@@ -569,7 +543,7 @@ img {
     .main-content{
         width: 100%;
         @include flexMixin(row, flex-start, flex-start);
-        gap: 40px;
+        gap: 60px;
     }
     .left-col{
         @include flexMixin(column,space-between,center);
@@ -686,6 +660,8 @@ img {
     top: 0;
     right: 0;
     @include flexMixin(row,center,center);
+    transition: $transition;
+    scale: (1);
     .main-content{
         width: 500px;
         height: 281px;
@@ -698,33 +674,49 @@ img {
         text-align: justify;
     }
 }
+.animate-pop-up{
+    scale: (0);
+}
 /* courses */
 
 /* recorded courses */
 .recorded-sessions-section{
     color: $mainColor;
+    .title{
+        font-size: 24px;
+        color: #000;
+        margin: 0 0 50px;
+    }
     .recorded-sessions{
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
-        gap: 40px;
+        gap: 60px;
     }
     .main-content{
         width: 100%;
         @include flexMixin(column,flex-start,flex-start);
-        gap: 20px;
     }
-    .link-to-class{
-        font-size: 20px;
-        @include flexMixin(row,flex-start,center);
-        gap: 10px;
-        &::before{
-            content: "";
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background-color: $yellowColor;
-            
+    .recorded-session-item {
+        width: 80%;
+        @include flexMixin(row, space-between, center);
+        height: 80px;
+        border: 2px solid #bcbcbc;
+        @include styler(#0C084F, #fff, 20px, 8px);
+        margin: 0 0 17px;
+        padding: 20px;
+        img{
+            position: relative;
+            top: 5px;
         }
+    }
+    .even-item{
+        background-color: #F1F1F1;
+    }
+    .session-date{
+        font-size: 16px;
+    }
+    .session-subject,.session-num{
+        font-weight: bold;
     }
 }
 /* recorded courses */
@@ -736,7 +728,7 @@ img {
     .topics-wrapper{
         @include flexMixin(row,flex-start,flex-start);
         width: 100%;
-        gap: 40px;
+        gap: 60px;
     }
     .main-content{
         width: 100%;
@@ -791,7 +783,7 @@ img {
         width: 100%;
         margin: 0 40px 0 20px;
         @include flexMixin(column,flex-start,center);
-        gap: 40px;
+        gap: 60px;
     }
     h1{
         width: 100%;
@@ -839,7 +831,7 @@ img {
     .profile-wrapper{
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
-        gap: 40px;
+        gap: 60px;
     }
     .mian-content{
         width: 100%;
@@ -952,10 +944,11 @@ img {
 
 /* under construction */
 .under-construction-section{
+    padding: 0 0 100px;
     .under-construction{
         width: 100%;
         @include flexMixin(row,flex-start,center);
-        gap: 40px;
+        gap: 60px;
     }
     .main-content{
         @include flexMixin(column,center,center);
@@ -966,6 +959,7 @@ img {
         width: 100%;
         h1{
             width: 700px;
+            min-height: 100px;
         }
     }
 }
@@ -1141,7 +1135,7 @@ img {
     .hello-page{
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
-        gap: 40px;
+        gap: 60px;
     }
     .main-content{
         @include flexMixin(column,flex-start,center);
@@ -1181,7 +1175,7 @@ img {
 .single-session{
     width: 100%;
     @include flexMixin(row,flex-start,flex-start);
-    gap: 40px;
+    gap: 60px;
     .main-content{
         @include flexMixin(column,flex-start,center);
         width: 100%;
@@ -1260,7 +1254,7 @@ img {
 .free-courses-wrapper{
     width: 100%;
     @include flexMixin(row,flex-start,flex-start);
-    gap: 40px;
+    gap: 60px;
     .main-content{
         @include flexMixin(column,flex-start,center);
         width: 100%;
@@ -1415,6 +1409,9 @@ img {
     .bgc-wrapper{
         margin-top: 82px;
     }
+    .error-wrapper{
+        width: 80%;
+    }
     .responsive-side-bar-menu-wrapper{
         background-color: rgba(97, 97, 97, 0.6);
         width: 100vw;
@@ -1424,6 +1421,8 @@ img {
         height:calc(100vh - 80px);
         z-index: 99;
         @include flexMixin(row,flex-start,flex-start);
+        transition: $transition;
+        transform: scale(1);
         .side-bar-wrapper{
             @include flexMixin(column,space-between,center);
             padding:40px 0px 20px;
@@ -1433,6 +1432,9 @@ img {
                 gap: 30px;
             }
         }
+    }
+    .animate-menu{
+        transform: scale(0);
     }
     .side-bar-wrapper{
         display: none;
@@ -1595,6 +1597,7 @@ img {
         }
     }
     .under-construction-section{ 
+        height: 100vh;
         .main-content{
             h1{
                 width: 100%;
@@ -1627,6 +1630,11 @@ img {
     .main-footer{
         .gradient-signature{
             font-size: 12px;
+        }
+    }
+    .recorded-sessions-section{
+        .recorded-session-item{
+            width: 100%;
         }
     }
 }

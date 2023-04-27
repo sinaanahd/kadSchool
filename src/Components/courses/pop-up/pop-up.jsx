@@ -4,10 +4,11 @@ import clock_vector from "../../../assets/images/clock-vector.svg";
 class PopUp extends Component {
   state = {};
   render() {
-    const { close_pu } = this.props;
+    const { close_pu, my_ref } = this.props;
     return (
       <div
-        className="courses-pop-up-wrapper"
+        className="courses-pop-up-wrapper animate-pop-up"
+        ref={my_ref}
         onClick={() => {
           close_pu();
         }}>

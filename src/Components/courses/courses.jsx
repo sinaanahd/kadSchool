@@ -11,11 +11,21 @@ class Courses extends Component {
     pop_up: false,
     courses: true,
   };
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
   open_class_pop_up = (e, entry) => {
     if (!entry) {
       this.setState({ pop_up: true });
       e.preventDefault();
     }
+    setTimeout(() => {
+      console.log(this.myRef.current);
+      if (this.myRef.current !== null) {
+        this.myRef.current.classList.remove("animate-pop-up");
+      }
+    }, 100);
   };
   close_class_pop_up = () => {
     this.setState({ pop_up: false });
@@ -88,7 +98,7 @@ class Courses extends Component {
           </Link> */}
         </section>
         {this.state.pop_up ? (
-          <PopUp close_pu={this.close_class_pop_up} />
+          <PopUp close_pu={this.close_class_pop_up} my_ref={this.myRef} />
         ) : (
           <></>
         )}

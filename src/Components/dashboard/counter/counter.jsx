@@ -9,11 +9,15 @@ class Counter extends Component {
       minutes: false,
       seconds: false,
     },
+    animate: " animate-counter",
   };
   componentDidMount() {
     setInterval(() => {
       this.get_counter_time();
     }, 1000);
+    setTimeout(() => {
+      this.setState({ animate: "" });
+    }, 100);
   }
   get_counter_time = () => {
     const date = new Date();
@@ -38,7 +42,7 @@ class Counter extends Component {
   };
   render() {
     return (
-      <div className="counter-wrapper">
+      <div className={"counter-wrapper" + this.state.animate}>
         <DateCalender />
         <h2 className="title">روز شمار تا کنکور ۱۴۰۲</h2>
         <div className="counter">

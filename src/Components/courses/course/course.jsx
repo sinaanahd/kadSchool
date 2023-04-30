@@ -3,11 +3,23 @@ import { Link } from "react-router-dom";
 import scrollToTop from "../../functions/scroll";
 import sampleRectangle from "../../../assets/images/sample-rectangle.svg";
 class Course extends Component {
-  state = {};
+  state = {
+    animate: "animate-course",
+  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ animate: " " });
+    }, 100);
+  }
   render() {
     const { active, open_class_pop_up } = this.props;
     return (
-      <div className={active ? "course active" : "course"}>
+      <div
+        className={
+          active
+            ? "course active " + this.state.animate
+            : "course " + this.state.animate
+        }>
         <img src={sampleRectangle} alt="عکس کلاس" />
         <a
           href="#"

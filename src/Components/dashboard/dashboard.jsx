@@ -5,6 +5,7 @@ import Counter from "./counter/counter";
 import { Helmet } from "react-helmet";
 import Calender_2 from "./calender/calender-2";
 import withWebsiteData from "../hoc/with-website-data";
+import Slider from "./slider/slider";
 class Dashboard extends Component {
   state = {
     classes: true,
@@ -31,7 +32,7 @@ class Dashboard extends Component {
             <div className="contetnt-wrapper">
               <div className="slider-calender">
                 <Counter />
-                <div className="orange-wrapper"></div>
+                <Slider />
               </div>
               {/* <div className="events-wrapper">
                 <div className="todays-classes">

@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import scrollToTop from "../../functions/scroll";
 class Kinds extends Component {
-  state = {};
+  state = {
+    animate: "animate-FC",
+  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ animate: "" });
+    }, 100);
+  }
   render() {
     const { show_courses } = this.props;
     return (
       <div className="kinds">
         <span
-          className="kind"
+          className={"kind " + this.state.animate}
           onClick={() => {
             scrollToTop();
             show_courses("جامع");
@@ -15,7 +22,7 @@ class Kinds extends Component {
           جامع
         </span>
         <span
-          className="kind"
+          className={"kind " + this.state.animate}
           onClick={() => {
             scrollToTop();
             show_courses(" نکته و تست");
@@ -23,7 +30,7 @@ class Kinds extends Component {
           نکته و تست
         </span>
         <span
-          className="kind"
+          className={"kind " + this.state.animate}
           onClick={() => {
             scrollToTop();
             show_courses("نهایی");
@@ -31,7 +38,7 @@ class Kinds extends Component {
           نهایی
         </span>
         <span
-          className="kind"
+          className={"kind " + this.state.animate}
           onClick={() => {
             scrollToTop();
             show_courses("تیر آخر");

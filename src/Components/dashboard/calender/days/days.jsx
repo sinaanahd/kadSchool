@@ -1,24 +1,23 @@
 import React, { Component } from "react";
-
+import Day from "./day";
 import sample_rectangle from "../../../../assets/images/sample-rectangle.svg";
 
 class Days extends Component {
   state = {};
+
   render() {
-    const { my_class } = this.props;
+    const { my_class, animate } = this.props;
     return (
       <ul className="time-class-wrapper">
         {my_class.length !== 0 ? (
           my_class.map((c) => (
-            <li key={c.id} className="time-class">
-              <span className="time">
-                {c.time} - {c.time + 2}
-              </span>
-              <span className="class-wrapper">
-                <h4 className="class-name">{c.name}</h4>
-                <h5 className="teachers-name">استاد {c.teacher}</h5>
-              </span>
-            </li>
+            <Day
+              key={c.id}
+              time={c.time}
+              name={c.name}
+              teacher={c.teacher}
+              animate={animate}
+            />
           ))
         ) : (
           <li className="no-class-for-today">

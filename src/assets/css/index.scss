@@ -248,7 +248,11 @@ img {
         height: 160px;
         border: 2px solid $yellowColor;
         border-radius: 10px;
+        transition: $transition;
     }
+    // .animate-slider{
+        
+    // }
     .events-wrapper{
         width: 100%;
         @include flexMixin(row,space-between,center);
@@ -313,7 +317,10 @@ img {
         @include flexMixin(column,flex-start,center);
         gap: 0px;
         overflow: hidden;
+        transition: $transition;
     }
+    // .animate-counter{
+    // }
     .title{
         font-size: 22px;
     }
@@ -450,6 +457,7 @@ img {
             @include flexMixin(column,center,center);
             gap: 12px;
             box-shadow: $boxShadow;
+            overflow: hidden;
         }
         .days-wrapper{
             width: 100%;
@@ -471,6 +479,7 @@ img {
                 color: #fff;
             }
         }
+        
         .active{
             background-color: #5793CE;
             color: #fff;
@@ -484,6 +493,13 @@ img {
             width: 100%;
             @include flexMixin(row,flex-start,center);
             gap: 50px;
+            transition: $transition;
+            opacity: 1;
+            // transform: translateX(0);
+        }
+        .animate-days {
+            opacity: 0.2;
+            // transform: translateX(80px);
         }
         .time{
             font-size: 16px;
@@ -565,6 +581,8 @@ img {
         gap:15px;
         box-shadow: $boxShadow;
         transition: $transition;
+        opacity: 1;
+        transform: scale(1);
         img{
             border-radius: 8px;
         }
@@ -600,6 +618,10 @@ img {
             box-shadow: $boxShadow_reverse;
             transform: translateY(-5px);
         }
+    }
+    .animate-course{
+       opacity: 0;
+       transform: scale(1.3);
     }
     .active{
         .enter-class{
@@ -1271,7 +1293,7 @@ img {
         cursor: pointer;
         span{
             transition: all ease-out 0.1s;
-            border: 3px solid $backGround;
+            border: 3px solid transparent;
             padding: 0 0 2px;
             box-sizing: border-box;
             &:hover{
@@ -1304,6 +1326,8 @@ img {
         height: 200px;
         @include flexMixin(column,space-between,center);
         padding: 30px 0;
+        transform: scale(1);
+        transition: $transition;
     }
     .fields{
         width: 100%;
@@ -1318,6 +1342,8 @@ img {
         width: 163px;
         height: 100px;
         @include flexMixin(row,center,center);
+        transform: scale(1);
+        transition: $transition;
     }
     .kinds{
         width: 100%;
@@ -1330,6 +1356,8 @@ img {
         width: 163px;
         height: 163px;
         @include flexMixin(row, center, center);
+        transform: scale(1);
+        transition: $transition;
     }
     .f-courses-wrapper{
         width: 100%;
@@ -1358,12 +1386,16 @@ img {
             border: 2px solid $redColor;
             cursor: pointer;
             transition: $transition;
+            transform: scale(1);
             &:hover{
                 color: $redColor;
                 background-color: #fff;
                 animation: shake .2s ease-in-out 0s 2 alternate-reverse;
             }
         }
+    }
+    .animate-fcourse , .animate-FC{
+        transform: scale(0);
     }
 }
 /* free-course */

@@ -4,34 +4,35 @@ import Days from "./days/days";
 class Calender_2 extends Component {
   state = {
     day: "sat",
+    animate: " ",
     classes: {
       sat: [
         {
-          name: "فیزیک جامع",
+          name: "فیزیک ",
           id: 1,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "شیمی جامع",
+          name: "شیمی ",
           id: 2,
           teacher: "کاظمی",
           time: 12,
         },
         {
-          name: "هندسه جامع",
+          name: "هندسه ",
           id: 3,
           teacher: "محمودی",
           time: 16,
         },
         {
-          name: "فیزیک جامع",
+          name: "فیزیک ",
           id: 4,
           teacher: "شریفی",
           time: 8,
         },
         {
-          name: "حسابان جامع",
+          name: "حسابان ",
           id: 5,
           teacher: "کریمی",
           time: 20,
@@ -39,160 +40,154 @@ class Calender_2 extends Component {
       ],
       sun: [
         {
-          name: "شیمی جامع",
-          id: 2,
+          name: "روانشناسی",
+          id: 6,
           teacher: "کاظمی",
           time: 12,
         },
         {
-          name: "فیزیک جامع",
-          id: 1,
+          name: "منطق",
+          id: 7,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "فیزیک جامع",
-          id: 4,
+          name: "ریاضیات تجربی",
+          id: 8,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "حسابان جامع",
-          id: 5,
+          name: "زبان انگلیسی",
+          id: 9,
           teacher: "کریمی",
           time: 8,
         },
         {
-          name: "هندسه جامع",
-          id: 3,
+          name: "گراف",
+          id: 10,
           teacher: "محمودی",
           time: 16,
         },
       ],
       mon: [
         {
-          name: "فیزیک جامع",
-          id: 1,
+          name: "احتمال",
+          id: 11,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "فیزیک جامع",
-          id: 4,
+          name: "جغرافیا",
+          id: 12,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "شیمی جامع",
-          id: 2,
+          name: "اجتماعی",
+          id: 13,
           teacher: "کاظمی",
           time: 12,
         },
         {
-          name: "حسابان جامع",
-          id: 5,
+          name: "تاریخ",
+          id: 14,
           teacher: "کریمی",
           time: 8,
         },
         {
-          name: "هندسه جامع",
-          id: 3,
+          name: "زیست",
+          id: 15,
           teacher: "محمودی",
           time: 16,
         },
       ],
       tue: [
         {
-          name: "فیزیک جامع",
-          id: 1,
+          name: "زیست ",
+          id: 16,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "فیزیک جامع",
-          id: 4,
+          name: "زمین شناسی ",
+          id: 17,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "شیمی جامع",
-          id: 2,
+          name: "جغرافیا ",
+          id: 18,
           teacher: "کاظمی",
           time: 12,
         },
         {
-          name: "حسابان جامع",
-          id: 5,
+          name: "حرفه و فن ",
+          id: 19,
           teacher: "کریمی",
           time: 8,
         },
         {
-          name: "هندسه جامع",
-          id: 3,
+          name: "کارآفرینی ",
+          id: 20,
           teacher: "محمودی",
           time: 16,
         },
       ],
       wed: [
         {
-          name: "فیزیک جامع",
-          id: 1,
+          name: "شیمی ۲ ",
+          id: 21,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "فیزیک جامع",
-          id: 4,
+          name: "ادبیات ",
+          id: 22,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "شیمی جامع",
-          id: 2,
+          name: "جبر ",
+          id: 23,
           teacher: "کاظمی",
           time: 12,
         },
         {
-          name: "حسابان جامع",
-          id: 5,
+          name: "ورزش ",
+          id: 24,
           teacher: "کریمی",
           time: 8,
         },
         {
-          name: "هندسه جامع",
-          id: 3,
+          name: "معارف ",
+          id: 25,
           teacher: "محمودی",
           time: 16,
         },
       ],
       thu: [
         {
-          name: "فیزیک جامع",
-          id: 1,
+          name: "دینی ",
+          id: 26,
           teacher: "شریفی",
           time: 10,
         },
         {
-          name: "فیزیک جامع",
-          id: 4,
-          teacher: "شریفی",
-          time: 10,
-        },
-        {
-          name: "شیمی جامع",
-          id: 2,
+          name: "فارسی ",
+          id: 27,
           teacher: "کاظمی",
           time: 12,
         },
         {
-          name: "حسابان جامع",
-          id: 5,
+          name: "زیست ",
+          id: 28,
           teacher: "کریمی",
           time: 8,
         },
         {
-          name: "هندسه جامع",
-          id: 3,
+          name: "جبر ",
+          id: 29,
           teacher: "محمودی",
           time: 16,
         },
@@ -203,6 +198,12 @@ class Calender_2 extends Component {
   change_active_date = (day) => {
     this.setState({ day });
   };
+  handle_animation = (e) => {
+    this.setState({ animate: " animate-days" });
+    setTimeout(() => {
+      this.setState({ animate: "" });
+    }, 100);
+  };
   render() {
     return (
       <div className="new-calender-wraper">
@@ -212,6 +213,7 @@ class Calender_2 extends Component {
             <span
               onClick={() => {
                 this.change_active_date("sat");
+                this.handle_animation();
               }}
               className={this.state.day !== "sat" ? "day" : "day active"}>
               شنبه
@@ -219,12 +221,14 @@ class Calender_2 extends Component {
             <span
               onClick={() => {
                 this.change_active_date("sun");
+                this.handle_animation();
               }}
               className={this.state.day !== "sun" ? "day" : "day active"}>
               یک‌شنبه
             </span>
             <span
               onClick={() => {
+                this.handle_animation();
                 this.change_active_date("mon");
               }}
               className={this.state.day !== "mon" ? "day" : "day active"}>
@@ -232,6 +236,7 @@ class Calender_2 extends Component {
             </span>
             <span
               onClick={() => {
+                this.handle_animation();
                 this.change_active_date("tue");
               }}
               className={this.state.day !== "tue" ? "day" : "day active"}>
@@ -239,6 +244,7 @@ class Calender_2 extends Component {
             </span>
             <span
               onClick={() => {
+                this.handle_animation();
                 this.change_active_date("wed");
               }}
               className={this.state.day !== "wed" ? "day" : "day active"}>
@@ -246,6 +252,7 @@ class Calender_2 extends Component {
             </span>
             <span
               onClick={() => {
+                this.handle_animation();
                 this.change_active_date("thu");
               }}
               className={this.state.day !== "thu" ? "day" : "day active"}>
@@ -259,7 +266,10 @@ class Calender_2 extends Component {
               جمعه
             </span> */}
           </div>
-          <Days my_class={this.state.classes[this.state.day]} />
+          <Days
+            my_class={this.state.classes[this.state.day]}
+            animate={this.state.animate}
+          />
         </div>
       </div>
     );

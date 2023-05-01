@@ -3,10 +3,13 @@ import { Helmet } from "react-helmet";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
+import convert_to_persian from "../functions/convert-to-persian";
 class Profile extends Component {
   state = {};
   render() {
     const { user } = this.props;
+    let phone_number = user.phone_number.split("+");
+    phone_number = "+" + convert_to_persian(phone_number[1]);
     return (
       <>
         <Helmet>
@@ -24,7 +27,7 @@ class Profile extends Component {
                     <span className="data-wrapper">
                       <span className="label">شماره موبایل:</span>
                       <span className="data">
-                        <bdi>{user.phone_number}</bdi>
+                        <bdi>{phone_number}</bdi>
                       </span>
                     </span>
                     <span className="data-wrapper">

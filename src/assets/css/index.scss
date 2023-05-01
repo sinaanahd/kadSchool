@@ -243,16 +243,48 @@ img {
         @include flexMixin(column,flex-start,center);
         gap: 16px;
     }
-    .orange-wrapper{
-        width: 100%;
+    .orange-wrapper{ 
+        width : 400px;
         height: 160px;
         border: 2px solid $yellowColor;
         border-radius: 10px;
         transition: $transition;
+        overflow-x: hidden;
+        @include flexMixin(row,flex-start,center);
     }
-    // .animate-slider{
-        
-    // }
+    .slider-area{
+        width: 4000px;
+        @include flexMixin(row,flex-start,center);
+        height: 100%;
+        transition: $transition;
+        position: relative;
+        cursor: grab;
+    }
+    .slide{
+        width: 400px;
+        height: 100%;
+        @include flexMixin(row,center,center);
+        z-index: 8;
+        position: relative;
+        img{
+            width: 100%;
+        }
+    }
+    .abs-to-show{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+    }
+    .drag-place{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        // background-color: rgba(0,0,0,0.5);
+    }
     .events-wrapper{
         width: 100%;
         @include flexMixin(row,space-between,center);
@@ -353,35 +385,6 @@ img {
         height: 56px;
         margin: 0 0 10px;
     }
-        // .date{
-        //     width: 254px;
-        //     height: 240px;
-        //     @include flexMixin(column,flex-start,center);
-        //     border-radius: 8px;
-        //     box-shadow: $boxShadow;
-        //     background-color: #fff;
-        //     overflow: hidden;
-        //     .month{
-        //         width: 100%;
-        //         background-color: $mainColor;
-        //         color: #fff;
-        //         height: 74px;
-        //         @include flexMixin(row,center,center);
-        //         font-size: 24px;
-        //     }
-        //     .day-number{
-        //         width: 100%;
-        //         @include flexMixin(row,center,center);
-        //         height: 65px;
-        //         color: $mainColor;
-        //         font-size: 64px;
-        //         margin: 30px 0 10px;
-        //     }
-        //     .week-day{
-        //         color: $mainColor;
-        //         font-size: 24px;
-        //     }
-        // }
     .calender-wrapper{
         width: 100%;
         border-radius: 8px;
@@ -1543,18 +1546,17 @@ img {
                 font-size: 14px;
             }
         }
-        // .calender-wrapper{
-        //     overflow-x : scroll;
-        //     align-items: flex-start;
-        //     .cal-title{
-        //         width: 1300px;
-        //         justify-content: flex-start;
-        //         padding: 0 15px 0 0;
-        //     }
-        //     .calender{
-        //         width: 1300px;
-        //     }
-        // }
+        .drag-place{
+            // background-color: rgba(0,0,0,.3);
+            width: 4000px;
+        }
+        .orange-wrapper{
+            width: 100%;
+        }
+        .slide{
+            flex:0 0 100%;
+            width: unset;
+        }
     }
     .courses-section{
         .courses-wrapper{

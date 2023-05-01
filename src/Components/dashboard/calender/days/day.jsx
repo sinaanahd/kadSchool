@@ -5,12 +5,7 @@ class Day extends Component {
   render() {
     const { time, name, teacher, animate } = this.props;
     return (
-      <li
-        className={"time-class" + animate}
-        on={() => {
-          //this.handle_animation();
-          alert();
-        }}>
+      <li className={"time-class" + animate}>
         <span className="time">
           {time} - {time + 2}
         </span>

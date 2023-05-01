@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LittleLoading from "../../reuseables/little-loading";
 import DateCalender from "../date/date";
+import convert_to_persian from "../../functions/convert-to-persian";
 class Counter extends Component {
   state = {
     counter: {
@@ -38,6 +39,7 @@ class Counter extends Component {
       minutes: minutes,
       seconds: seconds,
     };
+
     this.setState({ counter });
   };
   render() {
@@ -49,7 +51,7 @@ class Counter extends Component {
           <span className="days c-wrapper">
             <span className="num">
               {this.state.counter.days || this.state.counter.days === 0 ? (
-                this.state.counter.days
+                convert_to_persian(this.state.counter.days)
               ) : (
                 <LittleLoading />
               )}
@@ -60,7 +62,7 @@ class Counter extends Component {
           <span className="hours c-wrapper">
             <span className="num">
               {this.state.counter.hours || this.state.counter.hours === 0 ? (
-                this.state.counter.hours
+                convert_to_persian(this.state.counter.hours)
               ) : (
                 <LittleLoading />
               )}
@@ -72,7 +74,7 @@ class Counter extends Component {
             <span className="num">
               {this.state.counter.minutes ||
               this.state.counter.minutes === 0 ? (
-                this.state.counter.minutes
+                convert_to_persian(this.state.counter.minutes)
               ) : (
                 <LittleLoading />
               )}
@@ -84,7 +86,7 @@ class Counter extends Component {
             <span className="num">
               {this.state.counter.seconds ||
               this.state.counter.seconds === 0 ? (
-                this.state.counter.seconds
+                convert_to_persian(this.state.counter.seconds)
               ) : (
                 <LittleLoading />
               )}

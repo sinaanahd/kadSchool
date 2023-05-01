@@ -4,6 +4,7 @@ import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
 import hello_svg from "../../assets/images/hello-page.svg";
+import convert_to_persian from "../functions/convert-to-persian";
 
 class Support extends Component {
   state = {};
@@ -26,11 +27,15 @@ class Support extends Component {
                 <p>از طریق راه های زیر میتونیم کمکت کنیم:</p>
                 <span className="ways-to-contact-wrapper">
                   <span className="way-title">شماره ثابت:</span>
-                  <a href="tel:+982166950624">02166950624</a>
+                  <a href="tel:+982166950624">
+                    {"۰" + convert_to_persian(2166950624)}
+                  </a>
                 </span>
                 <span className="ways-to-contact-wrapper">
                   <span className="way-title">شماره همراه: </span>
-                  <a href="tel:+989051300693">09051300693</a>
+                  <a href="tel:+989051300693">
+                    {"۰" + convert_to_persian(9051300693)}
+                  </a>
                 </span>
                 <span className="ways-to-contact-wrapper">
                   <span className="way-title">پشتیبانی تلگرامی:</span>

@@ -6,6 +6,8 @@ import { Helmet } from "react-helmet";
 import Calender_2 from "./calender/calender-2";
 import withWebsiteData from "../hoc/with-website-data";
 import Slider from "./slider/slider";
+import InspirationSentence from "./inspiration-sentece/inspiration-sentece";
+import DaysTip from "./days-tip/days-tip";
 class Dashboard extends Component {
   state = {
     classes: true,
@@ -33,31 +35,12 @@ class Dashboard extends Component {
               <div className="slider-calender">
                 <Counter />
                 <Slider />
+                <InspirationSentence />
               </div>
-              {/* <div className="events-wrapper">
-                <div className="todays-classes">
-                  <h2 className="title">کلاس های امروز من</h2>
-                  {this.state.classes ? (
-                    <div className="classes-wrapper">
-                      <TodayClass />
-                      <TodayClass />
-                      <TodayClass />
-                      <TodayClass />
-                      <TodayClass />
-                      <TodayClass />
-                      <TodayClass />
-                      <TodayClass />
-                    </div>
-                  ) : (
-                    <div className="no-class">
-                      <img src={noClassImg} alt="کلاس ندارید" />
-                      <p>امروز کلاسی نداری</p>
-                    </div>
-                  )}
-                </div>
-              </div> */}
-              {/* <Calender /> */}
-              <Calender_2 />
+              <div className="calender-video">
+                <Calender_2 />
+                <DaysTip />
+              </div>
             </div>
           </div>
         </section>

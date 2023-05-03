@@ -207,8 +207,8 @@ class Calender_2 extends Component {
   render() {
     return (
       <div className="new-calender-wraper">
-        <h3 className="new-cal-title">برنامه هفتگی</h3>
         <div className="new-cal-content">
+          <h3 className="new-cal-title">برنامه هفتگی</h3>
           <div className="days-wrapper">
             <span
               onClick={() => {

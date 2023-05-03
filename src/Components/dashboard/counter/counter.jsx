@@ -23,7 +23,7 @@ class Counter extends Component {
   get_counter_time = () => {
     const date = new Date();
     const timestamp = date.getTime();
-    const konkor_day = new Date(2023, 6, 5);
+    const konkor_day = new Date(2024, 6, 8);
     const time = konkor_day - timestamp;
     const days = Math.floor(time / (24 * 60 * 60 * 1000));
     const hours = Math.floor((time / (24 * 60 * 60 * 1000) - days) * 24);
@@ -46,7 +46,7 @@ class Counter extends Component {
     return (
       <div className={"counter-wrapper" + this.state.animate}>
         <DateCalender />
-        <h2 className="title">روز شمار تا کنکور ۱۴۰۲</h2>
+        <h2 className="title">روز شمار تا کنکور ۱۴۰۳</h2>
         <div className="counter">
           <span className="days c-wrapper">
             <span className="num">

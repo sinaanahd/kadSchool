@@ -13,7 +13,7 @@ class Dashboard extends Component {
     classes: true,
   };
   render() {
-    const { user } = this.props;
+    const { user, data } = this.props;
     return (
       <>
         <Helmet>
@@ -44,6 +44,7 @@ class Dashboard extends Component {
             </div>
           </div>
         </section>
+        {/* <div>{data.my_log}</div> */}
       </>
     );
   }

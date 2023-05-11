@@ -2,19 +2,25 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
-import { Link } from "react-router-dom";
-import scrollToTop from "../functions/scroll";
 import withWebsiteData from "../hoc/with-website-data";
+import Session from "./session/session";
 
-import dots from "../../assets/images/dots.svg";
 class RecordedCourses extends Component {
-  state = {};
+  state = {
+    kelas: false,
+  };
+  componentDidMount() {
+    let my_path = window.location.pathname;
+    my_path = parseInt(my_path.split("/")[2]);
+    const kelas = this.props.user.kelases[my_path];
+    this.setState({ kelas });
+  }
   render() {
     const { user } = this.props;
     return (
       <>
         <Helmet>
-          <title>جلسات ضبط شده درس</title>
+          <title>{this.state.kelas ? this.state.kelas.kelas_title : ""}</title>
         </Helmet>
         <Header user={user ? user : false} />
         <section className="recorded-sessions-section bgc-wrapper">
@@ -22,23 +28,14 @@ class RecordedCourses extends Component {
             <SideBar />
             <div className="main-content">
               <h1 className="title">جلسات ضبط شده</h1>
-              <span className="recorded-session-item">
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="session-num">
-                  جلسه {1}
-                </Link>
-                <span className="session-subject">{"ریاضی"}</span>
-                <span className="session-date">تاریخ برگزاری</span>
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="dots">
-                  <img src={dots} alt="بیشتر" width={3} height={19} />
-                </Link>
-              </span>
-              <span className="recorded-session-item even-item">
+              {this.state.kelas ? (
+                this.state.kelas.jalasat.map((j, i) => (
+                  <Session jalase={j} temp_id={i} key={i++} />
+                ))
+              ) : (
+                <></>
+              )}
+              {/* <span className="recorded-session-item even-item">
                 <Link
                   onClick={() => scrollToTop()}
                   to="/SingleSession/:id"
@@ -101,7 +98,7 @@ class RecordedCourses extends Component {
                   className="dots">
                   <img src={dots} alt="بیشتر" width={3} height={19} />
                 </Link>
-              </span>
+              </span> */}
             </div>
           </div>
         </section>

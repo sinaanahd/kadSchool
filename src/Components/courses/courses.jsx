@@ -9,7 +9,6 @@ import EmptyCourses from "./empty-course/empty-courses";
 class Courses extends Component {
   state = {
     pop_up: false,
-    courses: true,
   };
   constructor(props) {
     super(props);
@@ -21,7 +20,6 @@ class Courses extends Component {
       e.preventDefault();
     }
     setTimeout(() => {
-      console.log(this.myRef.current);
       if (this.myRef.current !== null) {
         this.myRef.current.classList.remove("animate-pop-up");
       }
@@ -41,49 +39,21 @@ class Courses extends Component {
         <section className="courses-section bgc-wrapper">
           <div className="main-content mm-width">
             <SideBar />
-            {this.state.courses ? (
-              <div className="courses-wrapper">
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={false}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={true}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={true}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={true}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={true}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={false}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={false}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={false}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={false}
-                />
-                <Course
-                  open_class_pop_up={this.open_class_pop_up}
-                  active={false}
-                />
-              </div>
+            {user ? (
+              user.kelases.length !== 0 ? (
+                <div className="courses-wrapper">
+                  {user.kelases.map((k, i) => (
+                    <Course
+                      temp_id={i}
+                      key={i++}
+                      open_class_pop_up={this.open_class_pop_up}
+                      kelas={k}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <EmptyCourses />
+              )
             ) : (
               <EmptyCourses />
             )}

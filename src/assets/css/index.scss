@@ -379,7 +379,7 @@ img {
     .date{
         @include flexMixin(row-reverse,center,center);
         gap: 10px;
-        font-size: 24px;
+        font-size: 20px;
         background-color: $mainColor;
         color: #fff;
         width: 100%;
@@ -1225,11 +1225,39 @@ img {
         padding: 0 10px;
         font-family: "main-font";
     }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    .error-place{
+        color: $redColor;
+        font-size: 12px;
+        max-width: 300px;
+        width: 100%;
+        text-align: center;
+        border: 2px solid $redColor;
+        height: 40px;
+        border-radius: 8px;
+        margin: 0 0 20px;
+        @include flexMixin(row,center,center);
+    }
+    .need-margin{
+        margin: 20px 0 0;
+    }
     .button-span{
         @include flexMixin(row,center,center);
         height: 45px;
         @include styler(#fff,$mainColor,16px,8px);
         padding: 0 25px;
+        cursor: pointer;
+    }
+    .fail{
+        background-color: $redColor;
+        cursor: not-allowed;
     }
     select {
         width: 331px;

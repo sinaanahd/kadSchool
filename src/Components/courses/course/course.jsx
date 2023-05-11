@@ -12,20 +12,20 @@ class Course extends Component {
     }, 100);
   }
   render() {
-    const { active, open_class_pop_up } = this.props;
+    const { open_class_pop_up, kelas, temp_id } = this.props;
     return (
       <div
         className={
-          active
+          kelas.is_online
             ? "course active " + this.state.animate
             : "course " + this.state.animate
         }>
-        <img src={sampleRectangle} alt="عکس کلاس" />
+        <img src={kelas.image_link} alt={kelas.kelas_title} />
         <a
           href="#"
           className="enter-class"
           onClick={(e) => {
-            open_class_pop_up(e, active);
+            open_class_pop_up(e, kelas.active);
           }}>
           ورود به کلاس
         </a>
@@ -33,7 +33,7 @@ class Course extends Component {
           onClick={() => {
             scrollToTop();
           }}
-          to="/Course/:id"
+          to={`/Course/${temp_id}`}
           className="recorded-sessions">
           جلسات ضبط شده
         </Link>

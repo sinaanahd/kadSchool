@@ -5,15 +5,34 @@ import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
 import login_bgc from "../../assets/images/login-img.svg";
 import checked_img from "../../assets/images/checked.svg";
+import axios from "axios";
+import LittleLoading from "../reuseables/little-loading";
 class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+    this.myRef2 = React.createRef();
+  }
   state = {
     agree: false,
+    year: -1,
+    subject: -1,
+    name_err: false,
+    entry_name: false,
+    pause: false,
+    err_fileds: {
+      year: false,
+      subject: false,
+    },
   };
   componentDidMount() {
     document.querySelector(".main-footer").style.display = "none";
     const { user } = this.props;
     if (user) {
-      window.location.href = window.location.href.replace("Login", "Dashboard");
+      window.location.href = window.location.href.replace(
+        "SignUp",
+        "Dashboard"
+      );
     }
   }
   componentWillUnmount() {
@@ -22,6 +41,94 @@ class SignUp extends Component {
   agree_handler = () => {
     const agree = !this.state.agree;
     this.setState({ agree });
+  };
+  handle_name = ({ target }) => {
+    const { value } = target;
+    if (value.length === 0) {
+      const name_err = "این فیلد نباید خالی باشد";
+      this.setState({ name_err });
+    } else if (value.length < 3) {
+      const name_err = "اسم حداقل باید ۳ کاراکتر باشد";
+      this.setState({ name_err });
+    } else {
+      const entry_name = value;
+      this.setState({ entry_name, name_err: false });
+    }
+  };
+  send_data = () => {
+    let year = this.myRef.current.selectedIndex - 1;
+    let subject = this.myRef2.current.selectedIndex - 1;
+    const err_fileds = { ...this.state.err_fileds };
+    const entry_name = this.state.entry_name;
+    this.setState({ pause: true });
+    switch (year) {
+      case -1:
+        year = -1;
+        break;
+      case 0:
+        year = 10;
+        break;
+      case 1:
+        year = 11;
+        break;
+      case 2:
+        year = 12;
+        break;
+    }
+    if (year !== -1 && subject !== -1 && !this.state.name_err) {
+      const obj = {
+        phone_number: JSON.parse(localStorage.getItem("kad-phone-number")),
+        name: entry_name,
+        grade: this.convert_year(year),
+        major: this.convert_major(subject),
+      };
+      axios
+        .post(`https://daryaftyar.ir/backend/kad_api/register_user`, obj)
+        .then((res) => {
+          let data = res.data;
+          axios
+            .get(` https://daryaftyar.ir/backend/kad_api/user/${data.user_id}`)
+            .then((res) => {
+              const user = res.data;
+              localStorage.setItem("user-kad", JSON.stringify(user));
+              this.props.inside_user(user);
+              console.log(user);
+              window.location.pathname = "/Dashboard";
+              this.setState({ pause: false });
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      if (year === -1) {
+        err_fileds.year = "لطفا یک پایه را انتخاب کنید";
+      } else if (subject === -1) {
+        err_fileds.year = "لطفا یک رشته را انتخاب کنید";
+      }
+      this.setState({ err_fileds });
+    }
+  };
+  convert_year = (year) => {
+    switch (year) {
+      case 10:
+        return "دهم";
+      case 11:
+        return "یازدهم";
+      case 12:
+        return "دوازدهم";
+    }
+  };
+  convert_major = (subject) => {
+    switch (subject) {
+      case 0:
+        return "ریاضی";
+      case 1:
+        return "تجربی";
+      case 2:
+        return "انسانی";
+      case 3:
+        return "هنر";
+    }
   };
   render() {
     return (
@@ -45,18 +152,22 @@ class SignUp extends Component {
                 type="text"
                 placeholder="نام و نام‌خانوادگی"
                 className="input"
+                onInput={(e) => {
+                  this.handle_name(e);
+                }}
               />
-              <select name="" id="" placeholder="">
-                <option value="">پایه تحصیلی</option>
-                <option value="">دهم</option>
-                <option value="">یازدهم</option>
-                <option value="">دوازدهم</option>
+              <select name="" id="" placeholder="" ref={this.myRef}>
+                <option value={-1}>پایه تحصیلی</option>
+                <option value={10}>دهم</option>
+                <option value={11}>یازدهم</option>
+                <option value={12}>دوازدهم</option>
               </select>
-              <select name="" id="" placeholder="">
-                <option value="">رشته تحصیلی</option>
-                <option value="">ریاضی</option>
-                <option value="">تجربی</option>
-                <option value="">انسانی</option>
+              <select name="" id="" placeholder="" ref={this.myRef2}>
+                <option value={-1}>رشته تحصیلی</option>
+                <option value={0}>ریاضی</option>
+                <option value={1}>تجربی</option>
+                <option value={2}>انسانی</option>
+                <option value={3}>هنر</option>
               </select>
               <span
                 onClick={() => {
@@ -68,7 +179,32 @@ class SignUp extends Component {
                   {this.state.agree ? <img src={checked_img} /> : <></>}
                 </span>
               </span>
-              <span className="button-span">ثبت نام</span>
+              {this.state.agree ? (
+                <span
+                  onClick={() => {
+                    this.send_data();
+                  }}
+                  className="button-span">
+                  {this.state.pause ? <LittleLoading /> : "ثبت نام"}
+                </span>
+              ) : (
+                <span className="button-span fail">ثبت نام</span>
+              )}
+              {this.state.name_err ? (
+                <span className="error-place need-margin">
+                  {this.state.name_err}
+                </span>
+              ) : this.state.err_fileds.subject ? (
+                <span className="error-place need-margin">
+                  {this.state.err_fileds.subject}
+                </span>
+              ) : this.state.err_fileds.year ? (
+                <span className="error-place need-margin">
+                  {this.state.err_fileds.year}
+                </span>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </section>

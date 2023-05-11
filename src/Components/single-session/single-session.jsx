@@ -11,7 +11,17 @@ class SingleSession extends Component {
   state = {
     jozve: false,
     no_jozve: false,
+    course: false,
   };
+  componentDidMount() {
+    let my_path = window.location.pathname;
+    let my_path_arr = [];
+    my_path_arr.push(parseInt(my_path.split("/")[2]));
+    my_path_arr.push(parseInt(my_path.split("/")[3]));
+    const my_session =
+      this.props.user.kelases[my_path_arr[0]].jalasat[my_path_arr[1]];
+    this.setState({ course: my_session });
+  }
   show_no_content = () => {
     const no_jozve = !this.state.no_jozve;
     this.setState({ no_jozve });
@@ -21,31 +31,17 @@ class SingleSession extends Component {
     return (
       <>
         <Helmet>
-          <title>جلسه ۲ - موضوع جلسه</title>
+          <title>{this.state.course.jalase_title}</title>
         </Helmet>
         <Header user={user ? user : false} />
         <section className="bgc-wrapper single-session-section">
           <div className="single-session mm-width">
             <SideBar />
             <div className="main-content">
-              <h1 className="title">
-                جلسه {2}- موضوع جلسه {"فیزیک هسته ای"}
-              </h1>
+              <h1 className="title">{this.state.course.jalase_title}</h1>
               <img src={sampleImg} alt="موضوع جلسه" />
               <span className="single-details">توضیحات</span>
-              <p className="single-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-                در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
-                نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-                کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
-                جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را
-                برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در
-                زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و
-                دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد
-                وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات
-                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-              </p>
+              <p className="single-text">{this.state.course.descriptions}</p>
               {this.state.no_jozve ? (
                 <div className="no-jozve-wrapper">
                   <span className="blue-box"></span>

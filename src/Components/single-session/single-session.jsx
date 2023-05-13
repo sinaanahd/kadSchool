@@ -33,7 +33,6 @@ class SingleSession extends Component {
         <Helmet>
           <title>{this.state.course.jalase_title}</title>
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="bgc-wrapper single-session-section">
           <div className="single-session mm-width">
             <SideBar />

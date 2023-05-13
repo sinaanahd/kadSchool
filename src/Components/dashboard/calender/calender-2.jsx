@@ -195,9 +195,6 @@ class Calender_2 extends Component {
       fri: [],
     },
   };
-  change_active_date = (day) => {
-    this.setState({ day });
-  };
   handle_animation = (e) => {
     this.setState({ animate: " animate-days" });
     setTimeout(() => {
@@ -205,6 +202,8 @@ class Calender_2 extends Component {
     }, 100);
   };
   render() {
+    const { active_day, change_active_date, week_plan } = this.props;
+    //console.log(week_plan["Saturday"]);
     return (
       <div className="new-calender-wraper">
         <div className="new-cal-content">
@@ -212,64 +211,61 @@ class Calender_2 extends Component {
           <div className="days-wrapper">
             <span
               onClick={() => {
-                this.change_active_date("sat");
+                change_active_date("Saturday");
                 this.handle_animation();
               }}
-              className={this.state.day !== "sat" ? "day" : "day active"}>
+              className={active_day !== "Saturday" ? "day" : "day active"}>
               شنبه
             </span>
             <span
               onClick={() => {
-                this.change_active_date("sun");
+                change_active_date("Sunday");
                 this.handle_animation();
               }}
-              className={this.state.day !== "sun" ? "day" : "day active"}>
+              className={active_day !== "Sunday" ? "day" : "day active"}>
               یک‌شنبه
             </span>
             <span
               onClick={() => {
                 this.handle_animation();
-                this.change_active_date("mon");
+                change_active_date("Monday");
               }}
-              className={this.state.day !== "mon" ? "day" : "day active"}>
+              className={active_day !== "Monday" ? "day" : "day active"}>
               دو‌شنبه
             </span>
             <span
               onClick={() => {
                 this.handle_animation();
-                this.change_active_date("tue");
+                change_active_date("Tuesday");
               }}
-              className={this.state.day !== "tue" ? "day" : "day active"}>
+              className={active_day !== "Tuesday" ? "day" : "day active"}>
               سه‌شنبه
             </span>
             <span
               onClick={() => {
                 this.handle_animation();
-                this.change_active_date("wed");
+                change_active_date("Wednesday");
               }}
-              className={this.state.day !== "wed" ? "day" : "day active"}>
+              className={active_day !== "Wednesday" ? "day" : "day active"}>
               چهار‌شنبه
             </span>
             <span
               onClick={() => {
                 this.handle_animation();
-                this.change_active_date("thu");
+                change_active_date("Thursday");
               }}
-              className={this.state.day !== "thu" ? "day" : "day active"}>
+              className={active_day !== "Thursday" ? "day" : "day active"}>
               پنج‌شنبه
             </span>
             {/* <span
               onClick={() => {
-                this.change_active_date("fri");
+                change_active_date("fri");
               }}
-              className={this.state.day !== "fri" ? "day" : "day active"}>
+              className={active_day !== "fri" ? "day" : "day active"}>
               جمعه
             </span> */}
           </div>
-          <Days
-            my_class={this.state.classes[this.state.day]}
-            animate={this.state.animate}
-          />
+          <Days my_class={week_plan[active_day]} animate={this.state.animate} />
         </div>
       </div>
     );

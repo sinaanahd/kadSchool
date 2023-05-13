@@ -27,6 +27,7 @@ class SignUp extends Component {
   };
   componentDidMount() {
     document.querySelector(".main-footer").style.display = "none";
+    document.querySelector(".main-header").style.display = "none";
     const { user } = this.props;
     if (user) {
       window.location.href = window.location.href.replace(
@@ -37,6 +38,7 @@ class SignUp extends Component {
   }
   componentWillUnmount() {
     document.querySelector(".main-footer").style.display = "flex";
+    document.querySelector(".main-header").style.display = "flex";
   }
   agree_handler = () => {
     const agree = !this.state.agree;
@@ -87,18 +89,18 @@ class SignUp extends Component {
         .then((res) => {
           let data = res.data;
           axios
-            .get(` https://daryaftyar.ir/backend/kad_api/user/${data.user_id}`)
+            .get(`https://daryaftyar.ir/backend/kad_api/user/${data.user_id}`)
             .then((res) => {
               const user = res.data;
-              localStorage.setItem("user-kad", JSON.stringify(user));
+              //localStorage.setItem("user-kad", JSON.stringify(user));
               this.props.inside_user(user);
-              console.log(user);
+              //console.log(user);
               window.location.pathname = "/Dashboard";
               this.setState({ pause: false });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => this.props.handle_error(err));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => this.props.handle_error(err));
     } else {
       if (year === -1) {
         err_fileds.year = "لطفا یک پایه را انتخاب کنید";

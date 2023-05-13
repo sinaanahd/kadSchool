@@ -14,7 +14,6 @@ class Topics extends Component {
         <Helmet>
           <title>دوره های کاد</title>
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="topics-wrapper-section bgc-wrapper">
           <div className="topics-wrapper mm-width">
             <SideBar />

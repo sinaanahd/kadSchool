@@ -57,7 +57,6 @@ class FreeCourse extends Component {
         <Helmet>
           <title>درس های رایگان کاد</title>
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="bgc-wrapper">
           <div className="mm-width free-courses-wrapper">
             <SideBar />

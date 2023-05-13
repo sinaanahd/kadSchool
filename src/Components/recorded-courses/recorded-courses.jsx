@@ -22,7 +22,6 @@ class RecordedCourses extends Component {
         <Helmet>
           <title>{this.state.kelas ? this.state.kelas.kelas_title : ""}</title>
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="recorded-sessions-section bgc-wrapper">
           <div className="recorded-sessions mm-width">
             <SideBar />

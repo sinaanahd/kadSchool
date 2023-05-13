@@ -35,7 +35,6 @@ class Courses extends Component {
         <Helmet>
           <title>درس های من</title>
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="courses-section bgc-wrapper">
           <div className="main-content mm-width">
             <SideBar />

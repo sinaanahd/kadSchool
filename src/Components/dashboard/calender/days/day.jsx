@@ -1,17 +1,19 @@
 import React, { Component } from "react";
+import make_time_relatable from "../../../functions/make-time-relatable";
 class Day extends Component {
   state = {};
-
   render() {
-    const { time, name, teacher, animate } = this.props;
+    const { my_class, animate } = this.props;
     return (
       <li className={"time-class" + animate}>
         <span className="time">
-          {time} - {time + 2}
+          {make_time_relatable(my_class.start_time)}
+          {" - "}
+          {make_time_relatable(my_class.finish_time)}
         </span>
         <span className="class-wrapper">
-          <h4 className="class-name">{name}</h4>
-          <h5 className="teachers-name">استاد {teacher}</h5>
+          <h4 className="class-name">{my_class.jalase_title}</h4>
+          <h5 className="teachers-name">استاد {my_class.parent_kelas_id}</h5>
         </span>
       </li>
     );

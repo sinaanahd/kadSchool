@@ -35,7 +35,6 @@ class UnderConstruction extends Component {
         <Helmet>
           <title>در حال ساخت این صفحه هستیم</title>
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="under-construction-section bgc-wrapper">
           <div className="under-construction mm-width">
             <SideBar />

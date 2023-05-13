@@ -22,12 +22,14 @@ class Login extends Component {
   componentDidMount() {
     const { user } = this.props;
     document.querySelector(".main-footer").style.display = "none";
+    document.querySelector(".main-header").style.display = "none";
     if (user) {
-      window.location.href = window.location.href.replace("Login", "Dashboard");
+      // window.location.href = window.location.href.replace("Login", "Dashboard");
     }
   }
   componentWillUnmount() {
     document.querySelector(".main-footer").style.display = "flex";
+    document.querySelector(".main-header").style.display = "flex";
   }
   handle_phone_number = ({ target }) => {
     const { value } = target;
@@ -68,7 +70,7 @@ class Login extends Component {
         }
         this.setState({ verification_code, been_before });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => this.props.handle_error(err));
   };
   check_user = () => {
     const entry_code = this.state.entry_code;
@@ -82,12 +84,12 @@ class Login extends Component {
           )
           .then((res) => {
             const user = res.data;
-            localStorage.setItem("user-kad", JSON.stringify(user));
+            //localStorage.setItem("user-kad", JSON.stringify(user));
             this.props.inside_user(user);
             window.location.pathname = "/Dashboard";
           })
           .catch((err) => {
-            console.log(err);
+            this.props.handle_error(err);
           });
       } else {
         window.location.pathname = "/SignUp";

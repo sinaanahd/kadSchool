@@ -13,7 +13,7 @@ class Dashboard extends Component {
     classes: true,
   };
   render() {
-    const { user, data } = this.props;
+    const { user, data, change_active_date } = this.props;
     return (
       <>
         <Helmet>
@@ -27,7 +27,6 @@ class Dashboard extends Component {
             content="پنل دانش آموزی, کاد, کلاس های اینترنتی دریافت"
           />
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="bgc-wrapper">
           <div className="dashboard mm-width">
             <SideBar />
@@ -38,7 +37,11 @@ class Dashboard extends Component {
                 <InspirationSentence />
               </div>
               <div className="calender-video">
-                <Calender_2 />
+                <Calender_2
+                  active_day={data.active_day}
+                  change_active_date={change_active_date}
+                  week_plan={user.week_plan}
+                />
                 <DaysTip />
               </div>
             </div>

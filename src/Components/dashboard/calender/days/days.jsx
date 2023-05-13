@@ -11,13 +11,7 @@ class Days extends Component {
       <ul className="time-class-wrapper">
         {my_class.length !== 0 ? (
           my_class.map((c) => (
-            <Day
-              key={c.id}
-              time={c.time}
-              name={c.name}
-              teacher={c.teacher}
-              animate={animate}
-            />
+            <Day key={c.jalase_id} my_class={c} animate={animate} />
           ))
         ) : (
           <li className="no-class-for-today">

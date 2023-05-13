@@ -15,7 +15,6 @@ class Support extends Component {
         <Helmet>
           <title>پشتیبانی</title>
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="bgc-wrapper hello-page-section">
           <div className="hello-page mm-width">
             <SideBar />

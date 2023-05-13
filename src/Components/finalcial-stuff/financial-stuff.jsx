@@ -13,7 +13,6 @@ class FinancialStuff extends Component {
         <Helmet>
           <title>امور مالی</title>
         </Helmet>
-        <Header user={user ? user : false} />
         <section className="finance-section bgc-wrapper">
           <div className="finance-wrapper mm-width">
             <SideBar />

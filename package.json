@@ -2,6 +2,7 @@
   "name": "kad",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sinaanahd.github.io/{kadSchool}",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -41,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }

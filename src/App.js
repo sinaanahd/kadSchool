@@ -16,7 +16,7 @@ import Support from './Components/support-page/support-page';
 import SingleSession from './Components/single-session/single-session';
 import FreeCourses from './Components/free-courses/free-courses';
 import SignUp from './Components/signup/signup';
-import Footer from './Components/footer/footer';
+import Shop from "./Components/shop/shop";
 import './App.css';
 class App extends Component {
   state = {}
@@ -34,6 +34,7 @@ class App extends Component {
         <Route path="/Login" component={Login} />
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Support" component={Support} />
+        <Route path="/Shop" component={Shop} />
         <Redirect from="/" exact to="/Dashboard" />
         <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/not-found" component={UnderConstruction} />

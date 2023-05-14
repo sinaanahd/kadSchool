@@ -8,8 +8,8 @@ import sideBarIcon_3 from "../../assets/images/side-bar-icon-3.svg";
 import sideBarIcon_blue_3 from "../../assets/images/side-bar-icon-blue-3.svg";
 import sideBarIcon_4 from "../../assets/images/side-bar-icon-4.svg";
 import sideBarIcon_blue_4 from "../../assets/images/side-bar-icon-blue-4.svg";
-import sideBarIcon_5 from "../../assets/images/side-bar-icon-5.svg";
-import sideBarIcon__blue_5 from "../../assets/images/side-bar-icon-blue-5.svg";
+import sideBarIcon_5 from "../../assets/images/side-bar-icon-5-new.svg";
+import sideBarIcon__blue_5 from "../../assets/images/side-bar-icon-blue-5-new.svg";
 import sideBarIcon_6 from "../../assets/images/side-bar-icon-6.svg";
 import sideBarIcon_7 from "../../assets/images/side-bar-icon-7.svg";
 import sideBarIcon_blue_7 from "../../assets/images/side-bar-icon-blue-7.svg";
@@ -91,17 +91,17 @@ class SideBar extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to="/UnderConstruction"
+            to="/Shop"
             className={
-              location === "Finance"
+              location === "Shop"
                 ? "active" + " side-bar-item"
                 : "side-bar-item"
             }>
             <img
-              src={location !== "Finance" ? sideBarIcon_5 : sideBarIcon__blue_5}
-              alt="امور مالی"
+              src={location !== "Shop" ? sideBarIcon_5 : sideBarIcon__blue_5}
+              alt="فروشگاه"
             />
-            <span className="text">امور مالی</span>
+            <span className="text">فروشگاه</span>
           </Link>
           <Link
             onClick={() => {

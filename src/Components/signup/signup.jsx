@@ -26,7 +26,7 @@ class SignUp extends Component {
     },
   };
   componentDidMount() {
-    document.querySelector(".main-footer").style.display = "none";
+    document.querySelector(".new-footer").style.display = "none";
     document.querySelector(".main-header").style.display = "none";
     const { user } = this.props;
     if (user) {
@@ -37,7 +37,7 @@ class SignUp extends Component {
     }
   }
   componentWillUnmount() {
-    document.querySelector(".main-footer").style.display = "flex";
+    document.querySelector(".new-footer").style.display = "flex";
     document.querySelector(".main-header").style.display = "flex";
   }
   agree_handler = () => {

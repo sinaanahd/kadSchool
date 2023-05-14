@@ -265,7 +265,10 @@ class Calender_2 extends Component {
               جمعه
             </span> */}
           </div>
-          <Days my_class={week_plan[active_day]} animate={this.state.animate} />
+          <Days
+            my_class={week_plan ? week_plan[active_day] : []}
+            animate={this.state.animate}
+          />
         </div>
       </div>
     );

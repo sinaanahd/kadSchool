@@ -40,7 +40,7 @@ class Dashboard extends Component {
                 <Calender_2
                   active_day={data.active_day}
                   change_active_date={change_active_date}
-                  week_plan={user.week_plan}
+                  week_plan={user ? user.week_plan : false}
                 />
                 <DaysTip />
               </div>

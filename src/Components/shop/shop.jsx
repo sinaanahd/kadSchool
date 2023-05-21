@@ -49,6 +49,11 @@ class Shop extends Component {
                   <span className="cat-text">کلاس</span>
                 </span>
               </div>
+              <p>
+                توضیحات : لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده
+                از طراحان گرافیک است... - - - - - - - - - - - - - - - - - - - -
+                - - -
+              </p>
               <div className="filters-wrapper">
                 <div
                   className="filter"

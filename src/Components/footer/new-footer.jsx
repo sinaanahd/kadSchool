@@ -27,13 +27,14 @@ class NewFooter extends Component {
                 لورم ایپسوم متنی ساختگی توسط طراحانلورم ایپسوم متنی ساختگی توسط
                 طراحان لورم ایپسوم متنی ساختگی توسط طراحان
               </p>
-              <input type="number" />
+              <input type="number" placeholder="09123456789" />
+              <span className="submit-btn-footer">ثبت</span>
             </div>
             <div className="quick-acsses ul-type">
               <h4 className="ul-title">دسترسی سریع</h4>
               <ul>
                 <li>
-                  <Link to="#">پشتیبانی</Link>
+                  <Link to="/Support">پشتیبانی</Link>
                 </li>
                 <li>
                   <Link to="#">سوالات متداول</Link>

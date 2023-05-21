@@ -6,7 +6,7 @@ import sideBarIcon_2 from "../../assets/images/side-bar-icon-2.svg";
 import sideBarIcon_blue_2 from "../../assets/images/side-bar-icon-blue-2.svg";
 import sideBarIcon_3 from "../../assets/images/side-bar-icon-3.svg";
 import sideBarIcon_blue_3 from "../../assets/images/side-bar-icon-blue-3.svg";
-import sideBarIcon_4 from "../../assets/images/side-bar-icon-4.svg";
+import sideBarIcon_4 from "../../assets/images/side-bar-icon-4-new.svg";
 import sideBarIcon_blue_4 from "../../assets/images/side-bar-icon-blue-4.svg";
 import sideBarIcon_5 from "../../assets/images/side-bar-icon-5-new.svg";
 import sideBarIcon__blue_5 from "../../assets/images/side-bar-icon-blue-5-new.svg";
@@ -103,7 +103,7 @@ class SideBar extends Component {
             />
             <span className="text">فروشگاه</span>
           </Link>
-          <Link
+          {/* <Link
             onClick={() => {
               scrollToTop();
             }}
@@ -118,7 +118,7 @@ class SideBar extends Component {
               alt="امور مالی"
             />
             <span className="text">پشتیبانی</span>
-          </Link>
+          </Link> */}
         </div>
         <Link
           onClick={() => {

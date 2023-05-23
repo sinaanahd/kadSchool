@@ -18,6 +18,7 @@ class Login extends Component {
     been_before: false,
     entry_code: false,
     enter_code_status: false,
+    no_more_code: false,
   };
   componentDidMount() {
     const { user } = this.props;
@@ -55,17 +56,12 @@ class Login extends Component {
       .then((res) => {
         this.setState({ pause: false });
         const { been_before, user_id, verification_code } = res.data;
-        const test = {
-          been_before: been_before,
-          user_id: user_id,
-          verification_code: verification_code,
-        };
         localStorage.setItem(
           "kad-phone-number",
           JSON.stringify(this.state.phone_number)
         );
+        this.setState({ no_more_code: true });
         if (been_before) {
-          //window.location.pathname = "/SignUp";
           this.setState({ user_id });
         }
         this.setState({ verification_code, been_before });
@@ -137,7 +133,9 @@ class Login extends Component {
               ) : (
                 <></>
               )}
-              {this.state.err_phone || !this.state.phone_number ? (
+              {this.state.err_phone ||
+              !this.state.phone_number ||
+              this.state.no_more_code ? (
                 <span className="get-code button-span fail">دریافت کد</span>
               ) : (
                 <span

@@ -31,7 +31,7 @@ class NewFooter extends Component {
               <span className="submit-btn-footer">ثبت</span>
             </div>
             <div className="quick-acsses ul-type">
-              <h4 className="ul-title">دسترسی سریع</h4>
+              <h4 className="ul-title">درباره کاد</h4>
               <ul>
                 <li>
                   <Link to="/Support">پشتیبانی</Link>
@@ -80,12 +80,50 @@ class NewFooter extends Component {
                 </a>
               </div>
               <div className="map-img">
-                <span className="map"></span>
-                <img src={rectangle_again} alt="" />
+                <span className="map">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.0909715519983!2d51.3952713!3d35.699378900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e0122d3305d81%3A0xc26623dede1f537d!2z2qnYp9iv!5e0!3m2!1sen!2s!4v1684677706408!5m2!1sen!2s"
+                    width="180"
+                    height="133"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"></iframe>
+                </span>
+                <span className="enamad">
+                  <p>
+                    <a
+                      style={{
+                        textAlign: "center",
+                        margin: "auto",
+                        display: "block",
+                        background: "white",
+                        padding: "5px",
+                      }}
+                      href="https://trustseal.enamad.ir/?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
+                      target="_blank"
+                      rel="noopener">
+                      <img
+                        data-lazyloaded="1"
+                        src="https://Trustseal.eNamad.ir/logo.aspx?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
+                        id="Jmy33pCxvf9GCBxttooi"
+                        style={{ cursor: "pointer" }}
+                        data-src="https://Trustseal.eNamad.ir/logo.aspx?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
+                        alt=""
+                        className="litespeed-loaded"
+                        data-was-processed="true"
+                      />
+                    </a>
+                  </p>
+                </span>
               </div>
             </div>
           </div>
         </div>
+        <p className="abs-footer-copy">
+          کلیه حقوق مادی و معنوی این سایت در اختیار انتشارات دریافت می باشد و
+          کپی برداری از کلیه محتوای آن غیر مجاز است.
+        </p>
       </footer>
     );
   }

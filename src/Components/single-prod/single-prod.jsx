@@ -14,7 +14,7 @@ import PopUp from "./pop-up/pop-up";
 class SingleProd extends Component {
   state = {
     more_cm: false,
-    pop_up: "resume",
+    pop_up: false,
   };
   handle_cm = () => {
     const more_cm = !this.state.more_cm;

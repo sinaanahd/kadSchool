@@ -3,7 +3,7 @@ import arrowDown from "../../../assets/images/down-arrow-blue.svg";
 class PopUp extends Component {
   state = {
     animate: "pp-animate ",
-    faq_number: 1,
+    faq_number: 0,
   };
   componentDidMount() {
     setTimeout(() => {

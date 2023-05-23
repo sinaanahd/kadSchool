@@ -147,6 +147,7 @@ input[type=number] {
 
 .new-footer{
     width: 100%;
+    position: relative;
     @include flexMixin(column,flex-start,center);
     .logo-wrapper{
         width: calc(100% - 70px);
@@ -254,6 +255,12 @@ input[type=number] {
         width: 180px;
         height: 133px;
         background-color: #d9d9d9;
+    }
+    .abs-footer-copy{
+        position: absolute;
+        z-index: 12;
+        bottom: -50px;
+        
     }
 }
 /* footer */
@@ -898,7 +905,7 @@ input[type=number] {
             border-radius: 8px;
         }
         .enter-class{
-            @include styler(#fff,$redColor,16px,8px);
+            @include styler(#fff,$yellowColor,16px,8px);
             height: 50px;
             width: 140px;
             @include flexMixin(row,center,center);
@@ -2004,107 +2011,7 @@ input[type=number] {
         @include flexMixin(column,flex-start,center);
         gap: 10px;
     }
-    .semi-2-title{
-        width: 100%;
-        font-size: 20px;
-        color: $darkBlue;
-        @include flexMixin(row,flex-start,center);
-        gap: 5px;
-        &:before{
-            background-color: #006673;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            content: " ";
-        }
-    }
-    .text-area{
-        width: 90%;
-        border-radius: 8px;
-        background-color: #fff;
-        border: 1px solid #ABABAB;
-        color: #000;
-        outline: 0px solid #000;
-        height: 128px;
-        font-family: "main-font";
-        padding: 10px 20px;
-        resize: none;
-    }
-    .submit-btn-wrapper{
-        width: 90%;
-        @include flexMixin(row,flex-end,center);
-    }
-    .submit-comment{
-        width: 80px;
-        height: 42px;
-        @include flexMixin(row,center,center);
-        @include styler(#fff,$mainColor,14px,8px);
-        cursor: pointer;
-        border: 1px solid $mainColor;
-        transition: $transition;
-        &:hover{
-            background-color: #fff;
-            color: $mainColor;
-        }
-    }
-    .comments-wrapper{
-        width: 90%;
-        height: 200px;
-        overflow: hidden;
-        position: relative;
-        @include flexMixin(column,flex-start,center);
-        gap: 20px;
-        margin: 40px 0 0;
-    }
-    .open-cm{
-        height: auto;
-        overflow: visible;
-    }
-    .comment{
-        width: 100%;
-        height: 99px;
-        border: 1px solid #DADADA;
-        @include styler(#000,#fff,16px,8px);
-        @include flexMixin(column,flex-start,flex-start);
-        gap: 10px;
-        padding: 15px 10px;
-    }
-    .name-avatar{
-        width: 100%;
-        @include flexMixin(row,flex-start,center);
-        gap: 5px;
-        img{
-            width: 32px;
-            border: 2px solid #F5A623;
-            border-radius: 50%;
-            padding: 5px;
-        }
-    }
-    .more{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 200px;
-        @include flexMixin(row,center,flex-end);
-        color: $mainColor;
-        gap: 12px;
-        font-size: 14px;
-        padding: 0 0 20px;
-        cursor: pointer;
-        background: linear-gradient(360deg, #F9F9F9 0%, rgba(255, 255, 255, 0.0260417) 86.46%, rgba(255, 233, 233, 0) 88.77%, rgba(255, 255, 255, 0) 88.77%, rgba(255, 255, 255, 0) 88.77%);
-        img{
-            position: relative;
-            top: -4px;
-        }
-    }
-    .more.close{
-        position: relative;
-        height: 40px;
-        background: unset;
-        img{
-            transform: rotate(180deg);
-        }
-    }
+    
     .pop-up-wrapper{
         width: 100vw;
         height: 100vh;
@@ -2120,7 +2027,7 @@ input[type=number] {
     .resume{
         align-items: flex-start;
         overflow: scroll;
-        padding: 100px 0;
+        padding: 20px 0;
     }
     .pp-animate{
         transform: scale(0);
@@ -2217,12 +2124,12 @@ input[type=number] {
             }
         }
         .pop-up-sub-title{
-            font-size: 24px;
+            font-size: 16px;
             width: 100%;
         }
         .resume-text{
             width: 100%;
-            font-size: 20px;
+            font-size: 14px;
             padding: 0 5px;
             @include flexMixin(row,flex-start,flex-start);
             gap: 10px;
@@ -2240,6 +2147,317 @@ input[type=number] {
     }
 }
 /* single prod page */
+/* comment section */
+.students-comments-wrapper{
+    width: 100%;
+    @include flexMixin(column, flex-start, center);
+    gap: 10px;
+    .semi-2-title {
+        width: 100%;
+        font-size: 20px;
+        color: $darkBlue;
+        @include flexMixin(row, flex-start, center);
+        gap: 5px;
+
+        &:before {
+            background-color: #006673;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            content: " ";
+        }
+    }
+
+    .text-area {
+        width: 90%;
+        border-radius: 16px;
+        background-color: #fff;
+        border: 2px solid #ABABAB;
+        color: #000;
+        outline: 0px solid #000;
+        height: 128px;
+        font-family: "main-font";
+        padding: 10px 20px;
+        resize: none;
+    }
+
+    .submit-btn-wrapper {
+        width: 90%;
+        @include flexMixin(row, flex-end, center);
+    }
+
+    .submit-comment {
+        width: 80px;
+        height: 42px;
+        @include flexMixin(row, center, center);
+        @include styler(#fff, $mainColor, 14px, 8px);
+        cursor: pointer;
+        border: 1px solid $mainColor;
+        transition: $transition;
+
+        &:hover {
+            background-color: #fff;
+            color: $mainColor;
+        }
+    }
+
+    .comments-wrapper {
+        width: 90%;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        @include flexMixin(column, flex-start, center);
+        gap: 20px;
+        margin: 40px 0 0;
+    }
+
+    .open-cm {
+        height: auto;
+        overflow: visible;
+    }
+
+    .comment {
+        width: 100%;
+        height: auto;
+        border: 1px solid #DADADA;
+        @include styler(#000, #fff, 16px, 8px);
+        @include flexMixin(column, flex-start, flex-start);
+        gap: 10px;
+        padding: 15px 10px;
+    }
+
+    .name-avatar {
+        width: 100%;
+        @include flexMixin(row, flex-start, center);
+        gap: 5px;
+
+        img {
+            width: 32px;
+            border: 2px solid #F5A623;
+            border-radius: 50%;
+            padding: 5px;
+        }
+    }
+
+    .more {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 200px;
+        @include flexMixin(row, center, flex-end);
+        color: $mainColor;
+        gap: 12px;
+        font-size: 14px;
+        padding: 0 0 20px;
+        cursor: pointer;
+        background: linear-gradient(360deg, #F9F9F9 0%, rgba(255, 255, 255, 0.0260417) 86.46%, rgba(255, 233, 233, 0) 88.77%, rgba(255, 255, 255, 0) 88.77%, rgba(255, 255, 255, 0) 88.77%);
+
+        img {
+            position: relative;
+            top: -4px;
+        }
+    }
+
+    .more.close {
+        position: relative;
+        height: 40px;
+        background: unset;
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+}
+/* comment section */
+
+/* teacher page */
+.single-teacher-wrapper{
+    width: 100%;
+    .single-teacher{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 60px;
+    }
+    .main-content{
+        @include flexMixin(column,flex-start,center);
+        width: 100%;
+    }
+    .title{
+        color: $darkBlue;
+        font-size: 24px;
+        width: 100%;
+        margin: 0 0 16px;
+    }
+    .teacher-details{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 30px;
+    }
+    .teacher-img-name{
+        @include flexMixin(column,flex-start,center);
+        flex: 0 0 190px;
+        gap: 12px;
+        h2{
+            color: $darkBlue;
+            font-size: 20px;
+        }
+    }
+    .teacher-resume-wrapper{
+        width: 100%;
+    }
+    .teacher-resume-items{
+        width: 100%;   
+    }
+    .resume-title{
+        margin: 0 0 18px;
+    }
+    .teacher-resume-items{
+        width: 100%;
+        padding: 0 10px 0;
+        li{
+            margin: 20px 0 0;
+            list-style: none;
+            @include flexMixin(row,flex-start,center);
+            gap: 10px;
+            &::before{
+                width: 16px;
+                height: 16px;
+                background-color: $yellowColor;
+                border-radius: 2px;
+                content: " ";
+                display: block;
+            }
+        }
+    }
+    .intriduction-wrapper{
+        max-width: 600px;
+        width: 100%;
+        margin: 7px 0 34px;
+        @include flexMixin(column,flex-start,center);
+        gap: 14px;
+    }
+    .intro-video-wrapper{
+        max-width: 567px;
+        width: 100%;
+        height: 302px;
+        background-color: #d9d9d9;
+    }
+    .teachers-courses-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 11px;
+    }
+    .teacher-courses-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 20px;
+    }
+    .courses{
+        @include flexMixin(row,flex-start,center);
+        gap: 12px;
+        width: 1000px;
+        overflow: hidden;
+        padding:20px 10px;
+    }
+    .course{
+        width: 199px;
+        height: 199px;
+        flex:0 0 199px;
+        background-color: #fff;
+        box-shadow: $boxShadow;
+        border-radius: 8px;
+    }
+    .arrows{
+        flex: 0 0 30px;
+        height: 30px;
+        border: 2px solid #000;
+        border-radius: 50%;
+        @include flexMixin(row,center,center);
+        background-color: #fff;
+        cursor: pointer;
+        img{
+            width: 15px;
+        }
+    }
+    .prev-course{
+        img{
+            transform: rotate(270deg);
+        }
+    }
+    .next-course{
+        img{
+            transform: rotate(-270deg);
+        }
+    }
+    .teachers-sample-wrapper{
+        width: 100%;
+        margin: 51px 0 30px;
+        @include flexMixin(column,flex-start,center);
+    }
+    .samples{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 5px;
+        margin: 7px 0 32px;
+    }
+    .sample-wrapper{
+        max-width: 278px;
+        height: 252px;
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid #ddd;
+        padding: 8px 8px 17px;
+        background-color: #fff;
+        @include flexMixin(column,flex-start,flex-start);
+        .img-wrapper{
+            width: 100%;
+            height: 167px;
+            border-radius: 8px;
+            background-color: #d9d9d9;
+        }
+    }
+    .sample-btns-wrapper{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 30px;
+    }
+    .sample-btn{
+        width: 149px;
+        height: 46px;
+        background-color: #fff;
+        border-radius: 8px;
+        font-size: 18px;
+        border: 2px solid $mainColor;
+        color: $mainColor;
+        @include flexMixin(row,center,center);
+        gap: 5px;
+        &::before{
+            width: 29px;
+            height: 29px;
+            background-color: #d9d9d9;
+            content: " ";
+            display: block;
+
+        }
+    }
+    h3{
+        color: #000;
+        font-size: 20px;
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        width: 100%;
+        &::before{
+            content: " ";
+            width:14px;
+            height: 14px;
+            background-color: #006673;
+            border-radius: 50%;
+        }
+    }
+}
+/* teacher page */
+
+
 
 /* responsive */
 @media  (max-width: 991px) {
@@ -2578,6 +2796,137 @@ input[type=number] {
     .recorded-sessions-section{
         .recorded-session-item{
             width: 100%;
+        }
+    }
+    .students-comments-wrapper{
+        .text-area {
+            width: 100%;
+            border-radius: 16px;
+            height: 72px;
+        }
+
+        .submit-btn-wrapper {
+            width: 100%;
+        }
+
+        .comments-wrapper {
+            width: 100%;
+            gap: 5px;
+        }
+
+        .comment {
+            border-radius: 16px;
+        }
+    }
+    .single-prod-wrapper{
+        .prod-details-wrapper{
+            @include flexMixin(column,flex-start,flex-start);
+            gap: 30px;
+        }
+        .detail-title{
+            font-size: 13px;
+            img{
+                width: 20px;
+            }
+        }
+        .prod-details-text {
+            .content{
+                font-size: 12px;
+            }
+        }
+        .boxes-wrapper{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .box{
+            width: 172px;
+            height: 72px;
+            font-size: 16px;
+        }
+        
+        .main-data{
+            width: 97%;
+            .sample-btn{
+                width: 81px;
+                height: 32px;
+                font-size: 12px;
+                &:before{
+                    display: none;
+                }
+            }
+            .faq-question-wrapper {
+                padding: 10px;
+                .question-icon {
+                    img{
+                        width: 22px;
+                        height: 22px;
+                        padding: 5px;
+                    }
+                }
+                h2{
+                    font-size: 14px;
+                }
+                p{
+                    padding: 0;
+                    gap: 5px;
+                    &::before{
+                        flex: 0 0 5px;
+                    }
+                }
+            }
+            .resume-text{
+                &::before{
+                    flex: 0 0 5px;
+                }
+            }
+        }
+        .resume{
+            padding: 50px 0 200px;
+        }
+    }
+    .single-teacher-wrapper{
+        .teacher-details{
+            @include flexMixin(column,flex-start,flex-start);
+            gap: 20px;
+        }
+        .teacher-img-name{
+            @include flexMixin(row,flex-start,flex-start);
+            gap: 10px;
+            flex: 0 0 1;
+            width: 100%;
+            img{
+                max-width: 100%;
+                width: 173px;
+            }
+        }
+        .intriduction-wrapper{
+            margin: 20px 0;
+        }
+        .arrows{
+            display: none;
+        }
+        .courses{
+            overflow: scroll;
+        }
+        .teachers-sample-wrapper{
+            margin: 30px 0;
+        }
+        .samples{
+            width: 100%;
+            overflow: scroll;
+            justify-content: flex-start;
+            padding:10px 0px;
+        }
+        .sample-wrapper{
+            flex: 0 0 193px;
+        }
+        .sample-btn{
+            width: 89px;
+            height: 32px;
+            font-size: 12px;
+            &::before{
+                display: none;
+            }
         }
     }
 }

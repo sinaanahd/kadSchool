@@ -19,6 +19,7 @@ import SignUp from './Components/signup/signup';
 import Shop from "./Components/shop/shop";
 import SingleProd from "./Components/single-prod/single-prod";
 import Teacher from "./Components/teacher/teacher";
+import SingleCourse from "./Components/single-course/single-course";
 import './App.css';
 class App extends Component {
   state = {}
@@ -39,6 +40,7 @@ class App extends Component {
         <Route path="/Shop" component={Shop} />
         <Route path="/SingleProd/:id" component={SingleProd} />
         <Route path="/Teacher/:id" component={Teacher} />
+        <Route path="/SingleCourse/:id" component={SingleCourse} />
         <Redirect from="/" exact to="/Dashboard" />
         <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/not-found" component={UnderConstruction} />

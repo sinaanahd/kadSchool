@@ -910,9 +910,9 @@ input[type=number] {
             width: 140px;
             @include flexMixin(row,center,center);
             transition: $transition;
-            border: 2px solid $redColor;
+            border: 2px solid $yellowColor;
             &:hover{
-                color: $redColor;
+                color: $yellowColor;
                 background-color: #fff;
                 animation: shake .2s ease-in-out 0s 2 alternate-reverse;
             }
@@ -2147,6 +2147,227 @@ input[type=number] {
     }
 }
 /* single prod page */
+/* single course */
+.single-course-wrapper{
+    width: 100%;
+    .single_course{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 60px;
+    }
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+    }
+    .title{
+        color: $darkBlue;
+        font-size: 24px;
+        width: 100%;
+        margin: 0 0 30px;
+    }
+    .intro-class-wrapper{
+        width: 100%;
+        @include flexMixin(row,space-between,flex-start);
+    }
+    .h2-before{
+        color: #000;
+        font-size: 20px;
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        &::before{
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            content: " ";
+            display: block;
+            background-color: #006673;
+        }
+    }
+    .course-description{
+        width: 100%;
+        padding: 0 10px;
+        height: 150px;
+        overflow: hidden;
+        position: relative;
+        li{
+            list-style-type: none;
+            @include flexMixin(row,flex-start,center);
+            gap: 10px;
+            margin: 20px 0 0;
+            font-size: 16px;
+            &:before{
+                flex:0 0 16px;
+                height: 16px;
+                background-color: #FBC40D;
+                border-radius: 2px;
+                content: " ";
+                display: block;
+            }
+        }
+        .more-description{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+            @include flexMixin(row,center,flex-end);
+            padding: 10px;
+            background: linear-gradient(360deg, #F9F9F9 24.95%, rgba(249, 249, 249, 0) 87.1%);
+            height: 150px;
+            color: $mainColor;
+            border-radius: 8px;
+            cursor: pointer;
+            &::before{
+                display: none;
+            }
+        }
+    }
+    .visible-desc{
+        height: auto;
+        .more-description{
+            height: auto;
+            background: unset;
+            position: relative;
+            bottom: 0;
+        }
+    }
+    .class-details{
+        flex: 0 0 300px;
+        @include flexMixin(column , flex-start,center);
+        gap: 8px;
+    }
+    .video-wrapper{
+        width: 100%;
+        height: 133px;
+        background-color: #d9d9d9;
+    }
+    .class-time{
+        width: 100%;
+        height: 66px;
+        background-color: #fff;
+        box-shadow: $boxShadow;
+        border-radius: 8px;
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        padding: 0 14px;
+    }
+    .teachers-part-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+    }
+    .teachers-wrapper-btn{
+        padding: 0 20px;
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 20px;
+    }
+    .teachers-wrapper{
+        width: 100%;
+        max-width: 1000px;
+        overflow-x: hidden;
+        @include flexMixin(row,flex-start,center);
+        padding: 20px 10px;
+        gap: 10px;
+    }
+    .teacher{
+        flex: 0 0 170px;
+        @include flexMixin(column, flex-start, center);
+        gap: 6px;
+    }
+    .img-name-date{
+        height: 206px;
+        background-color: #fff;
+        box-shadow: $boxShadow;
+        width: 100%;
+        border-radius: 8px;
+        @include flexMixin(column, flex-start, center);
+        padding: 6px;
+        .img-wrapper{
+            width: 100%;
+            height: 142px; 
+            background-color: #D9D9D9;  
+        }
+        .teacher-name{
+            margin: 5px 0 10px;
+            font-size: 16px;
+        }
+        .dates{
+            font-size: 15px;
+        }
+    }
+    .add-teacher{
+        width: 100%;
+        border-radius: 8px;
+        height: 46px;
+        @include flexMixin(row,flex-start,center);
+        font-size: 14px;
+        color: #fff;
+        background-color: $yellowColor;
+        padding-right: 6px;
+        img{
+            cursor: pointer;
+        }
+    }
+    .discounted-price{
+        margin: 0 6px 0;
+        font-size: 12px;
+        text-decoration: line-through;
+        color: #FFFFFFB2;
+    }
+    .normal-price{
+        margin-left: 3px;
+    }
+    .currency{
+        font-size: 12px;
+        position: relative;
+        top: 2px;
+    }
+    .sample-teach-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+        margin: 0 0 20px;
+    }
+    .samples-wrapper-btns{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 20px;
+    }
+    .samples-wrapper{
+        width: 100%;
+        max-width: 1000px;
+        @include flexMixin(row,flex-start,center);
+        gap: 4px;
+        overflow-x: hidden;
+        padding: 20px 10px;
+    }
+    .sample-wrapper{
+        flex: 0 0 226px;
+        height: 220px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: $boxShadow;
+        color: $mainColor;
+        font-size: 16px;
+        @include flexMixin(column,flex-start,center);
+        gap: 4px;
+        padding: 6px;
+    }
+    .img-wrapper{
+        width: 100%;
+        height: 112px;
+        background-color: #d9d9d9;
+        margin: 0 0 5px;
+    }
+    .arrows{
+        cursor: pointer;
+    }
+    .next{
+        transform: rotate(180deg);
+    }
+}
+/* single course */
 /* comment section */
 .students-comments-wrapper{
     width: 100%;
@@ -2927,6 +3148,27 @@ input[type=number] {
             &::before{
                 display: none;
             }
+        }
+    }
+    .single-course-wrapper{
+        .intro-class-wrapper{
+            @include flexMixin(column,flex-start,center);
+            gap: 20px;
+        }
+        .class-details{
+            width: 100%;
+        }
+        .arrows{
+            display: none;
+        }
+        .teachers-wrapper-btn{
+            width: 100%;
+            padding: 0;
+        }
+        .teachers-wrapper,.samples-wrapper{
+            width: 100%;
+            padding: 10px 0;
+            overflow: scroll;
         }
     }
 }

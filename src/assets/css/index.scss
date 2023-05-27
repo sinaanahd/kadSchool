@@ -658,6 +658,8 @@ input[type=number] {
         }
         .teachers-name{
             font-size: 14px;
+            @include flexMixin(row,flex-start,center);
+            gap: 3px;
         }
         .no-class-for-today{
             // font-size: 20px;
@@ -1171,119 +1173,191 @@ input[type=number] {
     .profile-wrapper{
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
-        gap: 60px;
+        gap: 30px;
     }
     .mian-content{
         width: 100%;
         @include flexMixin(column,flex-start,center);
-        gap: 40px;
+        gap: 30px;
     }
     h1{
         font-size: 26px;
         width: 100%;
     }
-    .forms-wrapper{
+    .colums-3{
         width: 100%;
-        @include flexMixin(row,space-between,flex-start);
-        // gap: 100px;
+        @include flexMixin(row,flex-start,flex-start);
     }
-    .col{
-        flex: 0 0 45%;
+    .profile-options{
+        flex: 0 0 188px;
         @include flexMixin(column,flex-start,center);
-        gap: 40px;
+        gap: 22px;
     }
-    .constant-datas{
+    .option{
+        max-width: 188px;
         width: 100%;
-        @include flexMixin(column,flex-start,flex-start);
-        gap: 40px;
-    }
-    .data-wrapper{
-        @include flexMixin(row,flex-start,center);
-        width: 100%;
-        gap: 10px;
-    }
-    .form-box{
-        width: 100%;
-        @include styler(#000,#f4f4f4,12px,8px);
-        padding: 20px;
+        height: 109px;
+        border-radius: 8px;
+        background-color: #fff;
         box-shadow: $boxShadow;
-        @include flexMixin(column,flex-start,center);
-        gap: 30px;
-        h2{
-            font-size: 24px;
-            width: 100%;
+        font-size: 20px;
+        color: $mainColor;
+        @include flexMixin(row,center,center);
+        gap: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: $transition;
+        transform: translate(0,0);
+        &:hover{
+            transform: translate(0,-10px);
         }
+    }
+    .active.option{
+        background-color: #98bce0;
+        color: #fff;
+    }
+    .info-wrapper{
+       width: 100%;
+       gap: 50px;
+       @include flexMixin(row,flex-start,flex-start);
+       margin-right: 50px;
+    }
+    .cols{
+        @include flexMixin(column,flex-start,flex-start);
+    }
+    .col-1{
+        gap: 20px;
+    }
+    .profile-photo-wrapper{
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+        margin: 0 0 10px;
+        .title{
+            font-size: 16px;
+        }
+    }
+    .img-wrapper{
+        width: 138px;
+        height: 138px;
+        border-radius: 50%;
+        background-color: #d9d9d9;
     }
     .input-wrapper{
         width: 100%;
         @include flexMixin(column,flex-start,flex-start);
         gap: 10px;
-        padding: 0 20px;
-        // input{
-        //     background-color: #fff;
-        //     outline: 0px solid $mainColor;
-        //     border-radius: 8px;
-        //     border: 2px solid $mainColor;
-        //     height: 48px;
-        //     width: 100%;
-        //     padding: 0 15px;
-        // }
-        select{
-            font-family : "main-font";
-            height: 48px;
+        position: relative;
+        .title{
+            font-size: 16px;
+        }
+        input{
             width: 100%;
-            outline: 0px solid $mainColor;
-            border: 2px solid $mainColor;
-            padding: 0 15px;
+            max-width: 331px;
+            height: 48px;
+            outline: 0px solid #000;
+            font-family: "main-font";
             border-radius: 8px;
+            border: 2px solid $mainColor; 
+            padding: 0px 10px;
+            margin: 0 8px 0 0;
+        }
+        textarea{
+            width: 100%;
+            max-width: 331px;
+            height: 100px;
+            outline: 0px solid #000;
+            font-family: "main-font";
+            border-radius: 8px;
+            border: 2px solid $mainColor;
+            padding: 10px;
+            resize: none;
+            margin: 0 8px 0 0;
         }
     }
-    .options{
+    .birthday-input-wrapper{
+        position: relative;
         width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 23px;
+        margin:0 8px 0 0;
+        .text{
+            font-size: 12px;
+        }
+    }
+    .b-options{
+        width: 300%;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        max-width: 331px;
         display: grid;
         grid-template-columns: repeat(4,1fr);
-        column-gap: 10px;
-        row-gap: 10px;
+        background-color: #fff;
+        z-index: 10;
+        border: 2px solid $mainColor;
+        padding: 10px;
+        border-radius: 8px;
+        span{
+            @include flexMixin(row,center,center);
+            border-radius: 4px;
+            padding:7px 5px 5px;
+            &:hover{
+                background-color: $mainColor;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
     }
-    .option{
+    .birthday-input{
+        width: 95px;
+        height: 48px;
+        border: 2px solid $mainColor;
+        color: #000;
+        @include flexMixin(row,space-between,center);
+        padding: 5px;
+        border-radius: 8px;
+        background-color: #fff;
+        img{
+            cursor: pointer;
+        }
+    }
+    .subject-wrapper{
         width: 100%;
-        @include styler($mainColor,#fff , 16px , 8px);
+        max-width: 331px;
+        height: 48px;
+        border-radius: 8px;
         border: 2px solid $mainColor;
-        @include flexMixin(row,center,center);
-        font-size: 12px;
-        height: 35px;
-        cursor: pointer;
-    }
-    .upload-documents{
-        @include styler($mainColor,#fff,20px,8px);
-        @include flexMixin(row,center,center);
-        height: 74px;
-        border: 2px solid $mainColor;
-        margin: 0 0 50px;
-        width: 90%;
-    }
-    .upload{
-        align-items: center;
-        cursor: pointer;
-        .label{
-            width: 100%
+        padding: 0px 10px;
+        margin: 0 8px 0 0;
+        @include flexMixin(row,space-between,center);
+        position: relative;
+        background-color: #fff;
+        img {
+            cursor: pointer;
         }
-        h2{
+    }
+    .s-g-options{
+        width: 100%;
+        position: absolute;
+        padding: 10px;
+        border: 2px solid $mainColor;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 10px;
+        top: 50px;
+        right: 0;
+        border-radius: 8px;
+        z-index: 10;
+        background-color: #fff;
+        span{
             width: 100%;
-        }
-    }
-    .submit-btn{
-        @include flexMixin(row,center,center);
-        @include styler(#fff,$mainColor,16px,8px);
-        padding: 0 20px;
-        height: 49px;
-        margin: 0 0 20px;
-        border: 2px solid $mainColor;
-        cursor: pointer;
-        transition: $transition;
-        &:hover{
-            color: $mainColor;
-            background-color: #fff;
+            border-radius: 8px;
+            padding: 10px 5px;
+            transition: $transition;
+            cursor: pointer;
+            &:hover{
+                background-color: $mainColor;
+                color: #fff;
+            }
         }
     }
 }
@@ -1726,14 +1800,14 @@ input[type=number] {
         .view-btn{
             width: 100px;
             height: 50px;
-            @include styler(#fff,$redColor,16px,8px);
+            @include styler(#fff,$yellowColor,16px,8px);
             @include flexMixin(row,center,center);
-            border: 2px solid $redColor;
+            border: 2px solid $yellowColor;
             cursor: pointer;
             transition: $transition;
             transform: scale(1);
             &:hover{
-                color: $redColor;
+                color: $yellowColor;
                 background-color: #fff;
                 animation: shake .2s ease-in-out 0s 2 alternate-reverse;
             }

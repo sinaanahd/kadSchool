@@ -22,7 +22,7 @@ class Course extends Component {
         }>
         <img src={kelas.image_link} alt={kelas.kelas_title} />
         <a
-          href="#"
+          href={kelas.skyRoom_link}
           className="enter-class"
           onClick={(e) => {
             open_class_pop_up(e, kelas.active);

@@ -28,9 +28,16 @@ class RecordedCourses extends Component {
             <div className="main-content">
               <h1 className="title">جلسات ضبط شده</h1>
               {this.state.kelas ? (
-                this.state.kelas.jalasat.map((j, i) => (
-                  <Session jalase={j} temp_id={i} key={i++} />
-                ))
+                this.state.kelas.jalasat.length !== 0 ? (
+                  this.state.kelas.jalasat.map((j, i) => (
+                    <Session jalase={j} temp_id={i} key={i++} />
+                  ))
+                ) : (
+                  <p>
+                    متاسفانه جلسه‌ی ضبط شده‌ای برای این کلاس هنوز قرار نگرفته
+                    شده
+                  </p>
+                )
               ) : (
                 <></>
               )}

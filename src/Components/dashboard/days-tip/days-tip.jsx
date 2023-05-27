@@ -15,7 +15,7 @@ class DaysTip extends Component {
       <>
         <div className="days-tip-wrapper">
           <div className="days-tip-title-wrapper">
-            <h3 className="days-tip-title">نکته روز</h3>
+            <h3 className="days-tip-title">تله و تست</h3>
             <span
               className="back-btn"
               onClick={() => {

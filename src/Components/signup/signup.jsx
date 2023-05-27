@@ -29,12 +29,12 @@ class SignUp extends Component {
     document.querySelector(".new-footer").style.display = "none";
     document.querySelector(".main-header").style.display = "none";
     const { user } = this.props;
-    if (user) {
-      window.location.href = window.location.href.replace(
-        "SignUp",
-        "Dashboard"
-      );
-    }
+    // if (user) {
+    //   window.location.href = window.location.href.replace(
+    //     "SignUp",
+    //     "Dashboard"
+    //   );
+    // }
   }
   componentWillUnmount() {
     document.querySelector(".new-footer").style.display = "flex";

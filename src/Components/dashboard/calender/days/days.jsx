@@ -6,12 +6,17 @@ class Days extends Component {
   state = {};
 
   render() {
-    const { my_class, animate } = this.props;
+    const { my_class, animate, kelases } = this.props;
     return (
       <ul className="time-class-wrapper">
         {my_class.length !== 0 ? (
           my_class.map((c) => (
-            <Day key={c.jalase_id} my_class={c} animate={animate} />
+            <Day
+              key={c.jalase_id}
+              my_class={c}
+              animate={animate}
+              kelases={kelases}
+            />
           ))
         ) : (
           <li className="no-class-for-today">

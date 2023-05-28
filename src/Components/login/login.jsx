@@ -24,9 +24,9 @@ class Login extends Component {
     const { user } = this.props;
     document.querySelector(".new-footer").style.display = "none";
     document.querySelector(".main-header").style.display = "none";
-    if (user) {
-      window.location.href = window.location.href.replace("Login", "Dashboard");
-    }
+    // if (user) {
+    //   window.location.href = window.location.href.replace("Login", "Dashboard");
+    // }
   }
   componentWillUnmount() {
     document.querySelector(".new-footer").style.display = "flex";

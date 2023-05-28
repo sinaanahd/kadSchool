@@ -29,15 +29,16 @@ body {
 /* universal styles */
 #root {
     @include flexMixin(column, flex-start, center);
+    background-image: url("../images/paper-bg.svg");
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 .mm-width{
     max-width: 1300px;
 }
 .bgc-wrapper{
-    background-image: url("../images/backgroudn-main.svg");
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
+    
     width: 100%;
     @include flexMixin(column,flex-start,center);
     padding: 32px 0 100px;
@@ -165,7 +166,7 @@ input[type=number] {
     .light-blue{
         position: absolute;
         width: 100%;
-        height: 300px;
+        height: 330px;
         background: rgb(213, 244, 255);
         background: linear-gradient(180deg, rgb(213, 244, 255) 0%,rgb(213, 244, 255) 50%,#fff 100%);
         right: 0;
@@ -284,6 +285,20 @@ input[type=number] {
     }
     .cart-icon{
         @include flexMixin(row,center,center);
+        position: relative;
+    }
+    .number{
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        font-size: 16px;
+        background-color: $yellowColor;
+        @include flexMixin(row,center,center);
+        padding: 2px 0 0;
+        position: absolute;
+        bottom: -8px;
+        right: -13px;
+        color: #fff;
     }
     .user-name-wrapper{
         color: $mainColor;
@@ -1358,6 +1373,95 @@ input[type=number] {
                 background-color: $mainColor;
                 color: #fff;
             }
+        }
+    }
+    .col-2{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 100px;
+    }
+    .introduced-to-kad{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+        width: 100%;
+    }
+    .title-way{
+        font-size: 20px;
+    }
+    .input-btn-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        position: relative;
+        gap: 20px;
+    }
+    .select-input{
+        max-width: 331px;
+        width: 100%;
+        height: 48px;
+        border: 2px solid $mainColor;
+        border-radius: 8px;
+        background-color: #fff;
+        @include flexMixin(row,space-between,center);
+        padding: 0 10px;
+    }
+    .select-options{
+        position: absolute;
+        display: none;
+    }
+    .submit-ways{
+        width: 80px;
+        height: 48px;
+        @include flexMixin(row,center,center);
+        border-radius: 8px;
+        background-color: $mainColor;
+        color: #fff;
+        font-size: 16px;
+    }
+    .change-pass-wrapper{
+        width: 100%;
+        background-color: #f4f4f4;
+        border-radius: 8px;
+        padding: 18px 16px;
+        @include flexMixin(column,flex-start,center);
+        min-height: 330px;
+        gap:30px;
+        box-shadow: $boxShadow;
+    }
+    .change-pass-title{
+        font-size: 24px;
+        width: 100%;
+    }
+    .pass-input-wrapper{
+        padding: 0 30px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 10px;
+        width: 100%;
+        input{
+            width: 100%;
+            height: 46px;
+            outline: 0px solid $mainColor;
+            border: 2px solid $mainColor;
+            border-radius: 8px;
+            padding: 0 5px;
+        }
+    }
+    .input-tt{
+        font-size: 12px;
+    }
+    .change-pass-btn{
+        width: 150px;
+        height: 43px;
+        background-color: $mainColor;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 2px solid $mainColor;
+        @include flexMixin(row,center,center);
+        transition: $transition;
+        cursor: pointer;
+        &:hover{
+            color: $mainColor;
+            background-color: #fff;
         }
     }
 }
@@ -2752,7 +2856,198 @@ input[type=number] {
 }
 /* teacher page */
 
-
+/* cart page */
+.cart-section-wrapper{
+    width: 100%;
+    .cart-section{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 40px;
+    }
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 20px;
+    }
+    .title{
+        width: 100%;
+        color: $mainColor;
+        font-size: 24px;
+    }
+    .cols-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 25px;
+    }
+    .right-col{
+        @include flexMixin(column,flex-start,center);
+        width: 100%;
+        gap: 20px;
+    }
+    .cart-items-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 8px;
+        border: 1px solid #b3b3b3;
+        border-radius: 8px;
+        padding: 10px 20px;
+    }
+    .semi-title{
+        font-size: 24px;
+        color: $mainColor;
+        width: 100%;
+    }
+    .cart-item{
+        width: 100%;
+        border-radius: 8px;
+        height: 114px;
+        @include flexMixin(row,space-between,center);
+        border-radius: 8px;
+        background-color: #fff;
+        padding: 13px;
+    }
+    .img-wrapper-name{
+        @include flexMixin(row,flex-start,center);
+        gap: 8px;
+        height: 100%;
+        img{
+            width: 75px;
+            height: 100%;
+            background-color: #d9d9d9;
+        }
+    }
+    .names{
+        height: 100%;
+        @include flexMixin(column,space-between,flex-start);
+        font-size: 20px;
+    }
+    .delete-price{
+        @include flexMixin(column,space-between,flex-end);
+        height: 100%;
+        img{
+            cursor: pointer;
+            transition: $transition;
+            &:hover{
+                transform: scale(1.2);
+            }
+        }
+    }
+    .prices-wrapper{
+        @include flexMixin(row,flex-end,center);
+        gap:7px;
+        font-size: 16px;
+    }
+    .discounted-price{
+        font-size: 13px;
+        text-decoration: line-through;
+    }
+    .how-to-pay-wrapper{
+        width: 100%;
+        border : 1px solid #b3b3b3;
+        border-radius: 8px;
+        padding: 13px;
+        @include flexMixin(column,flex-start,center);
+        gap: 35px;
+        position: relative;
+    }
+    .arrow-up{
+        position: absolute;
+        top: 13px;
+        left: 13px;
+    }
+    .pay-details{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+    }
+    .pay-titles{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+    }
+    .left-col{
+        flex:0 0 310px;
+        @include flexMixin(column,flex-start,center);
+    }
+    .pay-item-title{
+        flex: 0 0 33%;
+        font-size: 18px;
+    }
+    .pay-btn{
+        color: $yellowColor;
+        border: 2px solid $yellowColor;
+        border-radius: 8px;
+        font-size: 16px;
+        @include flexMixin(row,center,center);
+        width: 154px;
+        height: 46px;
+        background-color: #fff;
+        transition: $transition;
+        cursor: pointer;
+        &:hover{
+            color: #fff;
+            background-color: $yellowColor;
+        }
+    }
+    .price-details{
+        width: 306px;
+        height: 293px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: $boxShadow;
+        padding: 10px;
+        @include flexMixin(column,space-between,center);
+    }
+    .details{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 24px;
+    }
+    .details-item{
+        width: 100%;
+        @include flexMixin(row,space-between,center);  
+    }
+    .d-i-title{
+        font-size: 16px;
+    }
+    .bold-style{
+        font-weight: bold;
+        font-size: 16px;
+        .d-i-title {
+            font-size: 18px;
+        }
+    }
+    .pay-btn-bank{
+        @include flexMixin(row,center,center);
+        width: 205px;
+        height: 46px;
+        border-radius: 8px;
+        background-color: $mainColor;
+        color: #fff;
+        border: 2px solid $mainColor;
+        transition: $transition;
+        cursor: pointer;
+        font-size: 16px;
+        &:hover{
+            background-color: #fff;
+            color: $mainColor;
+        }
+    }
+    .discount-code{
+        width: 218px;
+        height: 56px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: $boxShadow;
+        color: $mainColor;
+        @include flexMixin(row,space-between,center);
+        margin: 20px 0 0;
+        padding: 0px 10px;
+        font-size: 24px;
+        img{
+            transform: rotate(180deg);
+        }
+    }
+}
+/* cart page */
 
 /* responsive */
 @media  (max-width: 991px) {
@@ -3070,11 +3365,19 @@ input[type=number] {
             padding: 20px 15px;
             gap: 20px;
         }
+        .footer-content{
+            border-radius: 8px 8px 0 0;
+            background: linear-gradient(180deg, rgb(213, 244, 255) 0%, rgb(213, 244, 255) 50%, #fff 100%);
+            top: -80px;
+            z-index: 3;
+            padding-bottom: 100px;
+        }
         .light-blue{
             top: -90px;
             width: 100%;
             border-radius: 40px;
             transform: rotate(0deg);
+            display: none;
         }
         .logo-wrapper{
             width: 100%;
@@ -3086,6 +3389,16 @@ input[type=number] {
         .icon-img-map-col{
             width: 100%;
             align-items: center;
+        }
+        .abs-footer-copy{
+            position: relative;
+            bottom: unset;
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            background-color: #fff;
+            @include flexMixin(row,center,center);
+            top:-80px;
         }
     }
     .recorded-sessions-section{
@@ -3243,6 +3556,87 @@ input[type=number] {
             width: 100%;
             padding: 10px 0;
             overflow: scroll;
+        }
+    }
+    .cart-section-wrapper{
+        .cols-wrapper{
+            @include flexMixin(column,flex-start,center);
+            gap: 30px;
+        }
+        .names{
+            font-size: 14px;
+        }
+        .prices-wrapper{
+            font-size: 12px;
+        }
+        .cart-item{
+            height: 83px;
+        }
+        .left-col{
+            width: 100%;
+            flex: 0 0 100%;
+        }
+        .price-details{
+            width: 100%;
+        }
+        .pay-titles{
+            @include flexMixin(column,flex-start,flex-start);
+            gap: 30px;
+        }
+    }
+    .profile-section{
+        .colums-3{
+            @include flexMixin(column,flex-start,center);
+            gap: 20px;
+        }
+        .profile-options{
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            row-gap: 15px;
+            column-gap: 5px;
+            flex: unset;
+        }
+        .option{
+            font-size: 16px;
+            height: 56px;
+            img{
+                width: 16px;
+            }
+        }
+        .info-wrapper{
+            margin: 0;
+            @include flexMixin(column,flex-start,center);
+            gap: 30px;
+        }
+        .col-1{
+            width: 100%;
+            margin:0;
+            align-items : center;
+        }
+        .input-wrapper{
+            width: 100%;
+            align-items: center;
+            .title{
+                width: 100%;
+            }
+            input,textarea,.subject-wrapper{
+                margin: 0;
+                max-width: unset;
+            }
+        }
+        .birthday-input-wrapper{
+            justify-content: space-between;
+            gap: 0;
+            margin: 0;
+            position: relative;
+        }
+        .b-options{
+            width: 100%;
+            max-width: unset;
+        }
+        .pass-input-wrapper{
+            padding: 0;
         }
     }
 }

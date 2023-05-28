@@ -190,7 +190,44 @@ class Info extends Component {
             </span>
           </span>
         </div>
-        <div className="col-2 cols"></div>
+        <div className="col-2 cols">
+          <div className="introduced-to-kad">
+            <span className="title-way">از چه طریقی با کاد آشنا شدید؟</span>
+            <span className="input-btn-wrapper">
+              <span className="select-input">
+                <span className="s-text">لورم اپیسوم</span>
+                <img src={arrow} alt="" />
+              </span>
+              <span className="submit-ways">ثبت</span>
+              <span className="select-options">
+                <span className="select-option">
+                  لورم اپیسوم متن ساختگی است
+                </span>
+                <span className="select-option">
+                  لورم اپیسوم متن ساختگی است
+                </span>
+                <span className="select-option">
+                  لورم اپیسوم متن ساختگی است
+                </span>
+                <span className="select-option">
+                  لورم اپیسوم متن ساختگی است
+                </span>
+              </span>
+            </span>
+          </div>
+          <div className="change-pass-wrapper">
+            <span className="change-pass-title">تغییر رمز عبور</span>
+            <span className="pass-input-wrapper">
+              <span className="input-tt">رمز عبور</span>
+              <input type="password" name="" id="" />
+            </span>
+            <span className="pass-input-wrapper">
+              <span className="input-tt">تکرار رمز عبور</span>
+              <input type="password" name="" id="" />
+            </span>
+            <span className="change-pass-btn">تغییر رمز عبور</span>
+          </div>
+        </div>
       </div>
     );
   }

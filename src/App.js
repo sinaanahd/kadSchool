@@ -20,6 +20,7 @@ import Shop from "./Components/shop/shop";
 import SingleProd from "./Components/single-prod/single-prod";
 import Teacher from "./Components/teacher/teacher";
 import SingleCourse from "./Components/single-course/single-course";
+import Cart from './Components/cart/cart';
 import './App.css';
 class App extends Component {
   state = {}
@@ -38,6 +39,7 @@ class App extends Component {
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Support" component={Support} />
         <Route path="/Shop" component={Shop} />
+        <Route path="/Cart" component={Cart} />
         <Route path="/SingleProd/:id" component={SingleProd} />
         <Route path="/Teacher/:id" component={Teacher} />
         <Route path="/SingleCourse/:id" component={SingleCourse} />

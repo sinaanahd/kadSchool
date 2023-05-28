@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../side-bar/side-bar";
 import mainLogo from "../../assets/images/main-logo.webp";
-import cartIcon from "../../assets/images/cart-icon.svg";
+import cartIcon from "../../assets/images/cart-blue.svg";
 import userIcon from "../../assets/images/user-icon.svg";
 import menu_icon from "../../assets/images/menu-icon.svg";
 import cross_menu_icon from "../../assets/images/cross-menu.svg";
@@ -48,9 +48,10 @@ class Header extends Component {
             </Link>
           </div>
           <div className="cart-name-wrapper">
-            {/* <span className="cart-icon">
+            <Link to="/Cart" className="cart-icon">
               <img src={cartIcon} alt="رفتن به سبد خرید" />
-            </span> */}
+              <span className="number">3</span>
+            </Link>
             <Link
               to={user ? "/Profile" : "/Login"}
               className="user-name-wrapper">

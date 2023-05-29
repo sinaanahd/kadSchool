@@ -40,7 +40,7 @@ class Profile extends Component {
     return (
       <>
         <Helmet>
-          <title>ویرایش پروفایل</title>
+          <title>پروفایل</title>
         </Helmet>
         <section className="bgc-wrapper profile-section">
           <div className="profile-wrapper mm-width">

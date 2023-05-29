@@ -21,6 +21,7 @@ import SingleProd from "./Components/single-prod/single-prod";
 import Teacher from "./Components/teacher/teacher";
 import SingleCourse from "./Components/single-course/single-course";
 import Cart from './Components/cart/cart';
+import Fianance from "./Components/fianance/fianance";
 import './App.css';
 class App extends Component {
   state = {}
@@ -30,7 +31,8 @@ class App extends Component {
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/Topics" component={Topics} />
         <Route path="/Profile" component={Profile} />
-        <Route path="/Finance" component={FinancialStuff} />
+        {/* <Route path="/Finance" component={FinancialStuff} /> */}
+        <Route path="/Finance" component={Fianance} />
         <Route path="/Courses" component={Courses} />
         <Route path="/FreeCourses" component={FreeCourses} />
         <Route path="/Course/:id" component={RecordedCourses} />

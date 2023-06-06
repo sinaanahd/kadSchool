@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
-import convert_to_persian from "../functions/convert-to-persian";
-import LittleLoading from "../reuseables/little-loading";
-import axios from "axios";
 import PageDecider from "./page-decider/page-decider";
 import give_date_data from "../functions/give-date-data";
 import Info from "./info/info";
+import find_month from "../functions/find-month";
+import ProfileFinanace from "./profile-finance/profile-finanace";
 
 class Profile extends Component {
   state = {
@@ -35,6 +34,20 @@ class Profile extends Component {
   handle_day = (day) => {
     this.setState({ day });
   };
+  handle_month = (month) => {
+    this.setState({ month: find_month(month) });
+    const data = give_date_data(month);
+    const days = [...this.state.days];
+    const day = this.state.day;
+    //console.log(data.arr, days);
+    if (data.arr.length !== days.length) {
+      this.setState({ days: data.arr });
+      if (day === 31) this.setState({ day: 1 });
+    }
+  };
+  handle_year = (year) => {
+    this.setState({ year });
+  };
   render() {
     const { user } = this.props;
     return (
@@ -60,9 +73,14 @@ class Profile extends Component {
                     day={this.state.day}
                     year={this.state.year}
                     years={this.state.years}
+                    handle_day={this.handle_day}
+                    handle_month={this.handle_month}
+                    handle_year={this.handle_year}
                   />
+                ) : this.state.page === "fianance" ? (
+                  <ProfileFinanace />
                 ) : (
-                  <></>
+                  <div className="empty">در حال طراحی ...</div>
                 )}
               </div>
             </div>

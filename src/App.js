@@ -22,6 +22,7 @@ import Teacher from "./Components/teacher/teacher";
 import SingleCourse from "./Components/single-course/single-course";
 import Cart from './Components/cart/cart';
 import Fianance from "./Components/fianance/fianance";
+import newSingleSession from './Components/single-session/new-single-session';
 import './App.css';
 class App extends Component {
   state = {}
@@ -37,6 +38,7 @@ class App extends Component {
         <Route path="/FreeCourses" component={FreeCourses} />
         <Route path="/Course/:id" component={RecordedCourses} />
         <Route path="/SingleSession/:id" component={SingleSession} />
+        <Route path="/SingleSession-new/:id" component={newSingleSession} />
         <Route path="/Login" component={Login} />
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Support" component={Support} />

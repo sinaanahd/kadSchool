@@ -14,7 +14,7 @@ function withWebsiteData(Component) {
         state: false,
         message: "",
       },
-      active_day: "Saturday",
+      active_day: "Friday",
     };
     componentDidMount() {
       if (this.state.user) {

@@ -10,13 +10,13 @@ class Footer extends Component {
       <>
         <footer className="main-footer">
           <div className="icons-wrapper">
-            <a href="#" className="icon">
+            <a href="b2n.ir/f84751" className="icon">
               <img src={instagramIcon} alt="ایسنتاگرام کاد" />
             </a>
-            <a href="#" className="icon">
+            <a href="b2n.ir/r59262" className="icon">
               <img src={whatsappIcon} alt="واتسپ کاد" />
             </a>
-            <a href="#" className="icon">
+            <a href="b2n.ir/u76961" className="icon">
               <img src={telegramIcon} alt="تلگرام کاد" />
             </a>
           </div>

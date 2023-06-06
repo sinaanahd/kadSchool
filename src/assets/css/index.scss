@@ -194,21 +194,29 @@ input[type=number] {
             text-align: justify;
             max-width: 300px;
         }
+        
         input{
             width: 100%;
             height: 42px;
             border-radius: 8px;
             border: 2px solid $mainColor;
             outline: 0px solid $mainColor;
-            padding: 0 10px;
-
+            padding: 0 10px 0 78px;
         }
     }
+    .footer-input-wrapper {
+        width: 100%;
+        position: relative;
+    }
     .submit-btn-footer{
-        @include styler(#fff,$mainColor,14px,8px);
+        @include styler(#fff,$yellowColor,14px,8px);
         width: 72px;
-        height: 42px;
+        height: 32px;
         @include flexMixin(row,center,center);
+        position: absolute;
+        top: 5px;
+        left: 6px;
+        cursor: pointer;
     }
     .ul-type{
         @include flexMixin(column,flex-start,flex-start);
@@ -598,57 +606,83 @@ input[type=number] {
         .new-cal-title{
             width: 100%;
             font-size: 16px;
-            text-align: center;
             color: #2D2A62;
+            padding: 10px 10px 0;
         }
         .new-cal-content{
             background-color: #fff;
             border-radius: 8px;
-            width: 530px;
-            height: 254px;
-            padding:10px;
+            width: 512px;
+            min-height: 347px;
             @include flexMixin(column,flex-start,center);
-            gap: 12px;
             box-shadow: $boxShadow;
             overflow: hidden;
         }
         .days-wrapper{
             width: 100%;
-            @include flexMixin(row,flex-end,center);
-            gap: 5px;
-            flex-wrap: wrap;
+            @include flexMixin(row,flex-start,center);
         }
         .day{
-            @include styler(#000 , #fff , 14px , 8px);
-            height: 28px;
-            width: 72px;
+            @include styler(#000 , #fff , 14px , 0px);
+            height: 38px;
+            flex:0 0 86px;
             @include flexMixin(row,center,center);
-            border: 2px solid #5793CE;
             cursor: pointer;
             font-weight: bold;
             transition: $transition;
+            border-top: 1px solid #bcbcbc;
+            border-bottom: 1px solid #bcbcbc;
             &:hover{
-                background-color: #5793CE;
-                color: #fff;
+                background-color: #E6F9FF;
+                border-bottom: 1px solid #5A85CB;
             }
         }
-        
+        .middle{
+            border-right: 1px solid #bcbcbc;
+        }
         .active{
-            background-color: #5793CE;
-            color: #fff;
+            background-color: #E6F9FF;
+            border-bottom: 2px solid #5A85CB;
         }
         .time-class-wrapper{
-            @include flexMixin(column,flex-start,center);
             width: 100%;
-            gap: 14px;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            row-gap: 6px;
+            column-gap: 6px;
+            padding: 8px; 
         }
         .time-class{
-            width: 100%;
-            @include flexMixin(row,flex-start,center);
-            gap: 14px;
+            width: 120px;
+            height: 120px;
+            @include flexMixin(column,flex-start,flex-start);
             transition: $transition;
             opacity: 1;
-            // transform: translateX(0);
+            border : 2px solid #5A85CB;
+            border-radius: 8px;
+            background-color: #D6F5FF99;
+            padding: 6px;
+            position: relative;
+            
+        }
+        .finished.time-class{
+            opacity: 0.5;
+        }
+        .online.time-class{
+            border-color: #FBC40D;
+            background-color: #FDF9F3;
+            &::before {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+                content: " ";
+                display: block;
+                position: absolute;
+                top: -6px;
+                left: -6px;
+                background-color: #FBC40D;
+            }
         }
         .animate-days {
             opacity: 0.2;
@@ -657,29 +691,44 @@ input[type=number] {
         .time{
             font-size: 14px;
             border-radius: 8px;
-            width: 84px;
-            height: 44px;
-            color: #000;
-            @include flexMixin(row,center,center);
-            background-color: #F5F5F5;
+            color: #213C67;
         }
         .class-wrapper{
             @include flexMixin(row,flex-start,center);
-            gap: 14px;
             flex-wrap: wrap;
+            width: 100%;
         }
         .class-name{
-            font-size: 16px;
+            font-size: 14px;
+            width: 100%;
+            margin:5px 0 10px;
         }
         .teachers-name{
-            font-size: 14px;
-            @include flexMixin(row,flex-start,center);
-            gap: 3px;
+            font-size: 12px;
+            @include flexMixin(column,flex-start,flex-start);
+            width: 100%;
         }
         .no-class-for-today{
-            // font-size: 20px;
+            width: 200px;
             list-style: none;
             margin: 10px 0;
+        }
+        .dots-wrapper{
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            background-color: #5A85CB4D;
+            @include flexMixin(row,center,center);
+            padding: 0 0 4px;
+            color: #5A85CB;
+        }
+        .online .dots-wrapper{
+            color: #fff;
+            background-color: #FBC40D;
         }
     }
     .ins-sentence{
@@ -881,12 +930,12 @@ input[type=number] {
 @keyframes fade {
     from{
         // opacity: 0.7;
-        background-color: #fff018;
+        background-color: $redColor;
         scale: (1);
     }
     to{
         // opacity: 1;
-        background-color: #FFAF18;
+        background-color: #f24949;
         transform: scale(1.3);
     }
 }
@@ -1403,10 +1452,38 @@ input[type=number] {
         background-color: #fff;
         @include flexMixin(row,space-between,center);
         padding: 0 10px;
+        cursor: pointer;
     }
     .select-options{
         position: absolute;
         display: none;
+    }
+    .active-intro{
+        width: 100%;
+        max-width: 331px;
+        position: absolute;
+        padding: 10px;
+        border: 2px solid $mainColor;
+        @include flexMixin(column, flex-start, flex-start);
+        gap: 10px;
+        top: 50px;
+        right: 0;
+        border-radius: 8px;
+        z-index: 10;
+        background-color: #fff;
+    
+        span {
+            width: 100%;
+            border-radius: 8px;
+            padding: 10px 5px;
+            transition: $transition;
+            cursor: pointer;
+    
+            &:hover {
+                background-color: $mainColor;
+                color: #fff;
+            }
+        }
     }
     .submit-ways{
         width: 80px;
@@ -1794,7 +1871,187 @@ input[type=number] {
     }
 }
 /* single session */
-
+/* new signle session */
+.new-single-session-wrapper{
+    width: 100%;
+    .new-sigle-session{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 30px;
+    }
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 40px;
+    }
+    .title{
+        font-size: 20px;
+        color: $darkBlue;
+        width: 100%;
+    }
+    .two-part-colums{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 32px;
+    }
+    .second-side-bar-and-content{
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 30px;
+        width: 100%;
+    }
+    .second-side-bar-wrapper{
+        flex: 0 0 83px;
+        @include flexMixin(column,flex-start,center);
+        gap: 16px;
+    }
+    .second-side-bar-item{
+        width: 81px;
+        height: 82px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: $boxShadow;
+        @include flexMixin(row,center,center);
+        transition: $transition;
+        cursor: pointer;
+        &:hover{
+            transform: translate(0,-10px);
+        }
+    }
+    .second-side-bar-item.active{
+        background-color: #98BCE0;
+    }
+    .multiple-content{
+        @include flexMixin(column,flex-start,flex-start);
+        width: 100%;
+    }
+    .download{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 22px;
+    }
+    .download-item-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 15px;
+        font-size: 20px;
+        color: $mainColor;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .question{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 16px;
+        width: 100%;
+    }
+    .question-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 16px;
+    }
+    .options-wrapper{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 16px;
+        width: 100%;
+    }
+    .question-option{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+        font-size: 16px;
+        &:before{
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            border: 2px solid $mainColor;
+            content : " ";
+            display: block;
+        }
+    }
+    .question-text{
+        font-size: 20px;
+    }
+    .submit-question-answer-btn-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-end,center);
+    }
+    .submit-btn{
+        width: 112px;
+        height: 46px;
+        box-shadow: $boxShadow;
+        border-radius: 8px;
+        color: #fff;
+        background-color: $mainColor;
+        @include flexMixin(row,center,center);
+        transition: $transition;
+        border: 2px solid $mainColor;
+        font-size: 16px;
+        cursor: pointer;
+        &:hover{
+            color: $mainColor;
+            background-color: #fff;
+        }
+    }
+    .comment{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 22px;
+        width: 100%;
+    }
+    .add-commnet{
+        @include flexMixin(row,flex-start,center);
+        gap: 8px;
+        width: 100%;
+        input{
+            width: calc(100% - 32px);
+            height: 43px;
+            border-radius: 8px;
+            outline: 0px solid #fff;
+            border: 0px solid #fff;
+            background-color: #e4e4e4;
+            padding: 0 10px;
+            color: #000;
+            font-family: "main-font";
+        }
+    }
+    .avatar{
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #d9ddd9;
+        @include flexMixin(row,center,center);
+    }
+    .single-commnet-wrapper{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 0px;
+        width: 100%;
+    }
+    .commnets-part-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+    }
+    .avatar-name-time{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        font-size: 14px;
+        gap: 5px;
+    }
+    .comment-text{
+        padding: 0 35px 0 0;
+        font-size: 16px;
+        text-align: justify;
+        line-height: 28px;
+    }
+    .video-place{
+        flex: 0 0 710px;
+        @include flexMixin(row,center,center);
+        img{
+            max-width: 702px;
+            width: 100%;
+            height: 403px;
+            background-color: #d9d9d9;
+        }
+    }
+}
+/* new signle session */
 /* free-course */
 .free-courses-wrapper{
     width: 100%;
@@ -2038,6 +2295,81 @@ input[type=number] {
         cursor: pointer;
         &:hover{
             background-color: #5793CE80;
+        }
+    }
+    .products-wrapper{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        column-gap: 24px;
+        row-gap: 30px;
+        direction: ltr;
+    }
+    .product-wrapper{
+        width: 100%;
+        padding: 8px 8px 10px;
+        border-radius: 8px;
+        background-color: #fff;
+        @include flexMixin(column,flex-start,center);
+        transition: $transition;
+        direction: rtl;
+        &:hover{
+            transform: translate(0,-10px);
+            box-shadow: $boxShadow;
+        }
+    }
+    .prod-img-wrapper{
+        width: 100%;
+        height: 171px;
+        @include flexMixin(row,center,center);
+        background-color: #d9d9d9;
+    }
+    .product-title{
+        font-size: 16px;
+    }
+    .prod-details{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        font-size: 14px;
+        gap: 21px;
+        margin: 5px 0;
+    }
+    .prod-desc{
+        font-size: 16px;
+        color: $yellowColor;
+        font-weight: bold;
+    }
+    .price-currency-wrapper{
+        @include flexMixin(row,space-between,center);
+        width: 100%;
+        margin: 5px 0 10px;
+    }
+    .discounted-price{
+        font-size: 12px;
+        text-decoration: line-through;
+    }
+    .normal-price{
+        font-size: 14px;
+        @include flexMixin(row,flex-end,flex-end);
+        gap: 5px;
+    }
+    .currency{
+        font-size: 12px;
+    }
+    .prod-add-to-cart{
+        width: 100%;
+        height: 46px;
+        border-radius: 8px;
+        color: #fff;
+        background-color: $yellowColor;
+        @include flexMixin(row,center,center);
+        gap:7px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: $transition;
+        cursor: pointer;
+        &:hover{
+            animation: shake .2s ease-in-out 0s 2 alternate-reverse;
         }
     }
 }
@@ -3050,21 +3382,9 @@ input[type=number] {
 /* cart page */
 
 /* new finance page */
-.new-finance-wrapper{
+.profile-finance{
     width: 100%;
-    .new-finance{
-        width: 100%;
-        @include flexMixin(row,flex-start,flex-start);
-        gap: 30px;
-    }
-    .main-content{
-        @include flexMixin(column,flex-start,flex-start);
-        width: 100%;
-    }
-    .title{
-        font-size: 24px;
-        color: $mainColor;
-    }
+    margin-right: 40px;
     .two-boxes-wrapper{
         @include flexMixin(row,flex-start,center);
         width: 100%;
@@ -3354,18 +3674,23 @@ input[type=number] {
                 flex-wrap: nowrap;
             }
             .days-wrapper{
-                gap: 2px;
+                gap: 0;
+                overflow-x: scroll;
+                padding: 0 0 20px;
             }
             .day{
-                font-size: 14px;
-                width: 54px;
+                font-size: 12px;
+                flex:0 0 66px;
                 height: 32px;
             }
-            .class-name{
-                font-size: 18px;
+            .time-class-wrapper{
+                grid-template-columns: repeat(2,1fr);
+                row-gap: 10px;
+                column-gap: 10px
             }
-            .teachers-name{
-                font-size: 14px;
+            .time-class{
+                width: 100%;
+                height: 120px;
             }
         }
         .drag-place{
@@ -3528,6 +3853,9 @@ input[type=number] {
         }
         .filter-items-wrapper{
             max-width: 100%;
+        }
+        .products-wrapper{
+            grid-template-columns: repeat(2,1fr);
         }
     }
     .main-footer{
@@ -3816,7 +4144,8 @@ input[type=number] {
             padding: 0;
         }
     }
-    .new-finance-wrapper{
+    .profile-finance{
+        margin-right: 0;
         .two-boxes-wrapper{
             @include flexMixin(column,flex-start,center);
             gap: 20px;
@@ -3889,6 +4218,32 @@ input[type=number] {
         }
         .next-pay-price{
             font-size: 12px;
+        }
+    }
+    .new-single-session-wrapper{
+        .two-part-colums{
+            @include flexMixin(column-reverse,flex-start,center);
+            gap: 10px;
+        }
+        .video-place{
+            width: 100%;
+            flex: unset;
+            img{
+                max-width: 100%;
+                height: 300px;
+            }
+        }
+        .second-side-bar-and-content{
+            @include flexMixin(column,flex-start,center);
+        }
+        .second-side-bar-wrapper{
+            @include flexMixin(row,center,center);
+            gap: 12px;
+        }
+        .second-side-bar-item{
+            width: 80px;
+            height: 65px;
+            
         }
     }
 }

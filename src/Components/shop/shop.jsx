@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import withWebsiteData from "../hoc/with-website-data";
 import SideBar from "../side-bar/side-bar";
+import Product from "./product/product";
 
 import catImg1 from "../../assets/images/cat-img-1.svg";
 import catImg2 from "../../assets/images/cat-img-2.svg";
@@ -142,6 +143,16 @@ class Shop extends Component {
                     <span className="filter-item">تیر آخر</span>
                   </span>
                 </div>
+              </div>
+              <div className="products-wrapper">
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
               </div>
             </div>
           </div>

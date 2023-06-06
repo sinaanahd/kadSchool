@@ -6,7 +6,7 @@ import aparatLogo from "../../assets/images/aparat.svg";
 import telegramIcon from "../../assets/images/telegram-icon.svg";
 import whatsappIcon from "../../assets/images/whatsapp-icon.svg";
 import instagramIcon from "../../assets/images/instagram-icon.svg";
-import rectangle_again from "../../assets/images/rectangle-again.svg";
+
 class NewFooter extends Component {
   state = {};
   render() {
@@ -27,8 +27,10 @@ class NewFooter extends Component {
                 لورم ایپسوم متنی ساختگی توسط طراحانلورم ایپسوم متنی ساختگی توسط
                 طراحان لورم ایپسوم متنی ساختگی توسط طراحان
               </p>
-              <input type="number" placeholder="09123456789" />
-              <span className="submit-btn-footer">ثبت</span>
+              <span className="footer-input-wrapper">
+                <input type="number" placeholder="09123456789" />
+                <span className="submit-btn-footer">ثبت</span>
+              </span>
             </div>
             <div className="quick-acsses ul-type">
               <h4 className="ul-title">درباره کاد</h4>
@@ -66,16 +68,28 @@ class NewFooter extends Component {
             </div>
             <div className="icon-img-map-col">
               <div className="icons">
-                <a href="#" className="icon">
+                <a
+                  href="https://b2n.ir/y31513"
+                  target="_blank"
+                  className="icon">
                   <img src={aparatLogo} alt="آپارات کاد" />
                 </a>
-                <a href="#" className="icon">
+                <a
+                  href="https://b2n.ir/y01578"
+                  target="_blank"
+                  className="icon">
                   <img src={instagramIcon} alt="ایسنتاگرام کاد" />
                 </a>
-                <a href="#" className="icon">
+                <a
+                  href="https://b2n.ir/r59262"
+                  target="_blank"
+                  className="icon">
                   <img src={whatsappIcon} alt="واتسپ کاد" />
                 </a>
-                <a href="#" className="icon">
+                <a
+                  href="https://b2n.ir/u76961"
+                  target="_blank"
+                  className="icon">
                   <img src={telegramIcon} alt="تلگرام کاد" />
                 </a>
               </div>

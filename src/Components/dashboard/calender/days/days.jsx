@@ -8,7 +8,7 @@ class Days extends Component {
   render() {
     const { my_class, animate, kelases } = this.props;
     return (
-      <ul className="time-class-wrapper">
+      <div className="time-class-wrapper">
         {my_class.length !== 0 ? (
           my_class.map((c) => (
             <Day
@@ -19,10 +19,10 @@ class Days extends Component {
             />
           ))
         ) : (
-          <li className="no-class-for-today">
+          <div className="no-class-for-today">
             {" "}
             شما امروز هیچ کلاسی ندارید :({" "}
-          </li>
+          </div>
         )}
         {/* <li className="time-class">
           <span className="time">8-10</span>
@@ -77,7 +77,7 @@ class Days extends Component {
             <h5 className="teachers-name">استاد شریفی</h5>
           </span>
         </li> */}
-      </ul>
+      </div>
     );
   }
 }

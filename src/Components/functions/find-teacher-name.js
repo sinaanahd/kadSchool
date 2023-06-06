@@ -7,7 +7,6 @@ function find_teacher_name(kelasses, id) {
                 if (!teachers.includes(t.fullname)) {
                     teachers.push(t.fullname);
                 }
-
             })
         }
     });

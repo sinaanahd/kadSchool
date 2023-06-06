@@ -3,8 +3,6 @@ import Days from "./days/days";
 
 class Calender_2 extends Component {
   state = {
-    day: "Saturday",
-    //day: "Friday",
     animate: " ",
   };
   handle_animation = (e) => {
@@ -42,7 +40,9 @@ class Calender_2 extends Component {
                 change_active_date("Sunday");
                 this.handle_animation();
               }}
-              className={active_day !== "Sunday" ? "day" : "day active"}>
+              className={
+                active_day !== "Sunday" ? "day middle" : "day middle active"
+              }>
               یک‌شنبه
             </span>
             <span
@@ -50,7 +50,9 @@ class Calender_2 extends Component {
                 this.handle_animation();
                 change_active_date("Monday");
               }}
-              className={active_day !== "Monday" ? "day" : "day active"}>
+              className={
+                active_day !== "Monday" ? "day middle" : "day middle active"
+              }>
               دو‌شنبه
             </span>
             <span
@@ -58,7 +60,9 @@ class Calender_2 extends Component {
                 this.handle_animation();
                 change_active_date("Tuesday");
               }}
-              className={active_day !== "Tuesday" ? "day" : "day active"}>
+              className={
+                active_day !== "Tuesday" ? "day middle" : "day middle active"
+              }>
               سه‌شنبه
             </span>
             <span
@@ -66,7 +70,9 @@ class Calender_2 extends Component {
                 this.handle_animation();
                 change_active_date("Wednesday");
               }}
-              className={active_day !== "Wednesday" ? "day" : "day active"}>
+              className={
+                active_day !== "Wednesday" ? "day middle" : "day middle active"
+              }>
               چهار‌شنبه
             </span>
             <span
@@ -74,7 +80,11 @@ class Calender_2 extends Component {
                 this.handle_animation();
                 change_active_date("Thursday");
               }}
-              className={active_day !== "Thursday" ? "day" : "day active"}>
+              className={
+                active_day !== "Thursday"
+                  ? "day middle thur"
+                  : "day middle active"
+              }>
               پنج‌شنبه
             </span>
             {/* <span

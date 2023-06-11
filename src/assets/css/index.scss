@@ -1230,6 +1230,146 @@ input[type=number] {
 }
 /* financial things */
 
+/* faq page */
+.faq-wrapper{
+    width: 100%;
+    @include flexMixin(row,flex-start,flex-start);
+    gap: 24px;
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+        padding: 12px 0;
+        border: 2px solid #D9D9D9;
+        background-color: #fff;
+        border-radius: 16px;
+    }
+    .title{
+        font-size: 24px;
+        margin: 0 16px;
+    }
+    .tabs-with-contents{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+    }
+    .tabs{
+        border-bottom: 2px solid #d9d9d9;
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        padding-right: 5px;
+    }
+    .tab{
+        width: 164px;
+        height: 51px;
+        font-size: 16px;
+        color: $mainColor;
+        @include flexMixin(row,center,center);
+        position: relative;
+        cursor: pointer;
+        // transition: $transition;
+    }
+    .active.tab{
+        border-top: 2px solid #d9d9d9 ;
+        border-right: 2px solid #d9d9d9 ;
+        border-left: 2px solid #d9d9d9 ;
+        border-radius: 8px 8px 0 0;
+        &:after{
+            width: 100%;
+            height: 2px;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            content: " ";
+            background-color: #fff;
+        }
+    }
+    .questions-wrapper{
+        padding: 0 27px;
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 36px;
+    }
+    .question{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 10px;
+        img {
+            transform: rotate(0);
+            transition: $transition;
+            cursor: pointer;
+        }
+    }
+    .question.active{
+        .question-answer{
+            height: auto;
+            opacity: 1;
+        }
+        img{
+            transform: rotate(180deg);
+        }
+    }
+    .question-answer{
+        transition: $transition;
+        font-size: 16px;
+        line-height: 28px;
+        text-align: justify;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+    .question-header{
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+    }
+    .question-title{
+        font-size: 20px;
+    }
+    .didnt-get-your-answer{
+        margin: 32px 0 0;
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 20px;
+        p{
+            font-size: 24px;
+            text-align: center;
+        }
+    }
+    .input-wrapper{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 5px;
+        input{
+            max-width: 100%;
+            width: 331px;
+            height: 53px;
+            border-radius: 8px;
+            border: 2px solid $mainColor;
+            direction: ltr;
+            padding: 0 10px;
+        }
+    }
+    .input-title{
+        font-size: 14px;
+    }
+    .submit-wrapper{
+        max-width: 100%;
+        width: 331px;
+        @include flexMixin(row,flex-end,center);
+    }
+    .submit-btn{
+        width: 80px;
+        height: 49px;
+        font-size: 16px;
+        border-radius: 8px;
+        color: #fff;
+        background-color: $mainColor;
+        @include flexMixin(row,center,center);
+        margin: 10px 0 0;
+    }
+}
+/* faq page */
+
+
 /* profile */
 .profile-section{
     width: 100%;
@@ -1661,6 +1801,7 @@ input[type=number] {
         height: 14px;
         border-radius: 50%;
         border: 1px solid $mainColor;
+        cursor: pointer;
         img{
             display: none;
         }
@@ -1679,8 +1820,48 @@ input[type=number] {
         font-size: 12px;
         @include flexMixin(row, center, center);
         gap: 10px;
-        cursor: pointer;
         margin: 20px 0;
+    }
+    .rules-text{
+        text-decoration: underline;
+        color: $mainColor;
+        cursor: pointer;
+    }
+    .rules-pop-up-wrapper{
+        width: 100%;
+        max-width: 500px;
+        height: 95%;
+        border-radius: 8px;
+        box-shadow: $boxShadow;
+        background-color: #fff;
+        position: absolute;
+        overflow-y: scroll;
+        z-index: 9999;
+        top: 10px;
+        padding: 16px 16px 16px 30px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap : 22px;
+    }
+    .rules-title{
+        font-size: 24px;
+        color: #11098D;
+    }
+    .rule{
+        font-size: 16px;
+        line-height: 28px;
+        text-align: justify;
+        @include flexMixin(row,flex-start,flex-start);
+        gap:10px ;
+        &:before{
+            flex: 0 0 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #FFAF18;
+            content: " ";
+            display: block;
+            position: relative;
+            top: 5px;
+        }
     }
 }
 /* Login */
@@ -1793,6 +1974,48 @@ input[type=number] {
 }
 /* contact us */
 
+/* Teachers Page */
+.teachers-page-wrapper{
+    width: 100%;
+    .teachers-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 24px;
+    }
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 32px;
+        padding: 24px 60px;
+        background-color: #fff;
+        border-radius: 16px;
+        border: 2px solid #959595;
+    }
+    .title{
+        font-size: 24px;
+    }
+    .teachers{
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        row-gap: 50px;
+        column-gap: 24px;
+        width: 100%;
+    }
+    .teacher{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 12px;
+    }
+    .img-wrapper{
+        width: 100%;
+        height: 255px;
+        border-radius: 16px;
+        background-color: #d9d9d9;
+        @include flexMixin(row,center,center);
+        overflow: hidden;
+    }
+}
+/* Teachers Page */
 /* single session */
 .single-session{
     width: 100%;
@@ -4244,6 +4467,46 @@ input[type=number] {
             width: 80px;
             height: 65px;
             
+        }
+    }
+    .teachers-page-wrapper{
+        .main-content{
+            padding: 16px;
+        }
+        .teachers{
+            @include flexMixin(column,flex-start,center);
+            gap: 20px;
+        }
+    }
+    .faq-wrapper{
+        padding: 5px;
+        .tabs{
+            padding-right: 2px;
+        }
+        .tab{
+            font-size: 12px;
+            width: auto;
+            padding: 0 5px;
+        }
+        .question-title{
+            font-size: 16px;
+        }
+        .questions-wrapper{
+            padding: 0 5px;
+        }
+        .question-header{
+            justify-content: space-between;
+            gap: unset;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .didnt-get-your-answer{
+            p{
+                font-size: 16px;
+            }
+        }
+        .question-answer{
+            font-size: 14px;
         }
     }
 }

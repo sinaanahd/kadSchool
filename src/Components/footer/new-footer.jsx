@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import scrollToTop from "../functions/scroll";
 
 import footerLogo from "../../assets/images/footer-logo.svg";
 import aparatLogo from "../../assets/images/aparat.svg";
@@ -13,7 +14,11 @@ class NewFooter extends Component {
     return (
       <footer className="new-footer">
         <div className="logo-wrapper">
-          <Link to="/Dashboard">
+          <Link
+            onClick={() => {
+              scrollToTop();
+            }}
+            to="/Dashboard">
             <img src={footerLogo} alt="کاد (کلاس اینترنتی دریافت)" />
           </Link>
         </div>
@@ -36,13 +41,32 @@ class NewFooter extends Component {
               <h4 className="ul-title">درباره کاد</h4>
               <ul>
                 <li>
-                  <Link to="/Support">پشتیبانی</Link>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="/Support">
+                    پشتیبانی
+                  </Link>
                 </li>
                 <li>
-                  <Link to="#">سوالات متداول</Link>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="/FAQ">
+                    سوالات متداول
+                  </Link>
                 </li>
                 <li>
-                  <Link to="#"> نرم افزار های مورد نیاز</Link>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="#">
+                    {" "}
+                    نرم افزار های مورد نیاز
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -50,19 +74,50 @@ class NewFooter extends Component {
               <h4 className="ul-title">دسترسی سریع</h4>
               <ul>
                 <li>
-                  <Link to="#"> رتبه های برتر کاد</Link>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="#">
+                    {" "}
+                    رتبه های برتر کاد
+                  </Link>
                 </li>
                 <li>
-                  <Link to="#">چرا کاد؟</Link>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="#">
+                    چرا کاد؟
+                  </Link>
                 </li>
                 <li>
-                  <Link to="#">استادان کاد</Link>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="/Teachers">
+                    استادان کاد
+                  </Link>
                 </li>
                 <li>
-                  <Link to="#">تقویم کاد</Link>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="#">
+                    تقویم کاد
+                  </Link>
                 </li>
                 <li>
-                  <Link to="#">قوانین کاد</Link>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="#">
+                    قوانین کاد
+                  </Link>
                 </li>
               </ul>
             </div>

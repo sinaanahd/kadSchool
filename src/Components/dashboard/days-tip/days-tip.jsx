@@ -29,6 +29,7 @@ class DaysTip extends Component {
               <span style={{ display: "block", paddingTop: "57%" }}></span>
               <iframe src="https://www.aparat.com/video/video/embed/videohash/iNPJV/vt/frame?muted=true"></iframe>
             </div>
+            {/* <iframe src="https://www.aparat.com/video/video/embed/videohash/iNPJV/vt/frame"></iframe> */}
           </div>
           <h3 className="video-title">عنوان</h3>
           <p className="video-description">

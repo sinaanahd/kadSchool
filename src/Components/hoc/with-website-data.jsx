@@ -78,7 +78,13 @@ function withWebsiteData(Component) {
     render() {
       return (
         <>
-          <Header user={this.state.user ? this.state.user : false} />
+          {window.location.pathname === "/Login" ||
+          window.location.pathname === "/SignUp" ||
+          window.location.pathname === "/SetPassword" ? (
+            <></>
+          ) : (
+            <Header user={this.state.user ? this.state.user : false} />
+          )}
           <Component
             {...this.props}
             data={this.state}
@@ -94,7 +100,13 @@ function withWebsiteData(Component) {
           ) : (
             <></>
           )}
-          <NewFooter />
+          {window.location.pathname === "/Login" ||
+          window.location.pathname === "/SignUp" ||
+          window.location.pathname === "/SetPassword" ? (
+            <></>
+          ) : (
+            <NewFooter />
+          )}
         </>
       );
     }

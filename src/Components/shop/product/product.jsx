@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import spilit_in_three from "../../functions/spilit_in_three";
 import convert_to_persian from "../../functions/convert-to-persian";
 import { Link } from "react-router-dom";
+import scrollToTop from "../../functions/scroll";
 
 import cartWhite from "../../../assets/images/cart-white.svg";
 class Product extends Component {
@@ -10,21 +11,41 @@ class Product extends Component {
     return (
       <div className="product-wrapper">
         <Link
+          onClick={() => {
+            scrollToTop();
+          }}
           to="/SingleCourse/:id"
           target="_blank"
           className="prod-img-wrapper">
           <img src="" alt="" />
         </Link>
         <h2 className="product-title">
-          <Link to="/SingleCourse/:id" target="_blank">
+          <Link
+            onClick={() => {
+              scrollToTop();
+            }}
+            to="/SingleCourse/:id"
+            target="_blank">
             نام دوره
           </Link>
         </h2>
         <span className="prod-details">
-          <Link to="/SingleProd/:id" target="_blank" className="prod-class">
+          <Link
+            onClick={() => {
+              scrollToTop();
+            }}
+            to="/SingleProd/:id"
+            target="_blank"
+            className="prod-class">
             نام کلاس
           </Link>
-          <Link to="/Teacher/:id" target="_blank" className="prod-teacher">
+          <Link
+            onClick={() => {
+              scrollToTop();
+            }}
+            to="/Teacher/:id"
+            target="_blank"
+            className="prod-teacher">
             نام استاد
           </Link>
         </span>

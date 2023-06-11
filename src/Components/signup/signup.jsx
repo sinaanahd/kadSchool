@@ -3,10 +3,11 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
-import login_bgc from "../../assets/images/login-img.svg";
 import checked_img from "../../assets/images/checked.svg";
 import axios from "axios";
+import RulesPopUp from "./rules-pop-up/rules-pop-up";
 import LittleLoading from "../reuseables/little-loading";
+import login_bgc from "../../assets/images/login-img.svg";
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -24,10 +25,11 @@ class SignUp extends Component {
       year: false,
       subject: false,
     },
+    rules_pop_up: false,
   };
   componentDidMount() {
-    document.querySelector(".new-footer").style.display = "none";
-    document.querySelector(".main-header").style.display = "none";
+    // document.querySelector(".new-footer").style.display = "none";
+    // document.querySelector(".main-header").style.display = "none";
     const { user } = this.props;
     // if (user) {
     //   window.location.href = window.location.href.replace(
@@ -36,10 +38,20 @@ class SignUp extends Component {
     //   );
     // }
   }
-  componentWillUnmount() {
-    document.querySelector(".new-footer").style.display = "flex";
-    document.querySelector(".main-header").style.display = "flex";
-  }
+  // componentWillUnmount() {
+  //   document.querySelector(".new-footer").style.display = "flex";
+  //   document.querySelector(".main-header").style.display = "flex";
+  // }
+  handle_rule_pop_up = () => {
+    const rules_pop_up = !this.state.rules_pop_up;
+    this.setState({ rules_pop_up });
+  };
+  close_pop_up = () => {
+    const rules_pop_up = this.state.rules_pop_up;
+    if (rules_pop_up) {
+      this.setState({ rules_pop_up: false });
+    }
+  };
   agree_handler = () => {
     const agree = !this.state.agree;
     this.setState({ agree });
@@ -138,7 +150,11 @@ class SignUp extends Component {
         <Helmet>
           <title>ثبت نام در کاد</title>
         </Helmet>
-        <section className="login-wrapper-section">
+        <section
+          className="login-wrapper-section"
+          onClick={() => {
+            this.close_pop_up();
+          }}>
           <img
             src={login_bgc}
             alt="عکس پس زمینه برای صفحه ورود"
@@ -171,13 +187,23 @@ class SignUp extends Component {
                 <option value={2}>انسانی</option>
                 <option value={3}>هنر</option>
               </select>
-              <span
-                onClick={() => {
-                  this.agree_handler();
-                }}
-                className="agree_to-rules">
-                <p>با قوانین و مقررات کاد موافقم</p>
-                <span className={this.state.agree ? "check checked" : "check"}>
+              <span className="agree_to-rules">
+                <p>
+                  با{" "}
+                  <font
+                    className="rules-text"
+                    onClick={() => {
+                      this.handle_rule_pop_up();
+                    }}>
+                    قوانین و مقررات
+                  </font>{" "}
+                  کاد موافقم
+                </p>
+                <span
+                  onClick={() => {
+                    this.agree_handler();
+                  }}
+                  className={this.state.agree ? "check checked" : "check"}>
                   {this.state.agree ? <img src={checked_img} /> : <></>}
                 </span>
               </span>
@@ -208,6 +234,7 @@ class SignUp extends Component {
                 <></>
               )}
             </div>
+            {this.state.rules_pop_up ? <RulesPopUp /> : <></>}
           </div>
         </section>
       </>

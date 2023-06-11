@@ -23,6 +23,9 @@ import SingleCourse from "./Components/single-course/single-course";
 import Cart from './Components/cart/cart';
 import Fianance from "./Components/fianance/fianance";
 import newSingleSession from './Components/single-session/new-single-session';
+import setPassword from './Components/set-password/set-password';
+import Teachers from './Components/Teachers/teachers';
+import FAQ from './Components/FAQ/FAQ';
 import './App.css';
 class App extends Component {
   state = {}
@@ -41,10 +44,14 @@ class App extends Component {
         <Route path="/SingleSession-new/:id" component={newSingleSession} />
         <Route path="/Login" component={Login} />
         <Route path="/SignUp" component={SignUp} />
+        <Route path="/SetPassword" component={setPassword} />
         <Route path="/Support" component={Support} />
         <Route path="/Shop" component={Shop} />
         <Route path="/Cart" component={Cart} />
+        <Route path="/FAQ" component={FAQ} />
+        <Route path="/Needed-apps" component={NeededApps} />
         <Route path="/SingleProd/:id" component={SingleProd} />
+        <Route path="/Teachers/" component={Teachers} />
         <Route path="/Teacher/:id" component={Teacher} />
         <Route path="/SingleCourse/:id" component={SingleCourse} />
         <Redirect from="/" exact to="/Dashboard" />

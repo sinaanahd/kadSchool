@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import scrollToTop from "../../functions/scroll";
 
 import profileOptionImg_white_1 from "../../../assets/images/profile-option-white-6.svg";
 import profileOptionImg_1 from "../../../assets/images/profile-option-6.svg";
@@ -13,7 +14,6 @@ import profileOptionImg_white_5 from "../../../assets/images/profile-option-whit
 import profileOptionImg_6 from "../../../assets/images/profile-option-1.svg";
 import profileOptionImg_white_6 from "../../../assets/images/profile-option-white-1.svg";
 
-import test from "../../../assets/images/test/test-6.svg";
 class PageDecider extends Component {
   state = {};
   render() {
@@ -22,6 +22,7 @@ class PageDecider extends Component {
       <div className="profile-options">
         <span
           onClick={() => {
+            scrollToTop();
             handle_page("info");
           }}
           className={page === "info" ? "option active" : "option"}>
@@ -35,6 +36,7 @@ class PageDecider extends Component {
         </span>
         <span
           onClick={() => {
+            scrollToTop();
             handle_page("lesson");
           }}
           className={page === "lesson" ? "option active" : "option"}>
@@ -48,6 +50,7 @@ class PageDecider extends Component {
         </span>
         <span
           onClick={() => {
+            scrollToTop();
             handle_page("exam");
           }}
           className={page === "exam" ? "option active" : "option"}>
@@ -61,6 +64,7 @@ class PageDecider extends Component {
         </span>
         <span
           onClick={() => {
+            scrollToTop();
             handle_page("exrcise");
           }}
           className={page === "exrcise" ? "option active" : "option"}>
@@ -74,6 +78,7 @@ class PageDecider extends Component {
         </span>
         <span
           onClick={() => {
+            scrollToTop();
             handle_page("check");
           }}
           className={page === "check" ? "option active" : "option"}>
@@ -87,6 +92,7 @@ class PageDecider extends Component {
         </span>
         <span
           onClick={() => {
+            scrollToTop();
             handle_page("fianance");
           }}
           className={page === "fianance" ? "option active" : "option"}>

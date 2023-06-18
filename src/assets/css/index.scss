@@ -709,9 +709,23 @@ input[type=number] {
             width: 100%;
         }
         .no-class-for-today{
-            width: 200px;
+            width: 100%;
+            grid-column-start: 1;
+            grid-column-end: 6;
             list-style: none;
-            margin: 10px 0;
+            margin: 30px 0;
+            color: #ff4a64;
+            @include flexMixin(row,center,center);
+            gap: 10px;
+            font-size: 16px;
+            &:before{
+                width: 13px;
+                height: 13px;
+                border-radius: 50%;
+                background-color: #ff4a64;
+                content: " ";
+                display: block;
+            }
         }
         .dots-wrapper{
             position: absolute;
@@ -1027,6 +1041,9 @@ input[type=number] {
         width: 100%;
         @include flexMixin(column,flex-start,center);
         padding: 20px;
+        border: 2px solid #e5e5e5;
+        border-radius: 8px;
+        background-color: #fff;
     }
     .title-for-empty{
         font-size: 24px;
@@ -1760,6 +1777,9 @@ input[type=number] {
         padding: 0 10px;
         font-family: "main-font";
     }
+    .pass{
+        margin: 20px 0;
+    }
     .error-place{
         color: $redColor;
         font-size: 12px;
@@ -1863,6 +1883,38 @@ input[type=number] {
             top: 5px;
         }
     }
+    .enter-with-other-way{
+        margin: 20px 0 0;
+        a{
+            font-size: 16px;
+            color: $mainColor;
+        }
+    }
+    .forget{
+        margin: 10px 0;
+        a{
+            font-size : 14px;
+        }
+    }
+    .skip-this-step{
+        margin: 20px 0;
+        width: 100%;
+        @include flexMixin(row,center,center);
+        a{
+            font-size: 16px;
+            color: $mainColor;
+            width: 124px;
+            height: 48px;
+            border-radius: 8px;
+            border: 2px solid $mainColor;
+            @include flexMixin(row,center,center);
+        }
+    }
+    .pass-desc{
+        font-size: 22px;
+        width: 80%;
+        margin: 20px 0 0;
+    }
 }
 /* Login */
 /* SignUp*/
@@ -1943,6 +1995,10 @@ input[type=number] {
     .main-content{
         @include flexMixin(column,flex-start,center);
         width: 100%;
+        background-color: #fff;
+        border: 2px solid #e5e5e5;
+        border-radius: 8px;
+        padding: 0 55px 55px;
     }
     .title{
         font-size: 24px;
@@ -2114,11 +2170,15 @@ input[type=number] {
     }
     .two-part-colums{
         width: 100%;
-        @include flexMixin(row,flex-start,flex-start);
+        @include flexMixin(row,flex-start,center);
         gap: 32px;
+        background-color: #fff;
+        border-radius: 16px;
+        border: 2px solid #cacaca;
+        padding: 95px 15px;
     }
     .second-side-bar-and-content{
-        @include flexMixin(row,flex-start,flex-start);
+        @include flexMixin(row,flex-start,center);
         gap: 30px;
         width: 100%;
     }
@@ -2144,8 +2204,11 @@ input[type=number] {
         background-color: #98BCE0;
     }
     .multiple-content{
-        @include flexMixin(column,flex-start,flex-start);
+        @include flexMixin(column,center,flex-start);
         width: 100%;
+        padding: 22px;
+        border: 2px solid #c9c9c9;
+        border-radius: 8px;
     }
     .download{
         @include flexMixin(column,flex-start,flex-start);
@@ -2179,7 +2242,7 @@ input[type=number] {
         width: 100%;
         @include flexMixin(row,flex-start,center);
         gap: 10px;
-        font-size: 16px;
+        font-size: 14px;
         &:before{
             width: 19px;
             height: 19px;
@@ -2259,7 +2322,7 @@ input[type=number] {
     }
     .comment-text{
         padding: 0 35px 0 0;
-        font-size: 16px;
+        font-size: 14px;
         text-align: justify;
         line-height: 28px;
     }
@@ -2324,13 +2387,14 @@ input[type=number] {
     }
     .subject{
         @include styler($mainColor,#fff,24px,8px);
-        border : 2px solid $darkBlue;
+        border : 2px solid #c9c9c9;
         width: 200px;
         height: 200px;
         @include flexMixin(column,space-between,center);
         padding: 30px 0;
         transform: scale(1);
         transition: $transition;
+        cursor: pointer;
     }
     .fields{
         width: 100%;
@@ -2341,12 +2405,13 @@ input[type=number] {
     }
     .field{
         @include styler($mainColor, #fff, 20px, 8px);
-        border: 2px solid $darkBlue;
+        border: 2px solid #c9c9c9;
         width: 163px;
         height: 100px;
         @include flexMixin(row,center,center);
         transform: scale(1);
         transition: $transition;
+        cursor: pointer;
     }
     .kinds{
         width: 100%;
@@ -2355,12 +2420,13 @@ input[type=number] {
     }
     .kind{
         @include styler($mainColor, #fff, 24px, 8px);
-        border: 2px solid $darkBlue;
+        border: 2px solid #c9c9c9;
         width: 163px;
         height: 163px;
         @include flexMixin(row, center, center);
         transform: scale(1);
         transition: $transition;
+        cursor: pointer;
     }
     .f-courses-wrapper{
         width: 100%;
@@ -3769,6 +3835,78 @@ input[type=number] {
 }
 /* new finance page */
 
+/* needed apps */
+.needed-apps-wrapper{
+    width: 100%;
+    @include flexMixin(row,flex-start,flex-start);
+    gap: 123px;
+    .needed-apps{
+        width: 100%;
+        background-color: #fff;
+        border-radius: 16px;
+        border: 2px solid #959595;
+        padding: 12px 16px 40px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap : 67px; 
+    }
+    .title{
+        font-size: 24px;
+    }
+    .apps-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap : 37px;
+    }
+    .app-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 30px;
+    }
+    .app-title-icon{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+        cursor: pointer;
+        img{
+            width: 15px;
+            transform: rotate(180deg);
+            transition: $transition;
+        }
+    }
+    .app-title{
+        font-size: 16px;
+        color: $mainColor;
+    }
+    .os-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 37px;
+        transition: $transition;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+    .active.app-wrapper{
+        .app-title-icon{
+            img{
+                transform: rotate(0deg);
+            }
+        }
+        .os-wrapper {
+            height: auto;
+            opacity: 1;
+        }
+            
+    }
+    .os{
+        @include flexMixin(row,flex-start,center);
+        gap: 15px;
+    }
+}
+/* needed apps */
+
+
+
 /* responsive */
 @media  (max-width: 991px) {
     .main-header {
@@ -3953,6 +4091,11 @@ input[type=number] {
             grid-template-columns: repeat(2,1fr);
             column-gap: 20px;
             row-gap: 20px;
+        }
+        .no-courses{
+            .title-for-empty{
+                font-size: 18px;
+            }
         }
     }
     .courses-pop-up-wrapper{
@@ -4152,6 +4295,11 @@ input[type=number] {
 
         .comment {
             border-radius: 16px;
+        }
+    }
+    .hello-page-section{
+        .main-content{
+            padding: 0 10px 20px;
         }
     }
     .single-prod-wrapper{
@@ -4444,9 +4592,13 @@ input[type=number] {
         }
     }
     .new-single-session-wrapper{
+        .new-sigle-session{
+            padding: 5px;
+        }
         .two-part-colums{
             @include flexMixin(column-reverse,flex-start,center);
             gap: 10px;
+            padding: 6px 6px 10px;
         }
         .video-place{
             width: 100%;
@@ -4507,6 +4659,24 @@ input[type=number] {
         }
         .question-answer{
             font-size: 14px;
+        }
+    }
+    .needed-apps-wrapper{
+        .title{
+            font-size: 16px;
+        }
+        .needed-apps{
+            gap: 20px;
+        }
+        .apps-wrapper{
+            gap: 15px;
+        }
+        .app-title{
+            font-size: 14px;
+        }
+        .os-wrapper{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
         }
     }
 }

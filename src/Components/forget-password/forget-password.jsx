@@ -8,7 +8,7 @@ import login_bgc from "../../assets/images/login-img.svg";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
 
-class Login extends Component {
+class ForgetPassword extends Component {
   state = {
     phone_number: false,
     err_phone: false,
@@ -88,7 +88,7 @@ class Login extends Component {
             this.props.handle_error(err);
           });
       } else {
-        window.location.pathname = "/SetPassword";
+        window.location.pathname = "/SignUp";
       }
     } else {
       const enter_code_status = "کد وارد شده صحیح نمی باشد";
@@ -106,7 +106,7 @@ class Login extends Component {
     return (
       <>
         <Helmet>
-          <title>ورود به سایت</title>
+          <title>بازیابی رمزعبور</title>
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -119,7 +119,7 @@ class Login extends Component {
           </Link>
           <div className="login-wrapper mm-width">
             <div className="forms-wrapper">
-              <h1>ورود به سایت</h1>
+              <h1>بازیابی رمزعبور</h1>
               <input
                 type="number"
                 className="input-text input"
@@ -162,10 +162,10 @@ class Login extends Component {
                     this.check_user();
                   }}
                   className="enter button-span">
-                  ورود
+                  تایید
                 </span>
               ) : (
-                <span className="enter button-span fail">ورود</span>
+                <span className="enter button-span fail">تایید</span>
               )}
               {this.state.enter_code_status ? (
                 <span className="error-place need-margin">
@@ -174,9 +174,6 @@ class Login extends Component {
               ) : (
                 <></>
               )}
-              <span className="enter-with-other-way">
-                <Link to="/LoginPass">ورود با استفاده از رمز عبور</Link>
-              </span>
             </div>
           </div>
         </section>
@@ -185,4 +182,4 @@ class Login extends Component {
   }
 }
 
-export default withWebsiteData(Login);
+export default withWebsiteData(ForgetPassword);

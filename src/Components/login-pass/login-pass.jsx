@@ -8,7 +8,7 @@ import login_bgc from "../../assets/images/login-img.svg";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
 
-class Login extends Component {
+class LoginPass extends Component {
   state = {
     phone_number: false,
     err_phone: false,
@@ -47,61 +47,6 @@ class Login extends Component {
       this.setState({ phone_number: value, err_phone: false });
     }
   };
-  get_verification_code = () => {
-    this.setState({ pause: true });
-    axios
-      .get(
-        `https://daryaftyar.ir/backend/kad_api/verify_phone_number/${this.state.phone_number}`
-      )
-      .then((res) => {
-        this.setState({ pause: false });
-        const { been_before, user_id, verification_code } = res.data;
-        localStorage.setItem(
-          "kad-phone-number",
-          JSON.stringify(this.state.phone_number)
-        );
-        this.setState({ no_more_code: true });
-        if (been_before) {
-          this.setState({ user_id });
-        }
-        this.setState({ verification_code, been_before });
-      })
-      .catch((err) => this.props.handle_error(err));
-  };
-  check_user = () => {
-    const entry_code = this.state.entry_code;
-    const code = this.state.verification_code;
-    const been = this.state.been_before;
-    if (code === entry_code) {
-      if (been) {
-        axios
-          .get(
-            ` https://daryaftyar.ir/backend/kad_api/user/${this.state.user_id}`
-          )
-          .then((res) => {
-            const user = res.data;
-            //localStorage.setItem("user-kad", JSON.stringify(user));
-            this.props.inside_user(user);
-            window.location.pathname = "/Dashboard";
-          })
-          .catch((err) => {
-            this.props.handle_error(err);
-          });
-      } else {
-        window.location.pathname = "/SetPassword";
-      }
-    } else {
-      const enter_code_status = "کد وارد شده صحیح نمی باشد";
-      this.setState({ enter_code_status });
-    }
-  };
-  handle_verication_code = ({ target }) => {
-    const { value } = target;
-    const code = this.state.verification_code;
-    if (value.length === code.length) {
-      this.setState({ entry_code: value });
-    }
-  };
   render() {
     return (
       <>
@@ -133,28 +78,11 @@ class Login extends Component {
               ) : (
                 <></>
               )}
-              {this.state.err_phone ||
-              !this.state.phone_number ||
-              this.state.no_more_code ? (
-                <span className="get-code button-span fail">دریافت کد</span>
-              ) : (
-                <span
-                  className="get-code button-span"
-                  onClick={() => {
-                    this.get_verification_code();
-                  }}>
-                  {this.state.pause ? <LittleLoading /> : "دریافت کد"}
-                </span>
-              )}
               <input
-                type="number"
-                className="input-text input"
-                placeholder="کد یکبار مصرف"
-                onInput={(e) => this.handle_verication_code(e)}
+                type="password"
+                className="input-text input pass"
+                placeholder="رمز عبور"
               />
-              {/* onClick={() => {
-                  scrollToTop();
-                }} */}
 
               {this.state.verification_code ? (
                 <span
@@ -174,8 +102,11 @@ class Login extends Component {
               ) : (
                 <></>
               )}
+              <span className="enter-with-other-way forget">
+                <Link to="/Forget-password">فراموشی رمز عبور</Link>
+              </span>
               <span className="enter-with-other-way">
-                <Link to="/LoginPass">ورود با استفاده از رمز عبور</Link>
+                <Link to="/Login">ورود با استفاده از کد یکبار مصرف</Link>
               </span>
             </div>
           </div>
@@ -185,4 +116,4 @@ class Login extends Component {
   }
 }
 
-export default withWebsiteData(Login);
+export default withWebsiteData(LoginPass);

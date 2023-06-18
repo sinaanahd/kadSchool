@@ -26,6 +26,10 @@ import newSingleSession from './Components/single-session/new-single-session';
 import setPassword from './Components/set-password/set-password';
 import Teachers from './Components/Teachers/teachers';
 import FAQ from './Components/FAQ/FAQ';
+import NeededApps from './Components/needed-apps/needed-apps';
+import LoginPass from './Components/login-pass/login-pass';
+import ForgetPassword from './Components/forget-password/forget-password';
+import SetNewPassword from './Components/set-new-password/set-new-password';
 import './App.css';
 class App extends Component {
   state = {}
@@ -41,10 +45,13 @@ class App extends Component {
         <Route path="/FreeCourses" component={FreeCourses} />
         <Route path="/Course/:id" component={RecordedCourses} />
         <Route path="/SingleSession/:id" component={SingleSession} />
-        <Route path="/SingleSession-new/:id" component={newSingleSession} />
+        <Route path="/Stream/:id" component={newSingleSession} />
         <Route path="/Login" component={Login} />
+        <Route path="/LoginPass" component={LoginPass} />
+        <Route path="/Forget-password" component={ForgetPassword} />
         <Route path="/SignUp" component={SignUp} />
         <Route path="/SetPassword" component={setPassword} />
+        <Route path="/Set-new-password" component={SetNewPassword} />
         <Route path="/Support" component={Support} />
         <Route path="/Shop" component={Shop} />
         <Route path="/Cart" component={Cart} />

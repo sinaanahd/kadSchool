@@ -8,7 +8,7 @@ import login_bgc from "../../assets/images/login-img.svg";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
 
-class SetPassword extends Component {
+class SetNewPassword extends Component {
   state = {
     phone_number: false,
     err_phone: false,
@@ -28,11 +28,12 @@ class SetPassword extends Component {
     //   window.location.href = window.location.href.replace("Login", "Dashboard");
     // }
   }
+
   render() {
     return (
       <>
         <Helmet>
-          <title>ورود به سایت</title>
+          <title>تعیین رمز عبور جدید</title>
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -45,20 +46,21 @@ class SetPassword extends Component {
           </Link>
           <div className="login-wrapper mm-width">
             <div className="forms-wrapper">
-              <h1>ورود به سایت</h1>
+              <h1>تعیین رمز عبور جدید</h1>
+              <p className="pass-desc">توضیحات</p>
               <input
                 type="password"
                 className="input-text input"
-                placeholder="رمز عبور"
+                placeholder="رمزعبور جدید"
               />
-              <input
-                type="password"
-                className="input-text input pass"
-                placeholder="تکرار رمز عبور"
-              />
-
               {this.state.verification_code ? (
-                <span className="enter button-span">تایید</span>
+                <span
+                  onClick={() => {
+                    this.check_user();
+                  }}
+                  className="enter button-span">
+                  تایید
+                </span>
               ) : (
                 <span className="enter button-span fail">تایید</span>
               )}
@@ -69,9 +71,6 @@ class SetPassword extends Component {
               ) : (
                 <></>
               )}
-              <span className="skip-this-step">
-                <Link to="/SignUp">مرحله بعدی</Link>
-              </span>
             </div>
           </div>
         </section>
@@ -80,4 +79,4 @@ class SetPassword extends Component {
   }
 }
 
-export default withWebsiteData(SetPassword);
+export default withWebsiteData(SetNewPassword);

@@ -63,7 +63,7 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="#">
+                    to="/Needed-apps">
                     {" "}
                     نرم افزار های مورد نیاز
                   </Link>

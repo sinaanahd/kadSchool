@@ -79,6 +79,9 @@ function withWebsiteData(Component) {
       return (
         <>
           {window.location.pathname === "/Login" ||
+          window.location.pathname === "/LoginPass" ||
+          window.location.pathname === "/Forget-password" ||
+          window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
           window.location.pathname === "/SetPassword" ? (
             <></>

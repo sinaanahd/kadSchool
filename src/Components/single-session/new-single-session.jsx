@@ -12,15 +12,15 @@ class SingleSessionNew extends Component {
     course: false,
     active_side_bar: "download",
   };
-  componentDidMount() {
-    let my_path = window.location.pathname;
-    let my_path_arr = [];
-    my_path_arr.push(parseInt(my_path.split("/")[2]));
-    my_path_arr.push(parseInt(my_path.split("/")[3]));
-    const my_session =
-      this.props.user.kelases[my_path_arr[0]].jalasat[my_path_arr[1]];
-    this.setState({ course: my_session });
-  }
+  // componentDidMount() {
+  //   let my_path = window.location.pathname;
+  //   let my_path_arr = [];
+  //   my_path_arr.push(parseInt(my_path.split("/")[2]));
+  //   my_path_arr.push(parseInt(my_path.split("/")[3]));
+  //   const my_session =
+  //     this.props.user.kelases[my_path_arr[0]].jalasat[my_path_arr[1]];
+  //   this.setState({ course: my_session });
+  // }
   handle_active_side_bar = (active_side_bar) => {
     this.setState({ active_side_bar });
   };
@@ -28,13 +28,17 @@ class SingleSessionNew extends Component {
     return (
       <>
         <Helmet>
-          <title>{this.state.course.jalase_title}</title>
+          <title>
+            {this.state.course ? this.state.course.jalase_title : "استریم"}
+          </title>
         </Helmet>
         <section className="bgc-wrapper new-single-session-wrapper">
           <div className="new-sigle-session mm-width">
             <SideBar />
             <div className="main-content">
-              <h1 className="title">{this.state.course.jalase_title}</h1>
+              <h1 className="title">
+                {this.state.course ? this.state.course.jalase_title : "استریم"}
+              </h1>
               <div className="two-part-colums">
                 <div className="second-side-bar-and-content">
                   <SecondSideBar

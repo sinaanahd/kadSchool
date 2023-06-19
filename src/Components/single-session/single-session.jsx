@@ -14,13 +14,10 @@ class SingleSession extends Component {
     course: false,
   };
   componentDidMount() {
-    let my_path = window.location.pathname;
-    let my_path_arr = [];
-    my_path_arr.push(parseInt(my_path.split("/")[2]));
-    my_path_arr.push(parseInt(my_path.split("/")[3]));
-    const my_session =
-      this.props.user.kelases[my_path_arr[0]].jalasat[my_path_arr[1]];
-    this.setState({ course: my_session });
+    let my_path = parseInt(window.location.pathname.split("/")[2]);
+    const course = this.props.jalasat.find((j) => j.jalase_id === my_path);
+    if (course) this.setState({ course });
+    else window.location.pathname = "/not-found";
   }
   show_no_content = () => {
     const no_jozve = !this.state.no_jozve;

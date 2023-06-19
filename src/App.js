@@ -18,7 +18,7 @@ import FreeCourses from './Components/free-courses/free-courses';
 import SignUp from './Components/signup/signup';
 import Shop from "./Components/shop/shop";
 import SingleProd from "./Components/single-prod/single-prod";
-import Teacher from "./Components/teacher/teacher";
+import SingleTeacher from "./Components/single-teacher/single-teacher";
 import SingleCourse from "./Components/single-course/single-course";
 import Cart from './Components/cart/cart';
 import Fianance from "./Components/fianance/fianance";
@@ -30,6 +30,7 @@ import NeededApps from './Components/needed-apps/needed-apps';
 import LoginPass from './Components/login-pass/login-pass';
 import ForgetPassword from './Components/forget-password/forget-password';
 import SetNewPassword from './Components/set-new-password/set-new-password';
+import Payment from './Components/payment/payment';
 import './App.css';
 class App extends Component {
   state = {}
@@ -41,6 +42,7 @@ class App extends Component {
         <Route path="/Profile" component={Profile} />
         {/* <Route path="/Finance" component={FinancialStuff} /> */}
         <Route path="/Finance" component={Fianance} />
+        <Route path="/Payment" component={Payment} />
         <Route path="/Courses" component={Courses} />
         <Route path="/FreeCourses" component={FreeCourses} />
         <Route path="/Course/:id" component={RecordedCourses} />
@@ -59,7 +61,7 @@ class App extends Component {
         <Route path="/Needed-apps" component={NeededApps} />
         <Route path="/SingleProd/:id" component={SingleProd} />
         <Route path="/Teachers/" component={Teachers} />
-        <Route path="/Teacher/:id" component={Teacher} />
+        <Route path="/Teacher/:id" component={SingleTeacher} />
         <Route path="/SingleCourse/:id" component={SingleCourse} />
         <Redirect from="/" exact to="/Dashboard" />
         <Route path="/UnderConstruction" component={UnderConstruction} />

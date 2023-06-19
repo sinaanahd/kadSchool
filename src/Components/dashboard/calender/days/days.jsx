@@ -6,7 +6,7 @@ class Days extends Component {
   state = {};
 
   render() {
-    const { my_class, animate, kelases } = this.props;
+    const { my_class, animate, kelases, teachers } = this.props;
     return (
       <div className="time-class-wrapper">
         {my_class.length !== 0 ? (
@@ -16,6 +16,7 @@ class Days extends Component {
               my_class={c}
               animate={animate}
               kelases={kelases}
+              teachers={teachers}
             />
           ))
         ) : (

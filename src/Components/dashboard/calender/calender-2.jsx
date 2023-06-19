@@ -13,7 +13,8 @@ class Calender_2 extends Component {
     }, 100);
   };
   render() {
-    const { active_day, change_active_date, week_plan, kelases } = this.props;
+    const { active_day, change_active_date, week_plan, kelases, teachers } =
+      this.props;
     //console.log(week_plan["Saturday"]);
     return (
       <div className="new-calender-wraper">
@@ -101,7 +102,8 @@ class Calender_2 extends Component {
               week_plan.length !== 0 && week_plan ? week_plan[active_day] : []
             }
             animate={this.state.animate}
-            kelases={kelases}
+            kelases={kelases ? kelases : false}
+            teachers={teachers ? teachers : false}
           />
         </div>
       </div>

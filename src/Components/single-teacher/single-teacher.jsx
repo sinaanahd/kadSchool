@@ -2,33 +2,96 @@ import React, { Component } from "react";
 import withWebsiteData from "../hoc/with-website-data";
 import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
+import LittleLoading from "../reuseables/little-loading";
 import arrow from "../../assets/images/dow-arroow-filter.svg";
-import teacherImg from "../../assets/images/teacher-img.jpeg";
 import downArrowBlue from "../../assets/images/down-arrow-blue.svg";
 import avatar from "../../assets/images/avatar.svg";
-class Teacher extends Component {
+class SingleTeacher extends Component {
   state = {
     more_cm: false,
+    teacher: false,
+    teachers_doreha: false,
+    dore_carousel: false,
+    dore_carousel_pos: 0,
+  };
+  componentDidMount() {
+    const { teachers, doreha, initial_data } = this.props;
+    if (teachers && doreha) {
+      this.statrt_page();
+    } else {
+      initial_data();
+      this.statrt_page();
+    }
+  }
+  statrt_page = () => {
+    const { teachers, doreha } = this.props;
+    if (teachers && doreha) {
+      const page_id = parseInt(window.location.pathname.split("/")[2]);
+      const state_doreha = [];
+      const teacher = teachers.find((t) => t.teacher_id === page_id);
+
+      teacher.doreha.forEach((d_id) => {
+        const dore = doreha.find((d) => d.dore_id === d_id);
+        state_doreha.push(dore);
+      });
+      if (state_doreha.length <= 4) this.setState({ dore_carousel: false });
+      else this.setState({ dore_carousel: true });
+
+      this.setState({ teacher, teachers_doreha: state_doreha });
+    } else {
+      setTimeout(() => {
+        this.statrt_page();
+      }, 500);
+    }
   };
   handle_cm = () => {
     const more_cm = !this.state.more_cm;
     this.setState({ more_cm });
   };
+  handle_carousel_move = (way) => {
+    const dore_carousel_pos = this.state.dore_carousel_pos;
+    const my_length = Math.ceil(this.state.teachers_doreha.length / 4);
+    if (way === "next") {
+      if (my_length !== dore_carousel_pos)
+        this.setState({ dore_carousel_pos: dore_carousel_pos + 1 });
+    } else {
+      if (dore_carousel_pos !== 0)
+        this.setState({ dore_carousel_pos: dore_carousel_pos - 1 });
+    }
+  };
   render() {
     return (
       <>
         <Helmet>
-          <title>اسم استاد</title>
+          <title>
+            {this.state.teacher ? this.state.teacher.fullname : "اسم استاد"}
+          </title>
         </Helmet>
         <section className="single-teacher-wrapper bgc-wrapper">
           <div className="single-teacher mm-width">
             <SideBar />
             <div className="main-content">
-              <h1 className="title">اساتید کاد</h1>
+              <h1 className="title">
+                {this.state.teacher ? (
+                  this.state.teacher.fullname
+                ) : (
+                  <LittleLoading />
+                )}
+              </h1>
+              {/* {this.state.teacher ? this.state.teacher : <LittleLoading />} */}
+
               <div className="teacher-details">
                 <span className="teacher-img-name">
-                  <img src={teacherImg} alt="" />
-                  <h2>نام استاد</h2>
+                  {this.state.teacher ? (
+                    <img
+                      src={this.state.teacher.image_link}
+                      alt={this.state.teacher.fullname}
+                    />
+                  ) : (
+                    <LittleLoading />
+                  )}
+
+                  {/* <h2>نام استاد</h2> */}
                 </span>
                 <span className="teacher-resume-wrapper">
                   <h3 className="resume-title">رزومه</h3>
@@ -47,20 +110,47 @@ class Teacher extends Component {
               <div className="teachers-courses-wrapper">
                 <h3 className="course-title">دوره ها</h3>
                 <div className="teacher-courses-wrapper">
-                  <span className="prev-course arrows">
-                    <img src={arrow} alt="" />
-                  </span>
-                  <div className="courses">
-                    <div className="course">1</div>
-                    <div className="course">2</div>
+                  {this.state.dore_carousel ? (
+                    <span
+                      className="prev-course arrows"
+                      onClick={() => {
+                        this.handle_carousel_move("prev");
+                      }}>
+                      <img src={arrow} alt="قبلی" />
+                    </span>
+                  ) : (
+                    <></>
+                  )}
+
+                  <div
+                    className={"courses car-" + this.state.dore_carousel_pos}>
+                    {this.state.teachers_doreha ? (
+                      this.state.teachers_doreha.map((d, i) => (
+                        <div key={d.d_id} className="course">
+                          {d.dore_title}
+                        </div>
+                      ))
+                    ) : (
+                      <LittleLoading />
+                    )}
+
+                    {/* <div className="course">2</div>
                     <div className="course">3</div>
                     <div className="course">4</div>
                     <div className="course">5</div>
-                    <div className="course">6</div>
+                    <div className="course">6</div> */}
                   </div>
-                  <span className="next-course arrows">
-                    <img src={arrow} alt="" />
-                  </span>
+                  {this.state.dore_carousel ? (
+                    <span
+                      className="next-course arrows"
+                      onClick={() => {
+                        this.handle_carousel_move("next");
+                      }}>
+                      <img src={arrow} alt="بعدی" />
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div className="teachers-sample-wrapper">
@@ -196,4 +286,4 @@ class Teacher extends Component {
   }
 }
 
-export default withWebsiteData(Teacher);
+export default withWebsiteData(SingleTeacher);

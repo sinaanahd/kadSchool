@@ -929,6 +929,97 @@ input[type=number] {
 /* aparat video */
 /* dashboard */
 
+/* payment */
+.payment-page-wrapper{
+    width: 100%;
+    @include flexMixin(row,flex-start,flex-start);
+    gap: 53px;
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 60px;
+    }
+    .payment-status{
+        @include flexMixin(column,flex-start,center);
+        width: 100%;
+        gap: 27px;
+    }
+    .pay-img{
+        border: 5px solid #009590;
+        width: 208px;
+        height: 208px;
+        border-radius: 50%;
+        @include flexMixin(row,center,center);
+        img{
+            position: relative;
+            top: 10px;
+            left: 5px;
+        }
+    }
+    .red.pay-img{
+        border-color:#DC5142 ;
+    }
+    .pay-text{
+        font-size: 24px;
+        color: #009590;
+    }
+    .red.pay-text{
+        color: #DC5142;
+    }
+    .select-pay-method{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 11px;
+    }
+    .semi-title{
+       font-size: 24px; 
+    }
+    .pay-methods{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 18px;
+        padding: 0 10px;
+        margin: 22px 0 11px;
+        flex-wrap: wrap;
+
+    }
+    .pay-method{
+        width: 126px;
+        height: 125px;
+        background-color: #d9d9d9;
+    }
+    .pay-desc{
+        font-size: 16px;
+        padding: 0 10px;
+    }
+    .notice-yellow{
+        color: $yellowColor;
+        font-size: 16px;
+        padding: 0 10px;
+    }
+    .finish-buy{
+        width: 116px;
+        height: 46px;
+        border-radius: 8px;
+        color: #fff;
+        background-color: $mainColor;
+        @include flexMixin(row,center,center);
+        font-size: 16px;
+        box-shadow: $boxShadow;
+        cursor: pointer;
+        transition: $transition;
+        border: 2px solid $mainColor;
+        &:hover{
+            color: $mainColor;
+            background-color: #fff;
+            transform: scale(1.1);
+        }
+    }
+}
+
+/* payment */
+
+
 /* courses */
 @keyframes shake {
     0%{
@@ -2616,9 +2707,14 @@ input[type=number] {
     .product-title{
         font-size: 16px;
     }
+    .prod-class,.prod-teacher{
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        flex-wrap: wrap;
+    }
     .prod-details{
         width: 100%;
-        @include flexMixin(row,center,center);
+        @include flexMixin(column,center,center);
         font-size: 14px;
         gap: 21px;
         margin: 5px 0;
@@ -2743,6 +2839,8 @@ input[type=number] {
         .content{
             font-weight: normal;
             font-size: 14px;
+            @include flexMixin(row,flex-start,center);
+            gap: 5px;
         }
     }
     .prod-in-one-look{
@@ -2983,6 +3081,9 @@ input[type=number] {
             background-color: #006673;
         }
     }
+    .intro-course{
+        width: 100%;
+    }
     .course-description{
         width: 100%;
         padding: 0 10px;
@@ -2995,6 +3096,7 @@ input[type=number] {
             gap: 10px;
             margin: 20px 0 0;
             font-size: 16px;
+            width: 100%;
             &:before{
                 flex:0 0 16px;
                 height: 16px;
@@ -3069,10 +3171,66 @@ input[type=number] {
         padding: 20px 10px;
         gap: 10px;
     }
+    .car-0{
+        .teacher{
+            transform: translateX(0px);
+        }
+    }
+    .car-1{
+        .teacher{
+            transform: translateX(calc( 500%  + 50px));
+        }
+    }
+    .car-2{
+        .teacher{
+            transform: translateX(calc( 1000% + 100px));
+        }
+    }
+    .car-3{
+        .teacher{
+            transform: translateX(calc( 1500% + 150px));
+        }
+    }
+    .car-4{
+        .teacher{
+            transform: translateX(calc( 2000% + 200px));
+        }
+    }
+    .car-5{
+        .teacher{
+            transform: translateX(calc( 2500% + 250px));
+        }
+    }
+    .car-6{
+        .teacher{
+            transform: translateX(calc( 3000% + 300px));
+        }
+    }
+    .car-7{
+        .teacher{
+            transform: translateX(calc( 3500% + 350px));
+        }
+    }
+    .car-8{
+        .teacher{
+            transform: translateX(calc( 4000% + 400px));
+        }
+    }
+    .car-9{
+        .teacher{
+            transform: translateX(calc( 4500% + 450px));
+        }
+    }
+    .car-10{
+        .teacher{
+            transform: translateX(calc( 5000% + 500px));
+        }
+    }
     .teacher{
         flex: 0 0 170px;
         @include flexMixin(column, flex-start, center);
         gap: 6px;
+        transition: $transition;
     }
     .img-name-date{
         height: 206px;
@@ -3379,6 +3537,61 @@ input[type=number] {
         overflow: hidden;
         padding:20px 10px;
     }
+    .car-0{
+        .course{
+            transform: translateX(0px);
+        }
+    }
+    .car-1{
+        .course{
+            transform: translateX(calc( 500%  + 60px));
+        }
+    }
+    .car-2{
+        .course{
+            transform: translateX(calc( 1000% + 120px));
+        }
+    }
+    .car-3{
+        .course{
+            transform: translateX(calc( 1500% + 180px));
+        }
+    }
+    .car-4{
+        .course{
+            transform: translateX(calc( 2000% + 240px));
+        }
+    }
+    .car-5{
+        .course{
+            transform: translateX(calc( 2500% + 300px));
+        }
+    }
+    .car-6{
+        .course{
+            transform: translateX(calc( 3000% + 360px));
+        }
+    }
+    .car-7{
+        .course{
+            transform: translateX(calc( 3500% + 420px));
+        }
+    }
+    .car-8{
+        .course{
+            transform: translateX(calc( 4000% + 480px));
+        }
+    }
+    .car-9{
+        .course{
+            transform: translateX(calc( 4500% + 540px));
+        }
+    }
+    .car-10{
+        .course{
+            transform: translateX(calc( 5000% + 600px));
+        }
+    }
     .course{
         width: 199px;
         height: 199px;
@@ -3386,6 +3599,7 @@ input[type=number] {
         background-color: #fff;
         box-shadow: $boxShadow;
         border-radius: 8px;
+        transition: $transition;
     }
     .arrows{
         flex: 0 0 30px;

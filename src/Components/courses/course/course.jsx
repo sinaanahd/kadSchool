@@ -33,7 +33,7 @@ class Course extends Component {
           onClick={() => {
             scrollToTop();
           }}
-          to={`/Course/${temp_id}`}
+          to={`/Course/${kelas.kelas_id}`}
           className="recorded-sessions">
           جلسات ضبط شده
         </Link>

@@ -16,8 +16,13 @@ import sideBarIcon_blue_7 from "../../assets/images/side-bar-icon-blue-7.svg";
 import scrollToTop from "../functions/scroll";
 
 let location;
+const local_user = JSON.parse(localStorage.getItem("user-kad"))
+  ? JSON.parse(localStorage.getItem("user-kad"))
+  : false;
 class SideBar extends Component {
-  state = {};
+  state = {
+    user_logged_in: local_user ? true : false,
+  };
   componentDidMount() {}
   render() {
     location = window.location.pathname.split("/")[1];
@@ -124,7 +129,7 @@ class SideBar extends Component {
           onClick={() => {
             scrollToTop();
           }}
-          to="/Profile"
+          to={this.state.user_logged_in ? "/Profile" : "/Login"}
           className="setting">
           <img src={sideBarIcon_6} alt="تنظیمات" />
         </Link>

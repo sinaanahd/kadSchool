@@ -11,10 +11,39 @@ import downArrowBlue from "../../assets/images/down-arrow-blue.svg";
 import avatar from "../../assets/images/avatar.svg";
 import cart from "../../assets/images/cart.svg";
 import PopUp from "./pop-up/pop-up";
+import convert_days from "../functions/convert-days";
 class SingleProd extends Component {
   state = {
     more_cm: false,
     pop_up: false,
+    kelas: false,
+    kelas_taechers: false,
+  };
+  componentDidMount() {
+    const { kelasses, teachers, initial_data } = this.props;
+    if (kelasses && teachers) {
+      this.start_page();
+    } else {
+      initial_data();
+      this.start_page();
+    }
+  }
+  start_page = () => {
+    const { kelasses, teachers } = this.props;
+    if (kelasses && teachers) {
+      const my_path = parseInt(window.location.pathname.split("/")[2]);
+      const kelas_taechers = [];
+      const kelas = kelasses.find((k) => k.kelas_id === my_path);
+      kelas.teachers.forEach((t_id) => {
+        const teacher = teachers.find((t) => t.teacher_id === t_id);
+        if (teacher) kelas_taechers.push(teacher);
+      });
+      this.setState({ kelas_taechers, kelas });
+    } else {
+      setTimeout(() => {
+        this.start_page();
+      }, 500);
+    }
   };
   handle_cm = () => {
     const more_cm = !this.state.more_cm;
@@ -34,13 +63,17 @@ class SingleProd extends Component {
     return (
       <>
         <Helmet>
-          <title>محصول تست</title>
+          <title>
+            {this.state.kelas ? this.state.kelas.kelas_title : "اسم کلاس"}
+          </title>
         </Helmet>
         <section className="bgc-wrapper single-prod-wrapper">
           <div className="main-single-prod mm-width">
             <SideBar />
             <div className="main-content">
-              <h1 className="title">محصول</h1>
+              <h1 className="title">
+                {this.state.kelas ? this.state.kelas.kelas_title : "اسم کلاس"}
+              </h1>
               <div className="prod-details-wrapper">
                 <div className="prod-details-spec">
                   <span className="add-to-cart-prod">
@@ -48,7 +81,11 @@ class SingleProd extends Component {
                     <span className="price-wrapper">
                       <span className="price-title">قیمت :</span>
                       <span className="price">
-                        {spilit_in_three(convert_to_persian(123456789))}
+                        {spilit_in_three(
+                          convert_to_persian(
+                            this.state.kelas ? this.state.kelas.price : 0
+                          )
+                        )}
                       </span>
                     </span>
                     <span className="add-to-cart-btn">
@@ -59,7 +96,15 @@ class SingleProd extends Component {
                   <span className="prod-details-text-wrapper">
                     <span className="prod-details-text">
                       <span className="detail-title">نام استاد : </span>
-                      <span className="content">{"لورم ایپسوم"}</span>
+                      <span className="content">
+                        {this.state.kelas_taechers ? (
+                          this.state.kelas_taechers.map((t) => (
+                            <span key={t.teacher_id}>{t.fullname}</span>
+                          ))
+                        ) : (
+                          <></>
+                        )}
+                      </span>
                     </span>
                     <span className="prod-details-text">
                       <span className="detail-title">تاریخ شروع کلاس:</span>
@@ -70,14 +115,35 @@ class SingleProd extends Component {
                         <img src={asset_1} alt="" />
                         روز های برگزاری:
                       </span>
-                      <span className="content">{"لورم ایپسوم"}</span>
+                      <span className="content">
+                        {this.state.kelas ? (
+                          this.state.kelas.stream_plans.map((p) => (
+                            <span key={p.week_day_english}>
+                              {convert_days(p.week_day_english)}
+                            </span>
+                          ))
+                        ) : (
+                          <></>
+                        )}
+                      </span>
                     </span>
                     <span className="prod-details-text">
                       <span className="detail-title">
                         <img src={asset_2} alt="" />
                         ساعت برگزاری:
                       </span>
-                      <span className="content">{"لورم ایپسوم"}</span>
+                      <span className="content">
+                        {this.state.kelas ? (
+                          this.state.kelas.stream_plans.map((p) => (
+                            <span key={p.week_day_english}>
+                              {convert_to_persian(p.start_time.split(":")[0])}-
+                              {convert_to_persian(p.finish_time.split(":")[0])},
+                            </span>
+                          ))
+                        ) : (
+                          <></>
+                        )}
+                      </span>
                     </span>
                   </span>
                 </div>

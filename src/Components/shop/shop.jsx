@@ -12,6 +12,7 @@ class Shop extends Component {
   state = {
     shown: false,
   };
+  componentDidMount() {}
   handle_filter_show = (shown) => {
     const prev_state = this.state.shown;
     if (prev_state === shown) {
@@ -21,6 +22,7 @@ class Shop extends Component {
     }
   };
   render() {
+    const { doreha, kelasses, teachers, initial_data } = this.props;
     return (
       <>
         <Helmet>
@@ -145,14 +147,27 @@ class Shop extends Component {
                 </div>
               </div>
               <div className="products-wrapper">
+                {doreha ? (
+                  doreha.map((d) => (
+                    <Product
+                      key={d.dore_id}
+                      dore={d}
+                      kelasses={kelasses ? kelasses : false}
+                      teachers={teachers ? teachers : false}
+                      initial_data={initial_data}
+                    />
+                  ))
+                ) : (
+                  <></>
+                )}
+                {/* <Product />
                 <Product />
                 <Product />
                 <Product />
                 <Product />
                 <Product />
                 <Product />
-                <Product />
-                <Product />
+                <Product /> */}
               </div>
             </div>
           </div>

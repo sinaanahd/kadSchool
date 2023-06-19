@@ -41,10 +41,9 @@ class Courses extends Component {
             {user ? (
               user.kelases.length !== 0 ? (
                 <div className="courses-wrapper">
-                  {user.kelases.map((k, i) => (
+                  {user.kelases.map((k) => (
                     <Course
-                      temp_id={i}
-                      key={i++}
+                      key={k.kelas_id}
                       open_class_pop_up={this.open_class_pop_up}
                       kelas={k}
                     />

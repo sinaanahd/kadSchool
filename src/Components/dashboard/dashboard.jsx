@@ -13,7 +13,8 @@ class Dashboard extends Component {
     classes: true,
   };
   render() {
-    const { user, data, change_active_date } = this.props;
+    const { user, data, change_active_date, teachers, initial_data } =
+      this.props;
     return (
       <>
         <Helmet>
@@ -41,7 +42,9 @@ class Dashboard extends Component {
                   active_day={data.active_day}
                   change_active_date={change_active_date}
                   week_plan={user ? user.week_plan : false}
-                  kelases={user.kelases}
+                  kelases={user ? user.kelases : false}
+                  teachers={teachers ? teachers : false}
+                  initial_data={initial_data}
                 />
                 <DaysTip />
               </div>

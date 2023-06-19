@@ -12,6 +12,7 @@ class Day extends Component {
       this.props.my_class.start_time,
       this.props.my_class.finish_time
     );
+    // console.log(this.props.my_class);
   }
   class_type_decieder = (start_time, finish_time) => {
     const time = new Date();
@@ -31,13 +32,13 @@ class Day extends Component {
     this.setState({ status });
   };
   render() {
-    const { my_class, animate, kelases } = this.props;
-    const teachers = find_teacher_name(kelases, my_class.parent_kelas_id);
-    const [k_id, j_id] = find_class(
-      kelases,
+    const { my_class, animate, kelases, teachers } = this.props;
+    const jalase_teachers = find_teacher_name(
       my_class.parent_kelas_id,
-      my_class.jalase_id
+      teachers,
+      kelases
     );
+    const kelas_name = find_class(kelases, my_class.parent_kelas_id);
     return (
       <div className={this.state.status + " time-class" + animate}>
         <span className="time">
@@ -46,14 +47,16 @@ class Day extends Component {
           {make_time_relatable(my_class.finish_time)}
         </span>
         <span className="class-wrapper">
-          <h4 className="class-name">{my_class.jalase_title.split("-")[1]}</h4>
+          <h4 className="class-name">{kelas_name}</h4>
           <span className="teachers-name">
-            {teachers.map((t, i) => (
+            {jalase_teachers.map((t, i) => (
               <span key={i++}>{t},</span>
             ))}
           </span>
         </span>
-        <Link to={`/SingleSession/${k_id}/${j_id}`} className="dots-wrapper">
+        <Link
+          to={`/SingleSession/${my_class.jalase_id}`}
+          className="dots-wrapper">
           ...
         </Link>
       </div>

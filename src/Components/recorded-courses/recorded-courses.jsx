@@ -8,15 +8,24 @@ import Session from "./session/session";
 class RecordedCourses extends Component {
   state = {
     kelas: false,
+    jalasat: false,
   };
   componentDidMount() {
+    this.find_class();
+  }
+  find_class = () => {
     let my_path = window.location.pathname;
     my_path = parseInt(my_path.split("/")[2]);
-    const kelas = this.props.user.kelases[my_path];
-    this.setState({ kelas });
-  }
+    const kelas = this.props.user.kelases.find((k) => k.kelas_id === my_path);
+    const jalasat = [];
+    kelas.jalasat.forEach((j_id) => {
+      const jalase = this.props.jalasat.find((j) => j.jalase_id === j_id);
+      jalasat.push(jalase);
+    });
+    this.setState({ kelas, jalasat });
+    console.log(kelas);
+  };
   render() {
-    const { user } = this.props;
     return (
       <>
         <Helmet>
@@ -27,10 +36,10 @@ class RecordedCourses extends Component {
             <SideBar />
             <div className="main-content">
               <h1 className="title">جلسات ضبط شده</h1>
-              {this.state.kelas ? (
-                this.state.kelas.jalasat.length !== 0 ? (
-                  this.state.kelas.jalasat.map((j, i) => (
-                    <Session jalase={j} temp_id={i} key={i++} />
+              {this.state.kelas && this.state.jalasat ? (
+                this.state.jalasat.length !== 0 ? (
+                  this.state.jalasat.map((j, i) => (
+                    <Session jalase={j} key={i++} />
                   ))
                 ) : (
                   <p>
@@ -41,70 +50,6 @@ class RecordedCourses extends Component {
               ) : (
                 <></>
               )}
-              {/* <span className="recorded-session-item even-item">
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="session-num">
-                  جلسه {2}
-                </Link>
-                <span className="session-subject">{"ریاضی"}</span>
-                <span className="session-date">تاریخ برگزاری</span>
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="dots">
-                  <img src={dots} alt="بیشتر" width={3} height={19} />
-                </Link>
-              </span>
-              <span className="recorded-session-item">
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="session-num">
-                  جلسه {3}
-                </Link>
-                <span className="session-subject">{"ریاضی"}</span>
-                <span className="session-date">تاریخ برگزاری</span>
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="dots">
-                  <img src={dots} alt="بیشتر" width={3} height={19} />
-                </Link>
-              </span>
-              <span className="recorded-session-item even-item">
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="session-num">
-                  جلسه {4}
-                </Link>
-                <span className="session-subject">{"ریاضی"}</span>
-                <span className="session-date">تاریخ برگزاری</span>
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="dots">
-                  <img src={dots} alt="بیشتر" width={3} height={19} />
-                </Link>
-              </span>
-              <span className="recorded-session-item">
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="session-num">
-                  جلسه {5}
-                </Link>
-                <span className="session-subject">{"ریاضی"}</span>
-                <span className="session-date">تاریخ برگزاری</span>
-                <Link
-                  onClick={() => scrollToTop()}
-                  to="/SingleSession/:id"
-                  className="dots">
-                  <img src={dots} alt="بیشتر" width={3} height={19} />
-                </Link>
-              </span> */}
             </div>
           </div>
         </section>

@@ -26,6 +26,9 @@ const local_free_courses = JSON.parse(localStorage.getItem("free-coures"))
 const sessionLogin = JSON.parse(sessionStorage.getItem("session-login"))
   ? JSON.parse(sessionStorage.getItem("session-login"))
   : false;
+const local_cart = JSON.parse(sessionStorage.getItem("kad-cart"))
+  ? JSON.parse(sessionStorage.getItem("kad-cart"))
+  : false;
 function withWebsiteData(Component) {
   return class withWebsiteData extends Component {
     state = {
@@ -37,6 +40,7 @@ function withWebsiteData(Component) {
       jalasat: local_jalasat,
       free_courses: local_free_courses,
       sessionLogin: sessionLogin,
+      cart: local_cart,
       err: {
         state: false,
         message: "",
@@ -46,7 +50,8 @@ function withWebsiteData(Component) {
     componentDidMount() {
       this.initial_data();
       if (this.state.user) {
-        this.get_user();
+        this.get_user(this.state.user.user_id);
+        this.get_cart(this.state.user.user_id);
       }
     }
     initial_data = () => {
@@ -55,6 +60,18 @@ function withWebsiteData(Component) {
       this.get_teachers();
       this.get_courses();
       this.get_jalasat();
+    };
+    get_cart = (user_id) => {
+      axios
+        .get(`https://daryaftyar.ir/backend/kad_api/cart/${user_id}`)
+        .then((res) => {
+          const cart = res.data;
+          localStorage.setItem("kad-cart", JSON.stringify(cart));
+          this.setState({ cart });
+        })
+        .catch((e) => {
+          this.handle_error(e);
+        });
     };
     get_doreha = () => {
       axios
@@ -74,7 +91,7 @@ function withWebsiteData(Component) {
         .get("https://daryaftyar.ir/backend/kad_api/kelases")
         .then((res) => {
           const kelasses = res.data;
-          const free_courses = kelasses.find((k) => k.price === 0);
+          const free_courses = kelasses.filter((k) => k.price === 0);
           this.setState({ kelasses, free_courses });
           localStorage.setItem("kelasses", JSON.stringify(kelasses));
           localStorage.setItem("free-coures", JSON.stringify(free_courses));
@@ -120,11 +137,9 @@ function withWebsiteData(Component) {
           this.handle_error(e);
         });
     };
-    get_user = () => {
+    get_user = (user_id) => {
       axios
-        .get(
-          ` https://daryaftyar.ir/backend/kad_api/user/${local_user.user_id}`
-        )
+        .get(` https://daryaftyar.ir/backend/kad_api/user/${user_id}`)
         .then((res) => {
           const user = res.data;
           const kelasses = [];
@@ -222,7 +237,10 @@ function withWebsiteData(Component) {
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (
-            <Header user={this.state.user ? this.state.user : false} />
+            <Header
+              user={this.state.user ? this.state.user : false}
+              cart={this.state.cart ? this.state.cart : false}
+            />
           )}
           <Component
             {...this.props}
@@ -233,6 +251,7 @@ function withWebsiteData(Component) {
             teachers={this.state.teachers}
             courses={this.state.courses}
             jalasat={this.state.jalasat}
+            free_courses={this.state.free_courses}
             inside_user={this.inside_user}
             handle_error={this.handle_error}
             change_active_date={this.change_active_date}
@@ -241,6 +260,7 @@ function withWebsiteData(Component) {
             get_kelasses={this.get_kelasses}
             get_jalasat={this.get_jalasat}
             initial_data={this.initial_data}
+            cart={this.state.cart}
           />
           {this.state.err.state ? (
             <div className={this.state.err.classes.map((c) => `${c}`)}>

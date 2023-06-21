@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import fcourse_img from "../../../../assets/images/fcourse-sample-img.svg";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import scrollToTop from "../../../functions/scroll";
 class FCourse extends Component {
   state = {
     animate: "animate-fcourse",
@@ -10,10 +12,19 @@ class FCourse extends Component {
     }, 100);
   }
   render() {
+    const { kelas } = this.props;
     return (
       <div className={"fcourse " + this.state.animate}>
-        <img src={fcourse_img} alt="اسم دوره" />
-        <span className="view-btn">مشاهده</span>
+        <img src={fcourse_img} alt={kelas.kelas_title} />
+        <span className="kelas-name">{kelas.kelas_title}</span>
+        <Link
+          onClick={() => {
+            scrollToTop();
+          }}
+          to={`/SingleProd/${kelas.kelas_id}`}
+          className="view-btn">
+          مشاهده
+        </Link>
       </div>
     );
   }

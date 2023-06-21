@@ -11,6 +11,11 @@ import downArrow from "../../assets/images/dow-arroow-filter.svg";
 class Shop extends Component {
   state = {
     shown: false,
+    year: false,
+    subject: false,
+    dore: false,
+    course: false,
+    filtered_products: false,
   };
   componentDidMount() {}
   handle_filter_show = (shown) => {
@@ -21,8 +26,120 @@ class Shop extends Component {
       this.setState({ shown });
     }
   };
+  get_year = (year) => {
+    this.setState({ year });
+    this.final_klasses(
+      year,
+      this.state.subject,
+      this.state.dore,
+      this.state.course
+    );
+  };
+  year_text = (year) => {
+    switch (year) {
+      case 10:
+        return "دهم";
+      case 11:
+        return "یازدهم";
+      case 12:
+        return "دوازدهم";
+    }
+  };
+  get_subject = (subject) => {
+    this.setState({ subject });
+    this.final_klasses(
+      this.state.year,
+      subject,
+      this.state.dore,
+      this.state.course
+    );
+  };
+  subject_text = (subject) => {
+    switch (subject) {
+      case 0:
+        return "ریاضی و فیزیک";
+      case 1:
+        return "تجربی";
+      case 2:
+        return "انسانی";
+      case 3:
+        return "هنر";
+    }
+  };
+  get_dore = (dore) => {
+    this.setState({ dore });
+    this.final_klasses(
+      this.state.year,
+      this.state.subject,
+      dore,
+      this.state.course
+    );
+  };
+  get_course = (course) => {
+    this.setState({ course });
+    this.final_klasses(
+      this.state.year,
+      this.state.subject,
+      this.state.dore,
+      course
+    );
+  };
+  reset_filter = () => {
+    this.setState({
+      year: false,
+      subject: false,
+      dore: false,
+      course: false,
+      filtered_products: false,
+    });
+  };
+  final_klasses = (year, subject, dore, course) => {
+    const { kelasses } = this.props;
+    let yaer_kelases = [];
+    let subject_kelases = [];
+    let dore_kelases = [];
+    let course_kelases = [];
+    let counter = 0;
+    if (year) {
+      yaer_kelases = kelasses.filter((k) => k.year === year);
+      counter++;
+    }
+    if (subject || subject === 0) {
+      subject_kelases = kelasses.filter((k) => k.subject.includes(subject));
+      counter++;
+    }
+    if (dore) {
+      dore_kelases = kelasses.filter((k) => k.parent_dore_id === dore);
+      counter++;
+    }
+    if (course) {
+      course_kelases = kelasses.filter((k) => k.course === course);
+      counter++;
+    }
+    const all_kelasses = yaer_kelases.concat(
+      subject_kelases,
+      dore_kelases,
+      course_kelases
+    );
+    const objectCounts = {};
+
+    // Count the occurrences of each object
+    all_kelasses.forEach((obj) => {
+      const stringifiedObj = JSON.stringify(obj);
+      objectCounts[stringifiedObj] = (objectCounts[stringifiedObj] || 0) + 1;
+    });
+
+    const final_kelasses = [];
+    Object.entries(objectCounts).forEach(([stringifiedObj, count]) => {
+      if (count === counter) {
+        const obj = JSON.parse(stringifiedObj);
+        final_kelasses.push({ ...obj, repetitionCount: count });
+      }
+    });
+    this.setState({ filtered_products: final_kelasses });
+  };
   render() {
-    const { doreha, kelasses, teachers, initial_data } = this.props;
+    const { doreha, kelasses, teachers, initial_data, courses } = this.props;
     return (
       <>
         <Helmet>
@@ -65,7 +182,11 @@ class Shop extends Component {
                   }}>
                   <span className="filter-title">پایه تحصیلی </span>
                   <span className="main-filter">
-                    <span className="filter-text">پایه تحصیلی </span>
+                    <span className="filter-text">
+                      {this.state.year
+                        ? this.year_text(this.state.year)
+                        : "پایه تحصیلی"}
+                    </span>
                     <img src={downArrow} alt="" />
                   </span>
                   <span
@@ -74,9 +195,39 @@ class Shop extends Component {
                         ? "filter-items-wrapper show-filter"
                         : "filter-items-wrapper"
                     }>
-                    <span className="filter-item">دهم</span>
-                    <span className="filter-item">یازدهم</span>
-                    <span className="filter-item">دوازدهم</span>
+                    <span
+                      className={
+                        this.state.year === 10
+                          ? "filter-item active"
+                          : "filter-item"
+                      }
+                      onClick={() => {
+                        this.get_year(10);
+                      }}>
+                      دهم
+                    </span>
+                    <span
+                      className={
+                        this.state.year === 11
+                          ? "filter-item active"
+                          : "filter-item"
+                      }
+                      onClick={() => {
+                        this.get_year(11);
+                      }}>
+                      یازدهم
+                    </span>
+                    <span
+                      className={
+                        this.state.year === 12
+                          ? "filter-item active"
+                          : "filter-item"
+                      }
+                      onClick={() => {
+                        this.get_year(12);
+                      }}>
+                      دوازدهم
+                    </span>
                   </span>
                 </div>
                 <div
@@ -86,7 +237,11 @@ class Shop extends Component {
                   }}>
                   <span className="filter-title">رشته تحصیلی</span>
                   <span className="main-filter">
-                    <span className="filter-text">رشته تحصیلی</span>
+                    <span className="filter-text">
+                      {this.state.subject || this.state.subject === 0
+                        ? this.subject_text(this.state.subject)
+                        : "رشته تحصیلی"}
+                    </span>
                     <img src={downArrow} alt="" />
                   </span>
                   <span
@@ -95,10 +250,50 @@ class Shop extends Component {
                         ? "filter-items-wrapper show-filter"
                         : "filter-items-wrapper"
                     }>
-                    <span className="filter-item">ریاضی و فیزیک</span>
-                    <span className="filter-item">تجربی</span>
-                    <span className="filter-item">انسانی</span>
-                    <span className="filter-item">هنر</span>
+                    <span
+                      className={
+                        this.state.subject === 0
+                          ? "filter-item active"
+                          : "filter-item"
+                      }
+                      onClick={() => {
+                        this.get_subject(0);
+                      }}>
+                      ریاضی و فیزیک
+                    </span>
+                    <span
+                      className={
+                        this.state.subject === 1
+                          ? "filter-item active"
+                          : "filter-item"
+                      }
+                      onClick={() => {
+                        this.get_subject(1);
+                      }}>
+                      تجربی
+                    </span>
+                    <span
+                      className={
+                        this.state.subject === 2
+                          ? "filter-item active"
+                          : "filter-item"
+                      }
+                      onClick={() => {
+                        this.get_subject(2);
+                      }}>
+                      انسانی
+                    </span>
+                    <span
+                      className={
+                        this.state.subject === 3
+                          ? "filter-item active"
+                          : "filter-item"
+                      }
+                      onClick={() => {
+                        this.get_subject(3);
+                      }}>
+                      هنر
+                    </span>
                   </span>
                 </div>
                 <div
@@ -108,7 +303,12 @@ class Shop extends Component {
                   }}>
                   <span className="filter-title">دوره </span>
                   <span className="main-filter">
-                    <span className="filter-text">دوره </span>
+                    <span className="filter-text">
+                      {this.state.dore
+                        ? doreha.find((d) => d.dore_id === this.state.dore)
+                            .dore_title
+                        : "دوره"}{" "}
+                    </span>
                     <img src={downArrow} alt="" />
                   </span>
                   <span
@@ -117,10 +317,28 @@ class Shop extends Component {
                         ? "filter-items-wrapper show-filter"
                         : "filter-items-wrapper"
                     }>
-                    <span className="filter-item">جامع</span>
+                    {doreha ? (
+                      doreha.map((d) => (
+                        <span
+                          onClick={() => {
+                            this.get_dore(d.dore_id);
+                          }}
+                          key={d.dore_id}
+                          className={
+                            this.state.dore === d.dore_id
+                              ? "filter-item active"
+                              : "filter-item"
+                          }>
+                          {d.dore_title}
+                        </span>
+                      ))
+                    ) : (
+                      <></>
+                    )}
+                    {/* 
                     <span className="filter-item">نکته و تست</span>
                     <span className="filter-item">نهایی</span>
-                    <span className="filter-item">تیر آخر</span>
+                    <span className="filter-item">تیر آخر</span> */}
                   </span>
                 </div>
                 <div
@@ -130,44 +348,78 @@ class Shop extends Component {
                   }}>
                   <span className="filter-title">درس </span>
                   <span className="main-filter">
-                    <span className="filter-text">درس </span>
+                    <span className="filter-text">
+                      {this.state.course
+                        ? courses.find((c) => c.course_id === this.state.course)
+                            .name
+                        : "درس"}{" "}
+                    </span>
                     <img src={downArrow} alt="" />
                   </span>
                   <span
                     className={
                       this.state.shown === "course"
-                        ? "filter-items-wrapper show-filter"
-                        : "filter-items-wrapper"
+                        ? "filter-items-wrapper course-fu show-filter"
+                        : "filter-items-wrapper course-fu"
                     }>
-                    <span className="filter-item">جامع</span>
-                    <span className="filter-item">نکته و تست</span>
-                    <span className="filter-item">نهایی</span>
-                    <span className="filter-item">تیر آخر</span>
+                    {courses ? (
+                      courses.map((c) => (
+                        <span
+                          onClick={() => {
+                            this.get_course(c.course_id);
+                          }}
+                          key={c.course_id}
+                          className={
+                            this.state.course === c.course_id
+                              ? "filter-item active"
+                              : "filter-item"
+                          }>
+                          {c.name}
+                        </span>
+                      ))
+                    ) : (
+                      <></>
+                    )}
                   </span>
                 </div>
               </div>
               <div className="products-wrapper">
-                {doreha ? (
-                  doreha.map((d) => (
+                {!this.state.filtered_products ? (
+                  kelasses ? (
+                    kelasses.map((k) => (
+                      <Product
+                        key={k.kelas_id}
+                        kelas={k}
+                        teachers={teachers ? teachers : false}
+                        initial_data={initial_data}
+                        doreha={doreha ? doreha : false}
+                      />
+                    ))
+                  ) : (
+                    <></>
+                  )
+                ) : this.state.filtered_products.length !== 0 ? (
+                  this.state.filtered_products.map((k) => (
                     <Product
-                      key={d.dore_id}
-                      dore={d}
-                      kelasses={kelasses ? kelasses : false}
+                      key={k.kelas_id}
+                      kelas={k}
                       teachers={teachers ? teachers : false}
                       initial_data={initial_data}
+                      doreha={doreha ? doreha : false}
                     />
                   ))
                 ) : (
-                  <></>
+                  <div className="no-prods-found">
+                    <p>متاسفانه محصولی با امکانات مورد نظر شما یافت نشد</p>
+                    <span
+                      onClick={() => {
+                        this.reset_filter();
+                      }}
+                      className="reset-filter">
+                      بازگردانی فیلتر ها
+                    </span>
+                  </div>
                 )}
-                {/* <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product /> */}
               </div>
             </div>
           </div>

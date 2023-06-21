@@ -10,10 +10,26 @@ class Kinds extends Component {
     }, 100);
   }
   render() {
-    const { show_courses } = this.props;
+    const { show_courses, doreha } = this.props;
     return (
       <div className="kinds">
-        <span
+        {doreha ? (
+          doreha.map((d) => (
+            <span
+              key={d.dore_id}
+              className={"kind " + this.state.animate}
+              onClick={() => {
+                scrollToTop();
+                show_courses(d.dore_title, d.dore_id);
+              }}>
+              {d.dore_title}
+              {d.dore_id}
+            </span>
+          ))
+        ) : (
+          <></>
+        )}
+        {/* <span
           className={"kind " + this.state.animate}
           onClick={() => {
             scrollToTop();
@@ -44,7 +60,7 @@ class Kinds extends Component {
             show_courses("تیر آخر");
           }}>
           تیر آخر
-        </span>
+        </span> */}
       </div>
     );
   }

@@ -3,17 +3,18 @@ import spilit_in_three from "../../functions/spilit_in_three";
 import convert_to_persian from "../../functions/convert-to-persian";
 import { Link } from "react-router-dom";
 import scrollToTop from "../../functions/scroll";
+import LittleLoading from "../../reuseables/little-loading";
 
 import cartWhite from "../../../assets/images/cart-white.svg";
 class Product extends Component {
   state = {
     dore_kelases: false,
-    dore_teachers: false,
+    kelas_teachers: false,
     pause: false,
   };
   componentDidMount() {
-    const { dore, kelasses, teachers, initial_data } = this.props;
-    if (dore && kelasses && teachers) {
+    const { kelas, teachers, initial_data, doreha } = this.props;
+    if (kelas && teachers && doreha) {
       this.start_component();
     } else {
       initial_data();
@@ -21,22 +22,19 @@ class Product extends Component {
     }
   }
   start_component = () => {
-    const { dore, kelasses, teachers } = this.props;
-    if (dore && kelasses && teachers) {
-      const dore_kelases = [];
-      const dore_teachers = [];
-      dore.kelases.forEach((k_id) => {
-        const kelas = kelasses.find((k) => k_id === k.kelas_id);
-        if (kelas) dore_kelases.push(kelas);
+    const { kelas, teachers, doreha } = this.props;
+    if (kelas && teachers && doreha) {
+      const kelas_teachers = [];
+      kelas.teachers.forEach((t_id) => {
+        const teacher = teachers.find((t) => t_id === t.teacher_id);
+        if (teacher && !kelas_teachers.includes(teacher))
+          kelas_teachers.push(teacher);
       });
-      dore_kelases.forEach((k) => {
-        k.teachers.forEach((t_id) => {
-          const teacher = teachers.find((t) => t_id === t.teacher_id);
-          if (teacher && !dore_teachers.includes(teacher))
-            dore_teachers.push(teacher);
-        });
-      });
-      this.setState({ dore_kelases, dore_teachers });
+      const dore_kelases = doreha.find(
+        (d) => d.dore_id === kelas.parent_dore_id
+      );
+      // console.log(dore_kelases);
+      this.setState({ kelas_teachers, dore_kelases });
     } else {
       setTimeout(() => {
         this.start_component();
@@ -44,46 +42,44 @@ class Product extends Component {
     }
   };
   render() {
-    const { dore } = this.props;
+    const { kelas } = this.props;
     return (
       <div className="product-wrapper">
         <Link
           onClick={() => {
             scrollToTop();
           }}
-          to={`/SingleCourse/${dore.dore_id}`}
+          to={`/SingleProd/${kelas.kelas_id}`}
           className="prod-img-wrapper">
-          <img src="" alt={dore.dore_title} />
+          <img src="" alt={kelas.kelas_title} />
         </Link>
         <h2 className="product-title">
           <Link
             onClick={() => {
               scrollToTop();
             }}
-            to={`/SingleCourse/${dore.dore_id}`}>
-            {dore.dore_title}
+            to={`/SingleProd/${kelas.kelas_id}`}>
+            {kelas.kelas_title}
           </Link>
         </h2>
         <span className="prod-details">
-          <span className="prod-class">
+          <Link
+            onClick={() => {
+              scrollToTop();
+            }}
+            to={`/SingleCourse/${
+              this.state.dore_kelases ? this.state.dore_kelases.dore_id : false
+            }`}
+            className="prod-class">
             {this.state.dore_kelases ? (
-              this.state.dore_kelases.map((k) => (
-                <Link
-                  onClick={() => {
-                    scrollToTop();
-                  }}
-                  to={`/SingleProd/${k.kelas_id}`}
-                  key={k.kelas_id}>
-                  {k.kelas_title}
-                </Link>
-              ))
+              this.state.dore_kelases.dore_title
             ) : (
-              <></>
+              <LittleLoading />
             )}
-          </span>
+          </Link>
           <span className="prod-teacher">
-            {this.state.dore_teachers ? (
-              this.state.dore_teachers.map((t) => (
+            {this.state.kelas_teachers ? (
+              this.state.kelas_teachers.map((t) => (
                 <Link
                   onClick={() => {
                     scrollToTop();
@@ -100,13 +96,27 @@ class Product extends Component {
         </span>
         {/* <p className="prod-desc">{dore.description}</p> */}
         <span className="price-currency-wrapper">
-          <span className="discounted-price">
-            {spilit_in_three(convert_to_persian(123456))}
-          </span>
           <span className="normal-price">
-            {spilit_in_three(convert_to_persian(123456))}
-            <span className="currency">تومان</span>
+            {kelas.discounted_price
+              ? kelas.price !== 0
+                ? spilit_in_three(convert_to_persian(kelas.discounted_price))
+                : "رایگان"
+              : kelas.price !== 0
+              ? spilit_in_three(convert_to_persian(kelas.price))
+              : "رایگان"}
+            {kelas.price !== 0 ? (
+              <span className="currency">تومان</span>
+            ) : (
+              <></>
+            )}
           </span>
+          {kelas.discounted_price ? (
+            <span className="discounted-price">
+              {spilit_in_three(convert_to_persian(kelas.price))}
+            </span>
+          ) : (
+            <></>
+          )}
         </span>
         <span className="prod-add-to-cart">
           <img src={cartWhite} alt="" />

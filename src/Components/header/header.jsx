@@ -27,7 +27,7 @@ class Header extends Component {
     this.setState({ menu: false });
   };
   render() {
-    const { user } = this.props;
+    const { user, cart } = this.props;
     return (
       <>
         <header className="main-header mm-width">
@@ -50,7 +50,7 @@ class Header extends Component {
           <div className="cart-name-wrapper">
             <Link to="/Cart" className="cart-icon">
               <img src={cartIcon} alt="رفتن به سبد خرید" />
-              <span className="number">3</span>
+              <span className="number">{cart ? cart.items_ids.length : 0}</span>
             </Link>
             <Link
               to={user ? "/Profile" : "/Login"}

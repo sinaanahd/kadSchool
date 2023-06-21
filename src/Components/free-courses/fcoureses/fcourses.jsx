@@ -3,16 +3,14 @@ import FCourse from "./fcourse/fcourse";
 class FCourses extends Component {
   state = {};
   render() {
+    const { selected_courses } = this.props;
     return (
       <div className="f-courses-wrapper">
-        <FCourse />
-        <FCourse />
-        <FCourse />
-        <FCourse />
-        <FCourse />
-        <FCourse />
-        <FCourse />
-        <FCourse />
+        {selected_courses
+          ? selected_courses.map((sc) => (
+              <FCourse key={sc.kelas_id} kelas={sc} />
+            ))
+          : "متاسفانه ای دوره ای وجود ندارد"}
       </div>
     );
   }

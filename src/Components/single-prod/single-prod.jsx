@@ -12,6 +12,7 @@ import avatar from "../../assets/images/avatar.svg";
 import cart from "../../assets/images/cart.svg";
 import PopUp from "./pop-up/pop-up";
 import convert_days from "../functions/convert-days";
+import LittleLoading from "../reuseables/little-loading";
 class SingleProd extends Component {
   state = {
     more_cm: false,
@@ -81,10 +82,16 @@ class SingleProd extends Component {
                     <span className="price-wrapper">
                       <span className="price-title">قیمت :</span>
                       <span className="price">
-                        {spilit_in_three(
-                          convert_to_persian(
-                            this.state.kelas ? this.state.kelas.price : 0
+                        {this.state.kelas ? (
+                          this.state.kelas.price !== 0 ? (
+                            spilit_in_three(
+                              convert_to_persian(this.state.kelas.price)
+                            )
+                          ) : (
+                            "رایگان"
                           )
+                        ) : (
+                          <LittleLoading />
                         )}
                       </span>
                     </span>

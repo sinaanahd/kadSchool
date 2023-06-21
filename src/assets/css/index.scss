@@ -71,6 +71,7 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 /* universal styles */
 
@@ -2649,6 +2650,7 @@ input[type=number] {
         max-width: 244px;
         @include flexMixin(column,flex-start,flex-start);
         padding: 12px;
+        gap: 2px;
         border-radius: 8px;
         border: 2px solid $mainColor;
         background-color: #fff;
@@ -2665,6 +2667,13 @@ input[type=number] {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+    .course-fu{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        .filter-item{
+            font-size: 12px;
+        }
+    }
     .filter-item{
         width: 100%;
         height: 36px;
@@ -2677,6 +2686,9 @@ input[type=number] {
             background-color: #5793CE80;
         }
     }
+    .active.filter-item{
+        background-color: #5793CE80;
+    }
     .products-wrapper{
         width: 100%;
         display: grid;
@@ -2684,13 +2696,14 @@ input[type=number] {
         column-gap: 24px;
         row-gap: 30px;
         direction: ltr;
+        position: relative;
     }
     .product-wrapper{
         width: 100%;
         padding: 8px 8px 10px;
         border-radius: 8px;
         background-color: #fff;
-        @include flexMixin(column,flex-start,center);
+        @include flexMixin(column,space-between,center);
         transition: $transition;
         direction: rtl;
         &:hover{
@@ -2707,10 +2720,14 @@ input[type=number] {
     .product-title{
         font-size: 16px;
     }
-    .prod-class,.prod-teacher{
+    .prod-class{
         @include flexMixin(row,flex-start,center);
         gap: 5px;
         flex-wrap: wrap;
+    }
+    .prod-teacher{
+        @include flexMixin(column,flex-start,flex-start);
+        width: 100%;
     }
     .prod-details{
         width: 100%;
@@ -2725,7 +2742,7 @@ input[type=number] {
         font-weight: bold;
     }
     .price-currency-wrapper{
-        @include flexMixin(row,space-between,center);
+        @include flexMixin(row-reverse,space-between,center);
         width: 100%;
         margin: 5px 0 10px;
     }
@@ -2755,6 +2772,34 @@ input[type=number] {
         cursor: pointer;
         &:hover{
             animation: shake .2s ease-in-out 0s 2 alternate-reverse;
+        }
+    }
+    .no-prods-found{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 20px;
+        position: absolute;
+        top: 50px;
+        p{
+            color: $redColor;
+            font-size: 20px;
+            text-align: center;
+        }
+        .reset-filter{
+            border: 2px solid $mainColor;
+            color: #fff;
+            @include flexMixin(row,center,center);
+            width: 150px;
+            height: 50px;
+            border-radius: 8px;
+            background-color:$mainColor;
+            transition: $transition;
+            font-size: 18px;
+            cursor: pointer;
+            &:hover{
+                background-color: #fff;
+                color: $mainColor;
+            }
         }
     }
 }
@@ -3754,7 +3799,11 @@ input[type=number] {
     .names{
         height: 100%;
         @include flexMixin(column,space-between,flex-start);
-        font-size: 20px;
+        font-size: 16px;
+    }
+    .teacher-name{
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
     }
     .delete-price{
         @include flexMixin(column,space-between,flex-end);
@@ -4436,6 +4485,11 @@ input[type=number] {
         }
         .products-wrapper{
             grid-template-columns: repeat(2,1fr);
+        }
+        .no-prods-found{
+            position: relative;
+            grid-column-start: 1;
+            grid-column-end: 3;
         }
     }
     .main-footer{

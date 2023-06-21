@@ -15,10 +15,11 @@ class Field extends Component {
       <span
         className={"field " + this.state.animate}
         onClick={() => {
-          go_to_kinds(item);
+          go_to_kinds(item.name, item.course_id);
           scrollToTop();
         }}>
-        {item}
+        {item.name}
+        {item.course_id}
       </span>
     );
   }

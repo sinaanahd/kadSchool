@@ -9,8 +9,8 @@ class Fields extends Component {
     const { field, go_to_kinds } = this.props;
     return (
       <div className="fields">
-        {field.map((item, i) => (
-          <Field item={item} key={i++} go_to_kinds={go_to_kinds} />
+        {field.map((item) => (
+          <Field item={item} key={item.course_id} go_to_kinds={go_to_kinds} />
         ))}
       </div>
     );

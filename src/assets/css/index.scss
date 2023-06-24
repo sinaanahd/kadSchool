@@ -1213,7 +1213,7 @@ input[type=number] {
     }
     .recorded-session-item {
         width: 80%;
-        @include flexMixin(row, space-between, center);
+        @include flexMixin(row, space-evenly, center);
         height: 80px;
         border: 2px solid #bcbcbc;
         @include styler($darkBlue, #fff, 20px, 8px);
@@ -1222,6 +1222,10 @@ input[type=number] {
         img{
             position: relative;
             top: 5px;
+        }
+        *{
+            flex: 1;
+            display: flex;
         }
     }
     .even-item{
@@ -1232,6 +1236,12 @@ input[type=number] {
     }
     .session-subject,.session-num{
         font-weight: bold;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .dots{
+        justify-content: flex-end;
+        flex: 0 0 10px;
     }
 }
 /* recorded courses */
@@ -2731,7 +2741,7 @@ input[type=number] {
     }
     .prod-details{
         width: 100%;
-        @include flexMixin(column,center,center);
+        @include flexMixin(row-reverse,center,center);
         font-size: 14px;
         gap: 21px;
         margin: 5px 0;
@@ -2861,6 +2871,7 @@ input[type=number] {
         gap: 5px;
         font-size: 16px;
         color: #fff;
+        cursor: pointer;
         img{
             width: 24px;
         }

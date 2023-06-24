@@ -6,7 +6,7 @@ class FCourses extends Component {
     const { selected_courses } = this.props;
     return (
       <div className="f-courses-wrapper">
-        {selected_courses
+        {selected_courses && selected_courses.length !== 0
           ? selected_courses.map((sc) => (
               <FCourse key={sc.kelas_id} kelas={sc} />
             ))

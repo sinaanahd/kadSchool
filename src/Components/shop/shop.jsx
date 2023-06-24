@@ -8,6 +8,7 @@ import catImg1 from "../../assets/images/cat-img-1.svg";
 import catImg2 from "../../assets/images/cat-img-2.svg";
 import catImg3 from "../../assets/images/cat-img-3.svg";
 import downArrow from "../../assets/images/dow-arroow-filter.svg";
+import LittleLoading from "../reuseables/little-loading";
 class Shop extends Component {
   state = {
     shown: false,
@@ -94,7 +95,7 @@ class Shop extends Component {
     });
   };
   final_klasses = (year, subject, dore, course) => {
-    const { kelasses } = this.props;
+    const { kelasses } = { ...this.props };
     let yaer_kelases = [];
     let subject_kelases = [];
     let dore_kelases = [];
@@ -139,7 +140,62 @@ class Shop extends Component {
     this.setState({ filtered_products: final_kelasses });
   };
   render() {
-    const { doreha, kelasses, teachers, initial_data, courses } = this.props;
+    const {
+      doreha,
+      kelasses,
+      teachers,
+      initial_data,
+      courses,
+      handle_cart,
+      cart,
+      request_id,
+      get_kelass_data,
+    } = this.props;
+    if (
+      doreha === null ||
+      kelasses === null ||
+      teachers === null ||
+      courses === null ||
+      cart === null
+    ) {
+      return (
+        <>
+          <Helmet>
+            <title>فروشگاه کاد</title>
+          </Helmet>
+          <section className="bgc-wrapper shop-wrapper-section">
+            <div className="mm-width shop-wrapper">
+              <SideBar />
+              <div className="main-content">
+                <h1 className="page-title">فروشگاه</h1>
+                <div className="slider-wrapper">
+                  <span className="slider">
+                    <span className="slider-btn"></span>
+                  </span>
+                </div>
+                <div className="categories-wrapper">
+                  <span className="category active">
+                    <img src={catImg3} alt="" />
+                    <span className="cat-text">کاد پلاس</span>
+                  </span>
+                  <span className="category">
+                    <img src={catImg2} alt="" />
+                    <span className="cat-text">جزوه</span>
+                  </span>
+                  <span className="category">
+                    <img src={catImg1} alt="" />
+                    <span className="cat-text">کلاس</span>
+                  </span>
+                </div>
+                <div className="filters-wrapper">
+                  <LittleLoading />
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
+      );
+    }
     return (
       <>
         <Helmet>
@@ -385,14 +441,18 @@ class Shop extends Component {
               </div>
               <div className="products-wrapper">
                 {!this.state.filtered_products ? (
-                  kelasses ? (
+                  kelasses && teachers ? (
                     kelasses.map((k) => (
                       <Product
+                        get_kelass_data={get_kelass_data}
                         key={k.kelas_id}
                         kelas={k}
                         teachers={teachers ? teachers : false}
                         initial_data={initial_data}
                         doreha={doreha ? doreha : false}
+                        handle_cart={handle_cart}
+                        cart={cart ? cart : false}
+                        request_id={request_id}
                       />
                     ))
                   ) : (
@@ -401,11 +461,15 @@ class Shop extends Component {
                 ) : this.state.filtered_products.length !== 0 ? (
                   this.state.filtered_products.map((k) => (
                     <Product
+                      get_kelass_data={get_kelass_data}
                       key={k.kelas_id}
                       kelas={k}
                       teachers={teachers ? teachers : false}
                       initial_data={initial_data}
                       doreha={doreha ? doreha : false}
+                      handle_cart={handle_cart}
+                      cart={cart ? cart : false}
+                      request_id={request_id}
                     />
                   ))
                 ) : (

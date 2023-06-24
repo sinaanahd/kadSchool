@@ -9,6 +9,7 @@ class RecordedCourses extends Component {
   state = {
     kelas: false,
     jalasat: false,
+    course: false,
   };
   componentDidMount() {
     this.find_class();
@@ -22,8 +23,9 @@ class RecordedCourses extends Component {
       const jalase = this.props.jalasat.find((j) => j.jalase_id === j_id);
       jalasat.push(jalase);
     });
-    this.setState({ kelas, jalasat });
-    console.log(kelas);
+    const { courses } = this.props;
+    const course = courses.find((c) => c.course_id === kelas.course);
+    this.setState({ kelas, jalasat, course });
   };
   render() {
     return (
@@ -39,7 +41,11 @@ class RecordedCourses extends Component {
               {this.state.kelas && this.state.jalasat ? (
                 this.state.jalasat.length !== 0 ? (
                   this.state.jalasat.map((j, i) => (
-                    <Session jalase={j} key={i++} />
+                    <Session
+                      jalase={j}
+                      key={i++}
+                      course={this.state.course ? this.state.course : false}
+                    />
                   ))
                 ) : (
                   <p>

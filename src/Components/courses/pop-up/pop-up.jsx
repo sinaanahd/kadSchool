@@ -4,7 +4,7 @@ import clock_vector from "../../../assets/images/clock-vector.svg";
 class PopUp extends Component {
   state = {};
   render() {
-    const { close_pu, my_ref } = this.props;
+    const { close_pu, my_ref, user } = this.props;
     return (
       <div
         className="courses-pop-up-wrapper animate-pop-up"
@@ -14,10 +14,7 @@ class PopUp extends Component {
         }}>
         <div className="main-content">
           <img src={clock_vector} />
-          <p className="text">
-            {"نام کاربری "}
-            عزیز الان تایم کلاست نیست این کلاس دوشنبه ساعت {"...."} شروع میشه
-          </p>
+          <p className="text">{user.name} عزیز الان تایم کلاست نیست</p>
         </div>
       </div>
     );

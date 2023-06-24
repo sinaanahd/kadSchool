@@ -13,7 +13,7 @@ class Dashboard extends Component {
     classes: true,
   };
   render() {
-    const { user, data, change_active_date, teachers, initial_data } =
+    const { user, change_active_date, teachers, initial_data, active_day } =
       this.props;
     return (
       <>
@@ -39,7 +39,7 @@ class Dashboard extends Component {
               </div>
               <div className="calender-video">
                 <Calender_2
-                  active_day={data.active_day}
+                  active_day={active_day}
                   change_active_date={change_active_date}
                   week_plan={user ? user.week_plan : false}
                   kelases={user ? user.kelases : false}

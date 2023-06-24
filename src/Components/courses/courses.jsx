@@ -66,7 +66,11 @@ class Courses extends Component {
           </Link> */}
         </section>
         {this.state.pop_up ? (
-          <PopUp close_pu={this.close_class_pop_up} my_ref={this.myRef} />
+          <PopUp
+            close_pu={this.close_class_pop_up}
+            my_ref={this.myRef}
+            user={user}
+          />
         ) : (
           <></>
         )}

@@ -23,7 +23,6 @@ class Kinds extends Component {
                 show_courses(d.dore_title, d.dore_id);
               }}>
               {d.dore_title}
-              {d.dore_id}
             </span>
           ))
         ) : (

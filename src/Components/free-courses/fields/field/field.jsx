@@ -19,7 +19,6 @@ class Field extends Component {
           scrollToTop();
         }}>
         {item.name}
-        {item.course_id}
       </span>
     );
   }

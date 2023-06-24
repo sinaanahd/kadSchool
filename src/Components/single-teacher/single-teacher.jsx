@@ -6,6 +6,8 @@ import LittleLoading from "../reuseables/little-loading";
 import arrow from "../../assets/images/dow-arroow-filter.svg";
 import downArrowBlue from "../../assets/images/down-arrow-blue.svg";
 import avatar from "../../assets/images/avatar.svg";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import scrollToTop from "../functions/scroll";
 class SingleTeacher extends Component {
   state = {
     more_cm: false,
@@ -15,34 +17,33 @@ class SingleTeacher extends Component {
     dore_carousel_pos: 0,
   };
   componentDidMount() {
-    const { teachers, doreha, initial_data } = this.props;
-    if (teachers && doreha) {
-      this.statrt_page();
-    } else {
-      initial_data();
-      this.statrt_page();
-    }
+    // const { teachers, doreha, initial_data } = this.props;
+    // if (teachers && doreha) {
+    //   this.statrt_page();
+    // } else {
+    //   initial_data();
+    //   this.statrt_page();
+    // }
+    const page_id = parseInt(window.location.pathname.split("/")[2]);
+    this.props.find_single_teacher(page_id);
   }
   statrt_page = () => {
-    const { teachers, doreha } = this.props;
-    if (teachers && doreha) {
-      const page_id = parseInt(window.location.pathname.split("/")[2]);
-      const state_doreha = [];
-      const teacher = teachers.find((t) => t.teacher_id === page_id);
-
-      teacher.doreha.forEach((d_id) => {
-        const dore = doreha.find((d) => d.dore_id === d_id);
-        state_doreha.push(dore);
-      });
-      if (state_doreha.length <= 4) this.setState({ dore_carousel: false });
-      else this.setState({ dore_carousel: true });
-
-      this.setState({ teacher, teachers_doreha: state_doreha });
-    } else {
-      setTimeout(() => {
-        this.statrt_page();
-      }, 500);
-    }
+    // const { teachers, doreha } = this.props;
+    // if (teachers && doreha) {
+    //   const state_doreha = [];
+    //   const teacher = teachers.find((t) => t.teacher_id === page_id);
+    //   teacher.doreha.forEach((d_id) => {
+    //     const dore = doreha.find((d) => d.dore_id === d_id);
+    //     state_doreha.push(dore);
+    //   });
+    //   if (state_doreha.length <= 4) this.setState({ dore_carousel: false });
+    //   else this.setState({ dore_carousel: true });
+    //   this.setState({ teacher, teachers_doreha: state_doreha });
+    // } else {
+    //   setTimeout(() => {
+    //     this.statrt_page();
+    //   }, 500);
+    // }
   };
   handle_cm = () => {
     const more_cm = !this.state.more_cm;
@@ -60,11 +61,12 @@ class SingleTeacher extends Component {
     }
   };
   render() {
+    const { single_teacher } = this.props;
     return (
       <>
         <Helmet>
           <title>
-            {this.state.teacher ? this.state.teacher.fullname : "اسم استاد"}
+            {single_teacher ? single_teacher.fullname : "اسم استاد"}
           </title>
         </Helmet>
         <section className="single-teacher-wrapper bgc-wrapper">
@@ -72,20 +74,16 @@ class SingleTeacher extends Component {
             <SideBar />
             <div className="main-content">
               <h1 className="title">
-                {this.state.teacher ? (
-                  this.state.teacher.fullname
-                ) : (
-                  <LittleLoading />
-                )}
+                {single_teacher ? single_teacher.fullname : <LittleLoading />}
               </h1>
-              {/* {this.state.teacher ? this.state.teacher : <LittleLoading />} */}
+              {/* {single_teacher ? single_teacher : <LittleLoading />} */}
 
               <div className="teacher-details">
                 <span className="teacher-img-name">
-                  {this.state.teacher ? (
+                  {single_teacher ? (
                     <img
-                      src={this.state.teacher.image_link}
-                      alt={this.state.teacher.fullname}
+                      src={single_teacher.image_link}
+                      alt={single_teacher.fullname}
                     />
                   ) : (
                     <LittleLoading />
@@ -124,11 +122,18 @@ class SingleTeacher extends Component {
 
                   <div
                     className={"courses car-" + this.state.dore_carousel_pos}>
-                    {this.state.teachers_doreha ? (
-                      this.state.teachers_doreha.map((d, i) => (
-                        <div key={d.d_id} className="course">
-                          {d.dore_title}
-                        </div>
+                    {single_teacher.doreha ? (
+                      single_teacher.doreha.map((d) => (
+                        <Link
+                          onClick={() => {
+                            scrollToTop();
+                          }}
+                          to={`/SingleCourse/${d.dore_id}`}
+                          key={d.dore_id}
+                          className="course">
+                          <h2>{d.dore_title}</h2>
+                          <p>{d.description}</p>
+                        </Link>
                       ))
                     ) : (
                       <LittleLoading />

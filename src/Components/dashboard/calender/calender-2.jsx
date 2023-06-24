@@ -5,7 +5,9 @@ class Calender_2 extends Component {
   state = {
     animate: " ",
   };
-
+  componentDidMount() {
+    //console.log(this.props.active_day);
+  }
   handle_animation = (e) => {
     this.setState({ animate: " animate-days" });
     setTimeout(() => {
@@ -98,9 +100,7 @@ class Calender_2 extends Component {
             </span> */}
           </div>
           <Days
-            my_class={
-              week_plan.length !== 0 && week_plan ? week_plan[active_day] : []
-            }
+            my_class={week_plan ? week_plan[active_day] : []}
             animate={this.state.animate}
             kelases={kelases ? kelases : false}
             teachers={teachers ? teachers : false}

@@ -13,27 +13,24 @@ class Product extends Component {
     pause: false,
   };
   componentDidMount() {
-    const { kelas, teachers, initial_data, doreha } = this.props;
+    const { kelas, teachers, doreha } = { ...this.props };
     if (kelas && teachers && doreha) {
       this.start_component();
     } else {
-      initial_data();
-      this.start_component();
+      //this.start_component();
     }
   }
   start_component = () => {
-    const { kelas, teachers, doreha } = this.props;
+    const { kelas, teachers, doreha } = { ...this.props };
     if (kelas && teachers && doreha) {
       const kelas_teachers = [];
       kelas.teachers.forEach((t_id) => {
         const teacher = teachers.find((t) => t_id === t.teacher_id);
-        if (teacher && !kelas_teachers.includes(teacher))
-          kelas_teachers.push(teacher);
+        kelas_teachers.push(teacher);
       });
       const dore_kelases = doreha.find(
         (d) => d.dore_id === kelas.parent_dore_id
       );
-      // console.log(dore_kelases);
       this.setState({ kelas_teachers, dore_kelases });
     } else {
       setTimeout(() => {
@@ -42,7 +39,7 @@ class Product extends Component {
     }
   };
   render() {
-    const { kelas } = this.props;
+    const { kelas, handle_cart, cart, request_id } = this.props;
     return (
       <div className="product-wrapper">
         <Link
@@ -60,6 +57,7 @@ class Product extends Component {
             }}
             to={`/SingleProd/${kelas.kelas_id}`}>
             {kelas.kelas_title}
+            {kelas.kelas_id}
           </Link>
         </h2>
         <span className="prod-details">
@@ -118,10 +116,44 @@ class Product extends Component {
             <></>
           )}
         </span>
-        <span className="prod-add-to-cart">
-          <img src={cartWhite} alt="" />
-          <span className="add-to-cart-text">افزودن به سبد</span>
-        </span>
+        {cart ? (
+          cart.items_ids.includes(kelas.kelas_id) ? (
+            <span
+              className="prod-add-to-cart"
+              onClick={() => {
+                handle_cart(kelas.kelas_id);
+              }}>
+              <img src={cartWhite} alt="" />
+              {request_id === kelas.kelas_id ? (
+                <span className="add-to-cart-text">
+                  <LittleLoading />
+                </span>
+              ) : (
+                <span className="add-to-cart-text">حذف از سبدخرید</span>
+              )}
+            </span>
+          ) : (
+            <span
+              className="prod-add-to-cart"
+              onClick={() => {
+                handle_cart(kelas.kelas_id);
+              }}>
+              <img src={cartWhite} alt="" />
+              {request_id === kelas.kelas_id ? (
+                <span className="add-to-cart-text">
+                  <LittleLoading />
+                </span>
+              ) : (
+                <span className="add-to-cart-text">افزودن به سبد</span>
+              )}
+            </span>
+          )
+        ) : (
+          <Link to={"/Login"} className="prod-add-to-cart">
+            <img src={cartWhite} alt="" />
+            <span className="add-to-cart-text">افزودن به سبد</span>
+          </Link>
+        )}
       </div>
     );
   }

@@ -1225,7 +1225,7 @@ input[type=number] {
         }
         *{
             flex: 1;
-            display: flex;
+        display: flex;
         }
     }
     .even-item{
@@ -2726,6 +2726,7 @@ input[type=number] {
         height: 171px;
         @include flexMixin(row,center,center);
         background-color: #d9d9d9;
+        overflow: hidden;
     }
     .product-title{
         font-size: 16px;
@@ -3020,12 +3021,27 @@ input[type=number] {
             gap: 5px;
             font-size: 20px;
             color: $mainColor;
+            position: relative;
+            cursor: pointer;
             &::before{
                 width: 29px;
                 height: 29px;
                 background-color: #DADADA;
                 display: block;
                 content: " ";
+            }
+            .files-link{
+                position: absolute;
+                width: 100%;
+                bottom: 55px;
+                @include flexMixin(column,flex-start,center);
+                padding: 5px;
+                border: 2px solid $mainColor;
+                color: $mainColor;
+                border-radius: 8px;
+                background-color: #fff;
+                z-index : 99;
+                font-size: 14px;
             }
         }
         .faq-question-wrapper{
@@ -3299,7 +3315,8 @@ input[type=number] {
         .img-wrapper{
             width: 100%;
             height: 142px; 
-            background-color: #D9D9D9;  
+            background-color: #D9D9D9; 
+            overflow: hidden; 
         }
         .teacher-name{
             margin: 5px 0 10px;
@@ -3320,7 +3337,11 @@ input[type=number] {
         padding-right: 6px;
         img{
             cursor: pointer;
+            transition: $transition;
         }
+       .rotate-45{
+        transform: rotate(45deg);
+       }
     }
     .discounted-price{
         margin: 0 6px 0;
@@ -3346,6 +3367,54 @@ input[type=number] {
         width: 100%;
         @include flexMixin(row,center,center);
         gap: 20px;
+    }
+    .sample-btns-wrapper {
+        width: 100%;
+        @include flexMixin(row, center, center);
+        gap: 30px;
+    }
+
+    .sample-btn {
+        width: 149px;
+        height: 46px;
+        background-color: #fff;
+        border-radius: 8px;
+        font-size: 18px;
+        border: 2px solid $mainColor;
+        color: $mainColor;
+        @include flexMixin(row, center, center);
+        gap: 5px;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+            width: 29px;
+            height: 29px;
+            background-color: #d9d9d9;
+            content: " ";
+            display: block;
+
+        }
+    }
+
+    .sample-files {
+        position: absolute;
+        top: 55px;
+        width: 100%;
+        border: 8px;
+        background-color: #fff;
+        border: 2px solid $mainColor;
+        padding: 10px;
+        @include flexMixin(column, flex-start, center);
+        gap: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+    .no-sample{
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+        color: $redColor;
     }
     .samples-wrapper{
         width: 100%;
@@ -3600,52 +3669,52 @@ input[type=number] {
     }
     .car-1{
         .course{
-            transform: translateX(calc( 500%  + 60px));
+            transform: translateX(calc( 400%  + 48px));
         }
     }
     .car-2{
         .course{
-            transform: translateX(calc( 1000% + 120px));
+            transform: translateX(calc( 800% + 96px));
         }
     }
     .car-3{
         .course{
-            transform: translateX(calc( 1500% + 180px));
+            transform: translateX(calc( 1200% + 144px));
         }
     }
     .car-4{
         .course{
-            transform: translateX(calc( 2000% + 240px));
+            transform: translateX(calc( 1600% + 192px));
         }
     }
     .car-5{
         .course{
-            transform: translateX(calc( 2500% + 300px));
+            transform: translateX(calc( 2000% + 240px));
         }
     }
     .car-6{
         .course{
-            transform: translateX(calc( 3000% + 360px));
+            transform: translateX(calc( 2400% + 288px));
         }
     }
     .car-7{
         .course{
-            transform: translateX(calc( 3500% + 420px));
+            transform: translateX(calc( 2800% + 336px));
         }
     }
     .car-8{
         .course{
-            transform: translateX(calc( 4000% + 480px));
+            transform: translateX(calc( 3200% + 384px));
         }
     }
     .car-9{
         .course{
-            transform: translateX(calc( 4500% + 540px));
+            transform: translateX(calc( 3600% + 432px));
         }
     }
     .car-10{
         .course{
-            transform: translateX(calc( 5000% + 600px));
+            transform: translateX(calc( 4000% + 480px));
         }
     }
     .course{
@@ -3656,7 +3725,23 @@ input[type=number] {
         box-shadow: $boxShadow;
         border-radius: 8px;
         transition: $transition;
+        @include flexMixin(column,flex-start,flex-start);
+        padding: 5px;
+        gap: 10px;
+        .img-wrapper{
+            width: 100%;
+            height: 80px;
+            overflow: hidden;
+            background-color: #d9d9d9;
+        }
+        h2{
+            font-size: 16px;
+        }
+        p{
+            font-size: 12px;
+        }
     }
+
     .arrows{
         flex: 0 0 30px;
         height: 30px;
@@ -3721,6 +3806,8 @@ input[type=number] {
         color: $mainColor;
         @include flexMixin(row,center,center);
         gap: 5px;
+        position: relative;
+        cursor: pointer;
         &::before{
             width: 29px;
             height: 29px;
@@ -3729,6 +3816,19 @@ input[type=number] {
             display: block;
 
         }
+    }
+    .sample-files{
+        position: absolute;
+        top: 55px;
+        width: 100%;
+        border: 8px;
+        background-color: #fff;
+        border: 2px solid $mainColor;
+        padding: 10px;
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+        border-radius: 8px;
+        font-size: 14px;
     }
     h3{
         color: #000;
@@ -4616,6 +4716,10 @@ input[type=number] {
                 &:before{
                     display: none;
                 }
+                .files-link{
+                    width: 200%;
+                    
+                }
             }
             .faq-question-wrapper {
                 padding: 10px;
@@ -4690,6 +4794,11 @@ input[type=number] {
             &::before{
                 display: none;
             }
+            .sample-files{
+                width: 160%;
+                top: 40px;
+                z-index: 99;
+            }
         }
     }
     .single-course-wrapper{
@@ -4711,6 +4820,21 @@ input[type=number] {
             width: 100%;
             padding: 10px 0;
             overflow: scroll;
+        }
+        .sample-btn {
+            width: 89px;
+            height: 32px;
+            font-size: 12px;
+
+            &::before {
+                display: none;
+            }
+
+            .sample-files {
+                width: 160%;
+                top: 40px;
+                z-index: 99;
+            }
         }
     }
     .cart-section-wrapper{

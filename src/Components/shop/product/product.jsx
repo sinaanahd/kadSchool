@@ -48,7 +48,7 @@ class Product extends Component {
           }}
           to={`/SingleProd/${kelas.kelas_id}`}
           className="prod-img-wrapper">
-          <img src="" alt={kelas.kelas_title} />
+          <img src={kelas.image_link} alt={kelas.kelas_title} />
         </Link>
         <h2 className="product-title">
           <Link

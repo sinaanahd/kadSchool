@@ -4,11 +4,13 @@ class PopUp extends Component {
   state = {
     animate: "pp-animate ",
     faq_number: 0,
+    show_sample: false,
   };
   componentDidMount() {
     setTimeout(() => {
       this.setState({ animate: " " });
     }, 300);
+    console.log(this.props.sample_files);
   }
   handle_faq = (faq_number) => {
     if (faq_number === this.state.faq_number) {
@@ -17,8 +19,36 @@ class PopUp extends Component {
       this.setState({ faq_number });
     }
   };
+  show_samples_link = (show_sample) => {
+    if (show_sample === this.state.show_sample) {
+      this.setState({ show_sample: false });
+    } else {
+      this.setState({ show_sample });
+    }
+  };
   render() {
-    const { type, handle_pop_up } = this.props;
+    const { type, handle_pop_up, sample_files } = this.props;
+    const jozeha = sample_files
+      ? [
+          ...sample_files.pdf_sample_files.filter(
+            (sf) => sf.file_type === "نمونه جزوه"
+          ),
+        ]
+      : false;
+    const azmonha = sample_files
+      ? [
+          ...sample_files.pdf_sample_files.filter(
+            (sf) => sf.file_type === "نمونه آزمون"
+          ),
+        ]
+      : false;
+    const taklifha = sample_files
+      ? [
+          ...sample_files.pdf_sample_files.filter(
+            (sf) => sf.file_type === "نمونه تکلیف"
+          ),
+        ]
+      : false;
     return (
       <div
         className={this.state.animate + "pop-up-wrapper " + type}
@@ -47,13 +77,90 @@ class PopUp extends Component {
           )}
           {type === "sample" ? (
             <>
-              <span className="video-place"></span>
-              <p className="pop-up-text sample-text">توضیحات...</p>
-              <span className="sample-btns-wrapper">
-                <span className="sample-btn">نمونه جزوه</span>
-                <span className="sample-btn">نمونه آزمون</span>
-                <span className="sample-btn">نمونه تکلیف</span>
-              </span>
+              {sample_files ? (
+                <>
+                  <span className="video-place">
+                    {sample_files.video_sample_files.map(
+                      (sv) =>
+                        (sv.file_type = "نمونه تدریس" ? sv.file_link : <></>)
+                    )}
+                  </span>
+                  <p className="pop-up-text sample-text">توضیحات...</p>
+                  <span className="sample-btns-wrapper">
+                    <span
+                      className="sample-btn"
+                      onClick={() => {
+                        this.show_samples_link("jozveha");
+                      }}>
+                      نمونه جزوه
+                      {jozeha.length !== 0 &&
+                      jozeha &&
+                      this.state.show_sample === "jozveha" ? (
+                        <span className="files-link">
+                          {jozeha.map((j) => (
+                            <a
+                              target="_blank"
+                              key={j.file_id}
+                              href={j.file_link}>
+                              دانلود جزوه
+                            </a>
+                          ))}
+                        </span>
+                      ) : (
+                        <></>
+                      )}
+                    </span>
+                    <span
+                      className="sample-btn"
+                      onClick={() => {
+                        this.show_samples_link("azmonha");
+                      }}>
+                      نمونه آزمون
+                      {azmonha.length !== 0 &&
+                      azmonha &&
+                      this.state.show_sample === "azmonha" ? (
+                        <span className="files-link">
+                          {azmonha.map((a) => (
+                            <a
+                              target="_blank"
+                              key={a.file_id}
+                              href={a.file_link}>
+                              دانلود آزمون
+                            </a>
+                          ))}
+                        </span>
+                      ) : (
+                        <></>
+                      )}
+                    </span>
+                    <span
+                      className="sample-btn"
+                      onClick={() => {
+                        this.show_samples_link("taklifha");
+                      }}>
+                      نمونه تکلیف
+                      {taklifha.length !== 0 &&
+                      taklifha &&
+                      this.state.show_sample === "taklifha" ? (
+                        <span className="files-link">
+                          {taklifha.map((t) => (
+                            <a
+                              target="_blank"
+                              key={t.file_id}
+                              href={t.file_link}>
+                              دانلود تکلیف
+                            </a>
+                          ))}
+                        </span>
+                      ) : (
+                        <></>
+                      )}
+                    </span>
+                  </span>
+                </>
+              ) : (
+                <></>
+              )}
             </>
           ) : (
             <></>

@@ -89,7 +89,7 @@ function withWebsiteData(Component) {
         this.get_kelasses();
       }
       if (local_sample_files) {
-        this.setState({ sample_files: local_free_courses });
+        this.setState({ sample_files: local_sample_files });
       } else {
         this.get_sample_files();
       }
@@ -373,28 +373,50 @@ function withWebsiteData(Component) {
     find_single_prod = (id) => {
       const check_teachers = this.state.ref_teachers;
       const check_kelasses = this.state.ref_kelasses;
+      const check_sample_files = this.state.sample_files;
       const request_wait = this.state.request_wait;
 
-      if (check_kelasses && check_teachers) {
+      if (check_kelasses && check_teachers && check_sample_files) {
         const ref_teachers = [...this.state.ref_teachers];
         const ref_kelasses = [...this.state.ref_kelasses];
+        const sample_files = { ...this.state.sample_files };
+        const kelas_sample_files = {
+          pdf_sample_files: [],
+          video_sample_files: [],
+        };
         let kelas = false;
         if (ref_kelasses) {
-          kelas = ref_kelasses.find((k) => k.kelas_id === id);
+          kelas = { ...ref_kelasses.find((k) => k.kelas_id === id) };
         }
         const kelas_teachers = [];
         if (kelas) {
           kelas.teachers.forEach((t_id) => {
-            const teacher = ref_teachers.find((t) => t.teacher_id === t_id);
+            const teacher = {
+              ...ref_teachers.find((t) => t.teacher_id === t_id),
+            };
 
             kelas_teachers.push(teacher);
           });
+          kelas_sample_files.pdf_sample_files = [
+            ...sample_files.pdf_sample_files.filter((sf) => sf.kelas_id === id),
+          ];
+          kelas_sample_files.video_sample_files = [
+            ...sample_files.video_sample_files.filter(
+              (sv) => sv.kelas_id === id
+            ),
+          ];
           kelas.teachers = kelas_teachers;
         }
+        kelas.sample_files = kelas_sample_files;
+        console.log(kelas);
         this.setState({ single_prod: kelas ? kelas : false });
-      } else if (local_teachers && local_kelasses) {
+      } else if (local_teachers && local_kelasses && local_sample_files) {
         this.setState(
-          { ref_teachers: local_teachers, ref_kelasses: local_kelasses },
+          {
+            ref_teachers: local_teachers,
+            ref_kelasses: local_kelasses,
+            sample_files: local_sample_files,
+          },
           () => {
             this.find_single_prod(id);
           }
@@ -403,48 +425,76 @@ function withWebsiteData(Component) {
         this.setState({ request_wait: request_wait + 1 });
         setTimeout(() => {
           this.find_single_prod(id);
-        }, 1000);
+        }, 2000);
       }
     };
     find_single_course = (id) => {
       const check_doreha = this.state.ref_doreha;
       const check_kelasses = this.state.ref_kelasses;
       const check_teachers = this.state.ref_teachers;
+      const check_sample_files = this.state.sample_files;
       const request_wait = this.state.request_wait;
-
-      if (check_doreha && check_kelasses && check_teachers) {
+      if (
+        check_doreha &&
+        check_kelasses &&
+        check_teachers &&
+        check_sample_files
+      ) {
         const doreha = [...this.state.ref_doreha];
         const kelasses = [...this.state.ref_kelasses];
         const teachers = [...this.state.ref_teachers];
+        const sample_files = { ...this.state.sample_files };
         const dore_kelases = [];
         const dore_teachers = [];
-        const dore = doreha.find((d) => d.dore_id === id);
+        const dore_sample_files = {
+          pdf_sample_files: [],
+          video_sample_files: [],
+        };
+        const dore = { ...doreha.find((d) => d.dore_id === id) };
         if (!dore) window.location.pathname = "/not-found";
-        dore.kelases.forEach((k_id) => {
-          const kelas = kelasses.find((k) => k_id === k.kelas_id);
-          if (kelas) {
-            const teacher = teachers.find(
-              (t) => kelas.teachers[0] === t.teacher_id
-            );
-            if (teacher) dore_teachers.push(teacher);
-            // kelas.teachers.forEach((t_id) => {
-            // });
-            dore_kelases.push(kelas);
-          }
-        });
-        dore.teachers = dore_teachers;
-        dore.kelases = dore_kelases;
-        dore.teacher_carousel_pos = 0;
-        if (dore_kelases.length <= 4) dore.teacher_carousel = false;
-        else dore.teacher_carousel = true;
-        this.setState({ single_course: dore });
+        else {
+          dore.kelases.forEach((k_id) => {
+            const kelas = { ...kelasses.find((k) => k_id === k.kelas_id) };
+            if (kelas) {
+              const teacher = {
+                ...teachers.find((t) => kelas.teachers[0] === t.teacher_id),
+              };
+              if (teacher) dore_teachers.push(teacher);
+              dore_kelases.push(kelas);
+            }
+            dore_sample_files.pdf_sample_files = [
+              ...sample_files.pdf_sample_files.filter(
+                (pf) => pf.dore_id === id
+              ),
+            ];
+            dore_sample_files.video_sample_files = [
+              ...sample_files.video_sample_files.filter(
+                (vf) => vf.dore_id === id
+              ),
+            ];
+          });
+          dore.teachers = dore_teachers;
+          dore.kelases = dore_kelases;
+          dore.teacher_carousel_pos = 0;
+          dore.sample_files = dore_sample_files;
+          if (dore_kelases.length <= 4) dore.teacher_carousel = false;
+          else dore.teacher_carousel = true;
+          console.log(dore);
+          this.setState({ single_course: dore });
+        }
       } else {
-        if (local_doreha && local_kelasses && local_teachers) {
+        if (
+          local_doreha &&
+          local_kelasses &&
+          local_teachers &&
+          local_sample_files
+        ) {
           this.setState(
             {
               ref_kelasses: local_kelasses,
               ref_doreha: local_doreha,
               ref_teachers: local_teachers,
+              sample_files: local_sample_files,
             },
             () => {
               this.find_single_course(id);
@@ -454,62 +504,66 @@ function withWebsiteData(Component) {
           this.setState({ request_wait: request_wait + 1 });
           setTimeout(() => {
             this.find_single_course(id);
-          }, 1000);
+          }, 2000);
         }
       }
     };
-    course_move = (way) => {
-      const single_course = { ...this.state.single_course };
-      const teacher_carousel_pos = single_course.teacher_carousel_pos;
-      const my_length = Math.floor(single_course.kelases.length / 4) - 1;
-      if (way === "next") {
-        if (my_length !== teacher_carousel_pos)
-          teacher_carousel_pos = teacher_carousel_pos + 1;
-      } else {
-        if (teacher_carousel_pos !== 0)
-          teacher_carousel_pos = teacher_carousel_pos - 1;
-      }
-      this.setState({ single_course });
-    };
+    // course_move = (way) => {
+    //   const single_course = { ...this.state.single_course };
+    //   const teacher_carousel_pos = single_course.teacher_carousel_pos;
+    //   const my_length = Math.floor(single_course.kelases.length / 4) - 1;
+    //   if (way === "next") {
+    //     if (my_length !== teacher_carousel_pos)
+    //       teacher_carousel_pos = teacher_carousel_pos + 1;
+    //   } else {
+    //     if (teacher_carousel_pos !== 0)
+    //       teacher_carousel_pos = teacher_carousel_pos - 1;
+    //   }
+    //   this.setState({ single_course });
+    // };
     find_single_teacher = (id) => {
-      const check_doreha = this.state.ref_doreha;
-      const check_teachers = this.state.ref_kelasses;
+      const check_kelasses = this.state.ref_kelasses;
+      const check_teachers = this.state.ref_teachers;
       const check_sample_files = this.state.sample_files;
       const request_wait = this.state.request_wait;
-      if (check_doreha && check_sample_files && check_teachers) {
+      if (check_kelasses && check_sample_files && check_teachers) {
         const teachers = [...this.state.ref_teachers];
-        const doreha = [...this.state.ref_doreha];
+        const kelasses = [...this.state.ref_kelasses];
         const sample_files = { ...this.state.sample_files };
-        const teachers_doreha = [];
+        const teacher_kelasses = [];
         const teachers_sample_files = {
           pdf_sample_files: [],
           video_sample_files: [],
         };
-        const teacher = teachers.find((t) => t.teacher_id === id);
+        const teacher = { ...teachers.find((t) => t.teacher_id === id) };
         if (teacher) {
           teacher.doreha.forEach((d_id) => {
-            const dore = doreha.find((d) => d.dore_id === d_id);
-            if (dore) teachers_doreha.push(dore);
+            const kelas = { ...kelasses.find((d) => d.kelas_id === d_id) };
+            if (kelas) teacher_kelasses.push(kelas);
           });
           for (let item in teacher.sample_files) {
             teacher.sample_files[item].forEach((item_id) => {
               const correct_property_name = item.replace("_ids", "");
-              const temp = sample_files[correct_property_name].find(
-                (sf) => sf.file_id === item_id
-              );
-              if (temp) teachers_sample_files[item] = temp;
+              const temp = {
+                ...sample_files[correct_property_name].find(
+                  (sf) => sf.file_id === item_id
+                ),
+              };
+              if (temp)
+                teachers_sample_files[item.replace("_ids", "")].push(temp);
             });
           }
         }
         teacher.sample_files = teachers_sample_files;
-        teacher.doreha = teachers_doreha;
+        teacher.kelases = kelasses;
+        console.log(teacher);
         this.setState({ single_teacher: teacher });
       } else {
-        if (local_doreha && local_teachers && local_sample_files) {
+        if (local_kelasses && local_teachers && local_sample_files) {
           this.setState(
             {
               ref_teachers: local_teachers,
-              ref_doreha: local_doreha,
+              ref_kelasses: local_kelasses,
               sample_files: local_sample_files,
             },
             () => {
@@ -520,7 +574,7 @@ function withWebsiteData(Component) {
           this.setState({ request_wait: request_wait + 1 });
           setTimeout(() => {
             this.find_single_teacher(id);
-          }, 1000);
+          }, 2000);
         }
       }
     };
@@ -566,7 +620,6 @@ function withWebsiteData(Component) {
             get_kelass_data={this.get_kelass_data}
             find_single_course={this.find_single_course}
             single_course={this.state.single_course}
-            course_move={this.course_move}
             single_teacher={this.state.single_teacher}
             find_single_teacher={this.find_single_teacher}
           />

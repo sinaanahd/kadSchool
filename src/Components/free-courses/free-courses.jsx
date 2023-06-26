@@ -33,11 +33,8 @@ class FreeCourse extends Component {
     selected_course: false,
   };
   componentDidMount() {
-    const { courses, initial_data } = this.props;
+    const { courses } = this.props;
     if (courses) {
-      this.fill_courses();
-    } else {
-      initial_data();
       this.fill_courses();
     }
   }

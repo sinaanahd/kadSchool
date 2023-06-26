@@ -11,57 +11,66 @@ import scrollToTop from "../functions/scroll";
 class SingleTeacher extends Component {
   state = {
     more_cm: false,
-    teacher: false,
-    teachers_doreha: false,
-    dore_carousel: false,
-    dore_carousel_pos: 0,
+    kelas_carouse_pos: 0,
+    open_sample_drop_down: false,
   };
   componentDidMount() {
-    // const { teachers, doreha, initial_data } = this.props;
-    // if (teachers && doreha) {
-    //   this.statrt_page();
-    // } else {
-    //   initial_data();
-    //   this.statrt_page();
-    // }
     const page_id = parseInt(window.location.pathname.split("/")[2]);
     this.props.find_single_teacher(page_id);
+    const data_check = setInterval(() => {
+      if (this.props.single_teacher) {
+        clearInterval(data_check);
+      } else {
+        this.props.find_single_teacher(page_id);
+      }
+    }, 2000);
   }
-  statrt_page = () => {
-    // const { teachers, doreha } = this.props;
-    // if (teachers && doreha) {
-    //   const state_doreha = [];
-    //   const teacher = teachers.find((t) => t.teacher_id === page_id);
-    //   teacher.doreha.forEach((d_id) => {
-    //     const dore = doreha.find((d) => d.dore_id === d_id);
-    //     state_doreha.push(dore);
-    //   });
-    //   if (state_doreha.length <= 4) this.setState({ dore_carousel: false });
-    //   else this.setState({ dore_carousel: true });
-    //   this.setState({ teacher, teachers_doreha: state_doreha });
-    // } else {
-    //   setTimeout(() => {
-    //     this.statrt_page();
-    //   }, 500);
-    // }
-  };
+
   handle_cm = () => {
     const more_cm = !this.state.more_cm;
     this.setState({ more_cm });
   };
   handle_carousel_move = (way) => {
-    const dore_carousel_pos = this.state.dore_carousel_pos;
-    const my_length = Math.ceil(this.state.teachers_doreha.length / 4);
+    const kelas_carouse_pos = this.state.kelas_carouse_pos;
+    const my_length = Math.floor(this.props.single_teacher.kelases.length / 4);
     if (way === "next") {
-      if (my_length !== dore_carousel_pos)
-        this.setState({ dore_carousel_pos: dore_carousel_pos + 1 });
+      if (my_length !== kelas_carouse_pos)
+        this.setState({ kelas_carouse_pos: kelas_carouse_pos + 1 });
     } else {
-      if (dore_carousel_pos !== 0)
-        this.setState({ dore_carousel_pos: dore_carousel_pos - 1 });
+      if (kelas_carouse_pos !== 0)
+        this.setState({ kelas_carouse_pos: kelas_carouse_pos - 1 });
+    }
+  };
+  handle_sample = (open_sample_drop_down) => {
+    if (open_sample_drop_down !== this.state.open_sample_drop_down)
+      this.setState({ open_sample_drop_down });
+    else {
+      this.setState({ open_sample_drop_down: false });
     }
   };
   render() {
     const { single_teacher } = this.props;
+    const jozveha = single_teacher
+      ? [
+          ...single_teacher.sample_files.pdf_sample_files.filter(
+            (f) => f.file_type === "نمونه جزوه"
+          ),
+        ]
+      : false;
+    const taklifha = single_teacher
+      ? [
+          ...single_teacher.sample_files.pdf_sample_files.filter(
+            (f) => f.file_type === "نمونه تکلیف"
+          ),
+        ]
+      : false;
+    const azmonha = single_teacher
+      ? [
+          ...single_teacher.sample_files.pdf_sample_files.filter(
+            (f) => f.file_type === "نمونه آزمون"
+          ),
+        ]
+      : false;
     return (
       <>
         <Helmet>
@@ -106,33 +115,40 @@ class SingleTeacher extends Component {
                 <div className="intro-video-wrapper"></div>
               </div>
               <div className="teachers-courses-wrapper">
-                <h3 className="course-title">دوره ها</h3>
+                <h3 className="course-title">کلاس ها</h3>
                 <div className="teacher-courses-wrapper">
-                  {this.state.dore_carousel ? (
-                    <span
-                      className="prev-course arrows"
-                      onClick={() => {
-                        this.handle_carousel_move("prev");
-                      }}>
-                      <img src={arrow} alt="قبلی" />
-                    </span>
+                  {single_teacher ? (
+                    single_teacher.kelases.length >= 4 ? (
+                      <span
+                        className="prev-course arrows"
+                        onClick={() => {
+                          this.handle_carousel_move("prev");
+                        }}>
+                        <img src={arrow} alt="قبلی" />
+                      </span>
+                    ) : (
+                      <></>
+                    )
                   ) : (
                     <></>
                   )}
 
                   <div
-                    className={"courses car-" + this.state.dore_carousel_pos}>
-                    {single_teacher.doreha ? (
-                      single_teacher.doreha.map((d) => (
+                    className={"courses car-" + this.state.kelas_carouse_pos}>
+                    {single_teacher ? (
+                      single_teacher.kelases.map((k) => (
                         <Link
                           onClick={() => {
                             scrollToTop();
                           }}
-                          to={`/SingleCourse/${d.dore_id}`}
-                          key={d.dore_id}
+                          to={`/SingleProd/${k.kelas_id}`}
+                          key={k.kelas_id}
                           className="course">
-                          <h2>{d.dore_title}</h2>
-                          <p>{d.description}</p>
+                          <span className="img-wrapper">
+                            <img src={k.image_link} alt={k.kelas_title} />
+                          </span>
+                          <h2>{k.kelas_title}</h2>
+                          <p>{k.descriptions}</p>
                         </Link>
                       ))
                     ) : (
@@ -145,55 +161,135 @@ class SingleTeacher extends Component {
                     <div className="course">5</div>
                     <div className="course">6</div> */}
                   </div>
-                  {this.state.dore_carousel ? (
-                    <span
-                      className="next-course arrows"
-                      onClick={() => {
-                        this.handle_carousel_move("next");
-                      }}>
-                      <img src={arrow} alt="بعدی" />
-                    </span>
+                  {single_teacher ? (
+                    single_teacher.kelases.length >= 4 ? (
+                      <span
+                        className="next-course arrows"
+                        onClick={() => {
+                          this.handle_carousel_move("next");
+                        }}>
+                        <img src={arrow} alt="بعدی" />
+                      </span>
+                    ) : (
+                      ""
+                    )
                   ) : (
-                    ""
+                    <></>
                   )}
                 </div>
               </div>
               <div className="teachers-sample-wrapper">
                 <h3 className="teacher-sample-title">نمونه تدریس</h3>
                 <div className="samples">
-                  <div className="sample-wrapper">
-                    <span className="img-wrapper">
-                      <img src="" alt="" />
-                    </span>
-                    <h4 className="sample-title">عنوان</h4>
-                    <p>لورم ایپسوم متن ساختگی است</p>
-                  </div>
-                  <div className="sample-wrapper">
-                    <span className="img-wrapper">
-                      <img src="" alt="" />
-                    </span>
-                    <h4 className="sample-title">عنوان</h4>
-                    <p>لورم ایپسوم متن ساختگی است</p>
-                  </div>
-                  <div className="sample-wrapper">
-                    <span className="img-wrapper">
-                      <img src="" alt="" />
-                    </span>
-                    <h4 className="sample-title">عنوان</h4>
-                    <p>لورم ایپسوم متن ساختگی است</p>
-                  </div>
-                  <div className="sample-wrapper">
-                    <span className="img-wrapper">
-                      <img src="" alt="" />
-                    </span>
-                    <h4 className="sample-title">عنوان</h4>
-                    <p>لورم ایپسوم متن ساختگی است</p>
-                  </div>
+                  {single_teacher ? (
+                    single_teacher.sample_files.video_sample_files.map((sv) =>
+                      sv.file_type === "نمونه تدریس" ? (
+                        <div className="sample-wrapper" key={sv.file_id}>
+                          <span className="img-wrapper">
+                            <img src={sv.file_link} alt="" />
+                          </span>
+                          <h4 className="sample-title">{sv.file_id}</h4>
+                          <p>{sv.teacher_id}</p>
+                        </div>
+                      ) : (
+                        <React.Fragment key={sv.file_id}></React.Fragment>
+                      )
+                    )
+                  ) : (
+                    <LittleLoading />
+                  )}
                 </div>
                 <div className="sample-btns-wrapper">
-                  <span className="sample-btn">نمونه جزوه</span>
-                  <span className="sample-btn">نمونه آزمون</span>
-                  <span className="sample-btn">نمونه تکلیف</span>
+                  <span
+                    className="sample-btn"
+                    onClick={() => {
+                      this.handle_sample("jozve");
+                    }}>
+                    نمونه جزوه
+                    {this.state.open_sample_drop_down === "jozve" ? (
+                      single_teacher ? (
+                        jozveha && jozveha.length !== 0 ? (
+                          <span className="sample-files">
+                            {jozveha.map((sf) => (
+                              <a
+                                key={sf.file_id}
+                                target="_blank"
+                                href={sf.file_link}
+                                className="sample-file">
+                                دانلود نمونه جزوه
+                              </a>
+                            ))}
+                          </span>
+                        ) : (
+                          <></>
+                        )
+                      ) : (
+                        <LittleLoading />
+                      )
+                    ) : (
+                      <></>
+                    )}
+                  </span>
+                  <span
+                    className="sample-btn"
+                    onClick={() => {
+                      this.handle_sample("test");
+                    }}>
+                    نمونه آزمون
+                    {this.state.open_sample_drop_down === "test" ? (
+                      single_teacher ? (
+                        azmonha && azmonha.length !== 0 ? (
+                          <span className="sample-files">
+                            {azmonha.map((sf) => (
+                              <a
+                                key={sf.file_id}
+                                target="_blank"
+                                href={sf.file_link}
+                                className="sample-file">
+                                دانلود نمونه آزمون
+                              </a>
+                            ))}
+                          </span>
+                        ) : (
+                          <></>
+                        )
+                      ) : (
+                        <LittleLoading />
+                      )
+                    ) : (
+                      <></>
+                    )}
+                  </span>
+                  <span
+                    className="sample-btn"
+                    onClick={() => {
+                      this.handle_sample("taklif");
+                    }}>
+                    نمونه تکلیف
+                    {this.state.open_sample_drop_down === "taklif" ? (
+                      single_teacher ? (
+                        taklifha && taklifha.length !== 0 ? (
+                          <span className="sample-files">
+                            {taklifha.map((sf) => (
+                              <a
+                                key={sf.file_id}
+                                target="_blank"
+                                href={sf.file_link}
+                                className="sample-file">
+                                دانلود نمونه تکلیف
+                              </a>
+                            ))}
+                          </span>
+                        ) : (
+                          <></>
+                        )
+                      ) : (
+                        <LittleLoading />
+                      )
+                    ) : (
+                      <></>
+                    )}
+                  </span>
                 </div>
               </div>
               <div className="students-comments-wrapper">

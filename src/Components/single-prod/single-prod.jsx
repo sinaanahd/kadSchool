@@ -20,34 +20,20 @@ class SingleProd extends Component {
     pop_up: false,
   };
   componentDidMount() {
-    // const { kelasses, teachers, initial_data } = this.props;
-    // if (kelasses && teachers) {
-    //   this.start_page();
-    // } else {
-    //   initial_data();
-    //   this.start_page();
-    // }
     this.props.find_single_prod(
       parseInt(window.location.pathname.split("/")[2])
     );
+    const data_check = setInterval(() => {
+      if (this.props.single_prod) {
+        clearInterval(data_check);
+      } else {
+        this.props.find_single_prod(
+          parseInt(window.location.pathname.split("/")[2])
+        );
+      }
+    }, 2000);
   }
-  start_page = () => {
-    // const { kelasses, teachers } = this.props;
-    // if (kelasses && teachers) {
-    //   const my_path = parseInt(window.location.pathname.split("/")[2]);
-    //   const kelas_taechers = [];
-    //   const kelas = kelasses.find((k) => k.kelas_id === my_path);
-    //   kelas.teachers.forEach((t_id) => {
-    //     const teacher = teachers.find((t) => t.teacher_id === t_id);
-    //     if (teacher) kelas_taechers.push(teacher);
-    //   });
-    //   this.setState({ kelas_taechers, kelas });
-    // } else {
-    //   setTimeout(() => {
-    //     this.start_page();
-    //   }, 500);
-    // }
-  };
+
   handle_cm = () => {
     const more_cm = !this.state.more_cm;
     this.setState({ more_cm });
@@ -79,7 +65,11 @@ class SingleProd extends Component {
               <div className="prod-details-wrapper">
                 <div className="prod-details-spec">
                   <span className="add-to-cart-prod">
-                    <img src="" alt="" className="prod-img" />
+                    <img
+                      src={single_prod ? single_prod.image_link : ""}
+                      alt={single_prod ? single_prod.kelas_title : "اسم کلاس"}
+                      className="prod-img"
+                    />
                     <span className="price-wrapper">
                       <span className="price-title">قیمت :</span>
                       <span className="price">
@@ -159,8 +149,8 @@ class SingleProd extends Component {
                       </span>
                       <span className="content">
                         {single_prod ? (
-                          single_prod.stream_plans.map((p) => (
-                            <span key={p.week_day_english}>
+                          single_prod.stream_plans.map((p, i) => (
+                            <span key={i++}>
                               {convert_days(p.week_day_english)}
                             </span>
                           ))
@@ -176,8 +166,8 @@ class SingleProd extends Component {
                       </span>
                       <span className="content">
                         {single_prod ? (
-                          single_prod.stream_plans.map((p) => (
-                            <span key={p.week_day_english}>
+                          single_prod.stream_plans.map((p, i) => (
+                            <span key={i++}>
                               {convert_to_persian(p.start_time.split(":")[0])}-
                               {convert_to_persian(p.finish_time.split(":")[0])},
                             </span>
@@ -334,6 +324,7 @@ class SingleProd extends Component {
             <PopUp
               type={this.state.pop_up}
               handle_pop_up={this.handle_pop_up}
+              sample_files={single_prod ? single_prod.sample_files : false}
             />
           ) : (
             <></>

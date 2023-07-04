@@ -57,7 +57,6 @@ class Product extends Component {
             }}
             to={`/SingleProd/${kelas.kelas_id}`}>
             {kelas.kelas_title}
-            {kelas.kelas_id}
           </Link>
         </h2>
         <span className="prod-details">

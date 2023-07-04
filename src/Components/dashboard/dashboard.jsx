@@ -13,8 +13,14 @@ class Dashboard extends Component {
     classes: true,
   };
   render() {
-    const { user, change_active_date, teachers, initial_data, active_day } =
-      this.props;
+    const {
+      user,
+      change_active_date,
+      teachers,
+      initial_data,
+      active_day,
+      main_page_banners,
+    } = this.props;
     return (
       <>
         <Helmet>
@@ -34,7 +40,7 @@ class Dashboard extends Component {
             <div className="contetnt-wrapper">
               <div className="slider-calender">
                 <Counter />
-                <Slider />
+                <Slider main_page_banners={main_page_banners} />
                 <InspirationSentence />
               </div>
               <div className="calender-video">
@@ -46,7 +52,7 @@ class Dashboard extends Component {
                   teachers={teachers ? teachers : false}
                   initial_data={initial_data}
                 />
-                <DaysTip />
+                {/* <DaysTip /> */}
               </div>
             </div>
           </div>

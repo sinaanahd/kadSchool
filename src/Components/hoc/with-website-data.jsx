@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Header from "../header/header";
 import NewFooter from "../footer/new-footer";
+import last_login_check from "../functions/last-login-check";
 const local_user = JSON.parse(localStorage.getItem("user-kad"))
   ? JSON.parse(localStorage.getItem("user-kad"))
   : false;
@@ -26,12 +27,24 @@ const local_free_courses = JSON.parse(localStorage.getItem("free-coures"))
 const sessionLogin = JSON.parse(sessionStorage.getItem("session-login"))
   ? JSON.parse(sessionStorage.getItem("session-login"))
   : false;
-const local_cart = JSON.parse(sessionStorage.getItem("kad-cart"))
-  ? JSON.parse(sessionStorage.getItem("kad-cart"))
+const local_cart = JSON.parse(localStorage.getItem("kad-cart"))
+  ? JSON.parse(localStorage.getItem("kad-cart"))
   : false;
-const local_sample_files = JSON.parse(sessionStorage.getItem("sample_files"))
-  ? JSON.parse(sessionStorage.getItem("sample_files"))
+const local_sample_files = JSON.parse(localStorage.getItem("sample_files"))
+  ? JSON.parse(localStorage.getItem("sample_files"))
   : false;
+const local_main_page_banners = JSON.parse(
+  localStorage.getItem("main-page-banners")
+)
+  ? JSON.parse(localStorage.getItem("main-page-banners"))
+  : false;
+const local_shop_banners = JSON.parse(localStorage.getItem("shop-banners"))
+  ? JSON.parse(localStorage.getItem("shop-banners"))
+  : false;
+const this_time_login = new Date().getTime();
+const last_login = JSON.parse(localStorage.getItem("LL"))
+  ? JSON.parse(localStorage.getItem("LL"))
+  : this_time_login;
 function withWebsiteData(Component) {
   return class withWebsiteData extends Component {
     state = {
@@ -50,7 +63,41 @@ function withWebsiteData(Component) {
       single_prod: false,
       single_course: false,
       single_teacher: false,
+      single_kelas: false,
       request_wait: 0,
+      main_page_banners: local_main_page_banners,
+      shop_banners: local_shop_banners,
+      subjects: [
+        { id: 0, name: "ریاضی" },
+
+        { id: 1, name: "تجربی" },
+
+        { id: 2, name: "انسانی" },
+
+        { id: 3, name: "هنر" },
+      ],
+      years: [
+        {
+          id: 10,
+          name: "دهم",
+        },
+        {
+          id: 11,
+          name: "یازدهم",
+        },
+        {
+          id: 12,
+          name: "دوازدهم",
+        },
+        {
+          id: 18,
+          name: "کنکور",
+        },
+        {
+          id: 0,
+          name: "فارغ التحصیل",
+        },
+      ],
       err: {
         state: false,
         message: "",
@@ -58,47 +105,100 @@ function withWebsiteData(Component) {
       active_day: "Friday",
     };
     componentDidMount() {
-      if (local_teachers) {
-        this.setState({ ref_teachers: local_teachers });
-      } else {
+      //this.get_banners();
+      const is_time = last_login_check(last_login, this_time_login);
+      if (is_time) {
+        this.get_banners();
         this.get_teachers();
-      }
-      if (local_courses) {
-        this.setState({ ref_courses: local_courses });
-      } else {
         this.get_courses();
-      }
-      if (local_doreha) {
-        this.setState({ ref_doreha: local_doreha });
-      } else {
         this.get_doreha();
-      }
-      if (local_kelasses) {
-        this.setState({ ref_kelasses: local_kelasses });
-      } else {
         this.get_kelasses();
-      }
-      if (local_jalasat) {
-        this.setState({ ref_jalasat: local_jalasat });
-      } else {
         this.get_jalasat();
-      }
-      if (local_free_courses) {
-        this.setState({ free_courses: local_free_courses });
-      } else {
-        this.get_kelasses();
-      }
-      if (local_sample_files) {
-        this.setState({ sample_files: local_sample_files });
-      } else {
         this.get_sample_files();
+        console.log("got it");
+      } else {
+        if (local_shop_banners && local_main_page_banners) {
+          this.setState({
+            shop_banners: local_shop_banners,
+            main_page_banners: local_main_page_banners,
+          });
+        } else {
+          this.get_banners();
+        }
+        if (local_teachers) {
+          this.setState({ ref_teachers: local_teachers });
+        } else {
+          this.get_teachers();
+        }
+        if (local_courses) {
+          this.setState({ ref_courses: local_courses });
+        } else {
+          this.get_courses();
+        }
+        if (local_doreha) {
+          this.setState({ ref_doreha: local_doreha });
+        } else {
+          this.get_doreha();
+        }
+        if (local_kelasses) {
+          this.setState({ ref_kelasses: local_kelasses });
+        } else {
+          this.get_kelasses();
+        }
+        this.get_jalasat();
+        if (local_jalasat) {
+          this.setState({ ref_jalasat: local_jalasat });
+        } else {
+          this.get_jalasat();
+          //console.log("jalase");
+        }
+        if (local_free_courses) {
+          this.setState({ free_courses: local_free_courses });
+        } else {
+          this.get_kelasses();
+        }
+        if (local_sample_files) {
+          this.setState({ sample_files: local_sample_files });
+        } else {
+          this.get_sample_files();
+        }
       }
+      //this.get_user(3098);
       if (local_user) {
-        //this.get_user(3098);
         this.get_user(local_user.user_id);
         this.get_cart(local_user.user_id);
       }
     }
+    get_banners = () => {
+      axios
+        .get("https://daryaftyar.ir/backend/kad_api/banners")
+        .then((res) => {
+          console.log(res.data);
+          this.setState({
+            main_page_banners: res.data.main_page_banners,
+            shop_banners: res.data.store_banners[0],
+          });
+          localStorage.setItem(
+            "main-page-banners",
+            JSON.stringify(res.data.main_page_banners)
+          );
+          localStorage.setItem(
+            "shop-banners",
+            JSON.stringify(res.data.store_banners[0])
+          );
+        })
+        .catch((e) => {
+          this.handle_error(e);
+        });
+    };
+    get_ref = () => {
+      axios
+        .get("https://daryaftyar.ir/backend/kad_api/grades_and_majors")
+        .then((res) => console.log(res.data))
+        .catch((e) => {
+          this.handle_error(e);
+        });
+    };
     get_sample_files = () => {
       axios
         .get("https://daryaftyar.ir/backend/kad_api/sample_files")
@@ -130,6 +230,7 @@ function withWebsiteData(Component) {
       const cart_products = [];
       const check_teachers = this.state.ref_teachers;
       const check_kelasses = this.state.ref_kelasses;
+      const request_wait = this.state.request_wait;
 
       if (check_kelasses && check_teachers) {
         const ref_teachers = [...this.state.ref_teachers];
@@ -142,21 +243,32 @@ function withWebsiteData(Component) {
             if (cart_product) {
               const kelas_teachers = [];
               cart_product.teachers.forEach((t_id) => {
-                const teacher = ref_teachers.find((t) => t.teacher_id === t_id);
-                if (teacher) kelas_teachers.push(teacher);
+                const teacher = {
+                  ...ref_teachers.find((t) => t.teacher_id === t_id),
+                };
+                if (Object.keys(teacher).length !== 0)
+                  kelas_teachers.push(teacher);
               });
               cart_product.teachers = kelas_teachers;
               cart_products.push(cart_product);
             }
           });
         this.setState({ cart_products });
-      } else {
-        this.setState(
-          { ref_teachers: local_teachers, ref_kelasses: local_kelasses },
-          () => {
+      } else if (request_wait === 0) {
+        if (local_teachers && local_kelasses) {
+          this.setState(
+            { ref_teachers: local_teachers, ref_kelasses: local_kelasses },
+            () => {
+              this.get_cart_products();
+            }
+          );
+        } else {
+          this.get_teachers();
+          this.get_kelasses();
+          setTimeout(() => {
             this.get_cart_products();
-          }
-        );
+          }, 2000);
+        }
       }
     };
     get_doreha = () => {
@@ -177,7 +289,7 @@ function withWebsiteData(Component) {
         .then((res) => {
           const ref_kelasses = res.data;
           const all_kelasses = [...ref_kelasses];
-          const free_courses = all_kelasses.filter((k) => k.price === 0);
+          const free_courses = [...all_kelasses.filter((k) => k.price === 0)];
           this.setState({ ref_kelasses, free_courses });
           localStorage.setItem("kelasses", JSON.stringify(ref_kelasses));
           localStorage.setItem("free-coures", JSON.stringify(free_courses));
@@ -204,6 +316,7 @@ function withWebsiteData(Component) {
         .get("https://daryaftyar.ir/backend/kad_api/jalasat")
         .then((res) => {
           const ref_jalasat = res.data;
+          //console.log(ref_jalasat);
           this.setState({ ref_jalasat });
           localStorage.setItem("jalasat", JSON.stringify(ref_jalasat));
         })
@@ -257,6 +370,7 @@ function withWebsiteData(Component) {
         .get(`https://daryaftyar.ir/backend/kad_api/user/${user_id}`)
         .then((res) => {
           const user = res.data;
+          //console.log(user);
           this.fill_user_datas(user);
         })
         .catch((e) => {
@@ -286,23 +400,25 @@ function withWebsiteData(Component) {
         };
         if (ref_kelasses) {
           user.kelases.forEach((k_id) => {
-            const kelas = ref_kelasses.find((k) => k.kelas_id === k_id);
-            user_kelasses.push(kelas);
+            const kelas = { ...ref_kelasses.find((k) => k.kelas_id === k_id) };
+            if (Object.keys(kelas).length !== 0) user_kelasses.push(kelas);
           });
         }
         user.kelases = user_kelasses;
         if (ref_doreha) {
           user.doreha.forEach((d_id) => {
-            const dore = ref_doreha.find((d) => d.dore_id === d_id);
-            user_doreha.push(dore);
+            const dore = { ...ref_doreha.find((d) => d.dore_id === d_id) };
+            if (Object.keys(dore).length !== 0) user_doreha.push(dore);
           });
         }
         user.doreha = user_doreha;
         if (ref_jalasat) {
           for (let day in user.week_plan) {
             user.week_plan[day].forEach((j_id) => {
-              const jalase = ref_jalasat.find((j) => j.jalase_id === j_id);
-              week_plan[day].push(jalase);
+              const jalase = {
+                ...ref_jalasat.find((j) => j.jalase_id === j_id),
+              };
+              if (Object.keys(jalase).length !== 0) week_plan[day].push(jalase);
             });
           }
         }
@@ -360,7 +476,7 @@ function withWebsiteData(Component) {
         };
         this.setState({ err, pause: false });
       }, 5000);
-      console.log(e);
+      //console.log(e);
     };
     inside_user = (user) => {
       // this.setState({ user });
@@ -373,13 +489,20 @@ function withWebsiteData(Component) {
     find_single_prod = (id) => {
       const check_teachers = this.state.ref_teachers;
       const check_kelasses = this.state.ref_kelasses;
+      const check_doreha = this.state.ref_doreha;
       const check_sample_files = this.state.sample_files;
       const request_wait = this.state.request_wait;
 
-      if (check_kelasses && check_teachers && check_sample_files) {
+      if (
+        check_kelasses &&
+        check_teachers &&
+        check_sample_files &&
+        check_doreha
+      ) {
         const ref_teachers = [...this.state.ref_teachers];
         const ref_kelasses = [...this.state.ref_kelasses];
         const sample_files = { ...this.state.sample_files };
+        const ref_doreha = [...this.state.ref_doreha];
         const kelas_sample_files = {
           pdf_sample_files: [],
           video_sample_files: [],
@@ -389,13 +512,12 @@ function withWebsiteData(Component) {
           kelas = { ...ref_kelasses.find((k) => k.kelas_id === id) };
         }
         const kelas_teachers = [];
-        if (kelas) {
+        if (Object.keys(kelas).length !== 0) {
           kelas.teachers.forEach((t_id) => {
             const teacher = {
               ...ref_teachers.find((t) => t.teacher_id === t_id),
             };
-
-            kelas_teachers.push(teacher);
+            if (Object.keys(teacher).length !== 0) kelas_teachers.push(teacher);
           });
           kelas_sample_files.pdf_sample_files = [
             ...sample_files.pdf_sample_files.filter((sf) => sf.kelas_id === id),
@@ -406,9 +528,13 @@ function withWebsiteData(Component) {
             ),
           ];
           kelas.teachers = kelas_teachers;
+          const dore = {
+            ...ref_doreha.find((d) => d.dore_id === kelas.parent_dore_id),
+          };
+          if (Object.keys(dore).length !== 0) kelas.dore = dore;
         }
         kelas.sample_files = kelas_sample_files;
-        console.log(kelas);
+        //console.log(kelas);
         this.setState({ single_prod: kelas ? kelas : false });
       } else if (local_teachers && local_kelasses && local_sample_files) {
         this.setState(
@@ -451,15 +577,17 @@ function withWebsiteData(Component) {
           video_sample_files: [],
         };
         const dore = { ...doreha.find((d) => d.dore_id === id) };
-        if (!dore) window.location.pathname = "/not-found";
+        if (Object.keys(dore).length === 0)
+          window.location.pathname = "/not-found";
         else {
           dore.kelases.forEach((k_id) => {
             const kelas = { ...kelasses.find((k) => k_id === k.kelas_id) };
-            if (kelas) {
+            if (Object.keys(kelas).length !== 0) {
               const teacher = {
                 ...teachers.find((t) => kelas.teachers[0] === t.teacher_id),
               };
-              if (teacher) dore_teachers.push(teacher);
+              if (Object.keys(teacher).length !== 0)
+                dore_teachers.push(teacher);
               dore_kelases.push(kelas);
             }
             dore_sample_files.pdf_sample_files = [
@@ -479,7 +607,7 @@ function withWebsiteData(Component) {
           dore.sample_files = dore_sample_files;
           if (dore_kelases.length <= 4) dore.teacher_carousel = false;
           else dore.teacher_carousel = true;
-          console.log(dore);
+          //console.log(dore);
           this.setState({ single_course: dore });
         }
       } else {
@@ -508,19 +636,6 @@ function withWebsiteData(Component) {
         }
       }
     };
-    // course_move = (way) => {
-    //   const single_course = { ...this.state.single_course };
-    //   const teacher_carousel_pos = single_course.teacher_carousel_pos;
-    //   const my_length = Math.floor(single_course.kelases.length / 4) - 1;
-    //   if (way === "next") {
-    //     if (my_length !== teacher_carousel_pos)
-    //       teacher_carousel_pos = teacher_carousel_pos + 1;
-    //   } else {
-    //     if (teacher_carousel_pos !== 0)
-    //       teacher_carousel_pos = teacher_carousel_pos - 1;
-    //   }
-    //   this.setState({ single_course });
-    // };
     find_single_teacher = (id) => {
       const check_kelasses = this.state.ref_kelasses;
       const check_teachers = this.state.ref_teachers;
@@ -536,10 +651,10 @@ function withWebsiteData(Component) {
           video_sample_files: [],
         };
         const teacher = { ...teachers.find((t) => t.teacher_id === id) };
-        if (teacher) {
-          teacher.doreha.forEach((d_id) => {
+        if (Object.keys(teacher).length !== 0) {
+          teacher.kelases.forEach((d_id) => {
             const kelas = { ...kelasses.find((d) => d.kelas_id === d_id) };
-            if (kelas) teacher_kelasses.push(kelas);
+            if (Object.keys(kelas).length !== 0) teacher_kelasses.push(kelas);
           });
           for (let item in teacher.sample_files) {
             teacher.sample_files[item].forEach((item_id) => {
@@ -549,14 +664,15 @@ function withWebsiteData(Component) {
                   (sf) => sf.file_id === item_id
                 ),
               };
-              if (temp)
+              if (Object.keys(temp).length !== 0)
                 teachers_sample_files[item.replace("_ids", "")].push(temp);
             });
           }
         }
+
         teacher.sample_files = teachers_sample_files;
-        teacher.kelases = kelasses;
-        console.log(teacher);
+        teacher.kelases = teacher_kelasses;
+        // console.log(teacher_kelasses);
         this.setState({ single_teacher: teacher });
       } else {
         if (local_kelasses && local_teachers && local_sample_files) {
@@ -578,6 +694,49 @@ function withWebsiteData(Component) {
         }
       }
     };
+    find_class = (id) => {
+      const check_kelasses = this.state.ref_kelasses;
+      const check_jalasat = this.state.ref_jalasat;
+      const check_courses = this.state.ref_courses;
+      const request_wait = this.state.request_wait;
+      if (check_courses && check_jalasat && check_kelasses) {
+        const kelases = [...this.state.ref_kelasses];
+        const jalasat = [...this.state.ref_jalasat];
+        const courses = [...this.state.ref_courses];
+        const kelas_jalasat = [];
+        let course = false;
+        const kelas = { ...kelases.find((k) => k.kelas_id === id) };
+        if (kelas) {
+          course = { ...courses.find((c) => c.course_id === kelas.course) };
+          if (Object.keys(course).length !== 0) kelas.course = course;
+          kelas.jalasat.forEach((j_id) => {
+            const jalase = { ...jalasat.find((j) => j.jalase_id === j_id) };
+            if (Object.keys(jalase).length !== 0) kelas_jalasat.push(jalase);
+          });
+          kelas.jalasat = kelas_jalasat;
+        }
+        // console.log(kelas);
+        this.setState({ single_kelas: kelas });
+      } else {
+        if (local_courses && local_jalasat && local_kelasses) {
+          this.setState(
+            {
+              ref_jalasat: local_jalasat,
+              ref_kelasses: local_kelasses,
+              ref_courses: local_courses,
+            },
+            () => {
+              this.find_class(id);
+            }
+          );
+        } else if (request_wait === 0) {
+          this.setState({ request_wait: request_wait + 1 });
+          setTimeout(() => {
+            this.find_class(id);
+          }, 2000);
+        }
+      }
+    };
     render() {
       return (
         <>
@@ -586,6 +745,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/Forget-password" ||
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
+          window.location.pathname === "/Home" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (
@@ -604,6 +764,8 @@ function withWebsiteData(Component) {
             courses={this.state.ref_courses}
             jalasat={this.state.ref_jalasat}
             free_courses={this.state.free_courses}
+            years={this.state.years}
+            subjects={this.state.subjects}
             inside_user={this.inside_user}
             handle_error={this.handle_error}
             change_active_date={this.change_active_date}
@@ -622,6 +784,10 @@ function withWebsiteData(Component) {
             single_course={this.state.single_course}
             single_teacher={this.state.single_teacher}
             find_single_teacher={this.find_single_teacher}
+            find_class={this.find_class}
+            single_kelas={this.state.single_kelas}
+            main_page_banners={this.state.main_page_banners}
+            shop_banners={this.state.shop_banners}
           />
           {this.state.err.state ? (
             <div className={this.state.err.classes.map((c) => `${c}`)}>
@@ -631,7 +797,11 @@ function withWebsiteData(Component) {
             <></>
           )}
           {window.location.pathname === "/Login" ||
+          window.location.pathname === "/LoginPass" ||
+          window.location.pathname === "/Forget-password" ||
+          window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
+          window.location.pathname === "/Home" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (

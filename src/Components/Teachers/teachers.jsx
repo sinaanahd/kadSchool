@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import withWebsiteData from "../hoc/with-website-data";
 import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
-import { Link } from "react-router-dom";
-import scrollToTop from "../functions/scroll";
 import Teacher from "./teacher/teacher";
 class Teachers extends Component {
   state = {};
   componentDidMount() {}
   render() {
-    const { teachers } = this.props;
+    const { teachers, courses } = this.props;
     return (
       <>
         <Helmet>
@@ -24,7 +22,13 @@ class Teachers extends Component {
               </h1>
               <div className="teachers">
                 {teachers ? (
-                  teachers.map((t) => <Teacher key={t.id} teacher={t} />)
+                  teachers.map((t) => (
+                    <Teacher
+                      key={t.teacher_id}
+                      teacher={t}
+                      courses={courses ? courses : false}
+                    />
+                  ))
                 ) : (
                   <></>
                 )}

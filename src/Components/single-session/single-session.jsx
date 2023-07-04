@@ -15,8 +15,12 @@ class SingleSession extends Component {
   };
   componentDidMount() {
     let my_path = parseInt(window.location.pathname.split("/")[2]);
-    const course = this.props.jalasat.find((j) => j.jalase_id === my_path);
-    if (course) this.setState({ course });
+
+    const course = {
+      ...this.props.jalasat.find((j) => j.jalase_id === my_path),
+    };
+    console.log(course);
+    if (Object.keys(course).length !== 0) this.setState({ course });
     else window.location.pathname = "/not-found";
   }
   show_no_content = () => {
@@ -37,7 +41,18 @@ class SingleSession extends Component {
               <h1 className="title">{this.state.course.jalase_title}</h1>
               <img src={sampleImg} alt="موضوع جلسه" />
               <span className="single-details">توضیحات</span>
-              <p className="single-text">{this.state.course.descriptions}</p>
+              <p className="single-text">
+                {this.state.course ? (
+                  this.state.course.descriptions.map((d, i) => (
+                    <React.Fragment key={i++}>
+                      {d}
+                      <br />
+                    </React.Fragment>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </p>
               {this.state.no_jozve ? (
                 <div className="no-jozve-wrapper">
                   <span className="blue-box"></span>

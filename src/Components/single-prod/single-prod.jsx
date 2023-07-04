@@ -140,18 +140,29 @@ class SingleProd extends Component {
                     </span>
                     <span className="prod-details-text">
                       <span className="detail-title">تاریخ شروع کلاس:</span>
-                      <span className="content">{"لورم ایپسوم"}</span>
+                      <span className="content">
+                        {/* //date = date.toLocaleDateString("fa-IR").split("/"); */}
+                        {single_prod ? (
+                          new Date(
+                            single_prod.dore.dore_start_date
+                          ).toLocaleDateString("fa-IR")
+                        ) : (
+                          <></>
+                        )}
+                      </span>
                     </span>
                     <span className="prod-details-text">
                       <span className="detail-title">
                         <img src={asset_1} alt="" />
-                        روز های برگزاری:
+                        برنامه هفتگی :
                       </span>
-                      <span className="content">
+                      <span className="content column-need">
                         {single_prod ? (
                           single_prod.stream_plans.map((p, i) => (
                             <span key={i++}>
-                              {convert_days(p.week_day_english)}
+                              {convert_days(p.week_day_english)} ها{" "}
+                              {convert_to_persian(p.start_time.split(":")[0])} -
+                              {convert_to_persian(p.finish_time.split(":")[0])}
                             </span>
                           ))
                         ) : (
@@ -159,7 +170,7 @@ class SingleProd extends Component {
                         )}
                       </span>
                     </span>
-                    <span className="prod-details-text">
+                    {/* <span className="prod-details-text">
                       <span className="detail-title">
                         <img src={asset_2} alt="" />
                         ساعت برگزاری:
@@ -168,21 +179,32 @@ class SingleProd extends Component {
                         {single_prod ? (
                           single_prod.stream_plans.map((p, i) => (
                             <span key={i++}>
-                              {convert_to_persian(p.start_time.split(":")[0])}-
-                              {convert_to_persian(p.finish_time.split(":")[0])},
+                              {convert_to_persian(p.start_time.split(":")[0])}
+                              {convert_to_persian(p.finish_time.split(":")[0])}
                             </span>
                           ))
                         ) : (
                           <></>
                         )}
                       </span>
-                    </span>
+                    </span> */}
                   </span>
                 </div>
                 <div className="prod-in-one-look">
                   <h2 className="semi-title">دوره در یک نگاه:</h2>
                   <ul className="prod-texts">
-                    <li>
+                    {single_prod ? (
+                      single_prod.descriptions.length !== 0 ? (
+                        single_prod.descriptions.map((d, i) => (
+                          <li key={i++}>{d}</li>
+                        ))
+                      ) : (
+                        <li>هنوز دوره در یک نگاه وارد نشده</li>
+                      )
+                    ) : (
+                      <></>
+                    )}
+                    {/* <li>
                       لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
                       طراحان گرافیک است.
                     </li>
@@ -197,7 +219,7 @@ class SingleProd extends Component {
                     <li>
                       لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
                       طراحان گرافیک است.
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>
@@ -325,6 +347,9 @@ class SingleProd extends Component {
               type={this.state.pop_up}
               handle_pop_up={this.handle_pop_up}
               sample_files={single_prod ? single_prod.sample_files : false}
+              faq={single_prod ? single_prod.FAQ : false}
+              cv={single_prod ? single_prod.teachers[0].cv : false}
+              dore={single_prod ? single_prod.dore : false}
             />
           ) : (
             <></>

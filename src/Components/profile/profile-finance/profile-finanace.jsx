@@ -53,7 +53,7 @@ class ProfileFinanace extends Component {
               </span>
             </div>
           </div>
-          <div className="gift-cart-wrapper">
+          {/* <div className="gift-cart-wrapper">
             <h2 className="gift-card-title">گیفت کارد کاد</h2>
             <div className="link-boxes-wrapper n-m">
               <span className="link-title">لینک‌عضویت مخصوص تو</span>
@@ -101,7 +101,7 @@ class ProfileFinanace extends Component {
                 )}
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
         <h2 className="semi-title">سفارشات و پرداخت اقساط</h2>
         <div className="orders-payments-wrapper">

@@ -43,6 +43,8 @@ class SideBar extends Component {
               src={
                 location !== "Dashboard" ? sideBarIcon_1 : sideBarIcon_blue_1
               }
+              width={33}
+              height={34}
               alt="میز مطالعه"
             />
             <span className="text">میز مطالعه</span>
@@ -60,6 +62,8 @@ class SideBar extends Component {
             <img
               src={location !== "Courses" ? sideBarIcon_2 : sideBarIcon_blue_2}
               alt="درس های من"
+              width={40}
+              height={27}
             />
             <span className="text">درس های من</span>
           </Link>
@@ -77,6 +81,8 @@ class SideBar extends Component {
               src={
                 location === "FreeCourses" ? sideBarIcon_blue_3 : sideBarIcon_3
               }
+              width={26}
+              height={25}
               alt="درس های رایگان"
             />
             <span className="text">درس های رایگان</span>
@@ -89,7 +95,12 @@ class SideBar extends Component {
             className={
               location === "" ? "active" + " side-bar-item" : "side-bar-item"
             }>
-            <img src={sideBarIcon_4} alt="تکالیف و اشکالات" />
+            <img
+              width={25}
+              height={25}
+              src={sideBarIcon_4}
+              alt="تکالیف و اشکالات"
+            />
             <span className="text">تکالیف و اشکالات</span>
           </Link>
           <Link
@@ -105,6 +116,8 @@ class SideBar extends Component {
             <img
               src={location !== "Shop" ? sideBarIcon_5 : sideBarIcon__blue_5}
               alt="فروشگاه"
+              width={33}
+              height={29}
             />
             <span className="text">فروشگاه</span>
           </Link>
@@ -131,7 +144,7 @@ class SideBar extends Component {
           }}
           to={this.state.user_logged_in ? "/Profile" : "/Login"}
           className="setting">
-          <img src={sideBarIcon_6} alt="تنظیمات" />
+          <img src={sideBarIcon_6} alt="تنظیمات" width={24} height={24} />
         </Link>
       </div>
     );

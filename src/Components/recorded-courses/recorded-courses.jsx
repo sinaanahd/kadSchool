@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
-import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
 import Session from "./session/session";
@@ -12,39 +11,55 @@ class RecordedCourses extends Component {
     course: false,
   };
   componentDidMount() {
-    this.find_class();
-  }
-  find_class = () => {
+    // this.find_class();
     let my_path = window.location.pathname;
     my_path = parseInt(my_path.split("/")[2]);
-    const kelas = this.props.user.kelases.find((k) => k.kelas_id === my_path);
-    const jalasat = [];
-    kelas.jalasat.forEach((j_id) => {
-      const jalase = this.props.jalasat.find((j) => j.jalase_id === j_id);
-      jalasat.push(jalase);
-    });
-    const { courses } = this.props;
-    const course = courses.find((c) => c.course_id === kelas.course);
-    this.setState({ kelas, jalasat, course });
-  };
+    this.props.find_class(my_path);
+    const data_check = setInterval(() => {
+      if (this.props.single_kelas) {
+        clearInterval(data_check);
+      } else {
+        this.find_class(my_path);
+      }
+    }, 2000);
+  }
+  // find_class = () => {
+  //   let my_path = window.location.pathname;
+  //   my_path = parseInt(my_path.split("/")[2]);
+
+  //   const kelas = {
+  //     ...this.props.user.kelases.find((k) => k.kelas_id === my_path),
+  //   };
+  //   const jalasat = [];
+  //   kelas.jalasat.forEach((j_id) => {
+  //     const jalase = {
+  //       ...this.props.jalasat.find((j) => j.jalase_id === j_id),
+  //     };
+  //     jalasat.push(jalase);
+  //   });
+  //   const { courses } = this.props;
+  //   const course = { ...courses.find((c) => c.course_id === kelas.course) };
+  //   this.setState({ kelas, jalasat, course });
+  // };
   render() {
+    const { single_kelas } = this.props;
     return (
       <>
         <Helmet>
-          <title>{this.state.kelas ? this.state.kelas.kelas_title : ""}</title>
+          <title>{single_kelas ? single_kelas.kelas_title : ""}</title>
         </Helmet>
         <section className="recorded-sessions-section bgc-wrapper">
           <div className="recorded-sessions mm-width">
             <SideBar />
             <div className="main-content">
               <h1 className="title">جلسات ضبط شده</h1>
-              {this.state.kelas && this.state.jalasat ? (
-                this.state.jalasat.length !== 0 ? (
-                  this.state.jalasat.map((j, i) => (
+              {single_kelas && single_kelas.jalasat ? (
+                single_kelas.jalasat.length !== 0 ? (
+                  single_kelas.jalasat.map((j, i) => (
                     <Session
                       jalase={j}
                       key={i++}
-                      course={this.state.course ? this.state.course : false}
+                      course={single_kelas.course ? single_kelas.course : false}
                     />
                   ))
                 ) : (

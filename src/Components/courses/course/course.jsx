@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import scrollToTop from "../../functions/scroll";
-import sampleRectangle from "../../../assets/images/sample-rectangle.svg";
 class Course extends Component {
   state = {
     animate: "animate-course",

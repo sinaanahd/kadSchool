@@ -27,7 +27,9 @@ class DaysTip extends Component {
           <div className="video-wrapper">
             <div className="h_iframe-aparat_embed_frame">
               <span style={{ display: "block", paddingTop: "57%" }}></span>
-              <iframe src="https://www.aparat.com/video/video/embed/videohash/iNPJV/vt/frame?muted=true"></iframe>
+              <iframe
+                title="نکته روز"
+                src="https://www.aparat.com/video/video/embed/videohash/iNPJV/vt/frame?muted=true"></iframe>
             </div>
             {/* <iframe src="https://www.aparat.com/video/video/embed/videohash/iNPJV/vt/frame"></iframe> */}
           </div>

@@ -18,8 +18,13 @@ class NewFooter extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to="/Dashboard">
-            <img src={footerLogo} alt="کاد (کلاس اینترنتی دریافت)" />
+            to="/Home">
+            <img
+              src={footerLogo}
+              width={62}
+              height={28}
+              alt="کاد (کلاس اینترنتی دریافت)"
+            />
           </Link>
         </div>
         <div className="footer-content">
@@ -27,11 +32,7 @@ class NewFooter extends Component {
           <div className="main-content mm-width">
             <div className="get-gift">
               <h4>دریافت هدیه</h4>
-              <p>
-                {" "}
-                لورم ایپسوم متنی ساختگی توسط طراحانلورم ایپسوم متنی ساختگی توسط
-                طراحان لورم ایپسوم متنی ساختگی توسط طراحان
-              </p>
+              <p>هدیه یک میلیون تومانیت رو همین الان از کاد بگیر</p>
               <span className="footer-input-wrapper">
                 <input type="number" placeholder="09123456789" />
                 <span className="submit-btn-footer">ثبت</span>
@@ -78,7 +79,7 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="#">
+                    to="/Top-students">
                     {" "}
                     رتبه های برتر کاد
                   </Link>
@@ -88,7 +89,7 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="#">
+                    to="/Why-kad">
                     چرا کاد؟
                   </Link>
                 </li>
@@ -106,7 +107,7 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="#">
+                    to="/Kad-calender">
                     تقویم کاد
                   </Link>
                 </li>
@@ -115,7 +116,7 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="#">
+                    to="/Rules">
                     قوانین کاد
                   </Link>
                 </li>
@@ -127,25 +128,45 @@ class NewFooter extends Component {
                   href="https://b2n.ir/y31513"
                   target="_blank"
                   className="icon">
-                  <img src={aparatLogo} alt="آپارات کاد" />
+                  <img
+                    width={20}
+                    height={21}
+                    src={aparatLogo}
+                    alt="آپارات کاد"
+                  />
                 </a>
                 <a
                   href="https://b2n.ir/y01578"
                   target="_blank"
                   className="icon">
-                  <img src={instagramIcon} alt="ایسنتاگرام کاد" />
+                  <img
+                    width={20}
+                    height={19.35}
+                    src={instagramIcon}
+                    alt="اینستاگرام کاد"
+                  />
                 </a>
                 <a
                   href="https://b2n.ir/r59262"
                   target="_blank"
                   className="icon">
-                  <img src={whatsappIcon} alt="واتسپ کاد" />
+                  <img
+                    width={20}
+                    height={19.35}
+                    src={whatsappIcon}
+                    alt="واتسپ کاد"
+                  />
                 </a>
                 <a
                   href="https://b2n.ir/u76961"
                   target="_blank"
                   className="icon">
-                  <img src={telegramIcon} alt="تلگرام کاد" />
+                  <img
+                    width={20}
+                    height={18.36}
+                    src={telegramIcon}
+                    alt="تلگرام کاد"
+                  />
                 </a>
               </div>
               <div className="map-img">
@@ -154,6 +175,7 @@ class NewFooter extends Component {
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.0909715519983!2d51.3952713!3d35.699378900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e0122d3305d81%3A0xc26623dede1f537d!2z2qnYp9iv!5e0!3m2!1sen!2s!4v1684677706408!5m2!1sen!2s"
                     width="180"
                     height="133"
+                    title="نقشه کاد"
                     style={{ border: 0 }}
                     allowFullScreen=""
                     loading="lazy"
@@ -169,6 +191,7 @@ class NewFooter extends Component {
                         background: "white",
                         padding: "5px",
                       }}
+                      aria-label="اینماد"
                       href="https://trustseal.enamad.ir/?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
                       target="_blank"
                       rel="noopener">
@@ -178,9 +201,11 @@ class NewFooter extends Component {
                         id="Jmy33pCxvf9GCBxttooi"
                         style={{ cursor: "pointer" }}
                         data-src="https://Trustseal.eNamad.ir/logo.aspx?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
-                        alt=""
+                        alt="اینماد"
                         className="litespeed-loaded"
                         data-was-processed="true"
+                        width={20}
+                        height={20}
                       />
                     </a>
                   </p>

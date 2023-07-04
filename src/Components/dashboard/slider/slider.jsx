@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import sample_img from "../../../assets/images/sample-rectangle-v.svg";
+import LittleLoading from "../../reuseables/little-loading";
 class Slider extends Component {
   state = {
     is_dragging: false,
@@ -53,7 +54,7 @@ class Slider extends Component {
   move_slider = (move) => {
     const { active_item } = this.state;
     if (move === "next") {
-      if (active_item !== 7) {
+      if (active_item !== this.props.main_page_banners.length) {
         this.show_change(active_item + 1);
         this.setState({ active_item: active_item + 1 });
       } else {
@@ -71,7 +72,7 @@ class Slider extends Component {
   move_slider_touch = (move) => {
     const { active_item } = this.state;
     if (move === "next") {
-      if (active_item !== 7) {
+      if (active_item !== this.props.main_page_banners.length) {
         this.show_change_touch(active_item + 1);
         this.setState({ active_item: active_item + 1 });
       } else {
@@ -87,16 +88,32 @@ class Slider extends Component {
     }
   };
   show_change = (num) => {
-    this.myRef.current.style.transform = `translateX(${(num - 1) * 400}px)`;
+    // console.log(this.myRef.current.children);
+    const kinder = [...this.myRef.current.children];
+    const slides = kinder.filter((k) => k.classList.contains("slide"));
+    slides.forEach((slide) => {
+      slide.style.transform = `translateX(${(num - 1) * 100}%)`;
+    });
+    //this.myRef.current.style.transform = `translateX(${(num - 1) * 100}%)`;
   };
   show_change_touch = (num) => {
-    this.myRef.current.style.transform = `translateX(${(num - 1) * 100}%)`;
+    const kinder = [...this.myRef.current.children];
+    const slides = kinder.filter((k) => k.classList.contains("slide"));
+    slides.forEach((slide) => {
+      slide.style.transform = `translateX(${(num - 1) * 100}%)`;
+    });
+    //this.myRef.current.style.transform = `translateX(${(num - 1) * 100}%)`;
   };
   animate_end_touch = () => {
     const { active_item } = this.state;
-    this.myRef.current.style.transform = `translateX(${
-      (active_item - 1) * 101
-    }%)`;
+    // this.myRef.current.style.transform = `translateX(${
+    //   (active_item - 1) * 101
+    //   }%)`;
+    const kinder = [...this.myRef.current.children];
+    const slides = kinder.filter((k) => k.classList.contains("slide"));
+    slides.forEach((slide) => {
+      slide.style.transform = `translateX(${(active_item - 1) * 101}%)`;
+    });
     setTimeout(() => {
       this.show_change_touch(active_item);
     }, 300);
@@ -104,17 +121,24 @@ class Slider extends Component {
   animate_end = (pos) => {
     const { active_item } = this.state;
     if (pos === "end") {
-      this.myRef.current.style.transform = `translateX(${
-        active_item * 400 - 390
-      }px)`;
+      const kinder = [...this.myRef.current.children];
+      const slides = kinder.filter((k) => k.classList.contains("slide"));
+      slides.forEach((slide) => {
+        slide.style.transform = `translateX(${(active_item - 1) * 101}%)`;
+      });
     } else {
-      this.myRef.current.style.transform = `translateX(-10px)`;
+      const kinder = [...this.myRef.current.children];
+      const slides = kinder.filter((k) => k.classList.contains("slide"));
+      slides.forEach((slide) => {
+        slide.style.transform = `translateX(-10px)`;
+      });
     }
     setTimeout(() => {
       this.show_change(active_item);
     }, 300);
   };
   render() {
+    const { main_page_banners } = this.props;
     return (
       <div className="orange-wrapper">
         <div ref={this.myRef} className="slider-area">
@@ -138,34 +162,78 @@ class Slider extends Component {
             onTouchMove={(e) => {
               this.handle_touch_move(e);
             }}></div>
-          <div className="slide">
-            <img src={sample_img} />
+          {main_page_banners ? (
+            main_page_banners.map((b, i) => (
+              <div className="slide" key={i++}>
+                <img src={b} alt={"اسلایدر کاد"} />
+              </div>
+            ))
+          ) : (
+            <LittleLoading />
+          )}
+          {/* <div className="slide">
+            <img
+              src={sample_img}
+              width={400}
+              height={181}
+              alt={"sth for test"}
+            />
             <span className="abs-to-show">1</span>
           </div>
           <div className="slide">
-            <img src={sample_img} />
+            <img
+              src={sample_img}
+              width={400}
+              height={181}
+              alt={"sth for test"}
+            />
             <span className="abs-to-show">2</span>
           </div>
           <div className="slide">
-            <img src={sample_img} />
+            <img
+              src={sample_img}
+              width={400}
+              height={181}
+              alt={"sth for test"}
+            />
             <span className="abs-to-show">3</span>
           </div>
           <div className="slide">
-            <img src={sample_img} />
+            <img
+              src={sample_img}
+              width={400}
+              height={181}
+              alt={"sth for test"}
+            />
             <span className="abs-to-show">4</span>
           </div>
           <div className="slide">
-            <img src={sample_img} />
+            <img
+              src={sample_img}
+              width={400}
+              height={181}
+              alt={"sth for test"}
+            />
             <span className="abs-to-show">5</span>
           </div>
           <div className="slide">
-            <img src={sample_img} />
+            <img
+              src={sample_img}
+              width={400}
+              height={181}
+              alt={"sth for test"}
+            />
             <span className="abs-to-show">6</span>
           </div>
           <div className="slide">
-            <img src={sample_img} />
+            <img
+              src={sample_img}
+              width={400}
+              height={181}
+              alt={"sth for test"}
+            />
             <span className="abs-to-show">7</span>
-          </div>
+          </div> */}
         </div>
       </div>
     );

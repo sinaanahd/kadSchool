@@ -31,24 +31,35 @@ import LoginPass from './Components/login-pass/login-pass';
 import ForgetPassword from './Components/forget-password/forget-password';
 import SetNewPassword from './Components/set-new-password/set-new-password';
 import Payment from './Components/payment/payment';
+import HomePage from './Components/home/home';
+import WhyKad from './Components/why-kad/why-kad';
 import './App.css';
+import KadCalender from './Components/kad-calender/kad-calender';
+import Rules from './Components/rules/rules';
+import TopStudents from './Components/top-students/top-students';
 class App extends Component {
   state = {}
   render() {
     return (<>
       <Switch>
+
+        <Route path="/Home" component={HomePage} />
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/Topics" component={Topics} />
         <Route path="/Profile" component={Profile} />
         {/* <Route path="/Finance" component={FinancialStuff} /> */}
         <Route path="/Finance" component={Fianance} />
+        <Route path="/Why-kad" component={WhyKad} />
         <Route path="/Payment" component={Payment} />
         <Route path="/Courses" component={Courses} />
+        <Route path="/Rules" component={Rules} />
+        <Route path="/Kad-calender" component={KadCalender} />
         <Route path="/FreeCourses" component={FreeCourses} />
         <Route path="/Course/:id" component={RecordedCourses} />
         <Route path="/SingleSession/:id" component={SingleSession} />
         <Route path="/Stream/:id" component={newSingleSession} />
         <Route path="/Login" component={Login} />
+        <Route path="/Top-students" component={TopStudents} />
         <Route path="/LoginPass" component={LoginPass} />
         <Route path="/Forget-password" component={ForgetPassword} />
         <Route path="/SignUp" component={SignUp} />
@@ -63,7 +74,7 @@ class App extends Component {
         <Route path="/Teachers/" component={Teachers} />
         <Route path="/Teacher/:id" component={SingleTeacher} />
         <Route path="/SingleCourse/:id" component={SingleCourse} />
-        <Redirect from="/" exact to="/Dashboard" />
+        <Redirect from="/" exact to="/Home" />
         <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/not-found" component={UnderConstruction} />
         <Redirect to="/not-found" />

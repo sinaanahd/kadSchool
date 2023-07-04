@@ -37,19 +37,29 @@ class Header extends Component {
               this.menu_toggle();
             }}>
             {this.state.menu ? (
-              <img src={cross_menu_icon} />
+              <img width={23} height={23} src={cross_menu_icon} />
             ) : (
-              <img src={menu_icon} />
+              <img width={32} height={20} src={menu_icon} />
             )}
           </div>
           <div className="logo-wrapper">
-            <Link to="/Dashboard">
-              <img src={mainLogo} alt="کلاس های اینترنتی کاد" />
+            <Link to="/Home">
+              <img
+                width={181}
+                height={43}
+                src={mainLogo}
+                alt="کلاس های اینترنتی کاد"
+              />
             </Link>
           </div>
           <div className="cart-name-wrapper">
             <Link to="/Cart" className="cart-icon">
-              <img src={cartIcon} alt="رفتن به سبد خرید" />
+              <img
+                src={cartIcon}
+                width={27}
+                height={27}
+                alt="رفتن به سبد خرید"
+              />
               <span className="number">{cart ? cart.items_ids.length : 0}</span>
             </Link>
             <Link
@@ -58,7 +68,7 @@ class Header extends Component {
               {user ? (
                 <>
                   <span className="name">{user.name}</span>
-                  <img src={userIcon} alt={user.name} />
+                  <img width={27} height={26} src={userIcon} alt={user.name} />
                 </>
               ) : (
                 <>

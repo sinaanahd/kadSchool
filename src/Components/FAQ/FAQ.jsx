@@ -204,6 +204,9 @@ class FAQ extends Component {
   render() {
     return (
       <>
+        <Helmet>
+          <title>سوالات متداول</title>
+        </Helmet>
         <section className="bgc-wrapper">
           <div className="faq-wrapper mm-width">
             <SideBar />

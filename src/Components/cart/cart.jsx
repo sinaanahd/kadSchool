@@ -10,38 +10,7 @@ import arrow_up from "../../assets/images/arrow-blue-up.svg";
 import LittleLoading from "../reuseables/little-loading";
 class Cart extends Component {
   state = {};
-  componentDidMount() {
-    // const { kelasses, cart, teachers, initial_data } = this.props;
-    // if (kelasses && cart && teachers) {
-    //   this.start_page();
-    // } else {
-    //   initial_data();
-    //   this.start_page();
-    // }
-  }
-  start_page = () => {
-    // const { kelasses, cart, teachers } = this.props;
-    // const products = [];
-    // if (kelasses && cart && teachers) {
-    //   cart.items_ids.forEach((item_id) => {
-    //     const product = kelasses.find((k) => k.kelas_id === item_id);
-    //     if (product) {
-    //       const prod_teachers = [];
-    //       product.teachers.forEach((t_id) => {
-    //         const teacher = teachers.find((t) => t_id === t.teacher_id);
-    //         if (teacher) prod_teachers.push(teacher);
-    //       });
-    //       product.teachers = prod_teachers;
-    //       products.push(product);
-    //     }
-    //   });
-    //   this.setState({ products });
-    // } else {
-    //   setTimeout(() => {
-    //     this.start_page();
-    //   }, 500);
-    // }
-  };
+  componentDidMount() {}
   render() {
     const { cart, request_id, handle_cart, cart_products } = this.props;
     return (
@@ -62,12 +31,12 @@ class Cart extends Component {
                       cart_products.map((p) => (
                         <span key={p.kelas_id} className="cart-item">
                           <span className="img-wrapper-name">
-                            <img src="" alt={p.kelas_title} />
+                            <img src={p.image_link} alt={p.kelas_title} />
                             <span className="names">
                               <h3 className="prod-title">{p.kelas_title}</h3>
                               <span className="teacher-name">
                                 {p.teachers.map((t) => (
-                                  <span key={t.teacher_id}>{t.fullname}/</span>
+                                  <span key={t.teacher_id}>{t.fullname} </span>
                                 ))}
                               </span>
                             </span>

@@ -14,7 +14,7 @@ class PopUp extends Component {
   }
   handle_faq = (faq_number) => {
     if (faq_number === this.state.faq_number) {
-      this.setState({ faq_number: 0 });
+      this.setState({ faq_number: false });
     } else {
       this.setState({ faq_number });
     }
@@ -27,7 +27,7 @@ class PopUp extends Component {
     }
   };
   render() {
-    const { type, handle_pop_up, sample_files } = this.props;
+    const { type, handle_pop_up, sample_files, faq, cv, dore } = this.props;
     const jozeha = sample_files
       ? [
           ...sample_files.pdf_sample_files.filter(
@@ -70,7 +70,13 @@ class PopUp extends Component {
           {type === "intro" ? (
             <>
               <span className="video-place"></span>
-              <p className="pop-up-text intro-text">توضیحات...</p>
+              <p className="pop-up-text intro-text">
+                {dore
+                  ? dore.descriptions.length !== 0
+                    ? dore.descriptions.map((d, i) => <p key={i++}>{d}</p>)
+                    : "توضیحات وارد نشده است"
+                  : "توضیحات وارد نشده است"}
+              </p>
             </>
           ) : (
             <></>
@@ -85,7 +91,7 @@ class PopUp extends Component {
                         (sv.file_type = "نمونه تدریس" ? sv.file_link : <></>)
                     )}
                   </span>
-                  <p className="pop-up-text sample-text">توضیحات...</p>
+                  {/* <p className="pop-up-text sample-text">توضیحات...</p> */}
                   <span className="sample-btns-wrapper">
                     <span
                       className="sample-btn"
@@ -106,6 +112,8 @@ class PopUp extends Component {
                             </a>
                           ))}
                         </span>
+                      ) : this.state.show_sample === "jozveha" ? (
+                        <span className="files-link">فایل ندارد</span>
                       ) : (
                         <></>
                       )}
@@ -129,6 +137,8 @@ class PopUp extends Component {
                             </a>
                           ))}
                         </span>
+                      ) : this.state.show_sample === "azmonha" ? (
+                        <span className="files-link">فایل ندارد</span>
                       ) : (
                         <></>
                       )}
@@ -152,6 +162,8 @@ class PopUp extends Component {
                             </a>
                           ))}
                         </span>
+                      ) : this.state.show_sample === "taklifha" ? (
+                        <span className="files-link">فایل ندارد</span>
                       ) : (
                         <></>
                       )}
@@ -167,7 +179,36 @@ class PopUp extends Component {
           )}
           {type === "faq" ? (
             <>
-              <span className="faq-question-wrapper">
+              {faq ? (
+                faq.map((f, i) => (
+                  <span className="faq-question-wrapper" key={i++}>
+                    <span className="question-icon">
+                      <h2>{f.Q}</h2>
+                      <img
+                        src={arrowDown}
+                        className={
+                          this.state.faq_number === f.Q ? "rotate" : ""
+                        }
+                        onClick={() => {
+                          this.handle_faq(f.Q);
+                        }}
+                        alt=""
+                      />
+                    </span>
+                    <p
+                      className={
+                        this.state.faq_number === f.Q
+                          ? "answer-faq vis"
+                          : "answer-faq"
+                      }>
+                      {f.A}
+                    </p>
+                  </span>
+                ))
+              ) : (
+                <></>
+              )}
+              {/* <span className="faq-question-wrapper">
                 <span className="question-icon">
                   <h2>
                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
@@ -291,7 +332,7 @@ class PopUp extends Component {
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
                   استفاده از طراحان گرافیک است
                 </p>
-              </span>
+              </span> */}
             </>
           ) : (
             <></>
@@ -299,11 +340,25 @@ class PopUp extends Component {
           {type === "resume" ? (
             <>
               <span className="video-place"></span>
-              <h3 className="pop-up-sub-title">سابقه آموزشی</h3>
-              <p className="resume-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
+              {cv ? (
+                cv.full_cv.map((fc, i) => (
+                  <React.Fragment key={i++}>
+                    <h3 className="pop-up-sub-title">{fc.title}</h3>
+                    {fc.arrayed_text.length !== 0 ? (
+                      fc.arrayed_text.map((at, j) => (
+                        <p key={j++} className="resume-text">
+                          {at}
+                        </p>
+                      ))
+                    ) : (
+                      <p className="resume-text">وارد نشده است</p>
+                    )}
+                  </React.Fragment>
+                ))
+              ) : (
+                <p className="resume-text">رزومه وارد نشده است</p>
+              )}
+
               <p className="resume-text">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
                 استفاده از طراحان گرافیک است

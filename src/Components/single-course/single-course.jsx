@@ -62,28 +62,28 @@ class SingleCourse extends Component {
     const jozveha = single_course
       ? [
           ...single_course.sample_files.pdf_sample_files.filter(
-            (f) => f.file_type === "نمونه جزوه"
+            (f) => f.file_type === "نمونه جزوه" && !f.is_for_jalase
           ),
         ]
       : false;
     const taklifha = single_course
       ? [
           ...single_course.sample_files.pdf_sample_files.filter(
-            (f) => f.file_type === "نمونه تکلیف"
+            (f) => f.file_type === "نمونه تکلیف" && !f.is_for_jalase
           ),
         ]
       : false;
     const azmonha = single_course
       ? [
           ...single_course.sample_files.pdf_sample_files.filter(
-            (f) => f.file_type === "نمونه آزمون"
+            (f) => f.file_type === "نمونه آزمون" && !f.is_for_jalase
           ),
         ]
       : false;
     const nemone_tadris = single_course
       ? [
           ...single_course.sample_files.video_sample_files.filter(
-            (f) => f.file_type === "نمونه تدریس"
+            (f) => f.file_type === "نمونه تدریس" && !f.is_for_jalase
           ),
         ]
       : false;
@@ -104,30 +104,62 @@ class SingleCourse extends Component {
                   <h2 className="intro-title h2-before">معرفی دوره</h2>
                   <ul
                     className={
-                      this.state.more_desc
-                        ? "course-description visible-desc"
+                      single_course
+                        ? this.state.more_desc &&
+                          single_course.descriptions.length > 1
+                          ? "course-description visible-desc"
+                          : "course-description"
                         : "course-description"
                     }>
-                    <li>{single_course ? single_course.description : ""}</li>
-                    <li
-                      onClick={() => {
-                        this.handle_desc();
-                      }}
-                      className="more-description">
-                      {single_course.more_desc ? "کمتر ... " : "بیشتر ..."}
-                    </li>
+                    {single_course ? (
+                      single_course.descriptions.length !== 0 ? (
+                        single_course.descriptions.map((d, i) => (
+                          <li key={i++}>{d}</li>
+                        ))
+                      ) : (
+                        <li> هنوز توضیحات دوره ثبت نشده</li>
+                      )
+                    ) : (
+                      ""
+                    )}
+                    {single_course ? (
+                      single_course.descriptions.length > 1 ? (
+                        <li
+                          onClick={() => {
+                            this.handle_desc();
+                          }}
+                          className="more-description">
+                          {this.state.more_desc ? "کمتر ... " : "بیشتر ..."}
+                        </li>
+                      ) : (
+                        <></>
+                      )
+                    ) : (
+                      <></>
+                    )}
                   </ul>
                 </div>
                 <div className="class-details">
                   <span className="video-wrapper"></span>
                   <span className="class-time">
                     <img src={classCal} alt="" />
-                    <span className="class-text">تاریخ شروع دوره:</span>
+                    <span className="class-text">
+                      تاریخ شروع دوره:
+                      <span className="date-dore">
+                        {single_course ? (
+                          new Date(
+                            single_course.dore_start_date
+                          ).toLocaleDateString("fa-IR")
+                        ) : (
+                          <LittleLoading />
+                        )}
+                      </span>
+                    </span>
                   </span>
                 </div>
               </div>
               <div className="teachers-part-wrapper">
-                <h2 className="teachers-title h2-before">کلاس ها</h2>
+                <h2 className="teachers-title h2-before">استاد های دوره</h2>
                 <div className="teachers-wrapper-btn">
                   {single_course && single_course.kelases.length >= 4 ? (
                     <span
@@ -448,7 +480,9 @@ class SingleCourse extends Component {
                             ))}
                           </span>
                         ) : (
-                          <></>
+                          <span className="sample-files">
+                            <span className="sample-file">فایل ندارد</span>
+                          </span>
                         )
                       ) : (
                         <LittleLoading />
@@ -478,7 +512,9 @@ class SingleCourse extends Component {
                             ))}
                           </span>
                         ) : (
-                          <></>
+                          <span className="sample-files">
+                            <span className="sample-file">فایل ندارد</span>
+                          </span>
                         )
                       ) : (
                         <LittleLoading />
@@ -508,7 +544,9 @@ class SingleCourse extends Component {
                             ))}
                           </span>
                         ) : (
-                          <></>
+                          <span className="sample-files">
+                            <span className="sample-file">فایل ندارد</span>
+                          </span>
                         )
                       ) : (
                         <LittleLoading />

@@ -9,6 +9,7 @@ import catImg2 from "../../assets/images/cat-img-2.svg";
 import catImg3 from "../../assets/images/cat-img-3.svg";
 import downArrow from "../../assets/images/dow-arroow-filter.svg";
 import LittleLoading from "../reuseables/little-loading";
+import ShopSlider from "./shop-slider/shop-slider";
 class Shop extends Component {
   state = {
     shown: false,
@@ -28,7 +29,8 @@ class Shop extends Component {
     }
   };
   get_year = (year) => {
-    this.setState({ year });
+    if (year === "all") this.setState({ year: "all" });
+    else this.setState({ year });
     this.final_klasses(
       year,
       this.state.subject,
@@ -44,10 +46,20 @@ class Shop extends Component {
         return "یازدهم";
       case 12:
         return "دوازدهم";
+      case 18:
+        return "کنکور";
+      case 0:
+        return "فارغ التحصیل";
+      case "all":
+        return "همه پایه ها";
     }
   };
   get_subject = (subject) => {
-    this.setState({ subject });
+    if (subject === "all") {
+      this.setState({ subject: "all" });
+    } else {
+      this.setState({ subject });
+    }
     this.final_klasses(
       this.state.year,
       subject,
@@ -58,17 +70,23 @@ class Shop extends Component {
   subject_text = (subject) => {
     switch (subject) {
       case 0:
-        return "ریاضی و فیزیک";
+        return "ریاضی";
       case 1:
         return "تجربی";
       case 2:
         return "انسانی";
       case 3:
         return "هنر";
+      case "all":
+        return "همه رشته ها";
     }
   };
   get_dore = (dore) => {
-    this.setState({ dore });
+    if (dore === "all") {
+      this.setState({ dore: "all" });
+    } else {
+      this.setState({ dore });
+    }
     this.final_klasses(
       this.state.year,
       this.state.subject,
@@ -77,7 +95,11 @@ class Shop extends Component {
     );
   };
   get_course = (course) => {
-    this.setState({ course });
+    if (course === "all") {
+      this.setState({ course: "all" });
+    } else {
+      this.setState({ course });
+    }
     this.final_klasses(
       this.state.year,
       this.state.subject,
@@ -101,20 +123,32 @@ class Shop extends Component {
     let dore_kelases = [];
     let course_kelases = [];
     let counter = 0;
-    if (year) {
+    if (year && year !== "all") {
       yaer_kelases = kelasses.filter((k) => k.year === year);
       counter++;
+    } else if (year === "all") {
+      yaer_kelases = [...kelasses];
+      counter++;
     }
-    if (subject || subject === 0) {
+    if ((subject || subject === 0) && subject !== "all") {
       subject_kelases = kelasses.filter((k) => k.subject.includes(subject));
       counter++;
-    }
-    if (dore) {
-      dore_kelases = kelasses.filter((k) => k.parent_dore_id === dore);
+    } else if (subject === "all") {
+      subject_kelases = [...kelasses];
       counter++;
     }
-    if (course) {
+    if (dore && dore !== "all") {
+      dore_kelases = kelasses.filter((k) => k.parent_dore_id === dore);
+      counter++;
+    } else if (dore === "all") {
+      dore_kelases = [...kelasses];
+      counter++;
+    }
+    if (course && course !== "all") {
       course_kelases = kelasses.filter((k) => k.course === course);
+      counter++;
+    } else if (course === "all") {
+      course_kelases = [...kelasses];
       counter++;
     }
     const all_kelasses = yaer_kelases.concat(
@@ -150,6 +184,9 @@ class Shop extends Component {
       cart,
       request_id,
       get_kelass_data,
+      years,
+      subjects,
+      shop_banners,
     } = this.props;
     if (
       doreha === null ||
@@ -206,12 +243,8 @@ class Shop extends Component {
             <SideBar />
             <div className="main-content">
               <h1 className="page-title">فروشگاه</h1>
-              <div className="slider-wrapper">
-                <span className="slider">
-                  <span className="slider-btn"></span>
-                </span>
-              </div>
-              <div className="categories-wrapper">
+              <ShopSlider shop_banners={shop_banners} />
+              {/* <div className="categories-wrapper">
                 <span className="category active">
                   <img src={catImg3} alt="" />
                   <span className="cat-text">کاد پلاس</span>
@@ -224,12 +257,11 @@ class Shop extends Component {
                   <img src={catImg1} alt="" />
                   <span className="cat-text">کلاس</span>
                 </span>
-              </div>
-              {/* <p>
-                توضیحات : لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده
-                از طراحان گرافیک است... - - - - - - - - - - - - - - - - - - - -
-                - - -
-              </p> */}
+              </div> */}
+              <p>
+                توی این بخش میتونی لیست همه کلاس های آنلاین کاد رو ببینی.منتظر
+                دیدنت سر کلاس ها هستیم
+              </p>
               <div className="filters-wrapper">
                 <div
                   className="filter"
@@ -239,7 +271,7 @@ class Shop extends Component {
                   <span className="filter-title">پایه تحصیلی </span>
                   <span className="main-filter">
                     <span className="filter-text">
-                      {this.state.year
+                      {this.state.year || this.state.year === 0
                         ? this.year_text(this.state.year)
                         : "پایه تحصیلی"}
                     </span>
@@ -252,6 +284,35 @@ class Shop extends Component {
                         : "filter-items-wrapper"
                     }>
                     <span
+                      className={
+                        this.state.year === "all"
+                          ? "filter-item active"
+                          : "filter-item"
+                      }
+                      onClick={() => {
+                        this.get_year("all");
+                      }}>
+                      همه پایه ها
+                    </span>
+                    {years ? (
+                      years.map((y) => (
+                        <span
+                          key={y.id}
+                          className={
+                            this.state.year === y.id
+                              ? "filter-item active"
+                              : "filter-item"
+                          }
+                          onClick={() => {
+                            this.get_year(y.id);
+                          }}>
+                          {y.name}
+                        </span>
+                      ))
+                    ) : (
+                      <></>
+                    )}
+                    {/* <span
                       className={
                         this.state.year === 10
                           ? "filter-item active"
@@ -283,7 +344,7 @@ class Shop extends Component {
                         this.get_year(12);
                       }}>
                       دوازدهم
-                    </span>
+                    </span> */}
                   </span>
                 </div>
                 <div
@@ -308,16 +369,35 @@ class Shop extends Component {
                     }>
                     <span
                       className={
-                        this.state.subject === 0
+                        this.state.subject === "all"
                           ? "filter-item active"
                           : "filter-item"
                       }
                       onClick={() => {
-                        this.get_subject(0);
+                        this.get_subject("all");
                       }}>
-                      ریاضی و فیزیک
+                      همه رشته ها
                     </span>
-                    <span
+                    {subjects ? (
+                      subjects.map((s) => (
+                        <span
+                          key={s.id}
+                          className={
+                            this.state.subject === s.id
+                              ? "filter-item active"
+                              : "filter-item"
+                          }
+                          onClick={() => {
+                            this.get_subject(s.id);
+                          }}>
+                          {s.name}
+                        </span>
+                      ))
+                    ) : (
+                      <></>
+                    )}
+
+                    {/* <span
                       className={
                         this.state.subject === 1
                           ? "filter-item active"
@@ -349,7 +429,7 @@ class Shop extends Component {
                         this.get_subject(3);
                       }}>
                       هنر
-                    </span>
+                    </span> */}
                   </span>
                 </div>
                 <div
@@ -360,9 +440,11 @@ class Shop extends Component {
                   <span className="filter-title">دوره </span>
                   <span className="main-filter">
                     <span className="filter-text">
-                      {this.state.dore
+                      {this.state.dore && this.state.dore !== "all"
                         ? doreha.find((d) => d.dore_id === this.state.dore)
                             .dore_title
+                        : this.state.dore === "all"
+                        ? "همه دوره ها"
                         : "دوره"}{" "}
                     </span>
                     <img src={downArrow} alt="" />
@@ -373,6 +455,17 @@ class Shop extends Component {
                         ? "filter-items-wrapper show-filter"
                         : "filter-items-wrapper"
                     }>
+                    <span
+                      onClick={() => {
+                        this.get_dore("all");
+                      }}
+                      className={
+                        this.state.dore === "all"
+                          ? "filter-item active"
+                          : "filter-item"
+                      }>
+                      همه دوره ها
+                    </span>
                     {doreha ? (
                       doreha.map((d) => (
                         <span
@@ -405,9 +498,11 @@ class Shop extends Component {
                   <span className="filter-title">درس </span>
                   <span className="main-filter">
                     <span className="filter-text">
-                      {this.state.course
+                      {this.state.course && this.state.course !== "all"
                         ? courses.find((c) => c.course_id === this.state.course)
                             .name
+                        : this.state.course === "all"
+                        ? "همه درس ها"
                         : "درس"}{" "}
                     </span>
                     <img src={downArrow} alt="" />
@@ -418,6 +513,17 @@ class Shop extends Component {
                         ? "filter-items-wrapper course-fu show-filter"
                         : "filter-items-wrapper course-fu"
                     }>
+                    <span
+                      onClick={() => {
+                        if (this.state.course) this.get_course("all");
+                      }}
+                      className={
+                        !this.state.course
+                          ? "filter-item active"
+                          : "filter-item"
+                      }>
+                      همه درس ها
+                    </span>
                     {courses ? (
                       courses.map((c) => (
                         <span

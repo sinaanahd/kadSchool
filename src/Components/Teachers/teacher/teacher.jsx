@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import scrollToTop from "../../functions/scroll";
+import LittleLoading from "../../reuseables/little-loading";
 class Teacher extends Component {
   state = {};
   render() {
-    const { teacher } = this.props;
+    const { teacher, courses } = this.props;
     return (
       <div className="teacher" key={teacher.teacher_id}>
         <Link
@@ -25,13 +26,11 @@ class Teacher extends Component {
           </Link>
         </h2>
         <h3 className="course-name">
-          <Link
-            onClick={() => {
-              scrollToTop();
-            }}
-            to={`/SingleCourse/${teacher.course}`}>
-            نام درس
-          </Link>
+          {courses ? (
+            { ...courses.find((c) => c.course_id === teacher.course) }.name
+          ) : (
+            <LittleLoading />
+          )}
         </h3>
       </div>
     );

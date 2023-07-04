@@ -53,23 +53,30 @@ class SingleTeacher extends Component {
     const jozveha = single_teacher
       ? [
           ...single_teacher.sample_files.pdf_sample_files.filter(
-            (f) => f.file_type === "نمونه جزوه"
+            (f) => f.file_type === "نمونه جزوه" && !f.is_for_jalase
           ),
         ]
       : false;
     const taklifha = single_teacher
       ? [
           ...single_teacher.sample_files.pdf_sample_files.filter(
-            (f) => f.file_type === "نمونه تکلیف"
+            (f) => f.file_type === "نمونه تکلیف" && !f.is_for_jalase
           ),
         ]
       : false;
     const azmonha = single_teacher
       ? [
           ...single_teacher.sample_files.pdf_sample_files.filter(
-            (f) => f.file_type === "نمونه آزمون"
+            (f) => f.file_type === "نمونه آزمون" && !f.is_for_jalase
           ),
         ]
+      : false;
+    const nemone_tadris = single_teacher
+      ? {
+          ...single_teacher.sample_files.video_sample_files.filter(
+            (f) => f.file_type === "نمونه تدریس"
+          ),
+        }
       : false;
     return (
       <>
@@ -103,10 +110,17 @@ class SingleTeacher extends Component {
                 <span className="teacher-resume-wrapper">
                   <h3 className="resume-title">رزومه</h3>
                   <ul className="teacher-resume-items">
-                    <li>لورم ایپسوم</li>
-                    <li>لورم ایپسوم</li>
-                    <li>لورم ایپسوم</li>
-                    <li>لورم ایپسوم</li>
+                    {single_teacher ? (
+                      single_teacher.cv.text_cv.length !== 0 ? (
+                        single_teacher.cv.text_cv.map((tr, i) => (
+                          <li key={i++}>{tr}</li>
+                        ))
+                      ) : (
+                        <li>روزمه ای وارد نشده</li>
+                      )
+                    ) : (
+                      <></>
+                    )}
                   </ul>
                 </span>
               </div>
@@ -182,18 +196,23 @@ class SingleTeacher extends Component {
                 <h3 className="teacher-sample-title">نمونه تدریس</h3>
                 <div className="samples">
                   {single_teacher ? (
-                    single_teacher.sample_files.video_sample_files.map((sv) =>
-                      sv.file_type === "نمونه تدریس" ? (
-                        <div className="sample-wrapper" key={sv.file_id}>
-                          <span className="img-wrapper">
-                            <img src={sv.file_link} alt="" />
-                          </span>
-                          <h4 className="sample-title">{sv.file_id}</h4>
-                          <p>{sv.teacher_id}</p>
-                        </div>
-                      ) : (
-                        <React.Fragment key={sv.file_id}></React.Fragment>
-                      )
+                    nemone_tadris && Object.keys(nemone_tadris).length !== 0 ? (
+                      <div
+                        className="sample-wrapper"
+                        key={nemone_tadris.file_id}>
+                        {" "}
+                        <span className="img-wrapper">
+                          <img src={nemone_tadris.file_link} alt="" />{" "}
+                        </span>
+                        <h4 className="sample-title">
+                          {nemone_tadris.file_id}
+                        </h4>
+                        <p>{nemone_tadris.teacher_id}</p>{" "}
+                      </div>
+                    ) : (
+                      <span className="no-sample-teach">
+                        نمونه تدریسی برای نمایش وجود ندارد
+                      </span>
                     )
                   ) : (
                     <LittleLoading />
@@ -221,7 +240,9 @@ class SingleTeacher extends Component {
                             ))}
                           </span>
                         ) : (
-                          <></>
+                          <span className="sample-files">
+                            <span className="sample-file">فایل ندارد</span>
+                          </span>
                         )
                       ) : (
                         <LittleLoading />
@@ -251,7 +272,9 @@ class SingleTeacher extends Component {
                             ))}
                           </span>
                         ) : (
-                          <></>
+                          <span className="sample-files">
+                            <span className="sample-file">فایل ندارد</span>
+                          </span>
                         )
                       ) : (
                         <LittleLoading />
@@ -281,7 +304,9 @@ class SingleTeacher extends Component {
                             ))}
                           </span>
                         ) : (
-                          <></>
+                          <span className="sample-files">
+                            <span className="sample-file">فایل ندارد</span>
+                          </span>
                         )
                       ) : (
                         <LittleLoading />

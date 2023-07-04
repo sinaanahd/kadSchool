@@ -10,7 +10,8 @@ body {
     direction: rtl;
     overflow-x: hidden !important;
     font-size: 14px;
-    font-family: "main-font";
+    font-display: swap;
+    font-family: "main-font" , Arial, sans-serif;
     line-height: unset !important;
     width: 100% !important;
     min-width: 300px;
@@ -29,7 +30,8 @@ body {
 /* universal styles */
 #root {
     @include flexMixin(column, flex-start, center);
-    background-image: url("../images/paper-bg.svg");
+    //background-image: url("../images/paper-bg.svg");
+    background-image: url("../images/paper-bg.webp");
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
@@ -98,6 +100,533 @@ input[type=number] {
     top : -300px;
 }
 /* error component */
+
+/* home page ( Landing ) */
+.home-page{
+    width: 100%;
+    @include flexMixin(column,flex-start,center);
+    background-image: url('../images/landing-bg.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+    padding: 80px 0 0;
+    position: relative;
+    .home-page-header{
+        position: fixed;
+        z-index: 999;
+        top: 20px;
+        width : 100%;
+        height: 72px;
+        @include flexMixin(row,space-between,center);
+        padding: 0 30px;
+        border-radius: 16px;
+        background: rgba(209, 221, 248, 0.30);
+        backdrop-filter: blur(10px);
+        .menu-burger{
+            display: none;
+        }
+    }
+    .links-wrapper{
+        ul{
+            @include flexMixin(row-reverse,flex-end,center);
+            gap: 40px;
+        }
+        li{
+            list-style: none;
+            a{
+                transition: $transition;
+                color : #fff;
+                display: block;
+                &:hover{
+                    color: $yellowColor;
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+    .hero-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 20px;
+    }
+    .hero-gif{
+        // width: 50%;
+        @include flexMixin(row,flex-start,center);
+    }
+    .hero-text-wrapper{
+        @include flexMixin(column,flex-start,center);
+        gap: 42px;
+        width: 40%;
+    }
+    .hero-title{
+        color: #FFF;
+        text-align: center;
+        font-size: 64px;
+        font-weight: 700;
+    }
+    .hero-text{
+        color: #FFF;
+        text-align: center;
+        font-size: 22px;
+        line-height: 185.125%;
+    }
+    .get-on-board{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        margin: 20px 0 0;
+        font-size: 14px;
+        p{
+            margin : 0 0 25px;
+        }
+    }
+    .hero-input-wrapper{
+        // width: 100%;
+        position: relative;
+        @include flexMixin(row,center,center);
+        margin-bottom: 8px;
+        input{
+            width: 299px;
+            height: 40px;
+            outline: 0px solid #fff;
+            border: 0px solid #fff;
+            border-radius: 4px;
+            font-family: "main-font";
+            padding: 0 10px;
+        }
+    }
+    .fly-btn{
+        width: 96px;
+        height: 40px;
+        border-radius: 3px 0 0 3px;
+        position: absolute;
+        background-color: $darkBlue;
+        left: 0;
+        top: 0;
+        @include flexMixin(row,center,center);
+    }
+    .achivment-history-wrapper{
+        width: 100%;
+        max-width: 1500px;
+        @include flexMixin(column,center,center);
+        gap: 40px;
+        height: 311px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.10);
+        backdrop-filter: blur(20px);
+        position: relative;
+        padding: 0 100px;
+        margin: 100px 0 50px;
+    }
+    .semi-title{
+        color: #FFF;
+        font-size: 37px;
+        font-weight: 700;
+    }
+    .gif-wrap{
+        position: absolute;
+        left: -100px;
+        img {
+            width: 500px;
+        }
+    }
+    .numberical-contents{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        padding-left: 200px;
+    }
+    .numerical-item{
+        @include flexMixin(column,flex-start,center);
+        .number{
+            font-weight: 900;
+            color: $yellowColor;
+            font-size: 52px;
+        }
+    }
+    .content-text{
+        font-size: 24px;
+    }
+    .why-in-kad-we-trust {
+        width: 100%;
+        height: 479px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.00) 100%);
+        backdrop-filter: blur(10px);
+        position: relative;
+        @include flexMixin(column,center,center);
+        gap: 55px;
+    }
+    .astronut-img{
+        position : absolute;
+        right: -70px;
+        transform: rotateY(180deg);
+        top: 100px;
+    }
+    .astronut-img.responsive{
+        display: none;
+    }
+    .reasons-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 24px;
+        padding: 0 250px 0 50px;
+    }
+    .reasons{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 30px;
+        overflow-x: hidden;
+    }
+    // .pos-1{
+    //     .reason{
+    //         transform: translateX(calc(300% + 90px));
+    //     }
+    // }
+    // .pos-2{
+    //     .reason{
+    //         transform: translateX(calc(600% + 180px));
+    //     }
+    // }
+    .res-pos-1 {
+        .reasons {
+            .reason {
+                transform: translateX(calc(100% + 30px));
+            }
+        }
+    }
+
+    .res-pos-2 {
+        .reasons {
+            .reason {
+                transform: translateX(calc(200% + 60px));
+            }
+        }
+    }
+
+    .res-pos-3 {
+        .reasons {
+            .reason {
+                transform: translateX(calc(300% + 90px));
+            }
+        }
+    }
+
+    .res-pos-4 {
+        .reasons {
+            .reason {
+                transform: translateX(calc(400% + 120px));
+            }
+        }
+    }
+
+    .res-pos-5 {
+        .reasons {
+            .reason {
+                transform: translateX(calc(500% + 150px));
+            }
+        }
+    }
+
+    .res-pos-6 {
+        .reasons {
+            .reason {
+                transform: translateX(calc(600% + 180px));
+            }
+        }
+    }
+
+    .res-pos-7 {
+        .reasons {
+            .reason {
+                transform: translateX(calc(700% + 210px));
+            }
+        }
+    }
+    .reason{
+        flex: 0 0 397px;
+        height: 164px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.20);
+        backdrop-filter: blur(10px);
+        @include flexMixin(column,flex-start,center);
+        padding: 10px 20px;
+        gap: 10px;
+        transition: $transition;
+    }
+    .reason-title{
+        font-size: 24px;
+    }
+    .reason-text {
+        font-size: 16px;
+        line-height: 27px;
+        text-align: justify;
+    }
+    .resoan-back-btn{
+        cursor: pointer;
+        transition: $transition;
+    }
+    .rev.resoan-back-btn{
+        transform: rotateY(180deg);
+    }
+    .teachers-wrapper{
+        width: 100%;
+        margin: 30px 0 100px;
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+    }
+    .teachers{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        gap: 20px;
+    }
+    .teacher{
+        width: 100%;
+        height: 424px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 16px;
+        font-size: 20px;
+        @include flexMixin(column,space-between,center);
+        padding: 10px;
+        flex: 1;
+    }
+    .teacher-img-wrapper{
+        width: 100%;
+        border-radius: 8px;
+        background-color: #d9d9d9;
+        @include flexMixin(row,center,center);
+        height: 350px;
+    }
+    .good-students-wrapper{
+        width: 100%;
+        margin: 0 0 87px;
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+    }
+    .good-students{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        gap: 20px;
+    }
+    .good-student{
+        width: 100%;
+        height: 424px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 16px;
+        font-size: 20px;
+        @include flexMixin(column,space-between,center);
+        padding: 10px;
+        flex: 1;
+    }
+    .good-student-img-wrapper{
+        width: 100%;
+        border-radius: 8px;
+        background-color: #d9d9d9;
+        @include flexMixin(row,center,center);
+        height: 350px;
+    }
+    .comments-on-kad-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 52px;
+        margin: 0 0 100px;
+    }
+    .comment-img{
+        @include flexMixin(row,space-between,flex-start);
+    }
+    .astronut-lap-top{
+        flex:0 0 300px;
+        height: 300px;
+        position: relative;
+        @include flexMixin(row,center,center);
+        svg{
+            width: 500px!important;
+            height: 500px!important;
+            max-width: unset;
+            position: relative;
+            top: -150px;
+            // left: -40px;
+            position: absolute;
+        }
+    }
+    .comments{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        overflow-x: hidden;
+    }
+    .cm-0{
+        .home-comment{
+            transform: translateX(0%);
+        }
+    }
+    .cm-1{
+        .home-comment{
+            transform: translateX(100%);
+        }
+    }
+    .cm-2{
+        .home-comment{
+            transform: translateX(200%);
+        }
+    }
+    .cm-3{
+        .home-comment{
+            transform: translateX(300%);
+        }
+    }
+    .cm-4{
+        .home-comment{
+            transform: translateX(400%);
+        }
+    }
+    .cm-5{
+        .home-comment{
+            transform: translateX(500%);
+        }
+    }
+    .home-comment{
+        flex: 0 0 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 30px;
+        transition: $transition;
+    }
+    .home-comment-text{
+        font-size: 20px;
+        text-align: center;
+    }
+    .home-user-wrapper{
+        @include flexMixin(column,flex-start,center);
+        gap: 12px;
+    }
+    .img-bgc{
+        width: 123px;
+        height: 123px;
+        border-radius: 50%;
+        @include flexMixin(row,center,center);
+        background-color: #F2F5F7;
+        overflow: hidden;
+    }
+    .home-comment-avatar-img{
+        position: relative;
+        top: 14px;
+    }
+    .home-comment-user-name,.home-comment-user-subject{
+        font-size: 20px;
+    }
+    .jump-on-spaceship-wrapper{
+        width: 100%;
+        background: rgba(255, 255, 255, 0.20);
+        backdrop-filter: blur(15px);
+        @include flexMixin(row,center,center);
+        height: 277px;
+        gap: 30px;
+    }
+    .jump-img-wrapper{
+        flex: 0 0 124px;
+        height: 124px;
+        background-color: #d9d9d9;
+        @include flexMixin(row,center,center);
+    }
+    .forms-data{
+        @include flexMixin(row,center,center );
+        gap: 20px;
+    }
+    .jump-title{
+        font-size: 24px;
+    }
+    .jump-input-wrapper{
+        position: relative;
+        @include flexMixin(row,center,center);
+        input {
+            width: 299px;
+            height: 40px;
+            outline: 0px solid #fff;
+            border: 0px solid #fff;
+            border-radius: 4px;
+            font-family: "main-font";
+            padding: 0 10px;
+        }
+    }
+    .fly-spaceship-btn{
+        position: absolute;
+        left: 0;
+        background-color: $darkBlue;
+        border-radius: 3px 0 0 3px;
+        height: 40px;
+        width : 96px;
+        @include flexMixin(row,center,center);
+        font-size: 14px;
+    }
+    .home-footer{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 40px;
+        padding: 33px 0 55px;
+    }
+    .home-footer-cols{
+        width: 100%;
+        @include flexMixin(row,space-between,flex-start);
+    }
+    .hf-col{
+        @include flexMixin(column,flex-start,flex-start);
+    }
+    .hf-col-1{
+        gap: 10px;
+        flex: 0 0 300px;
+    }
+    .get-present{
+        font-size: 16px;
+    }
+    .present-text{
+        font-size: 12px;
+    }
+    .hf-col-2,.hf-col-3{
+        gap: 11px;
+        ul{
+            @include flexMixin(column,flex-start,flex-start);
+            gap: 20px;
+        }
+        li{
+            list-style: none;
+            font-size: 16px;
+        }
+        a{
+            transition: $transition;
+            display: block;
+            &:hover{
+                color: $yellowColor;
+                transform: scale(1.1);
+            }
+        }
+    }
+    .hf-footer-title{
+        font-size: 14px;
+    }
+    .social-icons{
+        @include flexMixin(row,flex-end,center);
+        width: 100%;
+        gap: 10px;
+        img{
+            filter: brightness(0) invert(1);
+        }
+    }
+    .hf-col-4{
+        gap: 50px;
+    }
+    .map-enamad{
+        @include flexMixin(row,flex-end,center);
+        gap: 20px;
+    }
+    .hf-copy-text{
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        margin: 20px 0 0;
+    }
+}
+
+/* home page ( Landing ) */
 
 /* footer */
 .main-footer{
@@ -396,8 +925,8 @@ input[type=number] {
         gap: 16px;
     }
     .orange-wrapper{ 
-        width : 400px;
-        height: 160px;
+        flex :0 0 440px;
+        // height: 160px;
         border: 2px solid $yellowColor;
         border-radius: 10px;
         transition: $transition;
@@ -405,20 +934,21 @@ input[type=number] {
         @include flexMixin(row,flex-start,center);
     }
     .slider-area{
-        width: 4000px;
+        width: 100%;
         @include flexMixin(row,flex-start,center);
         height: 100%;
         transition: $transition;
         position: relative;
         cursor: grab;
+        overflow-x: hidden;
     }
     .slide{
-        width: 400px;
-        height: 100%;
+        flex: 0 0 100%;
         overflow: hidden;
         @include flexMixin(row,center,center);
         z-index: 8;
         position: relative;
+        transition: $transition;
         img{
             width: 100%;
         }
@@ -748,28 +1278,33 @@ input[type=number] {
     }
     .ins-sentence{
         flex: 0 0 385px;
-        @include flexMixin(row,center,flex-start);
-        font-size: 16px;
+        @include flexMixin(row,center,center);
         border: 2px solid #006673;
         border-radius: 8px;
         height: 160px;
-        background-color: #fff;
+        background: linear-gradient(228deg, rgba(198, 229, 246, 0.50) 0%, rgba(255, 255, 255, 0.50) 100%);
         line-height: 22px;
-        padding: 8px 12px;
+        padding: 13px 16px;
         position: relative;
         p{
             width: 100%;
-            text-align: justify;
+            text-align: center;
+            line-height: 30px;
+            @include flexMixin(column,flex-start,center);
+            gap: 10px;
+            font-size: 16px;
         }
         b{
            
             @include flexMixin(row,center,center);
             gap: 10px;
             font-size: 14px;
-            position: absolute;
-            bottom: 0px;
-            left: 12px;
             font-weight: 100;
+        }
+        img{
+            position: absolute;
+            left: 0;
+            bottom: 0;
         }
     }
     .days-tip-wrapper{
@@ -1020,6 +1555,54 @@ input[type=number] {
 
 /* payment */
 
+/* why kad */
+.why-kad-wrapper{
+    width: 100%;
+    @include flexMixin(row,flex-start,flex-start);
+    gap: 30px;
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap : 100px;
+        background-color: #fff;
+        border: 2px solid #959595;
+        border-radius: 16px;
+        padding: 24px 0 ;
+    }
+    .title{
+        font-size: 24px;
+    }
+    .why-boxes{
+        @include flexMixin(row,center,center);
+        gap: 22px;
+        flex-wrap: wrap;
+    }
+    .why-box{
+        flex: 0 0 303px;
+        height: 220px;
+        border-radius: 16px;
+        border: 2px solid #d9d9d9;
+        @include flexMixin(column,center,center);
+        gap: 10px;
+        position: relative;
+        padding: 30px 0;
+        img{
+            position: absolute;
+            top: -20px;
+        }
+    }
+    .why-title{
+        font-size: 22px;
+    }
+    .why-text{
+        font-size: 16px;
+        text-align: justify;
+        padding: 0 22px;
+    }
+}
+/* why kad */
+
+
 
 /* courses */
 @keyframes shake {
@@ -1054,6 +1637,58 @@ input[type=number] {
     .left-col{
         @include flexMixin(column,space-between,center);
         width: 100%;
+    }
+    .spot-courses{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 40px;
+    }
+    .enter-class-spotplayer-info{
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 12px;
+    }
+    .spot-player-info{
+        width: 100%;
+        height: 160px;
+        border-radius: 24px;
+        border: 2px solid #bcbcbc;
+        @include flexMixin(column,center,flex-start);
+        gap: 10px;
+        padding: 20px 12px;
+        background-color: #fff;
+        p{
+            font-size: 14px;
+        }
+    }
+    .spot-datas-wrapper{
+        @include flexMixin(row,flex-start,center);
+        gap: 24px;
+        width: 100%;
+    }
+    .spot-data{
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+    }
+    .code-copy{
+        @include flexMixin(row,space-between,center);
+        font-size: 12px;
+        height: 40px;
+        background-color: #F0F0F0;
+        width: 184px;
+        padding: 6px;
+        border-radius: 16px;
+        img{
+            cursor: pointer;
+        }
+    }
+    .enter-online-class{
+        flex: 0 0 232px;
+        height: 49px;
+        @include flexMixin(row,center,center);
+        font-size: 16px;
+        color: #fff;
+        background-color: $yellowColor;
+        border-radius: 8px;
     }
     .courses-wrapper{
         display: grid;
@@ -1578,7 +2213,8 @@ input[type=number] {
             max-width: 331px;
             height: 48px;
             outline: 0px solid #000;
-            font-family: "main-font";
+            font-display: swap;
+            font-family: "main-font" , Arial, sans-serif;
             border-radius: 8px;
             border: 2px solid $mainColor; 
             padding: 0px 10px;
@@ -1589,7 +2225,8 @@ input[type=number] {
             max-width: 331px;
             height: 100px;
             outline: 0px solid #000;
-            font-family: "main-font";
+            font-display: swap;
+            font-family: "main-font" , Arial, sans-serif;
             border-radius: 8px;
             border: 2px solid $mainColor;
             padding: 10px;
@@ -1877,7 +2514,8 @@ input[type=number] {
         outline: 0px solid #000;
         border: 2px solid $mainColor;
         padding: 0 10px;
-        font-family: "main-font";
+        font-display: swap;
+        font-family: "main-font" , Arial, sans-serif;
     }
     .pass{
         margin: 20px 0;
@@ -1914,7 +2552,8 @@ input[type=number] {
         border-radius: 8px;
         outline: 0px solid $mainColor;
         border: 2px solid $mainColor;
-        font-family: "main-font";
+        font-display: swap;
+        font-family: "main-font" , Arial, sans-serif;
         padding: 0 10px;
         margin: 20px;
     }
@@ -2053,7 +2692,8 @@ input[type=number] {
         border-radius: 8px;
         outline: 0px solid $mainColor;
         border: 2px solid $mainColor;
-        font-family: "main-font";
+        font-display: swap;
+        font-family: "main-font" , Arial, sans-serif;
         padding: 0 10px;
     }
     .agree_to-rules{
@@ -2396,7 +3036,8 @@ input[type=number] {
             background-color: #e4e4e4;
             padding: 0 10px;
             color: #000;
-            font-family: "main-font";
+            font-display: swap;
+            font-family: "main-font" , Arial, sans-serif;
         }
     }
     .avatar{
@@ -2591,24 +3232,28 @@ input[type=number] {
     }
     .slider-wrapper{
         width: 100%;
-        padding: 0 30px;
-        @include flexMixin(row,center,center);
-    }
-    .slider{
-        width: 100%;
-        height: 141px;
-        background-color: #d9d9d9;
+        @include flexMixin(row,flex-start,center);
+        overflow: hidden;
         position: relative;
-        border-radius: 8px;
     }
-    .slider-btn{
-        width: 141px;
-        height: 42px;
-        @include flexMixin(row,center,center);
+    .drag-place{
+        width: 100%;
+        height: 100%;
         position: absolute;
-        bottom: 21px;
-        left: 25px;
-        background-color: #b0b0b0;
+        top: 0;
+        left: 0;
+        cursor: grab;
+        z-index: 5;
+    }
+    .slide{
+        flex: 0 0 100%;
+        position: relative;
+        z-index: 3;
+        transition: $transition;
+        img{
+            border-radius: 8px;
+            width: 100%;
+        }
     }
     .categories-wrapper{
         width: 100%;
@@ -2723,28 +3368,40 @@ input[type=number] {
     }
     .prod-img-wrapper{
         width: 100%;
-        height: 171px;
         @include flexMixin(row,center,center);
         background-color: #d9d9d9;
         overflow: hidden;
     }
     .product-title{
         font-size: 16px;
+        margin: 5px 0 0;
     }
     .prod-class{
-        @include flexMixin(row,flex-start,center);
+        @include flexMixin(row,flex-end,center);
         gap: 5px;
         flex-wrap: wrap;
+        transition: $transition;
+        // width: 100%;
+        &:hover {
+            color: $yellowColor;
+            transform: scale(1.1);
+        }
     }
     .prod-teacher{
         @include flexMixin(column,flex-start,flex-start);
         width: 100%;
+        a{
+            transition: $transition;
+            &:hover{
+                color: $mainColor;
+                transform: scale(1.1);
+            }
+        }
     }
     .prod-details{
         width: 100%;
-        @include flexMixin(row-reverse,center,center);
+        @include flexMixin(row-reverse,space-between,center);
         font-size: 14px;
-        gap: 21px;
         margin: 5px 0;
     }
     .prod-desc{
@@ -2845,7 +3502,6 @@ input[type=number] {
     }
     .add-to-cart-prod{
         flex:0 0 218px;
-        height: 359px;
         @include styler(#000,#fff,18px,8px);
         padding: 4px 4px 7px;
         box-shadow: $boxShadow;
@@ -2855,7 +3511,6 @@ input[type=number] {
     }
     .prod-img{
         width: 100%;
-        height: 259px;
         background-color: $grayColor;
     }
     .price-wrapper{
@@ -2878,9 +3533,9 @@ input[type=number] {
         }
     }
     .prod-details-text-wrapper{
-        @include flexMixin(column,space-between,flex-start);
-        height: 359px;
-        font-size: 18px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 50px;
+        font-size: 18px;    
     }
     .detail-title{
         font-weight: bold;
@@ -2893,11 +3548,16 @@ input[type=number] {
     .prod-details-text{
         @include flexMixin(column,flex-start,flex-start);
         width: 100%;
+        gap: 10px;
         .content{
             font-weight: normal;
             font-size: 14px;
             @include flexMixin(row,flex-start,center);
             gap: 5px;
+        }
+        .column-need{
+            @include flexMixin(column,flex-start,flex-start);
+            gap: 10px;
         }
     }
     .prod-in-one-look{
@@ -2921,7 +3581,7 @@ input[type=number] {
     .prod-texts{
         li{
             font-size: 16px;
-            @include flexMixin(row,space-between,center);
+            @include flexMixin(row,flex-start,center);
             gap: 10px;
             list-style: none;
             margin: 24px 0 0;
@@ -3076,16 +3736,16 @@ input[type=number] {
                 width: 100%;
                 gap: 10px;
                 padding: 0 10px;
-                &:before{
-                    width: 5px;
-                    height: 5px;
-                    border-radius: 50%;
-                    background-color: #000;
-                    content: " ";
-                    display: block;
-                    position: relative;
-                    top: 5px;
-                }
+                // &:before{
+                //     width: 5px;
+                //     height: 5px;
+                //     border-radius: 50%;
+                //     background-color: #000;
+                //     content: " ";
+                //     display: block;
+                //     position: relative;
+                //     top: 5px;
+                // }
             }
             .vis{
                 @include flexMixin(row,flex-start,flex-start);
@@ -3116,6 +3776,27 @@ input[type=number] {
     }
 }
 /* single prod page */
+/* kad calender */
+.weekplan-kad-wrapper{
+    width: 100%;
+    @include flexMixin(row,flex-start,flex-start);
+    gap: 42px;
+    .title{
+        font-size: 24px;
+        width: 100%;
+    }
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 20px;
+        img{
+            border-radius: 16px;
+        }
+    }
+}
+
+/* kad calender */
+
 /* single course */
 .single-course-wrapper{
     width: 100%;
@@ -3223,6 +3904,10 @@ input[type=number] {
         @include flexMixin(row,flex-start,center);
         gap: 5px;
         padding: 0 14px;
+    }
+    .class-text{
+        @include flexMixin(row,space-between,center);
+        width: 100%;
     }
     .teachers-part-wrapper{
         width: 100%;
@@ -3411,10 +4096,24 @@ input[type=number] {
         font-size: 14px;
     }
     .no-sample{
-        width: 100%;
-        text-align: center;
-        font-size: 20px;
         color: $redColor;
+        font-size: 20px;
+        width: 100%;
+        @include flexMixin(row, center, center);
+        height: 200px;
+        gap: 5px;
+        background-color: #fff;
+        border-radius: 16px;
+        border: 2px solid #bcbcbc;
+    
+        &::before {
+            height: 15px;
+            background-color: $redColor;
+            display: block;
+            flex: 0 0 15px;
+            content: " ";
+            border-radius: 50%;
+        }
     }
     .samples-wrapper{
         width: 100%;
@@ -3479,7 +4178,8 @@ input[type=number] {
         color: #000;
         outline: 0px solid #000;
         height: 128px;
-        font-family: "main-font";
+        font-display: swap;
+        font-family: "main-font" , Arial, sans-serif;
         padding: 10px 20px;
         resize: none;
     }
@@ -3620,15 +4320,18 @@ input[type=number] {
         li{
             margin: 20px 0 0;
             list-style: none;
-            @include flexMixin(row,flex-start,center);
+            @include flexMixin(row,flex-start,flex-start);
             gap: 10px;
+            line-height: 28px;
             &::before{
-                width: 16px;
+                flex:0 0 16px;
                 height: 16px;
                 background-color: $yellowColor;
                 border-radius: 2px;
                 content: " ";
                 display: block;
+                position: relative;
+                top : 3px;
             }
         }
     }
@@ -3719,7 +4422,6 @@ input[type=number] {
     }
     .course{
         width: 199px;
-        height: 199px;
         flex:0 0 199px;
         background-color: #fff;
         box-shadow: $boxShadow;
@@ -3730,9 +4432,7 @@ input[type=number] {
         gap: 10px;
         .img-wrapper{
             width: 100%;
-            height: 80px;
             overflow: hidden;
-            background-color: #d9d9d9;
         }
         h2{
             font-size: 16px;
@@ -3774,6 +4474,25 @@ input[type=number] {
         @include flexMixin(row,center,center);
         gap: 5px;
         margin: 7px 0 32px;
+    }
+    .no-sample-teach{
+        color: $redColor;
+        font-size: 20px;
+        width: 100%;
+        @include flexMixin(row,center,center);
+        height: 200px;
+        gap: 5px;
+        background-color: #fff;
+        border-radius: 16px;
+        border: 2px solid #bcbcbc;
+        &::before{
+            height: 15px;
+            background-color: $redColor;
+            display: block;
+            flex: 0 0 15px;
+            content: " ";
+            border-radius: 50%;
+        }
     }
     .sample-wrapper{
         max-width: 278px;
@@ -3903,7 +4622,6 @@ input[type=number] {
         height: 100%;
         img{
             width: 75px;
-            height: 100%;
             background-color: #d9d9d9;
         }
     }
@@ -4043,6 +4761,49 @@ input[type=number] {
     }
 }
 /* cart page */
+
+/* rules page */
+.rules-page-wrapper{
+    width: 100%;
+    @include flexMixin(row,flex-start,flex-start);
+    gap: 40px;
+    .main-content{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        padding: 20px;
+        background-color: #fff;
+        border: 2px solid #bcbcbc;
+        border-radius: 16px;
+    }
+    .title{
+        font-size: 24px;
+        width: 100%;
+        margin: 0 0 20px;
+    }
+    .rule{
+        font-size: 16px;
+        line-height: 30px;
+        text-align: justify;
+        @include flexMixin(row, flex-start, flex-start);
+        gap: 10px;
+        width: 100%;
+        margin: 20px 0 0;
+        &:before {
+            flex: 0 0 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #FFAF18;
+            content: " ";
+            display: block;
+            position: relative;
+            top: 5px;
+        }
+    }
+}
+/* rules page */
+
+
+
 
 /* new finance page */
 .profile-finance{
@@ -4434,6 +5195,7 @@ input[type=number] {
         }
         .orange-wrapper{
             width: 100%;
+            flex: unset;
         }
         .slide{
             flex:0 0 100%;
@@ -4465,6 +5227,21 @@ input[type=number] {
             grid-template-columns: repeat(2,1fr);
             column-gap: 20px;
             row-gap: 20px;
+        }
+        .enter-class-spotplayer-info{
+            @include flexMixin(column-reverse,flex-start,center);
+            gap: 20px;
+        }
+        .spot-datas-wrapper{
+            @include flexMixin(column, flex-start, center);
+            gap: 10px;
+        }
+        .spot-player-info{
+            height: unset;
+        }
+        .enter-online-class{
+            width: 100%;
+            flex: 0 0 40px;
         }
         .no-courses{
             .title-for-empty{
@@ -5080,6 +5857,196 @@ input[type=number] {
         .os-wrapper{
             display: grid;
             grid-template-columns: repeat(2,1fr);
+        }
+    }
+    .home-page{
+        .home-page-header{
+            flex-direction: row-reverse;
+            width: calc(100vw - 30px);
+            .links-wrapper{
+                display: none;
+            }
+            .home-res-menu{
+                display: block;
+                position: fixed;
+                width: 100vw;
+                right: 0;
+                top: 85px;
+                right: -16px;
+                z-index: 999999;
+                ul{
+                    @include flexMixin(column,flex-start,center);
+                    gap: 10px;
+                    position: relative;
+                }
+                li{
+                    width: calc(100% - 30px);
+                    height: 50px;
+                    background-color: #4a1981;
+                    @include flexMixin(row,flex-start,center);
+                    padding: 0 20px;
+                    border-radius:  10px;
+                    font-size: 20px;
+                }
+            }
+            .menu-burger{
+                @include flexMixin(row,center,center);
+                position: relative;
+                top: 7px;
+                img{
+                    width: 30px;
+                }
+            }
+            .close-pos{
+                position: relative;
+                top: -7px;
+            }
+        }
+        .hero-wrapper{
+            @include flexMixin(column,flex-start,center);
+        }
+        .hero-text-wrapper{
+            width: 100%;
+            padding: 0 10px;
+            gap: 20px;
+        }
+        .hero-title{
+            font-size: 32px;
+            width: 272px;
+        }
+        .hero-text{
+            font-size: 14px;
+            text-align: justify;
+            line-height: 26px;
+        }
+        .achivment-history-wrapper{
+            padding: 10px 26px 10px;
+            height: 520px;
+            width: calc(100% - 30px);
+            justify-content: flex-start;
+        }
+        .semi-title{
+            font-size: 28px;
+        }
+        .numberical-contents{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            padding-left: 0;
+            width: 100%;
+            justify-content: center;
+            gap : 20px;
+            .number{
+                font-size: 40px;
+            }
+        }
+        .gif-wrap{
+            top: unset;
+            bottom: -93px;
+            left: unset;
+        }
+        .content-text{
+            font-size: 16px;
+        }
+        .why-in-kad-we-trust{
+            height: unset;
+            background: unset;
+            -webkit-backdrop-filter: unset;
+            backdrop-filter: unset;
+            padding: 0 10px;
+            .semi-title {
+                text-align: center;
+            }
+        }
+        .astronut-img{
+            display: none;
+        }
+        .reasons-wrapper{
+            padding: 0;
+            width: 100%;
+            padding-right: 60px;
+            .resoan-back-btn{
+                display: none;
+            }
+        }
+        .reason{
+            flex: 0 0 276px;
+            height: unset;
+        }
+        .reason-title{
+            font-size: 19px;
+        }
+        .reason-text{
+            font-size: 16px;
+        }
+        .astronut-img.responsive{
+            @include flexMixin(row,center,center);
+            top : 130px;
+            right: -57px;
+        }
+        .teachers ,.good-students{
+            width: 100%;
+            overflow-x: scroll;
+        }
+        .teacher,.good-student{
+            flex: 0 0 300px;
+        }
+        .comment-img{
+            width: 100%;
+            @include flexMixin(column,flex-start,center);
+        }
+        .astronut-lap-top{
+            width: 300px;
+            svg{
+                // left: 50px;
+                top: 0px;
+                width: 300px!important;
+                height: 300px!important;
+            }
+        }
+        .jump-on-spaceship-wrapper{
+            @include flexMixin(column,flex-start,center);
+            height: unset;
+            padding: 20px 15px;
+        }
+        .jump-img-wrapper{
+            width: 124px;
+            display: none;
+        }
+        .forms-data{
+            flex-direction: column;
+        }
+        .jump-title{
+            font-size: 16px;
+        }
+        .pos-1,.pos-2,.pos-0{
+            .reason{
+                transform: translateX(0px);
+            }
+        }
+        .home-footer{
+
+            padding: 0 20px;
+        }
+        .home-footer-cols{
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .hf-col-1,.hf-col-4{
+            flex: unset;
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+        .hf-col-2,.hf-col-3{
+            width: 100%;
+        }
+        .hf-col-4{
+            @include flexMixin(row-reverse,space-between,center);
+        }
+        .social-icons{
+            @include flexMixin(column,flex-start,center);
         }
     }
 }

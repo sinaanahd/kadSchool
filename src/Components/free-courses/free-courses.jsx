@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
-import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import Subjects from "./subjects/subjects";
-import fields from "./fields";
+// import fields from "./fields";
 import Fields from "./fields/fields";
 import Kinds from "./kinds/kinds";
 import withWebsiteData from "../hoc/with-website-data";

@@ -926,6 +926,7 @@ input[type=number] {
     }
     .orange-wrapper{ 
         flex :0 0 440px;
+        max-width: 440px;
         // height: 160px;
         border: 2px solid $yellowColor;
         border-radius: 10px;
@@ -2146,6 +2147,29 @@ input[type=number] {
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
     }
+    .not-loged-in{
+        flex: 0 0 100%;
+        @include flexMixin(column,center,center);
+        gap : 20px;
+        height: 400px;
+        font-size: 16px;
+        a{
+            color: #fff;
+            font-size: 20px;
+            gap: 10px;
+            background-color: $mainColor;
+            width: 200px;
+            height: 60px;
+            border-radius: 8px;
+            @include flexMixin(row,center,center);
+            border: 3px solid $mainColor;
+            transition: $transition;
+            &:hover{
+                color: $mainColor;
+                background-color: #fff;
+            }
+        }
+    }
     .profile-options{
         flex: 0 0 188px;
         @include flexMixin(column,flex-start,center);
@@ -2436,6 +2460,29 @@ input[type=number] {
             color: $mainColor;
             background-color: #fff;
         }
+    }
+    .fail.change-pass-btn{
+        background-color: $redColor;
+        border-color: $redColor;
+        cursor: not-allowed;
+        &:hover{
+            
+            color: #fff;
+        }
+    }
+    .pass-error-wrapper{
+        width: 300px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 2px solid $redColor;
+        @include flexMixin(row,center,center);
+        font-size: 14px;
+        color: $redColor;
+        
+    }
+    .green.pass-error-wrapper{
+        color: $greenColor;
+        border-color: $greenColor;
     }
 }
 /* profile */
@@ -2811,6 +2858,9 @@ input[type=number] {
         background-color: #d9d9d9;
         @include flexMixin(row,center,center);
         overflow: hidden;
+    }
+    .teacher-name{
+        font-size: 18px;
     }
 }
 /* Teachers Page */
@@ -4357,6 +4407,7 @@ input[type=number] {
         width: 100%;
         @include flexMixin(row,flex-start,center);
         gap: 20px;
+        position: relative;
     }
     .courses{
         @include flexMixin(row,flex-start,center);
@@ -4475,16 +4526,17 @@ input[type=number] {
         gap: 5px;
         margin: 7px 0 32px;
     }
-    .no-sample-teach{
+   
+    .no-sample-teach,.no-class-box{
         color: $redColor;
         font-size: 20px;
         width: 100%;
-        @include flexMixin(row,center,center);
+        @include flexMixin(row,flex-start,center);
         height: 200px;
         gap: 5px;
-        background-color: #fff;
-        border-radius: 16px;
-        border: 2px solid #bcbcbc;
+        // background-color: #fff;
+        // border-radius: 16px;
+        // border: 2px solid #bcbcbc;
         &::before{
             height: 15px;
             background-color: $redColor;

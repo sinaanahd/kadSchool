@@ -93,7 +93,7 @@ class Cart extends Component {
                         </span>
                       ))
                     ) : (
-                      <></>
+                      <LittleLoading />
                     )}
                   </div>
                   <div className="how-to-pay-wrapper">

@@ -150,30 +150,30 @@ class SingleTeacher extends Component {
                   <div
                     className={"courses car-" + this.state.kelas_carouse_pos}>
                     {single_teacher ? (
-                      single_teacher.kelases.map((k) => (
-                        <Link
-                          onClick={() => {
-                            scrollToTop();
-                          }}
-                          to={`/SingleProd/${k.kelas_id}`}
-                          key={k.kelas_id}
-                          className="course">
-                          <span className="img-wrapper">
-                            <img src={k.image_link} alt={k.kelas_title} />
-                          </span>
-                          <h2>{k.kelas_title}</h2>
-                          <p>{k.descriptions}</p>
-                        </Link>
-                      ))
+                      single_teacher.kelases.length !== 0 ? (
+                        single_teacher.kelases.map((k) => (
+                          <Link
+                            onClick={() => {
+                              scrollToTop();
+                            }}
+                            to={`/SingleProd/${k.kelas_id}`}
+                            key={k.kelas_id}
+                            className="course">
+                            <span className="img-wrapper">
+                              <img src={k.image_link} alt={k.kelas_title} />
+                            </span>
+                            <h2>{k.kelas_title}</h2>
+                            <p>{k.descriptions}</p>
+                          </Link>
+                        ))
+                      ) : (
+                        <span className="no-class-box">
+                          کلاسی برای نمایش وجود ندارد
+                        </span>
+                      )
                     ) : (
                       <LittleLoading />
                     )}
-
-                    {/* <div className="course">2</div>
-                    <div className="course">3</div>
-                    <div className="course">4</div>
-                    <div className="course">5</div>
-                    <div className="course">6</div> */}
                   </div>
                   {single_teacher ? (
                     single_teacher.kelases.length >= 4 ? (

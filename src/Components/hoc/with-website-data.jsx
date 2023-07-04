@@ -173,10 +173,10 @@ function withWebsiteData(Component) {
       axios
         .get("https://daryaftyar.ir/backend/kad_api/banners")
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           this.setState({
             main_page_banners: res.data.main_page_banners,
-            shop_banners: res.data.store_banners[0],
+            shop_banners: res.data.store_banners,
           });
           localStorage.setItem(
             "main-page-banners",
@@ -184,7 +184,7 @@ function withWebsiteData(Component) {
           );
           localStorage.setItem(
             "shop-banners",
-            JSON.stringify(res.data.store_banners[0])
+            JSON.stringify(res.data.store_banners)
           );
         })
         .catch((e) => {
@@ -370,7 +370,7 @@ function withWebsiteData(Component) {
         .get(`https://daryaftyar.ir/backend/kad_api/user/${user_id}`)
         .then((res) => {
           const user = res.data;
-          //console.log(user);
+          //console.log("get log", res.data);
           this.fill_user_datas(user);
         })
         .catch((e) => {

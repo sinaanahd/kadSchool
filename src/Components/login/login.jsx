@@ -56,6 +56,7 @@ class Login extends Component {
       .then((res) => {
         this.setState({ pause: false });
         const { been_before, user_id, verification_code } = res.data;
+        //console.log(res.data);
         localStorage.setItem(
           "kad-phone-number",
           JSON.stringify(this.state.phone_number)
@@ -88,7 +89,7 @@ class Login extends Component {
             this.props.handle_error(err);
           });
       } else {
-        window.location.pathname = "/SetPassword";
+        window.location.pathname = "/SignUp";
       }
     } else {
       const enter_code_status = "کد وارد شده صحیح نمی باشد";
@@ -114,7 +115,7 @@ class Login extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Dashboard" className="main-logo">
+          <Link to="/Home" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">

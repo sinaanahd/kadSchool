@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import convert_to_persian from "../../functions/convert-to-persian";
+import axios from "axios";
 
 import pen from "../../../assets/images/pen-profile.svg";
 import arrow from "../../../assets/images/dow-arroow-filter.svg";
 import profile_sample from "../../../assets/images/user-sample-icon.png";
+import LittleLoading from "../../reuseables/little-loading";
 class Info extends Component {
   state = {
     active_option: false,
@@ -15,6 +17,11 @@ class Info extends Component {
     day: 1,
     month: "فروردین",
     year: "1401",
+    pass_1: false,
+    pass_2: false,
+    pass_err: false,
+    pause: false,
+    pass_win: false,
   };
   handle_active_option = (active_option) => {
     const prev_active = this.state.active_option;
@@ -45,6 +52,61 @@ class Info extends Component {
   };
   handle_subject_text = (subject_text) => {
     this.setState({ subject_text, s_g_active: false });
+  };
+  get_pass_1 = (value) => {
+    let pass_err = false;
+    let pass_1 = false;
+    if (value.length < 8) {
+      pass_err = "پسورد نباید کم تر از ۸ کارکتر باشه";
+    } else if (value.length > 29) {
+      pass_err = "پسورد نباید بیشتر از ۳۰ کاراکتر باشه";
+    } else {
+      pass_err = "ok";
+      pass_1 = value;
+    }
+    this.setState({ pass_1, pass_err });
+  };
+  get_pass_2 = (value) => {
+    let pass_err = false;
+    let pass_2 = false;
+    if (value.length < 8) {
+      pass_err = "پسورد نباید کم تر از ۸ کارکتر باشه";
+    } else if (value.length > 29) {
+      pass_err = "پسورد نباید بیشتر از ۳۰ کاراکتر باشه";
+    } else {
+      pass_err = "ok";
+      pass_2 = value;
+    }
+    this.setState({ pass_2, pass_err });
+  };
+  change_pass = () => {
+    const pass_1 = this.state.pass_1;
+    const pass_2 = this.state.pass_2;
+    if (pass_1 === pass_2) {
+      this.setState({ pause: true });
+      const phone_number = JSON.parse(localStorage.getItem("kad-phone-number"));
+      // prettier-ignore
+      axios
+        .patch(
+          `https://daryaftyar.ir/backend/kad_api/password/${phone_number}`,
+          { new_password: pass_1 }
+        )
+        .then((res) => {
+          const { status, message } = res.data;
+          if (status) {
+            // window.location.pathname = "/Profile";
+            this.setState({ pass_win: message, pause: false });
+          } else {
+            this.setState({ pass_err: message, pause: false });
+          }
+        })
+        .catch((e) => {
+          this.props.handle_error(e);
+          this.setState({ pause: false });
+        });
+    } else {
+      this.setState({ pass_err: "پسورد ها با هم مطابقت ندارند" });
+    }
   };
   render() {
     const {
@@ -358,13 +420,51 @@ class Info extends Component {
             <span className="change-pass-title">تغییر رمز عبور</span>
             <span className="pass-input-wrapper">
               <span className="input-tt">رمز عبور</span>
-              <input type="password" name="" id="" />
+              <input
+                onInput={(e) => {
+                  this.get_pass_1(e.target.value);
+                }}
+                type="password"
+                name="pass-1"
+                id="main-pass-1"
+              />
             </span>
             <span className="pass-input-wrapper">
               <span className="input-tt">تکرار رمز عبور</span>
-              <input type="password" name="" id="" />
+              <input
+                onInput={(e) => {
+                  this.get_pass_2(e.target.value);
+                }}
+                type="password"
+                name="pass-2"
+                id="main-pass-2"
+              />
             </span>
-            <span className="change-pass-btn">تغییر رمز عبور</span>
+            {this.state.pass_1 &&
+            this.state.pass_2 &&
+            this.state.pass_err === "ok" ? (
+              <span
+                className="change-pass-btn"
+                onClick={() => {
+                  this.change_pass();
+                }}>
+                {this.state.pause ? <LittleLoading /> : "تغییر رمز عبور"}
+              </span>
+            ) : (
+              <span className="change-pass-btn fail">تغییر رمز عبور</span>
+            )}
+            {this.state.pass_err && this.state.pass_err !== "ok" ? (
+              <span className="pass-error-wrapper">{this.state.pass_err}</span>
+            ) : (
+              ""
+            )}
+            {this.state.pass_win ? (
+              <span className="pass-error-wrapper green">
+                {this.state.pass_win}
+              </span>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

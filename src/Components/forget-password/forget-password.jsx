@@ -28,10 +28,6 @@ class ForgetPassword extends Component {
     //   window.location.href = window.location.href.replace("Login", "Dashboard");
     // }
   }
-  // componentWillUnmount() {
-  //   document.querySelector(".new-footer").style.display = "flex";
-  //   document.querySelector(".main-header").style.display = "flex";
-  // }
   handle_phone_number = ({ target }) => {
     const { value } = target;
     if (value.length === 0) {
@@ -74,19 +70,20 @@ class ForgetPassword extends Component {
     const been = this.state.been_before;
     if (code === entry_code) {
       if (been) {
-        axios
-          .get(
-            ` https://daryaftyar.ir/backend/kad_api/user/${this.state.user_id}`
-          )
-          .then((res) => {
-            const user = res.data;
-            //localStorage.setItem("user-kad", JSON.stringify(user));
-            this.props.inside_user(user);
-            window.location.pathname = "/Dashboard";
-          })
-          .catch((err) => {
-            this.props.handle_error(err);
-          });
+        // axios
+        //   .get(
+        //     `https://daryaftyar.ir/backend/kad_api/user/${this.state.user_id}`
+        //   )
+        //   .then((res) => {
+        //     const user = res.data;
+        //     //localStorage.setItem("user-kad", JSON.stringify(user));
+        //     this.props.inside_user(user);
+        //     window.location.pathname = "/Dashboard";
+        //   })
+        //   .catch((err) => {
+        //     this.props.handle_error(err);
+        //   });
+        window.location.pathname = "/Set-new-password";
       } else {
         window.location.pathname = "/SignUp";
       }
@@ -114,7 +111,7 @@ class ForgetPassword extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Dashboard" className="main-logo">
+          <Link to="/Home" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">

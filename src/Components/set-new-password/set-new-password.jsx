@@ -10,15 +10,10 @@ import LittleLoading from "../reuseables/little-loading";
 
 class SetNewPassword extends Component {
   state = {
-    phone_number: false,
-    err_phone: false,
+    pass_1: false,
+    pass_2: false,
+    pass_err: false,
     pause: false,
-    verification_code: false,
-    user_id: false,
-    been_before: false,
-    entry_code: false,
-    enter_code_status: false,
-    no_more_code: false,
   };
   componentDidMount() {
     const { user } = this.props;
@@ -28,12 +23,65 @@ class SetNewPassword extends Component {
     //   window.location.href = window.location.href.replace("Login", "Dashboard");
     // }
   }
-
+  get_pass_1 = (value) => {
+    let pass_err = false;
+    let pass_1 = false;
+    if (value.length < 8) {
+      pass_err = "پسورد نباید کم تر از ۸ کارکتر باشه";
+    } else if (value.length > 29) {
+      pass_err = "پسورد نباید بیشتر از ۳۰ کاراکتر باشه";
+    } else {
+      pass_err = "ok";
+      pass_1 = value;
+    }
+    this.setState({ pass_1, pass_err });
+  };
+  get_pass_2 = (value) => {
+    let pass_err = false;
+    let pass_2 = false;
+    if (value.length < 8) {
+      pass_err = "پسورد نباید کم تر از ۸ کارکتر باشه";
+    } else if (value.length > 29) {
+      pass_err = "پسورد نباید بیشتر از ۳۰ کاراکتر باشه";
+    } else {
+      pass_err = "ok";
+      pass_2 = value;
+    }
+    this.setState({ pass_2, pass_err });
+  };
+  change_pass = () => {
+    const pass_1 = this.state.pass_1;
+    const pass_2 = this.state.pass_2;
+    if (pass_1 === pass_2) {
+      this.setState({ pause: true });
+      const phone_number = JSON.parse(localStorage.getItem("kad-phone-number"));
+      // prettier-ignore
+      axios
+        .patch(
+          `https://daryaftyar.ir/backend/kad_api/password/${phone_number}`,
+          { new_password: pass_1 }
+        )
+        .then((res) => {
+          const { status, message } = res.data;
+          if (status) {
+            window.location.pathname = "/Dashboard";
+          } else {
+            this.setState({ pass_err: message, pause: false });
+          }
+        })
+        .catch((e) => {
+          this.props.handle_error(e);
+          this.setState({ pause: false });
+        });
+    } else {
+      this.setState({ pass_err: "پسورد ها با هم مطابقت ندارند" });
+    }
+  };
   render() {
     return (
       <>
         <Helmet>
-          <title>تعیین رمز عبور جدید</title>
+          <title> تعیین رمز عبور جدید </title>
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -41,32 +89,47 @@ class SetNewPassword extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Dashboard" className="main-logo">
+          <Link to="/Home" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">
             <div className="forms-wrapper">
               <h1>تعیین رمز عبور جدید</h1>
-              <p className="pass-desc">توضیحات</p>
               <input
                 type="password"
+                onInput={(e) => {
+                  this.get_pass_1(e.target.value);
+                }}
                 className="input-text input"
-                placeholder="رمزعبور جدید"
+                placeholder="رمز عبور"
+                id="pass_1"
               />
-              {this.state.verification_code ? (
+              <input
+                type="password"
+                onInput={(e) => {
+                  this.get_pass_2(e.target.value);
+                }}
+                className="input-text input pass"
+                placeholder="تکرار رمز عبور"
+                id="pass_2"
+              />
+
+              {this.state.pass_1 &&
+              this.state.pass_2 &&
+              this.state.pass_err === "ok" ? (
                 <span
+                  className="enter button-span"
                   onClick={() => {
-                    this.check_user();
-                  }}
-                  className="enter button-span">
-                  تایید
+                    this.change_pass();
+                  }}>
+                  {this.state.pause ? <LittleLoading /> : "تایید"}
                 </span>
               ) : (
                 <span className="enter button-span fail">تایید</span>
               )}
-              {this.state.enter_code_status ? (
+              {this.state.pass_err && this.state.pass_err !== "ok" ? (
                 <span className="error-place need-margin">
-                  {this.state.enter_code_status}
+                  {this.state.pass_err}
                 </span>
               ) : (
                 <></>

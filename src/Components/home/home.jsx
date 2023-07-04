@@ -278,6 +278,15 @@ class HomePage extends Component {
                     پشتیبانی
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="/Rules">
+                    قوانین
+                  </Link>
+                </li>
               </ul>
             </nav>
           </header>

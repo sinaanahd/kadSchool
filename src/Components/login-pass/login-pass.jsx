@@ -13,12 +13,8 @@ class LoginPass extends Component {
     phone_number: false,
     err_phone: false,
     pause: false,
-    verification_code: false,
-    user_id: false,
-    been_before: false,
-    entry_code: false,
-    enter_code_status: false,
-    no_more_code: false,
+    password: false,
+    pass_err: false,
   };
   componentDidMount() {
     const { user } = this.props;
@@ -28,10 +24,6 @@ class LoginPass extends Component {
     //   window.location.href = window.location.href.replace("Login", "Dashboard");
     // }
   }
-  // componentWillUnmount() {
-  //   document.querySelector(".new-footer").style.display = "flex";
-  //   document.querySelector(".main-header").style.display = "flex";
-  // }
   handle_phone_number = ({ target }) => {
     const { value } = target;
     if (value.length === 0) {
@@ -44,8 +36,56 @@ class LoginPass extends Component {
       const err_phone = "شماره تلفن باید ۱۱ رقم باشد";
       this.setState({ err_phone });
     } else {
-      this.setState({ phone_number: value, err_phone: false });
+      this.setState({ phone_number: value, err_phone: "ok" });
     }
+  };
+  check_password = (e) => {
+    const value = e.target.value;
+    if (value.length < 8) {
+      this.setState({ pass_err: "پسورد باید حداقل ۸ کاراکتر باشه" });
+    } else {
+      this.setState({ password: value, pass_err: "ok" });
+    }
+  };
+  check_user = () => {
+    this.setState({ pause: true });
+    axios
+      .get(
+        `https://daryaftyar.ir/backend/kad_api/password/${this.state.phone_number}`
+      )
+      .then((res) => {
+        const { exists, password, user_id } = res.data;
+        this.setState({ pause: false });
+        //console.log(res.data);
+        if (exists) {
+          if (password === this.state.password) {
+            axios
+              .get(` https://daryaftyar.ir/backend/kad_api/user/${user_id}`)
+              .then((res) => {
+                const user = res.data;
+                this.props.inside_user(user);
+                //console.log(user);
+                window.location.pathname = "/Dashboard";
+                localStorage.setItem(
+                  "kad-phone-number",
+                  JSON.stringify(this.state.phone_number)
+                );
+              })
+              .catch((err) => {
+                this.props.handle_error(err);
+              });
+          } else {
+            const pass_err = "پسورد وارد شده صحیح نمی باشد";
+            this.setState({ pass_err });
+          }
+        } else {
+          this.setState({ err_phone: "شماره تلفن وارد شده اشتباه است" });
+        }
+      })
+      .catch((e) => {
+        this.setState({ pause: false });
+        this.props.handle_error(e);
+      });
   };
   render() {
     return (
@@ -59,7 +99,7 @@ class LoginPass extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Dashboard" className="main-logo">
+          <Link to="/Home" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">
@@ -73,7 +113,7 @@ class LoginPass extends Component {
                   this.handle_phone_number(e);
                 }}
               />
-              {this.state.err_phone ? (
+              {this.state.err_phone && this.state.err_phone !== "ok" ? (
                 <span className="error-place">{this.state.err_phone}</span>
               ) : (
                 <></>
@@ -82,22 +122,24 @@ class LoginPass extends Component {
                 type="password"
                 className="input-text input pass"
                 placeholder="رمز عبور"
+                onInput={(e) => {
+                  this.check_password(e);
+                }}
               />
-
-              {this.state.verification_code ? (
+              {this.state.pass_err === "ok" && this.state.err_phone === "ok" ? (
                 <span
                   onClick={() => {
                     this.check_user();
                   }}
                   className="enter button-span">
-                  ورود
+                  {this.state.pause ? <LittleLoading /> : "ورود"}
                 </span>
               ) : (
                 <span className="enter button-span fail">ورود</span>
               )}
-              {this.state.enter_code_status ? (
+              {this.state.pass_err && this.state.pass_err !== "ok" ? (
                 <span className="error-place need-margin">
-                  {this.state.enter_code_status}
+                  {this.state.pass_err}
                 </span>
               ) : (
                 <></>

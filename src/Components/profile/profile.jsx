@@ -7,6 +7,7 @@ import give_date_data from "../functions/give-date-data";
 import Info from "./info/info";
 import find_month from "../functions/find-month";
 import ProfileFinanace from "./profile-finance/profile-finanace";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 class Profile extends Component {
   state = {
@@ -49,7 +50,7 @@ class Profile extends Component {
     this.setState({ year });
   };
   render() {
-    const { user } = this.props;
+    const { user, handle_error } = this.props;
     return (
       <>
         <Helmet>
@@ -61,26 +62,36 @@ class Profile extends Component {
             <div className="mian-content">
               <h1>پروفایل</h1>
               <div className="colums-3">
-                <PageDecider
-                  handle_page={this.handle_page}
-                  page={this.state.page}
-                />
-                {this.state.page === "info" ? (
-                  <Info
-                    month={this.state.month}
-                    months={this.state.months}
-                    days={this.state.days}
-                    day={this.state.day}
-                    year={this.state.year}
-                    years={this.state.years}
-                    handle_day={this.handle_day}
-                    handle_month={this.handle_month}
-                    handle_year={this.handle_year}
-                  />
-                ) : this.state.page === "fianance" ? (
-                  <ProfileFinanace />
+                {!user ? (
+                  <div className="not-loged-in">
+                    دوست خوبم برای استفاده از این صفحه نیاز هست که :
+                    <Link to="/Login">لاگین کنید</Link>
+                  </div>
                 ) : (
-                  <div className="empty">در حال طراحی ...</div>
+                  <>
+                    <PageDecider
+                      handle_page={this.handle_page}
+                      page={this.state.page}
+                    />
+                    {this.state.page === "info" ? (
+                      <Info
+                        handle_error={handle_error}
+                        month={this.state.month}
+                        months={this.state.months}
+                        days={this.state.days}
+                        day={this.state.day}
+                        year={this.state.year}
+                        years={this.state.years}
+                        handle_day={this.handle_day}
+                        handle_month={this.handle_month}
+                        handle_year={this.handle_year}
+                      />
+                    ) : this.state.page === "fianance" ? (
+                      <ProfileFinanace />
+                    ) : (
+                      <div className="empty">در حال طراحی ...</div>
+                    )}
+                  </>
                 )}
               </div>
             </div>

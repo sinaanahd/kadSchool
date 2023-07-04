@@ -38,10 +38,6 @@ class SignUp extends Component {
     //   );
     // }
   }
-  // componentWillUnmount() {
-  //   document.querySelector(".new-footer").style.display = "flex";
-  //   document.querySelector(".main-header").style.display = "flex";
-  // }
   handle_rule_pop_up = () => {
     const rules_pop_up = !this.state.rules_pop_up;
     this.setState({ rules_pop_up });
@@ -100,6 +96,7 @@ class SignUp extends Component {
         .post(`https://daryaftyar.ir/backend/kad_api/register_user`, obj)
         .then((res) => {
           let data = res.data;
+          console.log(res.data);
           axios
             .get(`https://daryaftyar.ir/backend/kad_api/user/${data.user_id}`)
             .then((res) => {
@@ -107,7 +104,7 @@ class SignUp extends Component {
               //localStorage.setItem("user-kad", JSON.stringify(user));
               this.props.inside_user(user);
               //console.log(user);
-              window.location.pathname = "/Dashboard";
+              window.location.pathname = "/SetPassword";
               this.setState({ pause: false });
             })
             .catch((err) => this.props.handle_error(err));
@@ -160,7 +157,7 @@ class SignUp extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Dashboard" className="main-logo">
+          <Link to="/Home" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper">

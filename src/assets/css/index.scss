@@ -3309,6 +3309,14 @@ input[type=number] {
 /* free-course */
 
 /* shop Page */
+@keyframes grow_little {
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.1);
+    }
+}
 .shop-wrapper-section{
     width: 100%;
     .shop-wrapper{
@@ -3329,7 +3337,7 @@ input[type=number] {
     .slider-wrapper{
         width: 100%;
         @include flexMixin(row,flex-start,center);
-        overflow: hidden;
+        overflow-x: hidden;
         position: relative;
     }
     .drag-place{
@@ -3340,6 +3348,24 @@ input[type=number] {
         left: 0;
         cursor: grab;
         z-index: 5;
+    }
+    .get-council-btn{
+        width: 130px;
+        position: absolute;
+        bottom: 15px;
+        left: 10px;
+        cursor: pointer;
+        font-size: 12px;
+        height: 30px;
+        z-index: 7;
+        background-image: linear-gradient( #3539a3 , #151656);
+        // #3539a3;
+        border-radius: 8px;
+        box-shadow:inset 0 0 1px 2px #4e53f7;
+        @include flexMixin(row,center,center);
+        color: #fff;
+        transition: $transition;
+        animation: grow_little 0.5s linear 0s infinite alternate;
     }
     .slide{
         flex: 0 0 100%;
@@ -3564,6 +3590,67 @@ input[type=number] {
                 background-color: #fff;
                 color: $mainColor;
             }
+        }
+    }
+}
+.shop-pu-bgc{
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000005a;
+    position: fixed;
+    padding: 20px;
+    @include flexMixin(row,center,center);
+    z-index: 999999;
+    .shop-pu-content{
+        width: 800px;
+        height: 465px;
+        background-color: #fff;
+        border-radius: 16px;
+        padding: 16px;
+        max-width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 23px;
+    }
+    .shop-pu-title{
+        font-size: 24px;
+        width: 100%;
+        margin: 0 0 11px;
+    }
+    .shop-pop-up-desc{
+        font-size: 16px;
+    }
+    .spu-input-wrapper{
+        max-width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        width: 331px;
+        gap: 14px;
+        input{
+            border: 2px solid $mainColor;
+            padding:0 10px ;
+            height: 50px;
+            width: 100%;
+            border-radius: 8px;
+            font-family: "main-font";
+        }
+    }
+    .si-title{
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .spu-submit-form{
+        width: 80px;
+        height: 50px;
+        border-radius: 8px;
+        color: #fff;
+        background-color: $mainColor;
+        border: 2px solid $mainColor;
+        transition: $transition;
+        cursor: pointer;
+        @include flexMixin(row,center,center);
+        font-size: 16px;
+        &:hover{
+            color: $mainColor;
+            background-color: #fff;
         }
     }
 }
@@ -4769,10 +4856,14 @@ input[type=number] {
     .pay-details{
         width: 100%;
         @include flexMixin(column,flex-start,center);
+        gap: 20px;
     }
-    .pay-titles{
+    .pay-titles,.pay-item{
         width: 100%;
         @include flexMixin(row,flex-start,center);
+        *{
+            flex: 1;
+        }
     }
     .left-col{
         flex:0 0 310px;
@@ -5446,6 +5537,9 @@ input[type=number] {
     .shop-wrapper-section{
         .slider-wrapper{
             padding: 0;
+        }
+        .get-council-btn{
+            display: none;
         }
         .category{
             max-width: 96px;

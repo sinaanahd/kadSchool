@@ -9,10 +9,21 @@ import deleteIcon from "../../assets/images/delete-icon-dark-blue.svg";
 import arrow_up from "../../assets/images/arrow-blue-up.svg";
 import LittleLoading from "../reuseables/little-loading";
 class Cart extends Component {
-  state = {};
+  state = {
+    pause: false,
+  };
   componentDidMount() {}
   render() {
-    const { cart, request_id, handle_cart, cart_products } = this.props;
+    const {
+      cart,
+      request_id,
+      handle_cart,
+      cart_products,
+      ghests,
+      wants_ghesti,
+      user,
+      gh_wait,
+    } = this.props;
     return (
       <>
         <Helmet>
@@ -104,8 +115,35 @@ class Cart extends Component {
                         <span className="pay-item-title">مبلغ قسط</span>
                         <span className="pay-item-title">تاریخ سررسید</span>
                       </span>
+                      {ghests ? (
+                        ghests.map((gh, i) => (
+                          <span className="pay-item" key={i++}>
+                            <span className="gh-item gh-gh-num">
+                              {convert_to_persian(i + 1)}
+                            </span>
+                            <span className="gh-item gh-price">
+                              {spilit_in_three(convert_to_persian(gh.price))}
+                            </span>
+                            <span className="gh-item gh-date">
+                              {convert_to_persian(gh.day) +
+                                " / " +
+                                gh.farsi_month +
+                                " / " +
+                                convert_to_persian(gh.year)}
+                            </span>
+                          </span>
+                        ))
+                      ) : (
+                        <></>
+                      )}
                     </div>
-                    <span className="pay-btn">پرداخت اقساطی</span>
+                    <span
+                      className="pay-btn"
+                      onClick={() => {
+                        wants_ghesti(user.user_id);
+                      }}>
+                      {gh_wait ? <LittleLoading /> : "پرداخت اقساطی"}
+                    </span>
                     <span className="arrow-up">
                       <img src={arrow_up} alt="" />
                     </span>
@@ -159,10 +197,10 @@ class Cart extends Component {
                       <LittleLoading />
                     )}
                   </div>
-                  <div className="discount-code">
+                  {/* <div className="discount-code">
                     <span className="discount-title">کد تخفیف</span>
                     <img src={arrow_up} alt="" />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

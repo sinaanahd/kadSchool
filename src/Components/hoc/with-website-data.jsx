@@ -67,6 +67,8 @@ function withWebsiteData(Component) {
       request_wait: 0,
       main_page_banners: local_main_page_banners,
       shop_banners: local_shop_banners,
+      ghests: false,
+      gh_wait: false,
       subjects: [
         { id: 0, name: "ریاضی" },
 
@@ -169,6 +171,19 @@ function withWebsiteData(Component) {
         this.get_cart(local_user.user_id);
       }
     }
+    wants_ghesti = (user_id) => {
+      this.setState({ gh_wait: true });
+      axios
+        .get(`https://daryaftyar.ir/backend/kad_api/wants_ghesti/${user_id}`)
+        .then((res) => {
+          const ghests = res.data;
+          this.setState({ ghests, gh_wait: false });
+          // console.log(ghests);
+        })
+        .catch((e) => {
+          this.handle_error(e);
+        });
+    };
     get_banners = () => {
       axios
         .get("https://daryaftyar.ir/backend/kad_api/banners")
@@ -788,6 +803,8 @@ function withWebsiteData(Component) {
             single_kelas={this.state.single_kelas}
             main_page_banners={this.state.main_page_banners}
             shop_banners={this.state.shop_banners}
+            wants_ghesti={this.wants_ghesti}
+            ghests={this.state.ghests}
           />
           {this.state.err.state ? (
             <div className={this.state.err.classes.map((c) => `${c}`)}>

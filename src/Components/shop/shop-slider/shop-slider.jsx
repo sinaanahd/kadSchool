@@ -137,7 +137,7 @@ class ShopSlider extends Component {
     }, 300);
   };
   render() {
-    const { shop_banners } = this.props;
+    const { shop_banners, handle_shop_pop_up } = this.props;
     return (
       <div className="slider-wrapper" ref={this.myRef}>
         <div
@@ -169,6 +169,13 @@ class ShopSlider extends Component {
         ) : (
           <LittleLoading />
         )}
+        {/* <span
+          onClick={(e) => {
+            handle_shop_pop_up(e);
+          }}
+          className="get-council-btn">
+          دریافت مشاوره ثبت نام
+        </span> */}
       </div>
     );
   }

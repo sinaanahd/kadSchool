@@ -10,6 +10,7 @@ import catImg3 from "../../assets/images/cat-img-3.svg";
 import downArrow from "../../assets/images/dow-arroow-filter.svg";
 import LittleLoading from "../reuseables/little-loading";
 import ShopSlider from "./shop-slider/shop-slider";
+import ShopPopUp from "./shop-pop-up/shop-pop-up";
 class Shop extends Component {
   state = {
     shown: false,
@@ -18,6 +19,7 @@ class Shop extends Component {
     dore: false,
     course: false,
     filtered_products: false,
+    shop_pop_up: false,
   };
   componentDidMount() {}
   handle_filter_show = (shown) => {
@@ -173,6 +175,17 @@ class Shop extends Component {
     });
     this.setState({ filtered_products: final_kelasses });
   };
+  handle_shop_pop_up = (e) => {
+    const shop_pop_up = this.state.shop_pop_up;
+    if (shop_pop_up) {
+      const classes = [...e.target.classList];
+      if (classes.includes("shop-pu-bgc")) {
+        this.setState({ shop_pop_up: !shop_pop_up });
+      }
+    } else {
+      this.setState({ shop_pop_up: !shop_pop_up });
+    }
+  };
   render() {
     const {
       doreha,
@@ -188,51 +201,7 @@ class Shop extends Component {
       subjects,
       shop_banners,
     } = this.props;
-    if (
-      doreha === null ||
-      kelasses === null ||
-      teachers === null ||
-      courses === null ||
-      cart === null
-    ) {
-      return (
-        <>
-          <Helmet>
-            <title>فروشگاه کاد</title>
-          </Helmet>
-          <section className="bgc-wrapper shop-wrapper-section">
-            <div className="mm-width shop-wrapper">
-              <SideBar />
-              <div className="main-content">
-                <h1 className="page-title">فروشگاه</h1>
-                <div className="slider-wrapper">
-                  <span className="slider">
-                    <span className="slider-btn"></span>
-                  </span>
-                </div>
-                <div className="categories-wrapper">
-                  <span className="category active">
-                    <img src={catImg3} alt="" />
-                    <span className="cat-text">کاد پلاس</span>
-                  </span>
-                  <span className="category">
-                    <img src={catImg2} alt="" />
-                    <span className="cat-text">جزوه</span>
-                  </span>
-                  <span className="category">
-                    <img src={catImg1} alt="" />
-                    <span className="cat-text">کلاس</span>
-                  </span>
-                </div>
-                <div className="filters-wrapper">
-                  <LittleLoading />
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      );
-    }
+
     return (
       <>
         <Helmet>
@@ -243,7 +212,10 @@ class Shop extends Component {
             <SideBar />
             <div className="main-content">
               <h1 className="page-title">فروشگاه</h1>
-              <ShopSlider shop_banners={shop_banners} />
+              <ShopSlider
+                shop_banners={shop_banners}
+                handle_shop_pop_up={this.handle_shop_pop_up}
+              />
               {/* <div className="categories-wrapper">
                 <span className="category active">
                   <img src={catImg3} alt="" />
@@ -594,6 +566,11 @@ class Shop extends Component {
             </div>
           </div>
         </section>
+        {this.state.shop_pop_up ? (
+          <ShopPopUp handle_shop_pop_up={this.handle_shop_pop_up} />
+        ) : (
+          <></>
+        )}
       </>
     );
   }

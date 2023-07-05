@@ -17,11 +17,9 @@ class SetNewPassword extends Component {
   };
   componentDidMount() {
     const { user } = this.props;
-    // document.querySelector(".new-footer").style.display = "none";
-    // document.querySelector(".main-header").style.display = "none";
-    // if (user) {
-    //   window.location.href = window.location.href.replace("Login", "Dashboard");
-    // }
+    if (user) {
+      window.location.pathname = "/Dashboard";
+    }
   }
   get_pass_1 = (value) => {
     let pass_err = false;
@@ -64,7 +62,7 @@ class SetNewPassword extends Component {
         .then((res) => {
           const { status, message } = res.data;
           if (status) {
-            window.location.pathname = "/Dashboard";
+            window.location.pathname = "/Login";
           } else {
             this.setState({ pass_err: message, pause: false });
           }

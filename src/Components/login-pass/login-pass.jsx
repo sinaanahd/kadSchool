@@ -18,11 +18,9 @@ class LoginPass extends Component {
   };
   componentDidMount() {
     const { user } = this.props;
-    // document.querySelector(".new-footer").style.display = "none";
-    // document.querySelector(".main-header").style.display = "none";
-    // if (user) {
-    //   window.location.href = window.location.href.replace("Login", "Dashboard");
-    // }
+    if (user) {
+      window.location.pathname = "/Dashboard";
+    }
   }
   handle_phone_number = ({ target }) => {
     const { value } = target;

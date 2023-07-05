@@ -2320,6 +2320,45 @@ input[type=number] {
             cursor: pointer;
         }
     }
+    .submit-info-data-btn{
+        width: 150px;
+        height: 48px;
+        font-size: 16px;
+        color: #fff;
+        background-color:$mainColor;
+        border-radius: 8px;
+        border: 2px solid $mainColor;
+        @include flexMixin(row,center,center);
+        margin: 20px 0 0;
+        cursor: pointer;
+        transition: $transition;
+        &:hover{
+            color: $mainColor;
+            background-color: #fff;
+        }
+    }
+    .fail.submit-info-data-btn{
+        cursor: not-allowed;
+        background-color: $redColor;
+        border-color: $redColor;
+        color: #fff;
+    }
+    .data-error-wrapper , .ok-way-data{
+        font-size: 14px;
+        color: $redColor;
+        width: 200px;
+        @include flexMixin(row,center,center);
+        height: 50px;
+        border-radius: 8px;
+        background-color: #fff;
+        border: 2px solid $redColor;
+        box-shadow: 0 0 10px -3px $redColor;
+    }
+    .ok.data-error-wrapper , .ok-way-data{
+        color: $greenColor;
+        border-color: $greenColor;
+        box-shadow: unset;
+    }
     .s-g-options{
         width: 100%;
         position: absolute;
@@ -2413,6 +2452,13 @@ input[type=number] {
         background-color: $mainColor;
         color: #fff;
         font-size: 16px;
+        cursor: pointer;
+        border: 2px solid $mainColor;
+        &:hover{
+            color: $mainColor;
+            background-color: #fff;
+
+        }
     }
     .change-pass-wrapper{
         width: 100%;

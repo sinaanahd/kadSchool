@@ -101,9 +101,7 @@ class SignUp extends Component {
             .get(`https://daryaftyar.ir/backend/kad_api/user/${data.user_id}`)
             .then((res) => {
               const user = res.data;
-              //localStorage.setItem("user-kad", JSON.stringify(user));
               this.props.inside_user(user);
-              //console.log(user);
               window.location.pathname = "/SetPassword";
               this.setState({ pause: false });
             })

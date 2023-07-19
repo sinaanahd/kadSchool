@@ -19,7 +19,12 @@ class Course extends Component {
             ? "course active " + this.state.animate
             : "course " + this.state.animate
         }>
-        <img src={kelas.image_link} alt={kelas.kelas_title} />
+        <img
+          src={kelas.image_link}
+          alt={kelas.kelas_title}
+          width={246}
+          height={246}
+        />
         <a
           href={kelas.skyRoom_link}
           className="enter-class"

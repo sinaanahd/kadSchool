@@ -3,11 +3,11 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
-import checked_img from "../../assets/images/checked.svg";
+import checked_img from "../../assets/images/checked.webp";
 import axios from "axios";
 import RulesPopUp from "./rules-pop-up/rules-pop-up";
 import LittleLoading from "../reuseables/little-loading";
-import login_bgc from "../../assets/images/login-img.svg";
+import login_bgc from "../../assets/images/login-img.webp";
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -28,15 +28,13 @@ class SignUp extends Component {
     rules_pop_up: false,
   };
   componentDidMount() {
-    // document.querySelector(".new-footer").style.display = "none";
-    // document.querySelector(".main-header").style.display = "none";
     const { user } = this.props;
-    // if (user) {
-    //   window.location.href = window.location.href.replace(
-    //     "SignUp",
-    //     "Dashboard"
-    //   );
-    // }
+    if (user) {
+      window.location.href = window.location.href.replace(
+        "SignUp",
+        "Dashboard"
+      );
+    }
   }
   handle_rule_pop_up = () => {
     const rules_pop_up = !this.state.rules_pop_up;
@@ -93,12 +91,12 @@ class SignUp extends Component {
         major: this.convert_major(subject),
       };
       axios
-        .post(`https://daryaftyar.ir/backend/kad_api/register_user`, obj)
+        .post(`https://kadschool.com/backend/kad_api/register_user`, obj)
         .then((res) => {
           let data = res.data;
           console.log(res.data);
           axios
-            .get(`https://daryaftyar.ir/backend/kad_api/user/${data.user_id}`)
+            .get(`https://kadschool.com/backend/kad_api/user/${data.user_id}`)
             .then((res) => {
               const user = res.data;
               this.props.inside_user(user);
@@ -144,6 +142,7 @@ class SignUp extends Component {
       <>
         <Helmet>
           <title>ثبت نام در کاد</title>
+          <meta name="description" content="صفحه ثبت نام کاد" />
         </Helmet>
         <section
           className="login-wrapper-section"
@@ -155,7 +154,7 @@ class SignUp extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Home" className="main-logo">
+          <Link to="/HomePage" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper">

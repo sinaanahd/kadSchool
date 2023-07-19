@@ -12,6 +12,10 @@ class TopStudents extends Component {
       <>
         <Helmet>
           <title>رتبه‌های برتر کاد</title>
+          <meta
+            name="description"
+            content="دانش آموزان برتر کاد که توانسته‌اند بهترین نتایج کنکور را کسب کنند. به کاد بپیوندید تا شما هم یکی از آنان باشید و بهترین نتیجه در کنکور را رقم بزنید."
+          />
         </Helmet>
         <section className="bgc-wrapper">
           <div className="weekplan-kad-wrapper mm-width">

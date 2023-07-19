@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import LittleLoading from "../../reuseables/little-loading";
+
+import council_btn from "../../../assets/images/concil-btn-1.webp";
 class ShopSlider extends Component {
   state = {
     is_dragging: false,
@@ -10,6 +12,21 @@ class ShopSlider extends Component {
     super(props);
     this.myRef = React.createRef();
   }
+  componentDidMount() {
+    setTimeout(() => {
+      setInterval(() => {
+        this.auto_move();
+      }, 4000);
+    }, 2000);
+  }
+  auto_move = () => {
+    const active_item = this.state.active_item;
+    if (active_item !== this.props.shop_banners.length) {
+      this.move_slider("next");
+    } else {
+      this.setState({ active_item: 1 });
+    }
+  };
   handle_mouse_down = (e) => {
     this.setState({ is_dragging: true, start_pos: e.clientX });
   };
@@ -87,12 +104,13 @@ class ShopSlider extends Component {
     }
   };
   show_change = (num) => {
-    // console.log(this.myRef.current.children);
-    const kinder = [...this.myRef.current.children];
-    const slides = kinder.filter((k) => k.classList.contains("slide"));
-    slides.forEach((slide) => {
-      slide.style.transform = `translateX(${(num - 1) * 100}%)`;
-    });
+    if (this.myRef.current) {
+      const kinder = [...this.myRef.current.children];
+      const slides = kinder.filter((k) => k.classList.contains("slide"));
+      slides.forEach((slide) => {
+        slide.style.transform = `translateX(${(num - 1) * 100}%)`;
+      });
+    }
     //this.myRef.current.style.transform = `translateX(${(num - 1) * 100}%)`;
   };
   show_change_touch = (num) => {
@@ -105,9 +123,6 @@ class ShopSlider extends Component {
   };
   animate_end_touch = () => {
     const { active_item } = this.state;
-    // this.myRef.current.style.transform = `translateX(${
-    //   (active_item - 1) * 101
-    //   }%)`;
     const kinder = [...this.myRef.current.children];
     const slides = kinder.filter((k) => k.classList.contains("slide"));
     slides.forEach((slide) => {
@@ -120,18 +135,23 @@ class ShopSlider extends Component {
   animate_end = (pos) => {
     const { active_item } = this.state;
     if (pos === "end") {
-      const kinder = [...this.myRef.current.children];
-      const slides = kinder.filter((k) => k.classList.contains("slide"));
-      slides.forEach((slide) => {
-        slide.style.transform = `translateX(${(active_item - 1) * 101}%)`;
-      });
+      if (this.myRef.current) {
+        const kinder = [...this.myRef.current.children];
+        const slides = kinder.filter((k) => k.classList.contains("slide"));
+        slides.forEach((slide) => {
+          slide.style.transform = `translateX(${(active_item - 1) * 101}%)`;
+        });
+      }
     } else {
-      const kinder = [...this.myRef.current.children];
-      const slides = kinder.filter((k) => k.classList.contains("slide"));
-      slides.forEach((slide) => {
-        slide.style.transform = `translateX(-10px)`;
-      });
+      if (this.myRef.current) {
+        const kinder = [...this.myRef.current.children];
+        const slides = kinder.filter((k) => k.classList.contains("slide"));
+        slides.forEach((slide) => {
+          slide.style.transform = `translateX(-10px)`;
+        });
+      }
     }
+    console.log();
     setTimeout(() => {
       this.show_change(active_item);
     }, 300);
@@ -163,19 +183,19 @@ class ShopSlider extends Component {
         {shop_banners ? (
           shop_banners.map((b, i) => (
             <div className="slide" key={i++}>
-              <img src={b} alt="چرا کاد متفاوت است" />
+              <img src={b} alt="چرا کاد متفاوت است" width={1144} height={181} />
             </div>
           ))
         ) : (
           <LittleLoading />
         )}
-        {/* <span
+        <span
           onClick={(e) => {
             handle_shop_pop_up(e);
           }}
           className="get-council-btn">
-          دریافت مشاوره ثبت نام
-        </span> */}
+          <img src={council_btn} alt="دریافت مشاوره" />
+        </span>
       </div>
     );
   }

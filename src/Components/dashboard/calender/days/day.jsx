@@ -19,17 +19,35 @@ class Day extends Component {
     const now = time.getHours();
     const start = parseInt(start_time.split(":")[0]);
     const finish = parseInt(finish_time.split(":")[0]);
+    const { active_day } = this.props;
     let status = "unknown";
-    if (now >= start && now <= finish) {
-      status = "online";
-      // status = "finished";
-      // status = "notStarted";
-    } else if (now > finish) {
-      status = "finished";
-    } else if (now < start) {
-      start = "notStarted";
+    if (this.handle_day_match(active_day)) {
+      if (now >= start && now <= finish) {
+        status = "online";
+      } else if (now > finish) {
+        status = "finished";
+      } else if (now < start) {
+        start = "notStarted";
+      }
+    } else {
+      status = "notStarted";
     }
     this.setState({ status });
+  };
+  handle_day_match = (day_str) => {
+    const time = new Date();
+    const day = time.getDay();
+    const day_strs = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const index = day_strs.indexOf(day_str);
+    return day === index;
   };
   find_tacher = (id, kelases, teachers) => {
     const kelas = kelases.find((k) => k.kelas_id === id);
@@ -56,18 +74,22 @@ class Day extends Component {
           <span className="teachers-name">
             {kelases ? (
               this.find_tacher(my_class.parent_kelas_id, kelases, teachers).map(
-                (t) => <span key={t.teacher_id}>{t.fullname},</span>
+                (t) => <span key={t.teacher_id}>{t.fullname} </span>
               )
             ) : (
               <LittleLoading />
             )}
           </span>
         </span>
-        <Link
-          to={`/SingleSession/${my_class.jalase_id}`}
-          className="dots-wrapper">
-          ...
-        </Link>
+        {this.state.status === "online" ? (
+          <Link
+            to={`/SingleSession/${my_class.jalase_id}`}
+            className="dots-wrapper">
+            ...
+          </Link>
+        ) : (
+          <span className="dots-wrapper">...</span>
+        )}
       </div>
     );
   }

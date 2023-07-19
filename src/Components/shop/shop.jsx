@@ -4,10 +4,10 @@ import withWebsiteData from "../hoc/with-website-data";
 import SideBar from "../side-bar/side-bar";
 import Product from "./product/product";
 
-import catImg1 from "../../assets/images/cat-img-1.svg";
-import catImg2 from "../../assets/images/cat-img-2.svg";
-import catImg3 from "../../assets/images/cat-img-3.svg";
-import downArrow from "../../assets/images/dow-arroow-filter.svg";
+import catImg1 from "../../assets/images/cat-img-1.webp";
+import catImg2 from "../../assets/images/cat-img-2.webp";
+import catImg3 from "../../assets/images/cat-img-3.webp";
+import downArrow from "../../assets/images/dow-arroow-filter.webp";
 import LittleLoading from "../reuseables/little-loading";
 import ShopSlider from "./shop-slider/shop-slider";
 import ShopPopUp from "./shop-pop-up/shop-pop-up";
@@ -200,12 +200,23 @@ class Shop extends Component {
       years,
       subjects,
       shop_banners,
+      handle_error,
     } = this.props;
 
     return (
       <>
         <Helmet>
           <title>فروشگاه کاد</title>
+          {shop_banners
+            ? shop_banners.map((sb, i) => (
+                <link key={i} rel="preload" as="image" href={sb} />
+              ))
+            : ""}
+          <meta
+            name="description"
+            content="صفحه فروشگاه ما شامل مجموعه‌ای از کلاس‌های آنلاین با کیفیت برتر است که برای  ارائه به دانش‌آموزان برتر در نظر گرفته شده است. این کلاس‌ها فرصتی عالی برای آمادگی برای کنکور در تمامی رشته ها است. با تنوع در موضوعات و استفاده از روش‌های آموزشی جذاب، دانش‌آموزان می‌توانند به طریقی هیجان‌انگیز و موثر در مسیر یادگیری خود پیشروی کنند. به فروشگاه ما بپیوندید و با استفاده از فروشگاه کاد، بهترین کلاس‌های آنلاین را به دست آورید و تجربه آموزشی عالی را تجربه کنید."
+          />
+          <meta name="keywords" content="داشبورد کاربری کاد, میز مطالعه کاد," />
         </Helmet>
         <section className="bgc-wrapper shop-wrapper-section">
           <div className="mm-width shop-wrapper">
@@ -230,9 +241,9 @@ class Shop extends Component {
                   <span className="cat-text">کلاس</span>
                 </span>
               </div> */}
-              <p>
-                توی این بخش میتونی لیست همه کلاس های آنلاین کاد رو ببینی.منتظر
-                دیدنت سر کلاس ها هستیم
+              <p className="shop-desc-p">
+                توی این بخش میتونی لیست همه کلاس های آنلاین کاد رو ببینی😍.منتظر
+                دیدنت سر کلاس ها هستیم.❤️
               </p>
               <div className="filters-wrapper">
                 <div
@@ -247,7 +258,12 @@ class Shop extends Component {
                         ? this.year_text(this.state.year)
                         : "پایه تحصیلی"}
                     </span>
-                    <img src={downArrow} alt="" />
+                    <img
+                      src={downArrow}
+                      alt="باز کردن"
+                      width={20}
+                      height={12}
+                    />
                   </span>
                   <span
                     className={
@@ -331,7 +347,12 @@ class Shop extends Component {
                         ? this.subject_text(this.state.subject)
                         : "رشته تحصیلی"}
                     </span>
-                    <img src={downArrow} alt="" />
+                    <img
+                      src={downArrow}
+                      alt="باز کردن"
+                      width={20}
+                      height={12}
+                    />
                   </span>
                   <span
                     className={
@@ -419,7 +440,12 @@ class Shop extends Component {
                         ? "همه دوره ها"
                         : "دوره"}{" "}
                     </span>
-                    <img src={downArrow} alt="" />
+                    <img
+                      src={downArrow}
+                      alt="باز کردن"
+                      width={20}
+                      height={12}
+                    />
                   </span>
                   <span
                     className={
@@ -477,7 +503,12 @@ class Shop extends Component {
                         ? "همه درس ها"
                         : "درس"}{" "}
                     </span>
-                    <img src={downArrow} alt="" />
+                    <img
+                      src={downArrow}
+                      alt="باز کردن"
+                      width={20}
+                      height={12}
+                    />
                   </span>
                   <span
                     className={
@@ -567,7 +598,10 @@ class Shop extends Component {
           </div>
         </section>
         {this.state.shop_pop_up ? (
-          <ShopPopUp handle_shop_pop_up={this.handle_shop_pop_up} />
+          <ShopPopUp
+            handle_shop_pop_up={this.handle_shop_pop_up}
+            handle_error={handle_error}
+          />
         ) : (
           <></>
         )}

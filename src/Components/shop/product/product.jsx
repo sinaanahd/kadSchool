@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import scrollToTop from "../../functions/scroll";
 import LittleLoading from "../../reuseables/little-loading";
 
-import cartWhite from "../../../assets/images/cart-white.svg";
+import cartWhite from "../../../assets/images/cart-white.webp";
 class Product extends Component {
   state = {
     dore_kelases: false,
     kelas_teachers: false,
     pause: false,
+    animate: "animate-product",
   };
   componentDidMount() {
     const { kelas, teachers, doreha } = { ...this.props };
@@ -19,6 +20,9 @@ class Product extends Component {
     } else {
       //this.start_component();
     }
+    setTimeout(() => {
+      this.setState({ animate: "" });
+    }, 100);
   }
   start_component = () => {
     const { kelas, teachers, doreha } = { ...this.props };
@@ -41,21 +45,27 @@ class Product extends Component {
   render() {
     const { kelas, handle_cart, cart, request_id } = this.props;
     return (
-      <div className="product-wrapper">
+      <div className={"product-wrapper " + this.state.animate}>
         <Link
           onClick={() => {
             scrollToTop();
           }}
-          to={`/SingleProd/${kelas.kelas_id}`}
+          to={`/SingleProd/${kelas.slug_name}`}
           className="prod-img-wrapper">
-          <img src={kelas.image_link} alt={kelas.kelas_title} />
+          <img
+            src={kelas.image_link}
+            alt={kelas.kelas_title}
+            width={194}
+            height={194}
+            loading="lazy"
+          />
         </Link>
         <h2 className="product-title">
           <Link
             onClick={() => {
               scrollToTop();
             }}
-            to={`/SingleProd/${kelas.kelas_id}`}>
+            to={`/SingleProd/${kelas.slug_name}`}>
             {kelas.kelas_title}
           </Link>
         </h2>
@@ -65,7 +75,9 @@ class Product extends Component {
               scrollToTop();
             }}
             to={`/SingleCourse/${
-              this.state.dore_kelases ? this.state.dore_kelases.dore_id : false
+              this.state.dore_kelases
+                ? this.state.dore_kelases.slug_name
+                : false
             }`}
             className="prod-class">
             {this.state.dore_kelases ? (
@@ -81,7 +93,7 @@ class Product extends Component {
                   onClick={() => {
                     scrollToTop();
                   }}
-                  to={`/Teacher/${t.teacher_id}`}
+                  to={`/Teacher/${t.slug_name}`}
                   key={t.teacher_id}>
                   {t.fullname}
                 </Link>
@@ -122,7 +134,12 @@ class Product extends Component {
               onClick={() => {
                 handle_cart(kelas.kelas_id);
               }}>
-              <img src={cartWhite} alt="" />
+              <img
+                src={cartWhite}
+                alt="اضافه کردن به سبد خرید"
+                width={20}
+                height={20}
+              />
               {request_id === kelas.kelas_id ? (
                 <span className="add-to-cart-text">
                   <LittleLoading />
@@ -137,7 +154,13 @@ class Product extends Component {
               onClick={() => {
                 handle_cart(kelas.kelas_id);
               }}>
-              <img src={cartWhite} alt="" />
+              <img
+                src={cartWhite}
+                alt="اضافه کردن به سبد خرید"
+                width={20}
+                height={20}
+                loading="lazy"
+              />
               {request_id === kelas.kelas_id ? (
                 <span className="add-to-cart-text">
                   <LittleLoading />
@@ -149,7 +172,13 @@ class Product extends Component {
           )
         ) : (
           <Link to={"/Login"} className="prod-add-to-cart">
-            <img src={cartWhite} alt="" />
+            <img
+              src={cartWhite}
+              alt="اضافه کردن به سبد خرید"
+              width={20}
+              height={20}
+              loading="lazy"
+            />
             <span className="add-to-cart-text">افزودن به سبد</span>
           </Link>
         )}

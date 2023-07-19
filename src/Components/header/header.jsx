@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "../side-bar/side-bar";
 import mainLogo from "../../assets/images/main-logo.webp";
-import cartIcon from "../../assets/images/cart-blue.svg";
-import userIcon from "../../assets/images/user-icon.svg";
-import menu_icon from "../../assets/images/menu-icon.svg";
-import cross_menu_icon from "../../assets/images/cross-menu.svg";
+import cartIcon from "../../assets/images/cart-blue.webp";
+import userIcon from "../../assets/images/user-icon.webp";
+import menu_icon from "../../assets/images/menu-icon.webp";
+import cross_menu_icon from "../../assets/images/cross-menu.webp";
 class Header extends Component {
   state = {
     menu: false,
@@ -43,7 +43,7 @@ class Header extends Component {
             )}
           </div>
           <div className="logo-wrapper">
-            <Link to="/Home">
+            <Link to="/HomePage">
               <img
                 width={181}
                 height={43}

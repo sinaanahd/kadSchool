@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import sidebarIcon_1 from "../../../assets/images/second-side-bar-item-3.svg";
-import sidebarIcon_2 from "../../../assets/images/second-side-bar-item-2.svg";
-import sidebarIcon_3 from "../../../assets/images/second-side-bar-item-1.svg";
-import sidebarIcon_3_white from "../../../assets/images/second-side-bar-item-white-1.svg";
-import sidebarIcon_2_white from "../../../assets/images/second-side-bar-item-white-2.svg";
-import sidebarIcon_1_white from "../../../assets/images/second-side-bar-item-white-3.svg";
+import sidebarIcon_1 from "../../../assets/images/second-side-bar-item-3.webp";
+import sidebarIcon_2 from "../../../assets/images/second-side-bar-item-2.webp";
+import sidebarIcon_3 from "../../../assets/images/second-side-bar-item-1.webp";
+import sidebarIcon_3_white from "../../../assets/images/second-side-bar-item-white-1.webp";
+import sidebarIcon_2_white from "../../../assets/images/second-side-bar-item-white-2.webp";
+import sidebarIcon_1_white from "../../../assets/images/second-side-bar-item-white-3.webp";
 class SecondSideBar extends Component {
   state = {};
   render() {

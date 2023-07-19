@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import { Helmet } from "react-helmet";
 import withWebsiteData from "../hoc/with-website-data";
 
-import iSvg from "../../assets/images/i.svg";
-import crossSvg from "../../assets/images/cross.svg";
-import sampleImg from "../../assets/images/single-sample.svg";
+import iSvg from "../../assets/images/i.webp";
+import crossSvg from "../../assets/images/cross.webp";
+import AparatVideo from "../video/aparat-video";
 class SingleSession extends Component {
   state = {
     jozve: false,
@@ -39,7 +38,7 @@ class SingleSession extends Component {
             <SideBar />
             <div className="main-content">
               <h1 className="title">{this.state.course.jalase_title}</h1>
-              <img src={sampleImg} alt="موضوع جلسه" />
+              <AparatVideo />
               <span className="single-details">توضیحات</span>
               <p className="single-text">
                 {this.state.course ? (

@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
 import SecondSideBar from "./second-side-bar/second-side-bar";
 
-import downloadIcon from "../../assets/images/download-icon.svg";
+import downloadIcon from "../../assets/images/download-icon.webp";
 class SingleSessionNew extends Component {
   state = {
     jozve: false,

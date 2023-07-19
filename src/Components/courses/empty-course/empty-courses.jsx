@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import empty_img from "../../../assets/images/my-courses-photo.svg";
+import empty_img from "../../../assets/images/my-courses-photo.webp";
 class EmptyCourses extends Component {
   state = {};
   render() {

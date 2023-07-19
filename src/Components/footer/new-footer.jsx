@@ -1,15 +1,66 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import scrollToTop from "../functions/scroll";
+import axios from "axios";
 
-import footerLogo from "../../assets/images/footer-logo.svg";
-import aparatLogo from "../../assets/images/aparat.svg";
-import telegramIcon from "../../assets/images/telegram-icon.svg";
-import whatsappIcon from "../../assets/images/whatsapp-icon.svg";
-import instagramIcon from "../../assets/images/instagram-icon.svg";
+import footerLogo from "../../assets/images/footer-logo-white-1.webp";
+import aparatLogo from "../../assets/images/aparat.webp";
+import telegramIcon from "../../assets/images/telegram-icon.webp";
+import whatsappIcon from "../../assets/images/whatsapp-icon.webp";
+import instagramIcon from "../../assets/images/instagram-icon.webp";
+import LittleLoading from "../reuseables/little-loading";
 
 class NewFooter extends Component {
-  state = {};
+  state = {
+    phone_number: false,
+    phone_err: false,
+    pause: false,
+    final_message: false,
+  };
+  send_gift_request = (e) => {
+    const phone_number = this.state.phone_number;
+    const send_obj = { phone_number: phone_number, type: 1 };
+    this.setState({ pause: true });
+    axios
+      .post(
+        `https://kadschool.com/backend/kad_api/call_request_marketing`,
+        send_obj
+      )
+      .then((res) => {
+        const { status } = res.data;
+        //console.log(res.data);
+        this.setState({ pause: false });
+        if (status) {
+          this.setState({ final_message: "درخواست شما با موفقیت ثبت شد" });
+        } else {
+          this.setState({
+            final_message: "درخواست شما قبلا ثبت شده ",
+          });
+        }
+        setTimeout(() => {
+          this.setState({ final_message: false });
+        }, 2000);
+      })
+      .catch((e) => {
+        this.setState({ pause: false });
+        this.props.handle_error(e);
+      });
+  };
+  handle_phone = (e) => {
+    const { value } = e.target;
+    //console.log(value);
+    let phone_number = false;
+    let phone_err = false;
+    if (!value.startsWith("09")) {
+      phone_err = "شماره باید با ۰۹ شروع شود";
+    } else if (value.length !== 11) {
+      phone_err = "شماره تلفن باید ۱۱ رقم باشد";
+    } else {
+      phone_err = "ok";
+      phone_number = value;
+    }
+    this.setState({ phone_err, phone_number });
+  };
   render() {
     return (
       <footer className="new-footer">
@@ -18,7 +69,7 @@ class NewFooter extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to="/Home">
+            to="/HomePage">
             <img
               src={footerLogo}
               width={62}
@@ -31,15 +82,45 @@ class NewFooter extends Component {
           <div className="light-blue"></div>
           <div className="main-content mm-width">
             <div className="get-gift">
-              <h4>دریافت هدیه</h4>
+              <p className="h4">دریافت هدیه</p>
               <p>هدیه یک میلیون تومانیت رو همین الان از کاد بگیر</p>
               <span className="footer-input-wrapper">
-                <input type="number" placeholder="09123456789" />
-                <span className="submit-btn-footer">ثبت</span>
+                <input
+                  onInput={(e) => {
+                    this.handle_phone(e);
+                  }}
+                  type="number"
+                  placeholder="09123456789"
+                />
+                {this.state.phone_err === "ok" ? (
+                  <span
+                    onClick={() => {
+                      this.send_gift_request();
+                    }}
+                    className="submit-btn-footer">
+                    {this.state.pause ? <LittleLoading /> : "ثبت"}
+                  </span>
+                ) : (
+                  <span className="submit-btn-footer wait-btn-footer">ثبت</span>
+                )}
               </span>
+              {this.state.final_message ? (
+                <span className="normal-footer-final-msg">
+                  {this.state.final_message}
+                </span>
+              ) : (
+                ""
+              )}
+              {this.state.phone_err && this.state.phone_err !== "ok" ? (
+                <span className="normal-footer-err-wrapper">
+                  {this.state.phone_err}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
             <div className="quick-acsses ul-type">
-              <h4 className="ul-title">درباره کاد</h4>
+              <p className="ul-title">درباره کاد</p>
               <ul>
                 <li>
                   <Link
@@ -72,7 +153,7 @@ class NewFooter extends Component {
               </ul>
             </div>
             <div className="about-kad ul-type">
-              <h4 className="ul-title">دسترسی سریع</h4>
+              <p className="ul-title">دسترسی سریع</p>
               <ul>
                 <li>
                   <Link

@@ -5,9 +5,7 @@ import give_date_data from "../../functions/give-date-data";
 import find_month from "../../functions/find-month";
 import make_full_objects from "../../functions/make-full-objects";
 
-import pen from "../../../assets/images/pen-profile.svg";
-import arrow from "../../../assets/images/dow-arroow-filter.svg";
-import profile_sample from "../../../assets/images/user-sample-icon.png";
+import arrow from "../../../assets/images/dow-arroow-filter.webp";
 import LittleLoading from "../../reuseables/little-loading";
 class Info extends Component {
   state = {
@@ -216,7 +214,7 @@ class Info extends Component {
       { title: "birth_year", value: birth_year },
       { title: "home_address", value: address },
       { title: "home_phone_number", value: home_number },
-      { title: "subject", value: subject },
+      { title: "major", value: subject },
       { title: "year", value: grade },
     ];
     // console.log(make_full_objects(obj_arr));
@@ -267,23 +265,17 @@ class Info extends Component {
     return (
       <div className="info-wrapper">
         <div className="col-1 cols">
-          {/* <span className="profile-photo-wrapper">
-            <span className="title">تصویر پروفایل</span>
-            <span className="img-wrapper">
-              <img src={profile_sample} alt="" />
-            </span>
-            <img src={pen} alt="" />
-          </span> */}
           <span className="input-wrapper">
-            <span className="title">
+            <label for="full-name">
               نام و نام خانوادگی : ({user ? user.name : <LittleLoading />})
-            </span>
+            </label>
             <input
               onInput={(e) => {
                 this.handle_name(e);
               }}
               type="text"
               placeholder="مثال :‌ محمد محمدی"
+              name="full-name"
             />
           </span>
           {this.state.name_err !== "ok" && this.state.name_err ? (
@@ -315,6 +307,8 @@ class Info extends Component {
                   {this.state.day ? convert_to_persian(this.state.day) : ""}
                 </span>
                 <img
+                  width={20}
+                  height={12}
                   src={arrow}
                   onClick={() => {
                     this.handle_active_option("days");
@@ -348,6 +342,8 @@ class Info extends Component {
               <span className="month birthday-input">
                 <span className="text">{this.state.month}</span>
                 <img
+                  width={20}
+                  height={12}
                   src={arrow}
                   onClick={() => {
                     this.handle_active_option("months");
@@ -386,7 +382,7 @@ class Info extends Component {
                 <span className="text">
                   {this.state.year ? convert_to_persian(this.state.year) : ""}
                 </span>
-                <img src={arrow} alt="" />
+                <img width={20} height={12} src={arrow} alt="" />
                 {this.state.active_option === "years" ? (
                   <span
                     onClick={() => {
@@ -452,7 +448,7 @@ class Info extends Component {
             <></>
           )}
           <span className="input-wrapper">
-            <span className="title">
+            <label for="home-number" className="title">
               شماره ثابت : (
               {user ? (
                 user.home_phone_number !== null ? (
@@ -464,12 +460,13 @@ class Info extends Component {
                 <LittleLoading />
               )}
               )
-            </span>
+            </label>
             <input
               onInput={(e) => {
                 this.handle_home_number(e);
               }}
               type="number"
+              name="home-number"
               placeholder="مثال : ۰۲۱۶۶۸۸۱۱۲۲"
             />
           </span>
@@ -493,6 +490,8 @@ class Info extends Component {
             <span className="subject-wrapper">
               <span className="text">{this.state.subject_text}</span>
               <img
+                width={20}
+                height={12}
                 onClick={() => {
                   this.handle_sg_active("subject");
                 }}
@@ -544,6 +543,8 @@ class Info extends Component {
             <span className="subject-wrapper">
               <span className="text">{this.state.grade_text}</span>
               <img
+                width={20}
+                height={12}
                 onClick={() => {
                   this.handle_sg_active("grade");
                 }}
@@ -552,12 +553,12 @@ class Info extends Component {
               />
               {this.state.s_g_active === "grade" ? (
                 <span className="s-g-options">
-                  <span
+                  {/* <span
                     onClick={() => {
                       this.handle_grade_text("نهم");
                     }}>
                     نهم
-                  </span>
+                  </span> */}
                   <span
                     onClick={() => {
                       this.handle_grade_text("دهم");
@@ -625,7 +626,7 @@ class Info extends Component {
                   this.handle_intro_ways();
                 }}>
                 <span className="s-text">{this.state.intro_text}</span>
-                <img src={arrow} alt="" />
+                <img width={20} height={12} src={arrow} alt="" />
               </span>
               <span
                 className="submit-ways"
@@ -700,25 +701,29 @@ class Info extends Component {
           <div className="change-pass-wrapper">
             <span className="change-pass-title">تغییر رمز عبور</span>
             <span className="pass-input-wrapper">
-              <span className="input-tt">رمز عبور</span>
+              <label for="pass-1" className="input-tt">
+                رمز عبور
+              </label>
               <input
                 onInput={(e) => {
                   this.get_pass_1(e.target.value);
                 }}
                 type="password"
                 name="pass-1"
-                id="main-pass-1"
+                id="pass-1"
               />
             </span>
             <span className="pass-input-wrapper">
-              <span className="input-tt">تکرار رمز عبور</span>
+              <label for="pass-2" className="input-tt">
+                تکرار رمز عبور
+              </label>
               <input
                 onInput={(e) => {
                   this.get_pass_2(e.target.value);
                 }}
                 type="password"
                 name="pass-2"
-                id="main-pass-2"
+                id="pass-2"
               />
             </span>
             {this.state.pass_1 &&

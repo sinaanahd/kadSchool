@@ -30,11 +30,12 @@ body {
 /* universal styles */
 #root {
     @include flexMixin(column, flex-start, center);
-    //background-image: url("../images/paper-bg.svg");
-    background-image: url("../images/paper-bg.webp");
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
+}
+.root_test {
+    background-image: url("../images/paper-bg.webp");
 }
 .mm-width{
     max-width: 1300px;
@@ -64,6 +65,7 @@ a{
 }
 img {
     max-width: 100%;
+    height: auto;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -101,6 +103,15 @@ input[type=number] {
 }
 /* error component */
 
+@keyframes flySpaceShip {
+    from{
+        transform: translateX(-2px);
+    }
+    to{
+        transform: translateX(2px);
+    }
+    
+}
 /* home page ( Landing ) */
 .home-page{
     width: 100%;
@@ -110,14 +121,16 @@ input[type=number] {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: #0C085C;
     color: #fff;
-    padding: 80px 0 0;
+    padding: 100px 0 0;
     position: relative;
+    overflow-x: hidden;
     .home-page-header{
         position: fixed;
         z-index: 999;
         top: 20px;
-        width : 100%;
+        width : calc(100% - 30px);
         height: 72px;
         @include flexMixin(row,space-between,center);
         padding: 0 30px;
@@ -147,8 +160,8 @@ input[type=number] {
         }
     }
     .hero-wrapper{
-        width: 100%;
-        @include flexMixin(row,flex-start,center);
+        width: calc(100% - 30px);
+        @include flexMixin(row,center,flex-start);
         gap: 20px;
     }
     .hero-gif{
@@ -172,14 +185,38 @@ input[type=number] {
         font-size: 22px;
         line-height: 185.125%;
     }
+    .hero-gift-text-img{
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        margin: 0 0 10px;
+        font {
+            color : $yellowColor;
+            font-size: 18px;
+            font-weight: bold;
+        };
+    }
+    .img-animate{
+        width: 30px;
+        height: 30px;
+        @include flexMixin(row,center,center);
+        // overflow: hidden;
+        img{
+            animation: flySpaceShip 1s ease-in-out .5s infinite alternate;
+            width: 100%;
+        }
+    }
     .get-on-board{
-        width: 100%;
+        width: 404px;
         @include flexMixin(column,flex-start,center);
         margin: 20px 0 0;
         font-size: 14px;
-        p{
-            margin : 0 0 25px;
-        }
+        max-width: 100%;
+        border-radius: 16px;
+        padding: 15px 5px;
+        border: 2px solid rgba(255, 255, 255, 0.60);
+        background: rgba(255, 255, 255, 0.20);
+        backdrop-filter: blur(20px);
+
     }
     .hero-input-wrapper{
         // width: 100%;
@@ -196,6 +233,22 @@ input[type=number] {
             padding: 0 10px;
         }
     }
+    .input-error{
+        color: $redColor;
+        width: 299px;
+        @include flexMixin(row,center,center);
+        height: 40px;
+        font-size: 12px;
+        border: 2px solid $redColor;
+        border-radius: 8px;
+        background-color: #fff;
+    }
+    .final-msg{
+        color: #fff;
+        width: 299px;
+        @include flexMixin(row,center,center);
+        font-size: 14px;
+    }
     .fly-btn{
         width: 96px;
         height: 40px;
@@ -205,9 +258,13 @@ input[type=number] {
         left: 0;
         top: 0;
         @include flexMixin(row,center,center);
+        cursor: pointer;
+    }
+    .fly-btn.dont-fly-yet{
+        cursor: not-allowed;
     }
     .achivment-history-wrapper{
-        width: 100%;
+        width: calc(100% - 30px);
         max-width: 1500px;
         @include flexMixin(column,center,center);
         gap: 40px;
@@ -232,7 +289,7 @@ input[type=number] {
         }
     }
     .numberical-contents{
-        width: 100%;
+        width: calc(100% - 30px);
         @include flexMixin(row,space-between,center);
         padding-left: 200px;
     }
@@ -355,11 +412,12 @@ input[type=number] {
     }
     .reason-title{
         font-size: 24px;
+        color: $yellowColor;
     }
     .reason-text {
         font-size: 16px;
         line-height: 27px;
-        text-align: justify;
+        text-align: center;
     }
     .resoan-back-btn{
         cursor: pointer;
@@ -369,65 +427,96 @@ input[type=number] {
         transform: rotateY(180deg);
     }
     .teachers-wrapper{
-        width: 100%;
-        margin: 30px 0 100px;
-        @include flexMixin(column,flex-start,center);
+        width: calc(100% - 30px);
+        margin: 30px 0 80px;
+        @include flexMixin(column,center,center);
         gap: 10px;
+        padding: 0 20px;
+        position: relative;
+        .resoan-back-btn{
+            position: absolute;
+            left: -20px;
+        }
+        .rev{
+            left: unset;
+            right: -20px;
+        }
     }
     .teachers{
         width: 100%;
         @include flexMixin(row,space-between,center);
         gap: 20px;
+        overflow: hidden;
     }
     .teacher{
-        width: 100%;
-        height: 424px;
+        flex: 0 0  244px;
         background-color: #fff;
         color: #000;
         border-radius: 16px;
         font-size: 20px;
-        @include flexMixin(column,space-between,center);
+        @include flexMixin(column,flex-start,center);
         padding: 10px;
-        flex: 1;
+        gap: 20px;
+        transition: $transition;
     }
     .teacher-img-wrapper{
         width: 100%;
         border-radius: 8px;
-        background-color: #d9d9d9;
         @include flexMixin(row,center,center);
-        height: 350px;
+        img{
+            width: 100%;
+        }
+    }
+    .teacher-name{
+        font-size: 20px;
     }
     .good-students-wrapper{
-        width: 100%;
+        width: calc(100% - 30px);
         margin: 0 0 87px;
-        @include flexMixin(column,flex-start,center);
+        @include flexMixin(column,center,center);
         gap: 10px;
+        padding: 0 20px;
+        position: relative;
+        .resoan-back-btn {
+            position: absolute;
+            left: -20px;
+        }
+        .rev {
+            left: unset;
+            right: -20px;
+        }
     }
     .good-students{
         width: 100%;
         @include flexMixin(row,space-between,center);
         gap: 20px;
+        overflow: hidden;
     }
     .good-student{
-        width: 100%;
-        height: 424px;
+        flex :0 0  244px;
+        // height: 424px;
         background-color: #fff;
         color: #000;
         border-radius: 16px;
         font-size: 20px;
-        @include flexMixin(column,space-between,center);
+        @include flexMixin(column,flex-start,center);
         padding: 10px;
-        flex: 1;
+        gap: 20px;
+        // flex: 1;
+        transition: $transition;
     }
     .good-student-img-wrapper{
         width: 100%;
         border-radius: 8px;
-        background-color: #d9d9d9;
+        // background-color: #d9d9d9;
         @include flexMixin(row,center,center);
-        height: 350px;
+        // height: 350px;
+        img{
+            width: 100%;
+        }
     }
     .comments-on-kad-wrapper{
-        width: 100%;
+        width: calc(100% - 30px);
         @include flexMixin(column,flex-start,center);
         gap: 52px;
         margin: 0 0 100px;
@@ -441,17 +530,17 @@ input[type=number] {
         position: relative;
         @include flexMixin(row,center,center);
         svg{
-            width: 500px!important;
-            height: 500px!important;
+            width: 300px!important;
+            height: 300px!important;
             max-width: unset;
             position: relative;
-            top: -150px;
+            top: -50px;
             // left: -40px;
             position: absolute;
         }
     }
     .comments{
-        width: 100%;
+        width: calc(100% - 30px);
         @include flexMixin(row,flex-start,center);
         overflow-x: hidden;
     }
@@ -521,11 +610,29 @@ input[type=number] {
         @include flexMixin(row,center,center);
         height: 277px;
         gap: 30px;
+        position: relative;
+    }
+    .jump-error-place{
+        position: absolute;
+        bottom: 20px;
+        @include flexMixin(row,center,center);
+        .jump-err{
+            color: $redColor;
+            background-color: #fff;
+            border: 2px solid $redColor;
+            height: 40px;
+            width: 300px;
+            border-radius: 8px;
+            @include flexMixin(row,center,center);
+        }
+        .jump-final-mg{
+            color: #fff;
+        }
     }
     .jump-img-wrapper{
         flex: 0 0 124px;
         height: 124px;
-        background-color: #d9d9d9;
+        // background-color: #d9d9d9;
         @include flexMixin(row,center,center);
     }
     .forms-data{
@@ -534,6 +641,12 @@ input[type=number] {
     }
     .jump-title{
         font-size: 24px;
+    }
+    .jump-titles-wrapper{
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+        color: $darkBlue;
+        text-align: center;
     }
     .jump-input-wrapper{
         position: relative;
@@ -557,9 +670,27 @@ input[type=number] {
         width : 96px;
         @include flexMixin(row,center,center);
         font-size: 14px;
+        cursor: pointer;
+    }
+    .wait-footer-home{
+        cursor: not-allowed;
+    }
+    .hf-error-wrapper{
+        color: $redColor;
+        background-color: #fff;
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+        border: 2px solid $redColor;
+        @include flexMixin(row,center,center);
+    }
+    .hf-final-msg{
+        color: #fff;
+        width: 100%;
+        @include flexMixin(row,center,center);
     }
     .home-footer{
-        width: 100%;
+        width: calc(100% - 30px);
         @include flexMixin(column,flex-start,flex-start);
         gap: 40px;
         padding: 33px 0 55px;
@@ -617,6 +748,13 @@ input[type=number] {
     .map-enamad{
         @include flexMixin(row,flex-end,center);
         gap: 20px;
+    }
+    .enamad  {
+        img{
+            width: 100px !important;
+            height: 100px !important;
+            display: block;
+        }
     }
     .hf-copy-text{
         font-size: 14px;
@@ -716,8 +854,9 @@ input[type=number] {
         font-size: 14px;
         @include flexMixin(column,flex-start,flex-end);
         gap: 10px;
-        h4{
+        .h4{
             width: 100%;
+            font-size: 16px;
         }
         p{
             font-size: 12px;
@@ -747,6 +886,25 @@ input[type=number] {
         top: 5px;
         left: 6px;
         cursor: pointer;
+    }
+    .wait-btn-footer.submit-btn-footer{
+        cursor: not-allowed;
+    }
+    .normal-footer-final-msg{
+        color: #000;
+        font-size: 14px;
+        width: 100%;
+        @include flexMixin(row,center,center);
+    }
+    .normal-footer-err-wrapper{
+        width: 100%;
+        height: 40px;
+        font-size: 12px;
+        border-radius: 8px;
+        border : 2px solid $redColor;
+        background-color: #fff;
+        color: $redColor;
+        @include flexMixin(row,center,center);
     }
     .ul-type{
         @include flexMixin(column,flex-start,flex-start);
@@ -794,6 +952,13 @@ input[type=number] {
         width: 180px;
         height: 133px;
         background-color: #d9d9d9;
+    }
+    .enamad {
+        img {
+            width: 100px !important;
+            height: 100px !important;
+            display: block;
+        }
     }
     .abs-footer-copy{
         position: absolute;
@@ -913,7 +1078,25 @@ input[type=number] {
     }
 }
 /* side bar */
-
+/* added to cart */
+.cart-update-wrapper-hoc{
+    position: fixed;
+    width: 300px;
+    height: 100px;
+    top: 40px;
+    border-radius: 16px;
+    border: 2px solid $mainColor;
+    color: $mainColor;
+    @include flexMixin(row,center,center);
+    font-size: 20px;
+    background-color: #fff;
+    z-index: 9999;
+    transition: $transition;
+}
+.cart-update-wrapper-hoc.animate{
+   top: -100px;
+}
+/* added to cart */
 /* dashboard */
 .dashboard{
     width: 100%;
@@ -1279,14 +1462,15 @@ input[type=number] {
     }
     .ins-sentence{
         flex: 0 0 385px;
-        @include flexMixin(row,center,center);
+        @include flexMixin(row,center,flex-start);
         border: 2px solid #006673;
         border-radius: 8px;
         height: 160px;
         background: linear-gradient(228deg, rgba(198, 229, 246, 0.50) 0%, rgba(255, 255, 255, 0.50) 100%);
         line-height: 22px;
-        padding: 13px 16px;
+        padding: 16px;
         position: relative;
+        overflow: hidden;
         p{
             width: 100%;
             text-align: center;
@@ -1294,9 +1478,10 @@ input[type=number] {
             @include flexMixin(column,flex-start,center);
             gap: 10px;
             font-size: 16px;
+            position: relative;
+            z-index: 2;
         }
         b{
-           
             @include flexMixin(row,center,center);
             gap: 10px;
             font-size: 14px;
@@ -1306,6 +1491,8 @@ input[type=number] {
             position: absolute;
             left: 0;
             bottom: 0;
+            width: 130px;
+            z-index: 1;
         }
     }
     .days-tip-wrapper{
@@ -1463,6 +1650,15 @@ input[type=number] {
     width: 100%;
     height: 100%;
 }
+.aparat-video-wrapper{
+    *{
+        outline: 0px solid #fff !important;
+        border: 0px solid #fff !important;
+    }
+    iframe{
+        border-radius: 8px !important;
+    }
+}
 /* aparat video */
 /* dashboard */
 
@@ -1491,6 +1687,7 @@ input[type=number] {
             position: relative;
             top: 10px;
             left: 5px;
+            width: 150px;
         }
     }
     .red.pay-img{
@@ -1578,6 +1775,11 @@ input[type=number] {
         gap: 22px;
         flex-wrap: wrap;
     }
+    .animate-why{
+        .why-box{
+            transform: scaleY(0);
+        }
+    }
     .why-box{
         flex: 0 0 303px;
         height: 220px;
@@ -1587,9 +1789,15 @@ input[type=number] {
         gap: 10px;
         position: relative;
         padding: 30px 0;
+        transition: $transition;
+        transform: scaleY(1);
         img{
             position: absolute;
-            top: -20px;
+            top: -25px;
+            max-width: 60px;
+            max-height: 50px;
+            width: auto;
+            height: auto;
         }
     }
     .why-title{
@@ -1647,6 +1855,7 @@ input[type=number] {
     .enter-class-spotplayer-info{
         @include flexMixin(row,flex-start,flex-start);
         gap: 12px;
+        width: 100%;
     }
     .spot-player-info{
         width: 100%;
@@ -1680,6 +1889,7 @@ input[type=number] {
         border-radius: 16px;
         img{
             cursor: pointer;
+            width: 20px;
         }
     }
     .enter-online-class{
@@ -1690,6 +1900,13 @@ input[type=number] {
         color: #fff;
         background-color: $yellowColor;
         border-radius: 8px;
+        transition: $transition;
+        cursor: pointer;
+        border: 2px solid $yellowColor;
+        &:hover{
+            color: $yellowColor;
+            background-color: #fff;
+        }
     }
     .courses-wrapper{
         display: grid;
@@ -1772,6 +1989,9 @@ input[type=number] {
         border: 2px solid #e5e5e5;
         border-radius: 8px;
         background-color: #fff;
+        img{
+            width: 600px;
+        }
     }
     .title-for-empty{
         font-size: 24px;
@@ -1823,6 +2043,9 @@ input[type=number] {
         gap: 10px;
         padding: 0 40px;
         text-align: justify;
+        img{
+            width: 30px;
+        }
     }
 }
 .animate-pop-up{
@@ -1857,7 +2080,10 @@ input[type=number] {
         padding: 20px;
         img{
             position: relative;
-            top: 5px;
+            top: 3px;
+            height: auto;
+            width: 5px;
+            flex: unset;
         }
         *{
             flex: 1;
@@ -2076,6 +2302,9 @@ input[type=number] {
     .question-header{
         @include flexMixin(row,flex-start,center);
         gap: 10px;
+        img{
+            width: 20px;
+        }
     }
     .question-title{
         font-size: 20px;
@@ -2101,7 +2330,17 @@ input[type=number] {
             border: 2px solid $mainColor;
             direction: ltr;
             padding: 0 10px;
+            outline: 0px solid $mainColor!important;
         }
+    }
+    .error-faq{
+        color: $redColor;
+        border: 2px solid $redColor;
+        max-width: 100%;
+        width: 300px;
+        height: 40px;
+        border-radius: 8px;
+        @include flexMixin(row,center,center);
     }
     .input-title{
         font-size: 14px;
@@ -2120,6 +2359,25 @@ input[type=number] {
         background-color: $mainColor;
         @include flexMixin(row,center,center);
         margin: 10px 0 0;
+        cursor: pointer;
+        border: 2px solid $mainColor;
+        transition: $transition;
+        &:hover{
+            color: $mainColor;
+            background-color: #fff;
+        }
+    }
+    .mate-mate.submit-btn{
+        cursor: not-allowed;
+        color: #fff;
+        background-color: $mainColor;
+    }
+    .final-msg-wrapper{
+        font-size: 16px;
+        color: $mainColor;
+        width: 100%;
+        @include flexMixin(row,center,center);
+
     }
 }
 /* faq page */
@@ -2192,6 +2450,12 @@ input[type=number] {
         transform: translate(0,0);
         &:hover{
             transform: translate(0,-10px);
+        }
+        img{
+           max-height: 25px;
+           max-width: 25px;
+           width: auto;
+           height: auto;
         }
     }
     .active.option{
@@ -2303,6 +2567,7 @@ input[type=number] {
         background-color: #fff;
         img{
             cursor: pointer;
+            width: 20px;
         }
     }
     .subject-wrapper{
@@ -2317,6 +2582,7 @@ input[type=number] {
         position: relative;
         background-color: #fff;
         img {
+            width: 20px;
             cursor: pointer;
         }
     }
@@ -2412,6 +2678,9 @@ input[type=number] {
         @include flexMixin(row,space-between,center);
         padding: 0 10px;
         cursor: pointer;
+        img{
+            width: 20px;
+        }
     }
     .select-options{
         position: absolute;
@@ -2552,6 +2821,9 @@ input[type=number] {
             width: 700px;
             min-height: 100px;
         }
+        img{
+            width: 800px;
+        }
     }
 }
 /* under construction */
@@ -2563,7 +2835,7 @@ input[type=number] {
     padding:50px 15px 50px;
     background-color: #EDFBFF;
     @include flexMixin(column,center,center);
-    overflow: hidden!important;
+    overflow-y: scroll;
     gap: 50px;
     .main-logo{
         width: 200px;
@@ -2575,7 +2847,7 @@ input[type=number] {
         height: 80%;
         opacity:0.5;
         z-index: 1;
-        top: 130px;
+        top: 10%;
         filter: blur(5px);
     }
     .login-wrapper{
@@ -2588,12 +2860,14 @@ input[type=number] {
         z-index: 2;
         position: relative;
         border: 2px solid $mainColor;
+        min-height: 500px;
     }
     .forms-wrapper{
         @include flexMixin(column,flex-start,center);
         width: 100%;
         padding: 30px 0;
         height: 100%;
+        min-height: 500px;
     }
     h1{
         color: #0C085C;
@@ -2624,6 +2898,10 @@ input[type=number] {
         border-radius: 8px;
         margin: 0 0 20px;
         @include flexMixin(row,center,center);
+    }
+    .green.error-place{
+        color: $greenColor;
+        border-color: $greenColor;
     }
     .need-margin{
         margin: 20px 0 0;
@@ -2834,6 +3112,9 @@ input[type=number] {
         border: 2px solid #e5e5e5;
         border-radius: 8px;
         padding: 0 55px 55px;
+        img{
+            width: 400px;
+        }
     }
     .title{
         font-size: 24px;
@@ -2896,12 +3177,19 @@ input[type=number] {
         width: 100%;
         @include flexMixin(column,flex-start,center);
         gap: 12px;
+        transition: $transition;
+        transform: scale(1);
+        opacity: 1;
+    }
+    .animate-teachers{
+        transform: scale(0);
+        opacity: 0;
     }
     .img-wrapper{
         width: 100%;
         height: 255px;
         border-radius: 16px;
-        background-color: #d9d9d9;
+        // background-color: #d9d9d9;
         @include flexMixin(row,center,center);
         overflow: hidden;
     }
@@ -2929,6 +3217,9 @@ input[type=number] {
         margin: 20px 0 10px;
         width: 100%;
         padding: 0 100px;
+    }
+    .aparat-video-wrapper{
+        width: 100%;
     }
     .single-text{
         font-size: 14px;
@@ -2964,6 +3255,7 @@ input[type=number] {
             top:15px;
             left: 15px;
             cursor: pointer;
+            width: 20px;
         }
     }
     .btns-wrapper{
@@ -3037,9 +3329,13 @@ input[type=number] {
         &:hover{
             transform: translate(0,-10px);
         }
+        img{
+            width: 40px;
+        }
     }
     .second-side-bar-item.active{
         background-color: #98BCE0;
+        
     }
     .multiple-content{
         @include flexMixin(column,center,flex-start);
@@ -3060,6 +3356,9 @@ input[type=number] {
         color: $mainColor;
         font-weight: bold;
         cursor: pointer;
+        img{
+            width: 20px;
+        }
     }
     .question{
         @include flexMixin(column,flex-start,flex-start);
@@ -3205,6 +3504,9 @@ input[type=number] {
                 border-bottom: 3px solid $mainColor;
             }
         }
+        img{
+            width: 10px;
+        }
     }
     .boxes-place{
         width: 1000px;
@@ -3215,6 +3517,10 @@ input[type=number] {
         width: 100%;
         @include flexMixin(row-reverse,flex-end,center);
         gap: 10px;
+        img{
+            width: 30px;
+            cursor: pointer;
+        }
     }
     .sub-title{
         font-size: 20px;
@@ -3234,6 +3540,9 @@ input[type=number] {
         transform: scale(1);
         transition: $transition;
         cursor: pointer;
+        img{
+            width: 100px;
+        }
     }
     .fields{
         width: 100%;
@@ -3353,19 +3662,20 @@ input[type=number] {
         width: 130px;
         position: absolute;
         bottom: 15px;
-        left: 10px;
+        right: 10px;
         cursor: pointer;
-        font-size: 12px;
-        height: 30px;
         z-index: 7;
-        background-image: linear-gradient( #3539a3 , #151656);
+        //background-image: linear-gradient( #3539a3 , #151656);
         // #3539a3;
-        border-radius: 8px;
-        box-shadow:inset 0 0 1px 2px #4e53f7;
+       // border-radius: 8px;
+        //box-shadow:inset 0 0 1px 2px #4e53f7;
         @include flexMixin(row,center,center);
-        color: #fff;
+        //color: #fff;
         transition: $transition;
         animation: grow_little 0.5s linear 0s infinite alternate;
+        img{
+            width: 120px;
+        }
     }
     .slide{
         flex: 0 0 100%;
@@ -3376,6 +3686,11 @@ input[type=number] {
             border-radius: 8px;
             width: 100%;
         }
+    }
+    .shop-desc-p{
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
     }
     .categories-wrapper{
         width: 100%;
@@ -3421,6 +3736,9 @@ input[type=number] {
         cursor: pointer;
         position: relative;
         z-index: 4;
+        img{
+            width: 20px;
+        }
     }
     .filter-items-wrapper{
         width: 100%;
@@ -3483,15 +3801,19 @@ input[type=number] {
         @include flexMixin(column,space-between,center);
         transition: $transition;
         direction: rtl;
+        transform: scale(1);
         &:hover{
-            transform: translate(0,-10px);
+            transform: scale(1) translate(0,-10px);
             box-shadow: $boxShadow;
         }
+    }
+    .animate-product{
+        transform: scale(0);
     }
     .prod-img-wrapper{
         width: 100%;
         @include flexMixin(row,center,center);
-        background-color: #d9d9d9;
+        // background-color: #d9d9d9;
         overflow: hidden;
     }
     .product-title{
@@ -3563,6 +3885,9 @@ input[type=number] {
         &:hover{
             animation: shake .2s ease-in-out 0s 2 alternate-reverse;
         }
+        img{
+            width: 20px;
+        }
     }
     .no-prods-found{
         width: 100%;
@@ -3603,7 +3928,7 @@ input[type=number] {
     z-index: 999999;
     .shop-pu-content{
         width: 800px;
-        height: 465px;
+        // height: 465px;
         background-color: #fff;
         border-radius: 16px;
         padding: 16px;
@@ -3631,7 +3956,19 @@ input[type=number] {
             width: 100%;
             border-radius: 8px;
             font-family: "main-font";
+            &:focus{
+               outline:0px solid $mainColor!important;
+            }
         }
+    }
+    .error-popup{
+        color: $redColor;
+        width: 200px;
+        height: 40px;
+        font-size: 12px;
+        border-radius: 8px;
+        border: 2px solid $redColor;
+        @include flexMixin(row,center,center);
     }
     .si-title{
         font-size: 16px;
@@ -3652,6 +3989,18 @@ input[type=number] {
             color: $mainColor;
             background-color: #fff;
         }
+    }
+    .not-now.spu-submit-form{
+        color: #fff;
+        background-color: $redColor;
+        cursor: not-allowed;
+        border: 2px solid $redColor;
+    }
+    .final-message{
+        color: $mainColor;
+        font-size: 16px;
+        width: 100%;
+        @include flexMixin(row,center,center);
     }
 }
 /* shop Page */
@@ -3843,9 +4192,9 @@ input[type=number] {
         }
         .video-place{
             width: 100%;
-            height: 456px;
+            // height: 456px;
             border-radius: 2px;
-            background-color: #D9D9D9;
+            // background-color: #D9D9D9;
         }
         .pop-up-text{
             width: 100%;
@@ -3896,25 +4245,32 @@ input[type=number] {
             .question-icon{
                 @include flexMixin(row,space-between,center);
                 width: 100%;
-                img{
+                gap: 10px;
+                .pop-qustion-img-arrow{
                     cursor: pointer;
-                    width: 36px;
+                    flex: 0 0 36px;
                     height: 36px;
                     border-radius: 50%;
                     border: 1px solid #c1c1c1;
-                    padding: 10px;
+                    @include flexMixin(row,center,center);
+                }
+                img{
                     transition: $transition;
                     transform: rotate(0deg);
+                    position: relative;
+                    top: 2px;
+                    width: 20px;
+                    height: auto;
                 }
                 .rotate{
                     transform: rotate(180deg);
                 }
             }
             h2{
-                font-size: 16px;
+                font-size: 20px;
             }
             p{
-                font-size: 12px;
+                font-size: 20px;
                 display: none;
                 width: 100%;
                 gap: 10px;
@@ -3954,6 +4310,35 @@ input[type=number] {
                 display: block;
                 position: relative;
                 top: 10px;
+            }
+        }
+        .go-to-teacher-pages{
+            width: 100%;
+            @include flexMixin(row,flex-start,center);
+            font-size: 16px;
+            gap: 5px;
+            flex-wrap: wrap;
+            a{
+                flex: 0 0 250px;
+                color: $mainColor;
+                transition: $transition;
+                @include flexMixin(row,flex-start,center);
+                gap : 5px;
+                &:hover{
+                    color: $yellowColor;
+                    &::before{
+                        background-color: $yellowColor;
+                    }
+                }
+                &::before{
+                    flex: 0 0 10px;
+                    height: 10px;
+                    background-color: $mainColor;
+                    transition: $transition;
+                    border-radius: 2px;
+                    content: " ";
+                    display: block;
+                }
             }
         }
     }
@@ -4075,8 +4460,8 @@ input[type=number] {
     }
     .video-wrapper{
         width: 100%;
-        height: 133px;
-        background-color: #d9d9d9;
+        // height: 133px;
+        //background-color: #d9d9d9;
     }
     .class-time{
         width: 100%;
@@ -4087,6 +4472,9 @@ input[type=number] {
         @include flexMixin(row,flex-start,center);
         gap: 5px;
         padding: 0 14px;
+        img{
+            width: 20px;
+        }
     }
     .class-text{
         @include flexMixin(row,space-between,center);
@@ -4206,6 +4594,7 @@ input[type=number] {
         img{
             cursor: pointer;
             transition: $transition;
+            width: 25px;
         }
        .rotate-45{
         transform: rotate(45deg);
@@ -4303,12 +4692,12 @@ input[type=number] {
         max-width: 1000px;
         @include flexMixin(row,flex-start,center);
         gap: 4px;
-        overflow-x: hidden;
+        overflow-x: scroll;
         padding: 20px 10px;
     }
     .sample-wrapper{
         flex: 0 0 226px;
-        height: 220px;
+        // height: 220px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: $boxShadow;
@@ -4316,7 +4705,7 @@ input[type=number] {
         font-size: 16px;
         @include flexMixin(column,flex-start,center);
         gap: 4px;
-        padding: 6px;
+        padding: 10px;
     }
     .img-wrapper{
         width: 100%;
@@ -4326,9 +4715,13 @@ input[type=number] {
     }
     .arrows{
         cursor: pointer;
+        img {
+                width: 15px;
+            }
     }
     .next{
         transform: rotate(180deg);
+        
     }
 }
 /* single course */
@@ -4441,6 +4834,7 @@ input[type=number] {
         img {
             position: relative;
             top: -4px;
+            width: 20px;
         }
     }
 
@@ -4490,6 +4884,7 @@ input[type=number] {
     }
     .teacher-resume-wrapper{
         width: 100%;
+        position: relative;
     }
     .teacher-resume-items{
         width: 100%;   
@@ -4500,6 +4895,7 @@ input[type=number] {
     .teacher-resume-items{
         width: 100%;
         padding: 0 10px 0;
+        margin: 0 0 40px;
         li{
             margin: 20px 0 0;
             list-style: none;
@@ -4517,6 +4913,42 @@ input[type=number] {
                 top : 3px;
             }
         }
+        .cv-title{
+            font-size: 18px;
+            &::before{
+                display: none;
+            }
+        }
+    }
+    .less.teacher-resume-items{
+        height: 200px;
+        overflow: hidden;
+    }
+    .more-cv{
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        position: absolute;
+        top: 255px;
+        right: 10px;
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        color: $yellowColor;
+        &::before{
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-right: 15px solid $yellowColor;
+            border-bottom: 10px solid transparent;
+            border-radius: 3px;
+            content: "";
+            display: block;
+        }
+    }
+    .less-cv{
+        position: relative;
+        top: -20px;
+        right: 10px;
     }
     .intriduction-wrapper{
         max-width: 600px;
@@ -4528,8 +4960,6 @@ input[type=number] {
     .intro-video-wrapper{
         max-width: 567px;
         width: 100%;
-        height: 302px;
-        background-color: #d9d9d9;
     }
     .teachers-courses-wrapper{
         width: 100%;
@@ -4613,7 +5043,7 @@ input[type=number] {
         transition: $transition;
         @include flexMixin(column,flex-start,flex-start);
         padding: 5px;
-        gap: 10px;
+        // gap: 10px;
         .img-wrapper{
             width: 100%;
             overflow: hidden;
@@ -4623,6 +5053,8 @@ input[type=number] {
         }
         p{
             font-size: 12px;
+            text-align: justify;
+            line-height: 20px;
         }
     }
 
@@ -4655,9 +5087,10 @@ input[type=number] {
     }
     .samples{
         width: 100%;
-        @include flexMixin(row,center,center);
+        @include flexMixin(row,flex-start,center);
         gap: 5px;
         margin: 7px 0 32px;
+        overflow-x: scroll;
     }
    
     .no-sample-teach,.no-class-box{
@@ -4680,20 +5113,19 @@ input[type=number] {
         }
     }
     .sample-wrapper{
-        max-width: 278px;
-        height: 252px;
-        width: 100%;
+        flex: 0 0 278px;
+        // height: 252px;
         border-radius: 8px;
         border: 2px solid #ddd;
-        padding: 8px 8px 17px;
+        padding: 8px;
         background-color: #fff;
-        @include flexMixin(column,flex-start,flex-start);
-        .img-wrapper{
-            width: 100%;
-            height: 167px;
-            border-radius: 8px;
-            background-color: #d9d9d9;
-        }
+        // @include flexMixin(column,flex-start,flex-start);
+        // .img-wrapper{
+        //     width: 100%;
+        //     height: 167px;
+        //     border-radius: 8px;
+        //     background-color: #d9d9d9;
+        // }
     }
     .sample-btns-wrapper{
         width: 100%;
@@ -4825,6 +5257,7 @@ input[type=number] {
         img{
             cursor: pointer;
             transition: $transition;
+            width: 20px;
             &:hover{
                 transform: scale(1.2);
             }
@@ -4852,6 +5285,9 @@ input[type=number] {
         position: absolute;
         top: 13px;
         left: 13px;
+        img{
+            width: 20px;
+        }
     }
     .pay-details{
         width: 100%;
@@ -4988,6 +5424,19 @@ input[type=number] {
             top: 5px;
         }
     }
+    // .includes-link{
+    //     display: inline-block;
+    //     &:before{
+    //         display : none;
+    //     }
+    //     a{
+    //         color: $mainColor;
+    //         transition: $transition;
+    //         &:hover{
+    //             color: $yellowColor;
+    //         }
+    //     }
+    // }
 }
 /* rules page */
 
@@ -5079,7 +5528,7 @@ input[type=number] {
         border-radius: 8px;
         padding: 16px 20px;
         max-width: 953px;
-        width: 100%;
+        width: calc(100% - 30px);
         min-height: 236px;
     }
     .payment-wrapper{
@@ -5087,9 +5536,14 @@ input[type=number] {
         @include flexMixin(column,flex-start,flex-start);
         gap: 12px;
     }
+    .single-payment{
+        width: 100%;
+        @include flexMixin(column, flex-start, flex-start);
+        gap: 12px;
+    }
     .payment{
         width: 100%;
-        height: 161px;
+        // height: 161px;
         background-color: #fff;
         border-radius: 8px;
         padding: 10px 20px;
@@ -5113,8 +5567,7 @@ input[type=number] {
         height: 100%;
         gap : 10px;
         img{
-            width: 75px;
-            height: 90px;
+            max-width: 95px;
             background-color: #d9d9d9;
         }
     }
@@ -5153,7 +5606,27 @@ input[type=number] {
     }
     .next-pay-price{
         font-size: 14px;
-        @include flexMixin(row,flex-start,center);
+        @include flexMixin(row,space-between,center);
+        gap: 10px;
+        width: 100%;
+    }
+    .next-pay-btn{
+        width: 200px;
+        height: 40px;
+        border-radius: 8px;
+        @include flexMixin(row,center,center);
+        cursor: pointer;
+        background-color: $yellowColor;
+        color: #fff;
+        border: 2px solid $yellowColor;
+        transition: $transition;
+        &:hover{
+            color: $yellowColor;
+            background-color: #fff;
+        }
+    }
+    .next-pay-notifier{
+        @include flexMixin(row, flex-start, center);
         gap: 10px;
     }
 }
@@ -5225,6 +5698,9 @@ input[type=number] {
     .os{
         @include flexMixin(row,flex-start,center);
         gap: 15px;
+        img{
+            width: 40px;
+        }
     }
 }
 /* needed apps */
@@ -5232,6 +5708,132 @@ input[type=number] {
 
 
 /* responsive */
+@media (max-width: 1200px) {
+    .home-page {
+        .hero-wrapper{
+            align-items: center;
+        }
+        .hero-title{
+            font-size: 40px;
+        }
+        .numerical-item {
+            .number{
+                font-size: 40px;
+            }
+        }
+        .content-text{
+            font-size: 16px;
+        }
+        .home-comment-text{
+            font-size: 16px;
+        }
+        .comments-on-kad-wrapper{
+            gap: 30px;
+        }
+        .forms-data{
+            flex-wrap: wrap;
+        }
+        .jump-titles-wrapper{
+            flex: 0 0 100%;
+        }
+    }
+    .dashboard {
+        padding: 0 15px;
+        gap: 30px;
+        .slider-calender{
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .counter-wrapper{
+            order: 3;
+        }
+    }
+    .courses-section {
+        .main-content{
+            gap: 30px;
+            padding: 0 15px;
+        }
+        .enter-class-spotplayer-info{
+            flex-wrap: wrap;
+        }
+    }
+    .free-courses-wrapper{
+        gap : 30px;
+        .subjects{
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    }
+    .new-footer{
+        width: calc(100% - 30px);
+        .main-content{
+            padding: 0 15px;
+        }
+    }
+    .shop-wrapper-section {
+        padding: 15px;
+        .shop-wrapper{
+            gap: 20px;
+        }
+        .main-filter{
+            width: 200px;
+        }
+        .filter-items-wrapper{
+            width: 200px;
+        }
+        .products-wrapper{
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    .profile-wrapper{
+        padding: 0 15px;
+        .colums-3{
+            @include flexMixin(column,flex-start,center);
+            gap: 20px;
+        }
+        .profile-options{
+            @include flexMixin(row,center,center);
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .info-wrapper{
+            margin-right: 0;
+            gap: 30px;
+        }
+    }
+    .hello-page-section {
+        .hello-page{
+            padding: 0 15px;
+            gap: 30px;
+        }
+    }
+    .faq-wrapper{
+        padding: 0 15px;
+    }
+    .needed-apps-wrapper{
+        padding: 0 15px;
+        gap: 30px;
+    }
+    .why-kad-wrapper{
+        padding: 0 15px;
+        gap: 30px;
+    }
+    .teachers-page-wrapper{
+        .teachers-wrapper{
+            padding: 0 15px;
+            gap: 20px;
+        }
+        .teachers{
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    .rules-page-wrapper{
+        gap: 20px;
+        padding: 0 15px;
+    }
+}
 @media  (max-width: 991px) {
     .main-header {
         z-index: 100;
@@ -5262,6 +5864,7 @@ input[type=number] {
             @include flexMixin(row,center,center);
             img{
                 width: 150px;
+                height: auto;
             }
         }
         .reponsive-icon-for-login {
@@ -5286,12 +5889,13 @@ input[type=number] {
         transition: $transition;
         transform: scale(1);
         .side-bar-wrapper{
-            @include flexMixin(column,space-between,center);
-            padding:40px 0px 20px;
+            @include flexMixin(column,flex-start,center);
+            padding:10px 0px 20px;
             height: 100%;
             border-radius: 8px 0 0 0;
+            gap : 20px;
             .items{
-                gap: 30px;
+                gap: 10px;
             }
         }
     }
@@ -5391,7 +5995,8 @@ input[type=number] {
             width: unset;
         }
         .ins-sentence{
-            flex: 0 0 100%;
+            flex:0 0 160px;
+            width: 100%;
         }
         .calender-video{
             @include flexMixin(column,flex-start,center);
@@ -5535,11 +6140,14 @@ input[type=number] {
         }
     }
     .shop-wrapper-section{
+        padding: 0;
         .slider-wrapper{
             padding: 0;
         }
         .get-council-btn{
-            display: none;
+            width: 60px;
+            bottom: 16px;
+            right: 15px;
         }
         .category{
             max-width: 96px;
@@ -5557,19 +6165,25 @@ input[type=number] {
             width: 100%;
         }
         .main-filter{
-            // width: 100%;
+            width: 100%;
             max-width: 100%;
         }
         .filter-items-wrapper{
             max-width: 100%;
+            width: 100%;
         }
         .products-wrapper{
             grid-template-columns: repeat(2,1fr);
+            column-gap: 10px;
+            row-gap: 15px;
         }
         .no-prods-found{
             position: relative;
             grid-column-start: 1;
             grid-column-end: 3;
+        }
+        .add-to-cart-text{
+            font-size: 12px;
         }
     }
     .main-footer{
@@ -5579,6 +6193,7 @@ input[type=number] {
     }
     .new-footer{
         overflow-x: hidden;
+        width: 100%;
         .main-content{
             flex-direction: column;
             padding: 20px 15px;
@@ -5694,16 +6309,17 @@ input[type=number] {
                 padding: 10px;
                 .question-icon {
                     img{
-                        width: 22px;
-                        height: 22px;
+                        width: 20px;
+                        // height: 22px;
                         padding: 5px;
                     }
                 }
                 h2{
-                    font-size: 14px;
+                    font-size: 16px;
                 }
                 p{
                     padding: 0;
+                    font-size: 14px;
                     gap: 5px;
                     &::before{
                         flex: 0 0 5px;
@@ -5828,8 +6444,8 @@ input[type=number] {
             width: 100%;
         }
         .pay-titles{
-            @include flexMixin(column,flex-start,flex-start);
-            gap: 30px;
+            // @include flexMixin(column,flex-start,flex-start);
+            // gap: 30px;
         }
     }
     .profile-section{
@@ -5846,11 +6462,14 @@ input[type=number] {
             flex: unset;
         }
         .option{
-            font-size: 16px;
+            font-size: 13px;
             height: 56px;
             img{
                 width: 16px;
             }
+        }
+        .col-2{
+            gap: 30px;
         }
         .info-wrapper{
             margin: 0;
@@ -6001,16 +6620,26 @@ input[type=number] {
             @include flexMixin(column,flex-start,center);
             gap: 20px;
         }
+        .title{
+            font-size: 20px;
+            text-align: center;
+        }
+        .teacher{
+            width: 189px;
+        }
     }
     .faq-wrapper{
         padding: 5px;
         .tabs{
             padding-right: 2px;
+            overflow-x: scroll;
+            align-items: flex-end;
+            overflow-y: hidden;
         }
         .tab{
             font-size: 12px;
-            width: auto;
-            padding: 0 5px;
+            flex: 0 0 150px;
+            padding: 0 5px 5px;
         }
         .question-title{
             font-size: 16px;
@@ -6063,8 +6692,8 @@ input[type=number] {
                 position: fixed;
                 width: 100vw;
                 right: 0;
-                top: 85px;
-                right: -16px;
+                top: 95px;
+                // right: -16px;
                 z-index: 999999;
                 ul{
                     @include flexMixin(column,flex-start,center);
@@ -6110,6 +6739,13 @@ input[type=number] {
             font-size: 14px;
             text-align: justify;
             line-height: 26px;
+        }
+        .hero-gif{
+            width: 100%;
+            @include flexMixin(row,center,center);
+        }
+        .video-hero{
+            max-width: calc(100% - 30px);
         }
         .achivment-history-wrapper{
             padding: 10px 26px 10px;
@@ -6175,12 +6811,20 @@ input[type=number] {
             top : 130px;
             right: -57px;
         }
-        .teachers ,.good-students{
-            width: 100%;
-            overflow-x: scroll;
+        .teachers-wrapper , .good-students-wrapper{
+            .resoan-back-btn {
+                left: 0px;
+                width: 40px;
+            }
+            .rev {
+                right: 0px;
+            }
         }
-        .teacher,.good-student{
-            flex: 0 0 300px;
+        .teachers ,.good-students{
+            width: calc(100% - 40px);
+        }
+        .teacher , .good-student{
+            flex: 0 0 100%;
         }
         .comment-img{
             width: 100%;
@@ -6215,9 +6859,14 @@ input[type=number] {
                 transform: translateX(0px);
             }
         }
+        .home-comment-text{
+            font-size: 15px;
+        }
+        .comments-on-kad-wrapper{
+            gap: 0px;
+        }
         .home-footer{
-
-            padding: 0 20px;
+            padding: 0 20px 100px;
         }
         .home-footer-cols{
             flex-direction: column;
@@ -6236,9 +6885,11 @@ input[type=number] {
         }
         .hf-col-4{
             @include flexMixin(row-reverse,space-between,center);
+            flex-wrap: wrap;
+            gap : 20px;
         }
         .social-icons{
-            @include flexMixin(column,flex-start,center);
+            justify-content: center;
         }
     }
 }

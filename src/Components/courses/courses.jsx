@@ -7,10 +7,11 @@ import withWebsiteData from "../hoc/with-website-data";
 import EmptyCourses from "./empty-course/empty-courses";
 import copy_to_clip_board from "../functions/copy-to-clip-board";
 
-import copy_icon from "../../assets/images/copy-icon.svg";
+import copy_icon from "../../assets/images/copy-icon.webp";
 class Courses extends Component {
   state = {
     pop_up: false,
+    enter_btn_text: "ورود به کلاس درحال برگزاری",
   };
   constructor(props) {
     super(props);
@@ -30,12 +31,36 @@ class Courses extends Component {
   close_class_pop_up = () => {
     this.setState({ pop_up: false });
   };
+  have_no_class = () => {
+    const enter_btn_text = " شما کلاس فعالی ندارید";
+    this.setState({ enter_btn_text });
+    console.log();
+  };
   render() {
     const { user } = this.props;
+    const active_kelass = user
+      ? { ...user.kelases.find((kelas) => kelas.is_online === true) }
+      : false;
     return (
       <>
         <Helmet>
           <title>درس های من</title>
+          {user
+            ? user.kelases.length !== 0
+              ? user.kelases.map((k, i) => (
+                  <link
+                    key={i++}
+                    rel="preload"
+                    as="image"
+                    href={k.image_link}
+                  />
+                ))
+              : ""
+            : ""}
+          <meta
+            name="description"
+            content="کلاس های خریداری شما در این صفحه قرار دارد و امکان ادامه یادگیری و مشاهده دوره های خود را دارید. اگر هنوز هیچ کلاسی خریداری نکردید، میتوانید با ما تماس بگیرید و ما به شما کمک کنیم و مشاوره دهیم تا کلاس‌ یا دوره مناسب خود را پیدا کنید. برای راهنمایی بیشتر، با ما تماس بگیرید."
+          />
         </Helmet>
         <section className="courses-section bgc-wrapper">
           <div className="main-content mm-width">
@@ -44,9 +69,26 @@ class Courses extends Component {
               user.kelases.length !== 0 ? (
                 <div className="spot-courses">
                   <div className="enter-class-spotplayer-info">
-                    <span className="enter-online-class">
+                    {active_kelass &&
+                    Object.keys(active_kelass).length !== 0 ? (
+                      <a
+                        target="_blank"
+                        href={active_kelass.skyRoom_link}
+                        className="enter-online-class">
+                        ورود به کلاس درحال برگزاری
+                      </a>
+                    ) : (
+                      <span
+                        onClick={() => {
+                          this.have_no_class();
+                        }}
+                        className="enter-online-class">
+                        {this.state.enter_btn_text}
+                      </span>
+                    )}
+                    {/* <span className="enter-online-class">
                       ورود به کلاس درحال برگزاری
-                    </span>
+                    </span> */}
                     <div className="spot-player-info">
                       <p>
                         دوست خوب کادی ❤️
@@ -67,6 +109,8 @@ class Courses extends Component {
                               onClick={() => {
                                 copy_to_clip_board(user.skyRoom_username);
                               }}
+                              width={20}
+                              height={24}
                               alt="کپی کردن"
                             />
                           </span>
@@ -83,6 +127,8 @@ class Courses extends Component {
                                 copy_to_clip_board(user.skyRoom_password);
                               }}
                               alt="کپی کردن"
+                              width={20}
+                              height={24}
                             />
                           </span>
                         </span>
@@ -98,6 +144,8 @@ class Courses extends Component {
                                 copy_to_clip_board();
                               }}
                               alt="کپی کردن"
+                              width={20}
+                              height={24}
                             />
                           </span>
                         </span>

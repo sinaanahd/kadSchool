@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import arrowDown from "../../../assets/images/down-arrow-blue.svg";
+import arrowDown from "../../../assets/images/down-arrow-blue.webp";
+import AparatVideo from "../../video/aparat-video";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import scrollToTop from "../../functions/scroll";
 class PopUp extends Component {
   state = {
     animate: "pp-animate ",
@@ -10,7 +13,7 @@ class PopUp extends Component {
     setTimeout(() => {
       this.setState({ animate: " " });
     }, 300);
-    console.log(this.props.sample_files);
+    //console.log(this.props.sample_files);
   }
   handle_faq = (faq_number) => {
     if (faq_number === this.state.faq_number) {
@@ -27,7 +30,8 @@ class PopUp extends Component {
     }
   };
   render() {
-    const { type, handle_pop_up, sample_files, faq, cv, dore } = this.props;
+    const { type, handle_pop_up, sample_files, faq, cv, dore, teachers } =
+      this.props;
     const jozeha = sample_files
       ? [
           ...sample_files.pdf_sample_files.filter(
@@ -49,6 +53,20 @@ class PopUp extends Component {
           ),
         ]
       : false;
+    const nemone_tadris = sample_files
+      ? {
+          ...sample_files.video_sample_files.find(
+            (sv) => sv.file_type === "نمونه تدریس"
+          ),
+        }
+      : false;
+    const teacher_resume = sample_files
+      ? {
+          ...sample_files.video_sample_files.find(
+            (sv) => sv.file_type === "رزومه ویدیویی استاد"
+          ),
+        }
+      : false;
     return (
       <div
         className={this.state.animate + "pop-up-wrapper " + type}
@@ -69,7 +87,10 @@ class PopUp extends Component {
           </span>
           {type === "intro" ? (
             <>
-              <span className="video-place"></span>
+              <span className="video-place">
+                ویدیو قرار داده نشده
+                {/* <AparatVideo /> */}
+              </span>
               <p className="pop-up-text intro-text">
                 {dore
                   ? dore.descriptions.length !== 0
@@ -86,9 +107,11 @@ class PopUp extends Component {
               {sample_files ? (
                 <>
                   <span className="video-place">
-                    {sample_files.video_sample_files.map(
-                      (sv) =>
-                        (sv.file_type = "نمونه تدریس" ? sv.file_link : <></>)
+                    {nemone_tadris &&
+                    Object.keys(nemone_tadris).length !== 0 ? (
+                      <AparatVideo src={nemone_tadris.file_link} />
+                    ) : (
+                      "ویدیو قرار داده نشده است"
                     )}
                   </span>
                   {/* <p className="pop-up-text sample-text">توضیحات...</p> */}
@@ -184,16 +207,20 @@ class PopUp extends Component {
                   <span className="faq-question-wrapper" key={i++}>
                     <span className="question-icon">
                       <h2>{f.Q}</h2>
-                      <img
-                        src={arrowDown}
-                        className={
-                          this.state.faq_number === f.Q ? "rotate" : ""
-                        }
+                      <span
+                        className="pop-qustion-img-arrow"
                         onClick={() => {
                           this.handle_faq(f.Q);
-                        }}
-                        alt=""
-                      />
+                        }}>
+                        <img
+                          src={arrowDown}
+                          className={
+                            this.state.faq_number === f.Q ? "rotate" : ""
+                          }
+                          alt="باز شدن"
+                          loading="lazy"
+                        />
+                      </span>
                     </span>
                     <p
                       className={
@@ -339,7 +366,13 @@ class PopUp extends Component {
           )}
           {type === "resume" ? (
             <>
-              <span className="video-place"></span>
+              <span className="video-place">
+                {teacher_resume && Object.keys(teacher_resume).length !== 0 ? (
+                  <AparatVideo src={teacher_resume.file_link} />
+                ) : (
+                  "ویدیو قرار داده نشده است"
+                )}
+              </span>
               {cv ? (
                 cv.full_cv.map((fc, i) => (
                   <React.Fragment key={i++}>
@@ -358,20 +391,20 @@ class PopUp extends Component {
               ) : (
                 <p className="resume-text">رزومه وارد نشده است</p>
               )}
-
-              <p className="resume-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-              <h3 className="pop-up-sub-title">سابقه تحصیلی</h3>
-              <p className="resume-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-              <p className="resume-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
+              <span className="go-to-teacher-pages">
+                {teachers
+                  ? teachers.map((t) => (
+                      <Link
+                        onClick={() => {
+                          scrollToTop();
+                        }}
+                        key={t.teacher_id}
+                        to={`/Teacher/${t.slug_name}`}>
+                        صفحه رزومه {t.fullname}
+                      </Link>
+                    ))
+                  : ""}
+              </span>
             </>
           ) : (
             <></>

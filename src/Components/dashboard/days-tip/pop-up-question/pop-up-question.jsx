@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import closeImg from "../../../../assets/images/close-circle.svg";
+import closeImg from "../../../../assets/images/close-circle.webp";
 import LittleLoading from "../../../reuseables/little-loading";
 class PopUpQuestion extends Component {
   state = {

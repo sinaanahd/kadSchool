@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import scrollToTop from "../functions/scroll";
 import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
-import login_bgc from "../../assets/images/login-img.svg";
+import login_bgc from "../../assets/images/login-img.webp";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
 
@@ -19,6 +19,7 @@ class ForgetPassword extends Component {
     entry_code: false,
     enter_code_status: false,
     no_more_code: false,
+    code_sent_msg: false,
   };
   componentDidMount() {
     const { user } = this.props;
@@ -45,11 +46,12 @@ class ForgetPassword extends Component {
     this.setState({ pause: true });
     axios
       .get(
-        `https://daryaftyar.ir/backend/kad_api/verify_phone_number/${this.state.phone_number}`
+        `https://kadschool.com/backend/kad_api/verify_phone_number/${this.state.phone_number}`
       )
       .then((res) => {
         this.setState({ pause: false });
         const { been_before, user_id, verification_code } = res.data;
+        this.setState({ code_sent_msg: "کد با موفقیت ارسال شد" });
         localStorage.setItem(
           "kad-phone-number",
           JSON.stringify(this.state.phone_number)
@@ -68,19 +70,6 @@ class ForgetPassword extends Component {
     const been = this.state.been_before;
     if (code === entry_code) {
       if (been) {
-        // axios
-        //   .get(
-        //     `https://daryaftyar.ir/backend/kad_api/user/${this.state.user_id}`
-        //   )
-        //   .then((res) => {
-        //     const user = res.data;
-        //     //localStorage.setItem("user-kad", JSON.stringify(user));
-        //     this.props.inside_user(user);
-        //     window.location.pathname = "/Dashboard";
-        //   })
-        //   .catch((err) => {
-        //     this.props.handle_error(err);
-        //   });
         window.location.pathname = "/Set-new-password";
       } else {
         window.location.pathname = "/SignUp";
@@ -102,6 +91,7 @@ class ForgetPassword extends Component {
       <>
         <Helmet>
           <title>بازیابی رمزعبور</title>
+          <meta name="description" content="صفحه فراموشی رمز عبور" />
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -109,7 +99,7 @@ class ForgetPassword extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Home" className="main-logo">
+          <Link to="/HomePage" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">
@@ -125,6 +115,13 @@ class ForgetPassword extends Component {
               />
               {this.state.err_phone ? (
                 <span className="error-place">{this.state.err_phone}</span>
+              ) : (
+                <></>
+              )}
+              {this.state.code_sent_msg ? (
+                <span className="error-place green">
+                  {this.state.code_sent_msg}
+                </span>
               ) : (
                 <></>
               )}

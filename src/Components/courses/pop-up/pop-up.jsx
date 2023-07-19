@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import clock_vector from "../../../assets/images/clock-vector.svg";
+import clock_vector from "../../../assets/images/clock-vector.webp";
 class PopUp extends Component {
   state = {};
   render() {

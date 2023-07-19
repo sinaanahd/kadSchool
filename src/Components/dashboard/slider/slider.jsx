@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import sample_img from "../../../assets/images/sample-rectangle-v.svg";
 import LittleLoading from "../../reuseables/little-loading";
 class Slider extends Component {
   state = {
@@ -11,6 +10,26 @@ class Slider extends Component {
     super(props);
     this.myRef = React.createRef();
   }
+  componentDidMount() {
+    setTimeout(() => {
+      setInterval(() => {
+        this.auto_move();
+      }, 4000);
+    }, 2000);
+  }
+  auto_move = () => {
+    const active_item = this.state.active_item;
+    // console.log(
+    //   active_item,
+    //   this.props.main_page_banners.length,
+    //   active_item !== this.props.main_page_banners.length
+    // );
+    if (active_item !== this.props.main_page_banners.length) {
+      this.move_slider("next");
+    } else {
+      this.move_slider("prev");
+    }
+  };
   handle_mouse_down = (e) => {
     this.setState({ is_dragging: true, start_pos: e.clientX });
   };
@@ -88,27 +107,28 @@ class Slider extends Component {
     }
   };
   show_change = (num) => {
-    // console.log(this.myRef.current.children);
-    const kinder = [...this.myRef.current.children];
-    const slides = kinder.filter((k) => k.classList.contains("slide"));
-    slides.forEach((slide) => {
-      slide.style.transform = `translateX(${(num - 1) * 100}%)`;
-    });
+    if (this.myRef.current) {
+      const kinder = [...this.myRef.current.children];
+      const slides = kinder.filter((k) => k.classList.contains("slide"));
+      slides.forEach((slide) => {
+        slide.style.transform = `translateX(${(num - 1) * 100}%)`;
+        // console.log("hi");
+      });
+    }
     //this.myRef.current.style.transform = `translateX(${(num - 1) * 100}%)`;
   };
   show_change_touch = (num) => {
-    const kinder = [...this.myRef.current.children];
-    const slides = kinder.filter((k) => k.classList.contains("slide"));
-    slides.forEach((slide) => {
-      slide.style.transform = `translateX(${(num - 1) * 100}%)`;
-    });
+    if (this.myRef.current) {
+      const kinder = [...this.myRef.current.children];
+      const slides = kinder.filter((k) => k.classList.contains("slide"));
+      slides.forEach((slide) => {
+        slide.style.transform = `translateX(${(num - 1) * 100}%)`;
+      });
+    }
     //this.myRef.current.style.transform = `translateX(${(num - 1) * 100}%)`;
   };
   animate_end_touch = () => {
     const { active_item } = this.state;
-    // this.myRef.current.style.transform = `translateX(${
-    //   (active_item - 1) * 101
-    //   }%)`;
     const kinder = [...this.myRef.current.children];
     const slides = kinder.filter((k) => k.classList.contains("slide"));
     slides.forEach((slide) => {
@@ -121,17 +141,21 @@ class Slider extends Component {
   animate_end = (pos) => {
     const { active_item } = this.state;
     if (pos === "end") {
-      const kinder = [...this.myRef.current.children];
-      const slides = kinder.filter((k) => k.classList.contains("slide"));
-      slides.forEach((slide) => {
-        slide.style.transform = `translateX(${(active_item - 1) * 101}%)`;
-      });
+      if (this.myRef.current) {
+        const kinder = [...this.myRef.current.children];
+        const slides = kinder.filter((k) => k.classList.contains("slide"));
+        slides.forEach((slide) => {
+          slide.style.transform = `translateX(${(active_item - 1) * 101}%)`;
+        });
+      }
     } else {
-      const kinder = [...this.myRef.current.children];
-      const slides = kinder.filter((k) => k.classList.contains("slide"));
-      slides.forEach((slide) => {
-        slide.style.transform = `translateX(-10px)`;
-      });
+      if (this.myRef.current) {
+        const kinder = [...this.myRef.current.children];
+        const slides = kinder.filter((k) => k.classList.contains("slide"));
+        slides.forEach((slide) => {
+          slide.style.transform = `translateX(-10px)`;
+        });
+      }
     }
     setTimeout(() => {
       this.show_change(active_item);
@@ -165,7 +189,7 @@ class Slider extends Component {
           {main_page_banners ? (
             main_page_banners.map((b, i) => (
               <div className="slide" key={i++}>
-                <img src={b} alt={"اسلایدر کاد"} />
+                <img src={b} alt={"اسلایدر کاد"} width={436} height={142.69} />
               </div>
             ))
           ) : (

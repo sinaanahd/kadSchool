@@ -5,31 +5,36 @@ import spilit_in_three from "../functions/spilit_in_three";
 import convert_to_persian from "../functions/convert-to-persian";
 import withWebsiteData from "../hoc/with-website-data";
 
-import asset_1 from "../../assets/images/prod-asset-1.svg";
-import asset_2 from "../../assets/images/prod-asset-2.svg";
-import downArrowBlue from "../../assets/images/down-arrow-blue.svg";
-import avatar from "../../assets/images/avatar.svg";
-import cart_img from "../../assets/images/cart.svg";
+import asset_1 from "../../assets/images/prod-asset-1.webp";
+import asset_2 from "../../assets/images/prod-asset-2.webp";
+import downArrowBlue from "../../assets/images/down-arrow-blue.webp";
+import avatar from "../../assets/images/avatar.webp";
+import cart_img from "../../assets/images/cart.webp";
 import PopUp from "./pop-up/pop-up";
 import convert_days from "../functions/convert-days";
 import LittleLoading from "../reuseables/little-loading";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import scrollToTop from "../functions/scroll";
 class SingleProd extends Component {
   state = {
     more_cm: false,
     pop_up: false,
   };
   componentDidMount() {
-    this.props.find_single_prod(
-      parseInt(window.location.pathname.split("/")[2])
-    );
+    const page_slug = window.location.pathname.split("/")[2];
+    let page_id;
+    const test_slug = decodeURIComponent(page_slug);
+    if (/\d/.test(test_slug)) {
+      page_id = parseInt(page_slug);
+    } else {
+      page_id = decodeURIComponent(page_slug);
+    }
+    this.props.find_single_prod(page_id);
     const data_check = setInterval(() => {
       if (this.props.single_prod) {
         clearInterval(data_check);
       } else {
-        this.props.find_single_prod(
-          parseInt(window.location.pathname.split("/")[2])
-        );
+        this.props.find_single_prod(page_id);
       }
     }, 2000);
   }
@@ -54,6 +59,12 @@ class SingleProd extends Component {
       <>
         <Helmet>
           <title>{single_prod ? single_prod.kelas_title : "اسم کلاس"}</title>
+          <meta
+            name="description"
+            content={`صفحه اطلاعات مربوط به کلاس ${
+              single_prod ? single_prod.kelas_title : ""
+            }`}
+          />
         </Helmet>
         <section className="bgc-wrapper single-prod-wrapper">
           <div className="main-single-prod mm-width">
@@ -131,7 +142,14 @@ class SingleProd extends Component {
                       <span className="content">
                         {single_prod ? (
                           single_prod.teachers.map((t) => (
-                            <span key={t.teacher_id}>{t.fullname}</span>
+                            <Link
+                              onClick={() => {
+                                scrollToTop();
+                              }}
+                              to={`/Teacher/${t.slug_name}`}
+                              key={t.teacher_id}>
+                              {t.fullname}
+                            </Link>
                           ))
                         ) : (
                           <></>
@@ -255,14 +273,14 @@ class SingleProd extends Component {
               </div>
               <div className="students-comments-wrapper">
                 <h3 className="semi-2-title">نظرات دانش آموزان</h3>
-                <textarea
+                {/* <textarea
                   name=""
                   id=""
                   placeholder="type ..."
                   className="text-area"></textarea>
                 <span className="submit-btn-wrapper">
                   <span className="submit-comment">ارسال</span>
-                </span>
+                </span> */}
                 <div
                   className={
                     this.state.more_cm
@@ -272,14 +290,39 @@ class SingleProd extends Component {
                   <div className="comment">
                     <span className="name-avatar">
                       <img src={avatar} alt="" />
-                      نام کاربری
+                      سارا مهدویان
                     </span>
                     <p className="comment-text">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
-                      طراحان گرافیک است.
+                      من امسال کنکور دادم و حقیقتا کاش زودتر با موسسه کاد آشنا
+                      میشدم🥲 فقط گفتم بابت قدردانی ازتون براتون کامنت بذارم و
+                      خسته نباشید بگم
                     </p>
                   </div>
                   <div className="comment">
+                    <span className="name-avatar">
+                      <img src={avatar} alt="" />
+                      سینا محمدی
+                    </span>
+                    <p className="comment-text">
+                      به به سایت جدید کاد بالاخره اومد😍 همه چی توی سال قبل خوب
+                      بود جز سایت که خب الان عالی شده گمونم از ما کنکوریا 402 که
+                      گذشت ولی 403 ای ها قدر بدونین و حتما نمونه تدریسای استادای
+                      کاد رو نگاهی بندازید
+                    </p>
+                  </div>
+                  <div className="comment">
+                    <span className="name-avatar">
+                      <img src={avatar} alt="" />
+                      مجتبی نوری
+                    </span>
+                    <p className="comment-text">
+                      تا الان موسسه ای مثل کاد ندیدم که اینقدر به فکر بچه ها
+                      باشن حتی من که اصلا تو هیچ کلاسی هم ثبت نکردم علاوه بر این
+                      کلاسای زیادی هم واقعا رایگان برگزار کردین انشاالله بتونم
+                      جبران کنم❤️👌 یاعلی🙌
+                    </p>
+                  </div>
+                  {/* <div className="comment">
                     <span className="name-avatar">
                       <img src={avatar} alt="" />
                       نام کاربری
@@ -308,27 +351,7 @@ class SingleProd extends Component {
                       لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
                       طراحان گرافیک است.
                     </p>
-                  </div>
-                  <div className="comment">
-                    <span className="name-avatar">
-                      <img src={avatar} alt="" />
-                      نام کاربری
-                    </span>
-                    <p className="comment-text">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
-                      طراحان گرافیک است.
-                    </p>
-                  </div>
-                  <div className="comment">
-                    <span className="name-avatar">
-                      <img src={avatar} alt="" />
-                      نام کاربری
-                    </span>
-                    <p className="comment-text">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
-                      طراحان گرافیک است.
-                    </p>
-                  </div>
+                  </div> */}
 
                   <span
                     onClick={() => {
@@ -350,6 +373,7 @@ class SingleProd extends Component {
               faq={single_prod ? single_prod.FAQ : false}
               cv={single_prod ? single_prod.teachers[0].cv : false}
               dore={single_prod ? single_prod.dore : false}
+              teachers={single_prod ? single_prod.teachers : false}
             />
           ) : (
             <></>

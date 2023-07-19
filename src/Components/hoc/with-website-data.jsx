@@ -3,6 +3,7 @@ import axios from "axios";
 import Header from "../header/header";
 import NewFooter from "../footer/new-footer";
 import last_login_check from "../functions/last-login-check";
+import { Helmet } from "react-helmet";
 const local_user = JSON.parse(localStorage.getItem("user-kad"))
   ? JSON.parse(localStorage.getItem("user-kad"))
   : false;
@@ -41,10 +42,18 @@ const local_main_page_banners = JSON.parse(
 const local_shop_banners = JSON.parse(localStorage.getItem("shop-banners"))
   ? JSON.parse(localStorage.getItem("shop-banners"))
   : false;
+const local_motive_quote = JSON.parse(localStorage.getItem("quote"))
+  ? JSON.parse(localStorage.getItem("quote"))
+  : false;
 const this_time_login = new Date().getTime();
 const last_login = JSON.parse(localStorage.getItem("LL"))
   ? JSON.parse(localStorage.getItem("LL"))
   : this_time_login;
+const local_sample_week_plan = JSON.parse(
+  localStorage.getItem("sample-weekplan")
+)
+  ? JSON.parse(localStorage.getItem("sample-weekplan"))
+  : false;
 function withWebsiteData(Component) {
   return class withWebsiteData extends Component {
     state = {
@@ -69,6 +78,11 @@ function withWebsiteData(Component) {
       shop_banners: local_shop_banners,
       ghests: false,
       gh_wait: false,
+      user_pay_info: false,
+      added_to_cart: false,
+      added_to_cart_animate: " animate",
+      sample_week_plan: local_sample_week_plan,
+      motiv_quote: local_motive_quote,
       subjects: [
         { id: 0, name: "ریاضی" },
 
@@ -108,6 +122,7 @@ function withWebsiteData(Component) {
     };
     componentDidMount() {
       //this.get_banners();
+      this.get_kelasses();
       const is_time = last_login_check(last_login, this_time_login);
       if (is_time) {
         this.get_banners();
@@ -117,8 +132,20 @@ function withWebsiteData(Component) {
         this.get_kelasses();
         this.get_jalasat();
         this.get_sample_files();
+        this.get_motivation_quote();
+        this.get_sample_week_plan();
         console.log("got it");
       } else {
+        if (local_sample_week_plan) {
+          this.setState({ sample_week_plan: local_sample_week_plan });
+        } else {
+          this.get_sample_week_plan();
+        }
+        if (local_motive_quote) {
+          this.setState({ motiv_quote: local_motive_quote });
+        } else {
+          this.get_motivation_quote();
+        }
         if (local_shop_banners && local_main_page_banners) {
           this.setState({
             shop_banners: local_shop_banners,
@@ -169,12 +196,70 @@ function withWebsiteData(Component) {
       if (local_user) {
         this.get_user(local_user.user_id);
         this.get_cart(local_user.user_id);
+        this.user_pay_info(local_user.user_id);
+      }
+      if (window.location.pathname !== "/HomePage") {
+        document.querySelector("#root").classList.add("root_test");
       }
     }
+    get_motivation_quote = () => {
+      axios
+        .get("https://kadschool.com/backend/kad_api/motivational_quote")
+        .then((res) => {
+          const motiv_quote = res.data.quote;
+          this.setState({ motiv_quote });
+          localStorage.setItem("quote", JSON.stringify(motiv_quote));
+        })
+        .catch((e) => {
+          this.handle_error(e);
+        });
+    };
+    get_sample_week_plan = () => {
+      axios
+        .get("https://kadschool.com/backend/kad_api/week_plan")
+        .then((res) => {
+          const sample_week_plan = res.data;
+          //console.log(sample_week_plan);
+          // localStorage.setItem(
+          //   "sample-weekplan",
+          //   JSON.stringify(sample_week_plan)
+          // );
+          const week_plan = {
+            Friday: [],
+            Monday: [],
+            Saturday: [],
+            Sunday: [],
+            Thursday: [],
+            Tuesday: [],
+            Wednesday: [],
+          };
+          const check_jalasat = this.state.ref_jalasat;
+          //console.log(check_jalasat);
+          if (check_jalasat) {
+            const ref_jalasat = [...this.state.ref_jalasat];
+            if (ref_jalasat && ref_jalasat.length !== 0) {
+              for (let day in sample_week_plan) {
+                sample_week_plan[day].forEach((j_id) => {
+                  const jalase = {
+                    ...ref_jalasat.find((j) => j.jalase_id === j_id),
+                  };
+                  if (Object.keys(jalase).length !== 0)
+                    week_plan[day].push(jalase);
+                });
+              }
+            }
+          }
+          localStorage.setItem("sample-weekplan", JSON.stringify(week_plan));
+          this.setState({ sample_week_plan: week_plan });
+        })
+        .catch((e) => {
+          this.handle_error(e);
+        });
+    };
     wants_ghesti = (user_id) => {
       this.setState({ gh_wait: true });
       axios
-        .get(`https://daryaftyar.ir/backend/kad_api/wants_ghesti/${user_id}`)
+        .get(`https://kadschool.com/backend/kad_api/wants_ghesti/${user_id}`)
         .then((res) => {
           const ghests = res.data;
           this.setState({ ghests, gh_wait: false });
@@ -186,7 +271,7 @@ function withWebsiteData(Component) {
     };
     get_banners = () => {
       axios
-        .get("https://daryaftyar.ir/backend/kad_api/banners")
+        .get("https://kadschool.com/backend/kad_api/banners")
         .then((res) => {
           //console.log(res.data);
           this.setState({
@@ -208,7 +293,7 @@ function withWebsiteData(Component) {
     };
     get_ref = () => {
       axios
-        .get("https://daryaftyar.ir/backend/kad_api/grades_and_majors")
+        .get("https://kadschool.com/backend/kad_api/grades_and_majors")
         .then((res) => console.log(res.data))
         .catch((e) => {
           this.handle_error(e);
@@ -216,7 +301,7 @@ function withWebsiteData(Component) {
     };
     get_sample_files = () => {
       axios
-        .get("https://daryaftyar.ir/backend/kad_api/sample_files")
+        .get("https://kadschool.com/backend/kad_api/sample_files")
         .then((res) => {
           const sample_files = res.data;
           localStorage.setItem("sample_files", JSON.stringify(sample_files));
@@ -228,7 +313,7 @@ function withWebsiteData(Component) {
     };
     get_cart = (user_id) => {
       axios
-        .get(`https://daryaftyar.ir/backend/kad_api/cart/${user_id}`)
+        .get(`https://kadschool.com/backend/kad_api/cart/${user_id}`)
         .then((res) => {
           const cart = res.data;
           localStorage.setItem("kad-cart", JSON.stringify(cart));
@@ -288,9 +373,13 @@ function withWebsiteData(Component) {
     };
     get_doreha = () => {
       axios
-        .get("https://daryaftyar.ir/backend/kad_api/doreha")
+        .get("https://kadschool.com/backend/kad_api/doreha")
         .then((res) => {
           const ref_doreha = res.data;
+          ref_doreha.forEach((dore) => {
+            const slug_name = dore.dore_title.replaceAll(" ", "-");
+            dore.slug_name = slug_name;
+          });
           this.setState({ ref_doreha });
           localStorage.setItem("doreha", JSON.stringify(ref_doreha));
         })
@@ -300,9 +389,14 @@ function withWebsiteData(Component) {
     };
     get_kelasses = () => {
       axios
-        .get("https://daryaftyar.ir/backend/kad_api/kelases")
+        .get("https://kadschool.com/backend/kad_api/kelases")
         .then((res) => {
           const ref_kelasses = res.data;
+          ref_kelasses.forEach((kelas) => {
+            const kelas_name = kelas.kelas_title + "";
+            const slug_name = kelas_name.replaceAll(" ", "-");
+            kelas.slug_name = slug_name;
+          });
           const all_kelasses = [...ref_kelasses];
           const free_courses = [...all_kelasses.filter((k) => k.price === 0)];
           this.setState({ ref_kelasses, free_courses });
@@ -316,9 +410,15 @@ function withWebsiteData(Component) {
     };
     get_teachers = () => {
       axios
-        .get("https://daryaftyar.ir/backend/kad_api/teachers")
+        .get("https://kadschool.com/backend/kad_api/teachers")
         .then((res) => {
           const ref_teachers = res.data;
+          ref_teachers.forEach((t) => {
+            const name = t.fullname + "";
+            const slug_name = name.replaceAll(" ", "-");
+            t.slug_name = slug_name;
+            // console.log(t, slug_name);
+          });
           this.setState({ ref_teachers });
           localStorage.setItem("teachers", JSON.stringify(ref_teachers));
         })
@@ -328,7 +428,7 @@ function withWebsiteData(Component) {
     };
     get_jalasat = () => {
       axios
-        .get("https://daryaftyar.ir/backend/kad_api/jalasat")
+        .get("https://kadschool.com/backend/kad_api/jalasat")
         .then((res) => {
           const ref_jalasat = res.data;
           //console.log(ref_jalasat);
@@ -341,7 +441,7 @@ function withWebsiteData(Component) {
     };
     get_courses = () => {
       axios
-        .get("https://daryaftyar.ir/backend/kad_api/courses")
+        .get("https://kadschool.com/backend/kad_api/all_courses")
         .then((res) => {
           const ref_courses = res.data;
           this.setState({ ref_courses });
@@ -354,7 +454,7 @@ function withWebsiteData(Component) {
     // prettier-ignore
     modify_cart = (user_id, item_ids) => {
       axios
-        .patch(`https://daryaftyar.ir/backend/kad_api/cart/${user_id}`, {
+        .patch(`https://kadschool.com/backend/kad_api/cart/${user_id}`, {
           "ids": item_ids,
         })
         .then((res) => {
@@ -374,15 +474,17 @@ function withWebsiteData(Component) {
       if (items_ids.includes(id)) {
         const index = items_ids.indexOf(id);
         items_ids.splice(index, 1);
+        this.added_removed_to_cart("removed");
       } else {
         items_ids.push(id);
+        this.added_removed_to_cart("added");
       }
       // console.log(user_id, items_ids);
       this.modify_cart(user_id, items_ids);
     };
     get_user = (user_id) => {
       axios
-        .get(`https://daryaftyar.ir/backend/kad_api/user/${user_id}`)
+        .get(`https://kadschool.com/backend/kad_api/user/${user_id}`)
         .then((res) => {
           const user = res.data;
           //console.log("get log", res.data);
@@ -522,9 +624,13 @@ function withWebsiteData(Component) {
           pdf_sample_files: [],
           video_sample_files: [],
         };
-        let kelas = false;
+        let kelas = {};
         if (ref_kelasses) {
-          kelas = { ...ref_kelasses.find((k) => k.kelas_id === id) };
+          if (typeof id === "number") {
+            kelas = { ...ref_kelasses.find((k) => k.kelas_id === id) };
+          } else if (typeof id === "string") {
+            kelas = { ...ref_kelasses.find((k) => k.slug_name === id) };
+          }
         }
         const kelas_teachers = [];
         if (Object.keys(kelas).length !== 0) {
@@ -548,9 +654,12 @@ function withWebsiteData(Component) {
           };
           if (Object.keys(dore).length !== 0) kelas.dore = dore;
         }
-        kelas.sample_files = kelas_sample_files;
-        //console.log(kelas);
-        this.setState({ single_prod: kelas ? kelas : false });
+        if (Object.keys(kelas).length !== 0) {
+          kelas.sample_files = kelas_sample_files;
+          this.setState({ single_prod: kelas ? kelas : false });
+        } else {
+          window.location.pathname = "/not-found";
+        }
       } else if (local_teachers && local_kelasses && local_sample_files) {
         this.setState(
           {
@@ -591,7 +700,12 @@ function withWebsiteData(Component) {
           pdf_sample_files: [],
           video_sample_files: [],
         };
-        const dore = { ...doreha.find((d) => d.dore_id === id) };
+        let dore = {};
+        if (typeof id === "number") {
+          dore = { ...doreha.find((d) => d.dore_id === id) };
+        } else if (typeof id === "string") {
+          dore = { ...doreha.find((d) => d.slug_name === id) };
+        }
         if (Object.keys(dore).length === 0)
           window.location.pathname = "/not-found";
         else {
@@ -616,14 +730,18 @@ function withWebsiteData(Component) {
               ),
             ];
           });
-          dore.teachers = dore_teachers;
-          dore.kelases = dore_kelases;
-          dore.teacher_carousel_pos = 0;
-          dore.sample_files = dore_sample_files;
-          if (dore_kelases.length <= 4) dore.teacher_carousel = false;
-          else dore.teacher_carousel = true;
-          //console.log(dore);
-          this.setState({ single_course: dore });
+          if (Object.keys(dore).length !== 0) {
+            dore.teachers = dore_teachers;
+            dore.kelases = dore_kelases;
+            dore.teacher_carousel_pos = 0;
+            dore.sample_files = dore_sample_files;
+            if (dore_kelases.length <= 4) dore.teacher_carousel = false;
+            else dore.teacher_carousel = true;
+            //console.log(dore);
+            this.setState({ single_course: dore });
+          } else {
+            window.location.pathname = "/not-found";
+          }
         }
       } else {
         if (
@@ -665,7 +783,14 @@ function withWebsiteData(Component) {
           pdf_sample_files: [],
           video_sample_files: [],
         };
-        const teacher = { ...teachers.find((t) => t.teacher_id === id) };
+        let teacher = {};
+        //console.log(typeof id);
+        if (typeof id === "number")
+          teacher = { ...teachers.find((t) => t.teacher_id === id) };
+        else if (typeof id === "string") {
+          teacher = { ...teachers.find((t) => t.slug_name === id) };
+          // console.log(teacher);
+        }
         if (Object.keys(teacher).length !== 0) {
           teacher.kelases.forEach((d_id) => {
             const kelas = { ...kelasses.find((d) => d.kelas_id === d_id) };
@@ -685,10 +810,15 @@ function withWebsiteData(Component) {
           }
         }
 
-        teacher.sample_files = teachers_sample_files;
-        teacher.kelases = teacher_kelasses;
         // console.log(teacher_kelasses);
-        this.setState({ single_teacher: teacher });
+        //console.log(teacher);
+        if (Object.keys(teacher).length !== 0) {
+          teacher.sample_files = teachers_sample_files;
+          teacher.kelases = teacher_kelasses;
+          this.setState({ single_teacher: teacher });
+        } else {
+          window.location.pathname = "/not-found";
+        }
       } else {
         if (local_kelasses && local_teachers && local_sample_files) {
           this.setState(
@@ -752,15 +882,100 @@ function withWebsiteData(Component) {
         }
       }
     };
+    user_pay_info = (user_id) => {
+      axios
+        .get(
+          `https://kadschool.com/backend/kad_api/financial_records/${user_id}`
+          //`https://kadschool.com/backend/kad_api/financial_records/${9166}`
+        )
+        .then((res) => {
+          const user_pay_info = res.data;
+          //console.log(user_pay_info);
+          if (user_pay_info.length !== 0) {
+            const check_kelasses = this.state.ref_kelasses;
+            const check_teachers = this.state.ref_teachers;
+            if (check_kelasses && check_teachers) {
+              const kelasses = [...this.state.ref_kelasses];
+              const teachers = [...this.state.ref_teachers];
+              const data_kelasses = [];
+              user_pay_info.forEach((upi) => {
+                upi.kelases_ids.forEach((k_id) => {
+                  const kelas = {
+                    ...kelasses.find((k) => k_id === k.kelas_id),
+                  };
+                  if (Object.keys(kelas).length !== 0) {
+                    kelas.teachers.forEach((t_id) => {
+                      const teacher = {
+                        ...teachers.find((t) => t.teacher_id === t_id),
+                      };
+                      if (Object.keys(teacher).length !== 0)
+                        kelas.data_teachers = teacher;
+                    });
+                    data_kelasses.push(kelas);
+                  }
+                });
+                upi.data_kelasses = data_kelasses;
+              });
+              this.setState({ user_pay_info });
+              //console.log(user_pay_info);
+            } else {
+              if (local_kelasses && local_teachers) {
+                this.setState(
+                  {
+                    ref_kelasses: local_kelasses,
+                    ref_teachers: local_teachers,
+                  },
+                  () => {
+                    this.user_pay_info(user_id);
+                  }
+                );
+              } else if (this.state.request_wait === 0) {
+                this.get_kelasses();
+                this.get_teachers();
+                setTimeout(() => {
+                  this.user_pay_info(user_id);
+                }, 2000);
+              }
+            }
+          }
+        })
+        .catch((e) => {
+          this.handle_error(e);
+          //console.log(e);
+        });
+    };
+    added_removed_to_cart = (status) => {
+      setTimeout(() => {
+        this.setState({ added_to_cart_animate: "" });
+      }, 200);
+      if (status === "added") {
+        this.setState({ added_to_cart: status });
+      } else if (status === "removed") {
+        this.setState({ added_to_cart: status });
+      }
+      setTimeout(() => {
+        this.setState({
+          added_to_cart: false,
+          added_to_cart_animate: " animate",
+        });
+      }, 1000);
+    };
     render() {
       return (
         <>
+          <Helmet>
+            <link
+              rel="preload"
+              as="image"
+              href="../../assets/images/paper-bg.webp"
+            />
+          </Helmet>
           {window.location.pathname === "/Login" ||
           window.location.pathname === "/LoginPass" ||
           window.location.pathname === "/Forget-password" ||
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
-          window.location.pathname === "/Home" ||
+          window.location.pathname === "/HomePage" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (
@@ -805,6 +1020,10 @@ function withWebsiteData(Component) {
             shop_banners={this.state.shop_banners}
             wants_ghesti={this.wants_ghesti}
             ghests={this.state.ghests}
+            gh_wait={this.state.gh_wait}
+            user_pay_info={this.state.user_pay_info}
+            sample_week_plan={this.state.sample_week_plan}
+            motiv_quote={this.state.motiv_quote}
           />
           {this.state.err.state ? (
             <div className={this.state.err.classes.map((c) => `${c}`)}>
@@ -813,12 +1032,25 @@ function withWebsiteData(Component) {
           ) : (
             <></>
           )}
+          {this.state.added_to_cart ? (
+            <span
+              className={
+                "cart-update-wrapper-hoc " + this.state.added_to_cart_animate
+              }>
+              {this.state.added_to_cart === "added"
+                ? "محصول با موفقیت اضافه شد"
+                : "محصول با موفقیت حذف شد"}
+            </span>
+          ) : (
+            <></>
+          )}
+
           {window.location.pathname === "/Login" ||
           window.location.pathname === "/LoginPass" ||
           window.location.pathname === "/Forget-password" ||
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
-          window.location.pathname === "/Home" ||
+          window.location.pathname === "/HomePage" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (

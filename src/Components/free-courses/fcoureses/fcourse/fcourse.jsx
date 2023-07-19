@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import fcourse_img from "../../../../assets/images/fcourse-sample-img.svg";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import scrollToTop from "../../../functions/scroll";
 class FCourse extends Component {
@@ -15,7 +14,7 @@ class FCourse extends Component {
     const { kelas } = this.props;
     return (
       <div className={"fcourse " + this.state.animate}>
-        <img src={fcourse_img} alt={kelas.kelas_title} />
+        <img src={kelas.image_link} alt={kelas.kelas_title} />
         <span className="kelas-name">{kelas.kelas_title}</span>
         <Link
           onClick={() => {

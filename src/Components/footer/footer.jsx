@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import telegramIcon from "../../assets/images/telegram-icon.svg";
-import whatsappIcon from "../../assets/images/whatsapp-icon.svg";
-import instagramIcon from "../../assets/images/instagram-icon.svg";
+import telegramIcon from "../../assets/images/telegram-icon.webp";
+import whatsappIcon from "../../assets/images/whatsapp-icon.webp";
+import instagramIcon from "../../assets/images/instagram-icon.webp";
 class Footer extends Component {
   state = {};
   render() {

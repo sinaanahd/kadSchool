@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import scrollToTop from "../functions/scroll";
 import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
-import login_bgc from "../../assets/images/login-img.svg";
+import login_bgc from "../../assets/images/login-img.webp";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
 
@@ -56,11 +56,12 @@ class SetNewPassword extends Component {
       // prettier-ignore
       axios
         .patch(
-          `https://daryaftyar.ir/backend/kad_api/password/${phone_number}`,
+          `https://kadschool.com/backend/kad_api/password/${phone_number}`,
           { new_password: pass_1 }
         )
         .then((res) => {
           const { status, message } = res.data;
+          console.log(res.data);
           if (status) {
             window.location.pathname = "/Login";
           } else {
@@ -80,6 +81,7 @@ class SetNewPassword extends Component {
       <>
         <Helmet>
           <title> تعیین رمز عبور جدید </title>
+          <meta name="description" content="تعیین رمز عبور جدید" />
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -87,7 +89,7 @@ class SetNewPassword extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Home" className="main-logo">
+          <Link to="/HomePage" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">

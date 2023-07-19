@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
-import dots from "../../assets/images/dots.svg";
+import dots from "../../assets/images/dots.webp";
 class FinancialStuff extends Component {
   state = {};
   render() {

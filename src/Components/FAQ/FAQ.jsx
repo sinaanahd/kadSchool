@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
 import FaqQuestion from "./faq-question/faq-question";
+import axios from "axios";
+import LittleLoading from "../reuseables/little-loading";
 
 class FAQ extends Component {
   state = {
@@ -191,6 +193,54 @@ class FAQ extends Component {
         ],
       },
     ],
+    phone_number: false,
+    phone_err: false,
+    pause: false,
+    final_message: false,
+  };
+  send_advice_request = (e) => {
+    const phone_number = this.state.phone_number;
+    const send_obj = { phone_number: phone_number, type: 3 };
+    this.setState({ pause: true });
+    axios
+      .post(
+        `https://kadschool.com/backend/kad_api/call_request_marketing`,
+        send_obj
+      )
+      .then((res) => {
+        const { status } = res.data;
+        //console.log(res.data);
+        this.setState({ pause: false });
+        if (status) {
+          this.setState({ final_message: "درخواست شما با موفقیت ثبت شد" });
+        } else {
+          this.setState({
+            final_message:
+              "درخواست شما قبلا ثبت شده به زودی با شما تماس خواهیم گرفت",
+          });
+        }
+        setTimeout(() => {
+          this.setState({ final_message: false });
+        }, 2000);
+      })
+      .catch((e) => {
+        this.setState({ pause: false });
+        this.props.handle_error(e);
+      });
+  };
+  handle_phone = (target) => {
+    const { value } = target;
+    let phone_number = false;
+    let phone_err = false;
+    if (!value.startsWith("09")) {
+      phone_err = "شماره باید با ۰۹ شروع شود";
+    } else if (value.length !== 11) {
+      phone_err = "شماره تلفن باید ۱۱ رقم باشد";
+    } else {
+      phone_err = "ok";
+      phone_number = value;
+    }
+    this.setState({ phone_err, phone_number });
   };
   handle_tab = (tab) => {
     this.setState({ tab, question_id: 0 });
@@ -206,6 +256,10 @@ class FAQ extends Component {
       <>
         <Helmet>
           <title>سوالات متداول</title>
+          <meta
+            name="description"
+            content="صفحه سوالات متداول  ما حاوی پاسخ‌هایی برای سوالات متداول شما است. در این صفحه، می‌توانید به سادگی به سوالات پرتکرار خود پاسخ بگیرید. اما اگر پاسخ مورد نظر خود را پیدا نکرده‌اید، هر زمان می‌توانید با ما تماس بگیرید و دریابید. تیم ما آماده‌ی پاسخگویی به شما می‌باشد و به شما کمک خواهد کرد."
+          />
         </Helmet>
         <section className="bgc-wrapper">
           <div className="faq-wrapper mm-width">
@@ -274,13 +328,38 @@ class FAQ extends Component {
                   <span className="input-title">تلفن همراه</span>
                   <input
                     type="number"
-                    name=""
-                    id=""
+                    name="phone-number"
+                    id="phone-num-faq"
                     placeholder="09121234567"
+                    onInput={({ target }) => {
+                      this.handle_phone(target);
+                    }}
                   />
                   <span className="submit-wrapper">
-                    <span className="submit-btn">تایید</span>
+                    {this.state.phone_err === "ok" ? (
+                      <span
+                        className="submit-btn"
+                        onClick={() => {
+                          this.send_advice_request();
+                        }}>
+                        {this.state.pause ? <LittleLoading /> : "تایید"}
+                      </span>
+                    ) : (
+                      <span className="submit-btn mate-mate">تایید</span>
+                    )}
                   </span>
+                  {this.state.phone_err && this.state.phone_err !== "ok" ? (
+                    <span className="error-faq">{this.state.phone_err}</span>
+                  ) : (
+                    ""
+                  )}
+                  {this.state.final_message ? (
+                    <span className="final-msg-wrapper">
+                      {this.state.final_message}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>

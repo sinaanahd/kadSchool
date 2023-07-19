@@ -5,14 +5,33 @@ import SideBar from "../side-bar/side-bar";
 import convert_to_persian from "../functions/convert-to-persian";
 import spilit_in_three from "../functions/spilit_in_three";
 
-import deleteIcon from "../../assets/images/delete-icon-dark-blue.svg";
-import arrow_up from "../../assets/images/arrow-blue-up.svg";
+import deleteIcon from "../../assets/images/delete-icon-dark-blue.webp";
+import arrow_up from "../../assets/images/arrow-blue-up.webp";
 import LittleLoading from "../reuseables/little-loading";
+import axios from "axios";
 class Cart extends Component {
   state = {
     pause: false,
+    cash_pause: false,
   };
   componentDidMount() {}
+  get_link = (num) => {
+    const { user, handle_error } = this.props;
+    this.setState({ cash_pause: true });
+    axios
+      .get(
+        `https://kadschool.com/backend/kad_api/payment_link/${user.user_id}-${num}`
+      )
+      .then((res) => {
+        const payment_link = res.data;
+        //console.log(payment_link.link);
+        window.open(payment_link.link);
+        this.setState({ cash_pause: false });
+      })
+      .catch((e) => {
+        handle_error(e);
+      });
+  };
   render() {
     const {
       cart,
@@ -28,6 +47,14 @@ class Cart extends Component {
       <>
         <Helmet>
           <title>سبد خرید</title>
+          <meta
+            name="description"
+            content="صفحه سبد خرید کاد برای مشاهده و اعمال تغییر در خرید های شما در سایت کاد"
+          />
+          <meta
+            name="keywords"
+            content="سبد خرید کاد, سبد خرید, مشاهده سبد خرید کاد"
+          />
         </Helmet>
         <section className="bgc-wrapper cart-section-wrapper">
           <div className="cart-section mm-width">
@@ -137,13 +164,34 @@ class Cart extends Component {
                         <></>
                       )}
                     </div>
-                    <span
+                    {ghests ? (
+                      <span
+                        className="pay-btn"
+                        onClick={() => {
+                          this.get_link(1);
+                        }}>
+                        {this.state.cash_pause ? (
+                          <LittleLoading />
+                        ) : (
+                          "پرداخت اولین قسط"
+                        )}
+                      </span>
+                    ) : (
+                      <span
+                        className="pay-btn"
+                        onClick={() => {
+                          wants_ghesti(user.user_id);
+                        }}>
+                        {gh_wait ? <LittleLoading /> : "پرداخت اقساطی"}
+                      </span>
+                    )}
+                    {/* <span
                       className="pay-btn"
                       onClick={() => {
                         wants_ghesti(user.user_id);
                       }}>
                       {gh_wait ? <LittleLoading /> : "پرداخت اقساطی"}
-                    </span>
+                    </span> */}
                     <span className="arrow-up">
                       <img src={arrow_up} alt="" />
                     </span>
@@ -184,13 +232,23 @@ class Cart extends Component {
                       </span>
                     </div>
                     {cart ? (
-                      cart.final_price === 0 ? (
+                      cart.items_ids.length === 0 ? (
+                        ""
+                      ) : cart.final_price === 0 ? (
                         <span className="pay-btn-bank">
                           اضافه کردن دوره رایگان
                         </span>
                       ) : (
-                        <span className="pay-btn-bank">
-                          انتقال به بانک و پرداخت
+                        <span
+                          onClick={() => {
+                            this.get_link(0);
+                          }}
+                          className="pay-btn-bank">
+                          {this.state.cash_pause ? (
+                            <LittleLoading />
+                          ) : (
+                            "خرید نقدی"
+                          )}
                         </span>
                       )
                     ) : (

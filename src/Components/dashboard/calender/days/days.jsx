@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Day from "./day";
-import sample_rectangle from "../../../../assets/images/sample-rectangle.svg";
 
 class Days extends Component {
   state = {};
 
   render() {
-    const { my_class, animate, kelases, teachers } = this.props;
+    const { my_class, animate, kelases, teachers, active_day } = this.props;
     return (
       <div className="time-class-wrapper">
         {my_class && my_class.length !== 0 ? (
@@ -17,6 +16,7 @@ class Days extends Component {
               animate={animate}
               kelases={kelases}
               teachers={teachers ? teachers : false}
+              active_day={active_day}
             />
           ))
         ) : (

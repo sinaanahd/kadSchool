@@ -7,8 +7,8 @@ import Fields from "./fields/fields";
 import Kinds from "./kinds/kinds";
 import withWebsiteData from "../hoc/with-website-data";
 import FCourses from "./fcoureses/fcourses";
-import arrow from "../../assets/images/circle-arrow-right.svg";
-import seprator from "../../assets/images/seprator.svg";
+import arrow from "../../assets/images/circle-arrow-right.webp";
+import seprator from "../../assets/images/seprator.webp";
 
 class FreeCourse extends Component {
   state = {
@@ -33,9 +33,11 @@ class FreeCourse extends Component {
   };
   componentDidMount() {
     const { courses } = this.props;
-    if (courses) {
-      this.fill_courses();
-    }
+    setTimeout(() => {
+      if (courses) {
+        this.fill_courses();
+      }
+    }, 2000);
   }
   fill_courses = () => {
     const { courses } = this.props;
@@ -55,7 +57,6 @@ class FreeCourse extends Component {
           fields.honar.push(course);
         }
       });
-      // console.log(fields.honar);
       this.setState({ fields });
     } else {
       setTimeout(() => {
@@ -119,6 +120,25 @@ class FreeCourse extends Component {
       <>
         <Helmet>
           <title>درس های رایگان کاد</title>
+          <link
+            rel="preload"
+            as="image"
+            href="../../assets/images/ensani-icon.webp"
+          />
+          <link
+            rel="preload"
+            as="image"
+            href="../../assets/images/tajrobi-icon.webp"
+          />
+          <link
+            rel="preload"
+            as="image"
+            href="../../assets/images/riazi-icon.webp"
+          />
+          <meta
+            name="description"
+            content="دوره‌های رایگان در تمام رشته‌ها با بهترین اساتید و با بالاترین کیفیت برای تمامی دانش آموزان کنکوری یا نهایی. بهترین منابع آموزشی را در این صفحه کشف کنید و به رایگان به دوره‌هایی با کیفیت دسترسی پیدا کنید. آماده‌سازی خود را برای موفقیت در این آزمون‌ها با ما شروع کنید."
+          />
         </Helmet>
         <section className="bgc-wrapper">
           <div className="mm-width free-courses-wrapper">

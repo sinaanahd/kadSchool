@@ -20,6 +20,9 @@ class Dashboard extends Component {
       initial_data,
       active_day,
       main_page_banners,
+      sample_week_plan,
+      kelasses,
+      motiv_quote,
     } = this.props;
     return (
       <>
@@ -27,12 +30,17 @@ class Dashboard extends Component {
           <title>داشبورد کاربری کاد</title>
           <meta
             name="description"
-            content="صفحه کابری پنل دانش آموزان کاد برای دیدن اطلاعات شخصی"
+            content="در صفحه داشبورد ما، با خلاصه‌ای از برنامه هفتگی دانش‌آموزان و اخبار جذاب و مهم کنکور و اطلاعات را به اشتراک می‌گذاریم. با مراجعه به این صفحه، می‌توانید بازدهی و پیشرفت هفتگی دانش‌آموزان را به راحتی مشاهده کنید و از آخرین اخبار و رویدادهای کاد با خبر شوید. همراه ما باشید تا همیشه در جریان برنامه هفتگی دانش‌آموزان و اطلاعات مهم ما باشید"
           />
           <meta
             name="keywords"
             content="پنل دانش آموزی, کاد, کلاس های اینترنتی دریافت"
           />
+          {main_page_banners
+            ? main_page_banners.map((mpb, i) => (
+                <link key={i++} rel="preload" as="image" href={mpb} />
+              ))
+            : ""}
         </Helmet>
         <section className="bgc-wrapper">
           <div className="dashboard mm-width">
@@ -41,14 +49,20 @@ class Dashboard extends Component {
               <div className="slider-calender">
                 <Counter />
                 <Slider main_page_banners={main_page_banners} />
-                <InspirationSentence />
+                <InspirationSentence motiv_quote={motiv_quote} />
               </div>
               <div className="calender-video">
                 <Calender_2
                   active_day={active_day}
                   change_active_date={change_active_date}
-                  week_plan={user ? user.week_plan : false}
-                  kelases={user ? user.kelases : false}
+                  week_plan={
+                    user
+                      ? user.week_plan
+                      : sample_week_plan
+                      ? sample_week_plan
+                      : false
+                  }
+                  kelases={kelasses ? kelasses : false}
                   teachers={teachers ? teachers : false}
                   initial_data={initial_data}
                 />

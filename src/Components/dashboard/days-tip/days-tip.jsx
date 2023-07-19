@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import leftArrow from "../../../assets/images/left-arrow.svg";
+import leftArrow from "../../../assets/images/left-arrow.webp";
 import PopUpQuestion from "./pop-up-question/pop-up-question";
 class DaysTip extends Component {
   state = {

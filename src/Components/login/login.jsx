@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import scrollToTop from "../functions/scroll";
 import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
-import login_bgc from "../../assets/images/login-img.svg";
+import login_bgc from "../../assets/images/login-img.webp";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
 
@@ -19,6 +19,7 @@ class Login extends Component {
     entry_code: false,
     enter_code_status: false,
     no_more_code: false,
+    code_sent_msg: false,
   };
   componentDidMount() {
     const { user } = this.props;
@@ -46,12 +47,12 @@ class Login extends Component {
     this.setState({ pause: true });
     axios
       .get(
-        `https://daryaftyar.ir/backend/kad_api/verify_phone_number/${this.state.phone_number}`
+        `https://kadschool.com/backend/kad_api/verify_phone_number/${this.state.phone_number}`
       )
       .then((res) => {
         this.setState({ pause: false });
         const { been_before, user_id, verification_code } = res.data;
-        //console.log(res.data);
+        this.setState({ code_sent_msg: "کد با موفقیت ارسال شد" });
         localStorage.setItem(
           "kad-phone-number",
           JSON.stringify(this.state.phone_number)
@@ -72,7 +73,7 @@ class Login extends Component {
       if (been) {
         axios
           .get(
-            ` https://daryaftyar.ir/backend/kad_api/user/${this.state.user_id}`
+            ` https://kadschool.com/backend/kad_api/user/${this.state.user_id}`
           )
           .then((res) => {
             const user = res.data;
@@ -103,6 +104,11 @@ class Login extends Component {
       <>
         <Helmet>
           <title>ورود به سایت</title>
+          <meta name="description" content="صفحه ورود و ثبت نام کاد" />
+          <meta
+            name="keywords"
+            content="ورود به کاد, ثبت نام در کاد, لاگین کاد, وارد شدن به کاد"
+          />
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -110,7 +116,7 @@ class Login extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Home" className="main-logo">
+          <Link to="/HomePage" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">
@@ -129,6 +135,13 @@ class Login extends Component {
               ) : (
                 <></>
               )}
+              {this.state.code_sent_msg ? (
+                <span className="error-place green">
+                  {this.state.code_sent_msg}
+                </span>
+              ) : (
+                <></>
+              )}
               {this.state.err_phone ||
               !this.state.phone_number ||
               this.state.no_more_code ? (
@@ -142,6 +155,7 @@ class Login extends Component {
                   {this.state.pause ? <LittleLoading /> : "دریافت کد"}
                 </span>
               )}
+
               <input
                 type="number"
                 className="input-text input"

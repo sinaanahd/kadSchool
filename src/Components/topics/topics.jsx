@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import { Helmet } from "react-helmet";
 import spilit_in_three from "../functions/spilit_in_three";
 import withWebsiteData from "../hoc/with-website-data";
-import sampleRectangle from "../../assets/images/sample-rectangle-v.svg";
 class Topics extends Component {
   state = {};
   render() {
     const { user } = this.props;
+    const sampleRectangle = "1";
     return (
       <>
         <Helmet>

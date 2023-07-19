@@ -18,11 +18,16 @@ class Profile extends Component {
   };
 
   render() {
-    const { user, handle_error, subjects, years, inside_user } = this.props;
+    const { user, handle_error, subjects, years, inside_user, user_pay_info } =
+      this.props;
     return (
       <>
         <Helmet>
           <title>پروفایل</title>
+          <meta
+            name="description"
+            content="در این صفحه می‌توانید اطلاعات پروفایل خود را تغییر دهید و همچنین صورتحساب خود را مشاهده کنید. اطلاعات شما با ما امن می‌باشد و کاد به خودش افتخار میکنه که همراهش هستی . به راحتی از امکانات صفحه استفاده کنید و اطلاعات خود را به‌روز نگه دارید و صورتحساب خود را مشاهده کنید."
+          />
         </Helmet>
         <section className="bgc-wrapper profile-section">
           <div className="profile-wrapper mm-width">
@@ -59,7 +64,11 @@ class Profile extends Component {
                         inside_user={inside_user}
                       />
                     ) : this.state.page === "fianance" ? (
-                      <ProfileFinanace />
+                      <ProfileFinanace
+                        user={user ? user : false}
+                        handle_error={handle_error}
+                        user_pay_info={user_pay_info}
+                      />
                     ) : (
                       <div className="empty">در حال طراحی ...</div>
                     )}

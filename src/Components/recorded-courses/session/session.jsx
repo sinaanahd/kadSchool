@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import scrollToTop from "../../functions/scroll";
 
 import LittleLoading from "../../reuseables/little-loading";
-import dots from "../../../assets/images/dots.svg";
+import dots from "../../../assets/images/dots.webp";
 class Session extends Component {
   state = {};
   componentDidMount() {}

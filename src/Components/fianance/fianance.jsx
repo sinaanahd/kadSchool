@@ -6,7 +6,7 @@ import convert_to_persian from "../functions/convert-to-persian";
 import split_in_three from "../functions/spilit_in_three";
 import copy_to_clip_board from "../functions/copy-to-clip-board";
 
-import copyIcon from "../../assets/images/copy-icon.svg";
+import copyIcon from "../../assets/images/copy-icon.webp";
 class Fianace extends Component {
   state = {
     copied_item: [

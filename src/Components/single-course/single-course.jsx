@@ -6,13 +6,15 @@ import spilit_in_three from "../functions/spilit_in_three";
 import convert_to_persian from "../functions/convert-to-persian";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-import classCal from "../../assets/images/class-cal.svg";
-import teacherNext from "../../assets/images/next-btn-teacher.svg";
-import plusWhiteCircle from "../../assets/images/plus-white-circle.svg";
-import downArrowBlue from "../../assets/images/down-arrow-blue.svg";
-import avatar from "../../assets/images/avatar.svg";
+import classCal from "../../assets/images/class-cal.webp";
+import teacherNext from "../../assets/images/next-btn-teacher.webp";
+import plusWhiteCircle from "../../assets/images/plus-white-circle.webp";
+import downArrowBlue from "../../assets/images/down-arrow-blue.webp";
+import avatar from "../../assets/images/avatar.webp";
 import LittleLoading from "../reuseables/little-loading";
 import convert_days from "../functions/convert-days";
+import AparatVideo from "../video/aparat-video";
+import scrollToTop from "../functions/scroll";
 class SingleCourse extends Component {
   state = {
     more_desc: false,
@@ -21,13 +23,20 @@ class SingleCourse extends Component {
     open_sample_drop_down: false,
   };
   componentDidMount() {
-    const my_path = parseInt(window.location.pathname.split("/")[2]);
-    this.props.find_single_course(my_path);
+    const my_path = window.location.pathname.split("/")[2];
+    let page_id;
+    const test_slug = decodeURIComponent(my_path);
+    if (/\d/.test(test_slug)) {
+      page_id = parseInt(my_path);
+    } else {
+      page_id = decodeURIComponent(my_path);
+    }
+    this.props.find_single_course(page_id);
     const data_check = setInterval(() => {
       if (this.props.single_course) {
         clearInterval(data_check);
       } else {
-        this.props.find_single_course(my_path);
+        this.props.find_single_course(page_id);
       }
     }, 2000);
   }
@@ -41,7 +50,8 @@ class SingleCourse extends Component {
   };
   course_carousel = (way) => {
     const class_carousel_pos = this.state.class_carousel_pos;
-    const my_length = Math.floor(this.props.single_course.kelases.length / 4);
+    const my_length =
+      Math.floor(this.props.single_course.kelases.length / 4) - 1;
     if (way === "next") {
       if (my_length !== class_carousel_pos)
         this.setState({ class_carousel_pos: class_carousel_pos + 1 });
@@ -91,6 +101,14 @@ class SingleCourse extends Component {
       <>
         <Helmet>
           <title>{single_course ? single_course.dore_title : "دوره"}</title>
+          <meta
+            name="description"
+            content={`دوره ${single_course ? single_course.dore_title : ""}`}
+          />
+          <meta
+            name="keywords"
+            content={`${single_course ? single_course.dore_title : ""}`}
+          />
         </Helmet>
         <section className="bgc-wrapper single-course-wrapper">
           <div className="single_course mm-width">
@@ -140,7 +158,10 @@ class SingleCourse extends Component {
                   </ul>
                 </div>
                 <div className="class-details">
-                  <span className="video-wrapper"></span>
+                  <span className="video-wrapper">
+                    ویدیو برای دوره قرار نگرفته است
+                    {/* <AparatVideo /> */}
+                  </span>
                   <span className="class-time">
                     <img src={classCal} alt="" />
                     <span className="class-text">
@@ -167,7 +188,13 @@ class SingleCourse extends Component {
                       onClick={() => {
                         this.course_carousel("prev");
                       }}>
-                      <img src={teacherNext} alt="" />
+                      <img
+                        src={teacherNext}
+                        alt="بعدی"
+                        width={15}
+                        height={28}
+                        loading="lazy"
+                      />
                     </span>
                   ) : (
                     ""
@@ -181,13 +208,23 @@ class SingleCourse extends Component {
                         <div className="teacher" key={i++}>
                           <span className="img-name-date">
                             <Link
-                              to={`/SingleProd/${k.kelas_id}`}
+                              onClick={() => {
+                                scrollToTop();
+                              }}
+                              to={`/SingleProd/${k.slug_name}`}
                               className="img-wrapper">
-                              <img src={k.image_link} alt={k.kelas_title} />
+                              <img
+                                src={k.image_link}
+                                alt={k.kelas_title}
+                                loading="lazy"
+                              />
                             </Link>
                             <h3 className="teacher-name">
                               <Link
-                                to={`/Teacher/${single_course.teachers[i].teacher_id}`}>
+                                onClick={() => {
+                                  scrollToTop();
+                                }}
+                                to={`/Teacher/${single_course.teachers[i].slug_name}`}>
                                 {single_course.teachers[i].fullname}
                               </Link>
                             </h3>
@@ -295,7 +332,12 @@ class SingleCourse extends Component {
                               </span>
                             )
                           ) : (
-                            <Link to={"/Login"} className="add-teacher">
+                            <Link
+                              onClick={() => {
+                                scrollToTop();
+                              }}
+                              to={"/Login"}
+                              className="add-teacher">
                               <img src={plusWhiteCircle} alt="" />
                               {k.price ? (
                                 k.discounted_price ? (
@@ -344,7 +386,13 @@ class SingleCourse extends Component {
                       onClick={() => {
                         this.course_carousel("next");
                       }}>
-                      <img src={teacherNext} alt="" />
+                      <img
+                        src={teacherNext}
+                        alt="بعدی"
+                        width={15}
+                        height={28}
+                        loading="lazy"
+                      />
                     </span>
                   ) : (
                     ""
@@ -354,7 +402,7 @@ class SingleCourse extends Component {
               <div className="sample-teach-wrapper">
                 <h2 className="h2-before teacher-sample-title">نمونه تدریس</h2>
                 <div className="samples-wrapper-btns">
-                  {single_course ? (
+                  {/* {single_course ? (
                     nemone_tadris.length >= 4 ? (
                       <span className="arrows prev">
                         <img src={teacherNext} alt="" />
@@ -366,72 +414,14 @@ class SingleCourse extends Component {
                     <span className="arrows prev">
                       <img src={teacherNext} alt="" />
                     </span>
-                  )}
-                  {/* <span className="arrows prev">
-                    <img src={teacherNext} alt="" />
-                  </span> */}
+                  )} */}
                   <div className="samples-wrapper">
-                    {/* <div className="sample-wrapper">
-                      <span className="img-wrapper">
-                        <img src="" alt="" />
-                      </span>
-                      <span className="links">دریافت نمونه جزوه</span>
-                      <span className="links">دریافت نمونه آزمون</span>
-                      <span className="links">دریافت نمونه تکلیف</span>
-                    </div> */}
-
-                    {/* {single_course ? (
-                      single_course.sample_files.pdf_sample_files.length !==
-                      0 ? (
-                        single_course.sample_files.pdf_sample_files.map(
-                          (sf) => (
-                            <div className="sample-wrapper" key={sf.file_id}>
-                              {single_course.sample_files.video_sample_files
-                                .length !== 0 ? (
-                                <span className="img-wrapper">
-                                  <img src="" alt="" />
-                                </span>
-                              ) : (
-                                <span className="img-wrapper">
-                                  <p>ویدیو نداریم</p>
-                                </span>
-                              )}
-                              {sf.file_type === "نمونه جزوه" ? (
-                                <a href={sf.file_link} className="links">
-                                  دریافت نمونه جزوه
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                              {sf.file_type === "نمونه آزمون" ? (
-                                <a href={sf.file_link} className="links">
-                                  دریافت نمونه آزمون
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                              {sf.file_type === "نمونه تکلیف" ? (
-                                <a href={sf.file_link} className="links">
-                                  دریافت نمونه تکلیف
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          )
-                        )
-                      ) : (
-                        ""
-                      )
-                    ) : (
-                      <LittleLoading />
-                    )} */}
                     {single_course ? (
                       nemone_tadris.length !== 0 && nemone_tadris ? (
                         nemone_tadris.map((sv) => (
                           <div key={sv.file_id} className="sample-wrapper">
                             <span className="img-wrapper">
-                              <img src="" alt={sv.file_id} />
+                              <AparatVideo src={sv.file_link} />
                             </span>
                           </div>
                         ))
@@ -444,7 +434,7 @@ class SingleCourse extends Component {
                       <></>
                     )}
                   </div>
-                  {single_course ? (
+                  {/* {single_course ? (
                     nemone_tadris.length >= 4 ? (
                       <span className="arrows next">
                         <img src={teacherNext} alt="" />
@@ -456,7 +446,7 @@ class SingleCourse extends Component {
                     <span className="arrows next">
                       <img src={teacherNext} alt="" />
                     </span>
-                  )}
+                  )} */}
                 </div>
                 <div className="sample-btns-wrapper">
                   <span
@@ -559,14 +549,14 @@ class SingleCourse extends Component {
               </div>
               <div className="students-comments-wrapper">
                 <h3 className="semi-2-title">نظرات دانش آموزان</h3>
-                <textarea
+                {/* <textarea
                   name=""
                   id=""
                   placeholder="type ..."
                   className="text-area"></textarea>
                 <span className="submit-btn-wrapper">
                   <span className="submit-comment">ارسال</span>
-                </span>
+                </span> */}
                 <div
                   className={
                     this.state.more_cm
@@ -576,14 +566,61 @@ class SingleCourse extends Component {
                   <div className="comment">
                     <span className="name-avatar">
                       <img src={avatar} alt="" />
-                      نام کاربری
+                      شاهین اکبری
                     </span>
                     <p className="comment-text">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
-                      طراحان گرافیک است.
+                      کنکورو نمیدونم خراب کردم یا نه 😅منتظر نتایجم ... خلاصه
+                      کاد استادای باتجربه ای داره متاسفانه دیر آشنا شدم باهاتون
+                      استاد سودیان استاد مرتضوی عالیییی ( من کلاساتون شرکت نکردم
+                      فقط تو همایش رایگان شرکت کردم....) ولی تعریف بقیه
+                      استاداتون رو هم شنیدم خلاصه کاد بهترین موسسه برای کنکور
+                      هست 🫶🏼
                     </p>
                   </div>
                   <div className="comment">
+                    <span className="name-avatar">
+                      <img src={avatar} alt="" />
+                      محمد کاظمی
+                    </span>
+                    <p className="comment-text">
+                      سلام مرسی که امسال کنارمون بودید واقعا کلاساتون خیلی تاثیر
+                      داشت برام. از مجموعه تون و استاداتون خیلی راضی بودم اگه
+                      برگردم عقب قطعا کلاسای بیشتری و شرکت میکردم خلاصه که خیلی
+                      خوبید همیشه همینجوری بمونید❤️
+                    </p>
+                  </div>
+                  <div className="comment">
+                    <span className="name-avatar">
+                      <img src={avatar} alt="" />
+                      پریسا شریفی
+                    </span>
+                    <p className="comment-text">
+                      مرسی بابت تیمتون کاد امسال خیلی کمکم کرد💛✨امیدوارم
+                      هرکدوم از ماهایی که واقعا تلاش کردیم نتیجشو بزودی ببینیم
+                    </p>
+                  </div>
+                  <div className="comment">
+                    <span className="name-avatar">
+                      <img src={avatar} alt="" />
+                      ملیکا موسوی
+                    </span>
+                    <p className="comment-text">
+                      دعا کنید ک بهترین نتیجه ها برامون رقم بخوره🥲💙 آشنایی با
+                      مجموعه شما برام خیلیی خیلیییی خوب بود،ممنون ازتون
+                      ،امیدوارم موفق و شاد باشید.
+                    </p>
+                  </div>
+                  <div className="comment">
+                    <span className="name-avatar">
+                      <img src={avatar} alt="" />
+                      فرشید کریمی
+                    </span>
+                    <p className="comment-text">
+                      کاد بهترینه شاید زیاد معروف نباشین ولی بی شک بهترین اساتید
+                      و بی حاشیه ترین استادا رو دارین
+                    </p>
+                  </div>
+                  {/* <div className="comment">
                     <span className="name-avatar">
                       <img src={avatar} alt="" />
                       نام کاربری
@@ -592,47 +629,7 @@ class SingleCourse extends Component {
                       لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
                       طراحان گرافیک است.
                     </p>
-                  </div>
-                  <div className="comment">
-                    <span className="name-avatar">
-                      <img src={avatar} alt="" />
-                      نام کاربری
-                    </span>
-                    <p className="comment-text">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
-                      طراحان گرافیک است.
-                    </p>
-                  </div>
-                  <div className="comment">
-                    <span className="name-avatar">
-                      <img src={avatar} alt="" />
-                      نام کاربری
-                    </span>
-                    <p className="comment-text">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
-                      طراحان گرافیک است.
-                    </p>
-                  </div>
-                  <div className="comment">
-                    <span className="name-avatar">
-                      <img src={avatar} alt="" />
-                      نام کاربری
-                    </span>
-                    <p className="comment-text">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
-                      طراحان گرافیک است.
-                    </p>
-                  </div>
-                  <div className="comment">
-                    <span className="name-avatar">
-                      <img src={avatar} alt="" />
-                      نام کاربری
-                    </span>
-                    <p className="comment-text">
-                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم استفاده از
-                      طراحان گرافیک است.
-                    </p>
-                  </div>
+                  </div> */}
 
                   <span
                     onClick={() => {

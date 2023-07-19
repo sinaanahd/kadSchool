@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import arrowUp from "../../../assets/images/arrow-up-blue.svg";
+import arrowUp from "../../../assets/images/arrow-up-blue.webp";
 
 class FaqQuestion extends Component {
   state = {};
@@ -14,6 +14,8 @@ class FaqQuestion extends Component {
           <img
             src={arrowUp}
             alt="بالا"
+            width={20}
+            height={12}
             onClick={() => {
               handle_clicked_question(id);
             }}

@@ -4,22 +4,48 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Lottie from "react-lottie";
 import scrollToTop from "../functions/scroll";
 import withWebsiteData from "../hoc/with-website-data";
+import axios from "axios";
+import LittleLoading from "../reuseables/little-loading";
 
 import rocket from "../lotties/rocket.json";
 import astronut from "../lotties/astronot.json";
 import astronut_laptop from "../lotties/space-developer.json";
+import hero_animation from "../lotties/hero-animation.json";
 
-import mainLogo from "../../assets/images/kad-logo-lq.svg";
-import menuIcon from "../../assets/images/menu-white.png";
-import hero_img from "../../assets/images/hero-img.png";
-import leftIcon from "../../assets/images/CaretLeft.svg";
-import avatar from "../../assets/images/home-cm-avatar.svg";
-import aparatLogo from "../../assets/images/aparat.svg";
-import telegramIcon from "../../assets/images/telegram-icon.svg";
-import whatsappIcon from "../../assets/images/whatsapp-icon.svg";
-import instagramIcon from "../../assets/images/instagram-icon.svg";
-import closeMenu from "../../assets/images/close-menu-white.png";
-const len = 5;
+import mainLogo from "../../assets/images/main-logo-white-1.webp";
+import menuIcon from "../../assets/images/menu-white.webp";
+import leftIcon from "../../assets/images/CaretLeft.webp";
+import avatar from "../../assets/images/home-cm-avatar.webp";
+import aparatLogo from "../../assets/images/aparat.webp";
+import telegramIcon from "../../assets/images/telegram-icon.webp";
+import whatsappIcon from "../../assets/images/whatsapp-icon.webp";
+import instagramIcon from "../../assets/images/instagram-icon.webp";
+import closeMenu from "../../assets/images/close-menu-white.webp";
+import jump_img from "../../assets/images/jump-img.webp";
+import hero_little_icon from "../../assets/images/space-ship-new.webp";
+
+// sample teacher
+
+import teacher_img_3 from "../../assets/images/kad-teacher-3.webp";
+import teacher_img_4 from "../../assets/images/kad-teacher-4.webp";
+import teacher_img_5 from "../../assets/images/kad-teacher-5.webp";
+import teacher_img_6 from "../../assets/images/kad-teacher-6.webp";
+
+import good_students_1 from "../../assets/images/svg/g-s-1.svg";
+import good_students_2 from "../../assets/images/svg/g-s-2.svg";
+import good_students_3 from "../../assets/images/svg/g-s-3.svg";
+import good_students_4 from "../../assets/images/svg/g-s-4.svg";
+import good_students_5 from "../../assets/images/svg/g-s-5.svg";
+import good_students_6 from "../../assets/images/svg/g-s-6.svg";
+import good_students_7 from "../../assets/images/svg/g-s-7.svg";
+import good_students_8 from "../../assets/images/svg/g-s-8.svg";
+import good_students_9 from "../../assets/images/svg/g-s-9.svg";
+import good_students_10 from "../../assets/images/svg/g-s-10.svg";
+import good_students_11 from "../../assets/images/svg/g-s-11.svg";
+import good_students_12 from "../../assets/images/svg/g-s-12.svg";
+import good_students_13 from "../../assets/images/svg/g-s-13.svg";
+
+const len = 8;
 const user = JSON.parse(localStorage.getItem("user-kad"))
   ? JSON.parse(localStorage.getItem("user-kad"))
   : false;
@@ -35,8 +61,25 @@ class HomePage extends Component {
     way: "forward",
     comment_pos: 0,
     comment_way: "forward",
+    active_teacher: 1,
+    active_student: 1,
     menu: false,
+    name: false,
+    phone_number: false,
+    phone_number_2: false,
+    name_err: false,
+    phone_err: false,
+    phone_err_2: false,
+    pause: false,
+    pause_2: false,
+    final_message: false,
+    final_message_2: false,
   };
+  constructor(props) {
+    super(props);
+    this.teachers_ref = React.createRef();
+    this.students_ref = React.createRef();
+  }
   componentDidMount() {
     setTimeout(() => {
       this.count_students(3875);
@@ -50,8 +93,128 @@ class HomePage extends Component {
     }, 5000);
     setInterval(() => {
       this.handle_commnet();
-    }, 3000);
+    }, 10000);
+    // setInterval(() => {
+    //   this.move_teacher("forward");
+    // }, 1000);
   }
+  move_teacher = (way) => {
+    const num = this.state.active_teacher;
+    const teachers_dom = [...this.teachers_ref.current.children];
+    const len = teachers_dom.length;
+    if (way === "forward") {
+      if (num !== len) {
+        teachers_dom.forEach((td) => {
+          //console.log(td.style.transform);
+          td.style.transform = `translateX(calc(${num * 100}% + ${
+            num * 20
+          }px))`;
+          // console.log(
+          //   `num : ${num} ,translateX(calc(${num * 100}% + ${num * 20}px)) `
+          // );
+        });
+        this.setState({ active_teacher: num + 1 });
+      }
+    } else {
+      if (num !== 1) {
+        teachers_dom.forEach((td) => {
+          td.style.transform = `translateX(calc(${(num - 2) * 100}% + ${
+            (num - 2) * 20
+          }px))`;
+          // console.log(
+          //   `num : ${num} ,translateX(calc(${(num - 2) * 100}% + ${
+          //     (num - 2) * 20
+          //   }px)) `
+          // );
+        });
+        this.setState({ active_teacher: num - 1 });
+      }
+    }
+  };
+  move_student = (way) => {
+    const num = this.state.active_student;
+    const students_dom = [...this.students_ref.current.children];
+    const len = students_dom.length;
+    if (way === "forward") {
+      if (num !== len) {
+        students_dom.forEach((td) => {
+          //console.log(td.style.transform);
+          td.style.transform = `translateX(calc(${num * 100}% + ${
+            num * 20
+          }px))`;
+        });
+        this.setState({ active_student: num + 1 });
+      }
+    } else {
+      if (num !== 1) {
+        students_dom.forEach((td) => {
+          td.style.transform = `translateX(calc(${(num - 2) * 100}% + ${
+            (num - 2) * 20
+          }px))`;
+        });
+        this.setState({ active_student: num - 1 });
+      }
+    }
+  };
+  send_gift_request = (e) => {
+    const name = this.state.name;
+    const phone_number = this.state.phone_number;
+    const send_obj = { fullname: name, phone_number: phone_number, type: 0 };
+    this.setState({ pause: true });
+    axios
+      .post(
+        `https://kadschool.com/backend/kad_api/call_request_marketing`,
+        send_obj
+      )
+      .then((res) => {
+        const { status } = res.data;
+        //console.log(res.data);
+        this.setState({ pause: false });
+        if (status) {
+          this.setState({ final_message: "درخواست شما با موفقیت ثبت شد" });
+        } else {
+          this.setState({
+            final_message: "درخواست شما قبلا ثبت شده ",
+          });
+        }
+        setTimeout(() => {
+          this.setState({ final_message: false });
+        }, 2000);
+      })
+      .catch((e) => {
+        this.setState({ pause: false });
+        this.props.handle_error(e);
+      });
+  };
+  handle_name = (target) => {
+    const { value } = target;
+    let name_err = false;
+    let name = false;
+    if (value.length === 0) {
+      name_err = "این فیلد نباید خالی باشد";
+    } else if (value.length < 3) {
+      name_err = "اسم وارد شده کوتاه است";
+    } else {
+      name_err = "ok";
+      name = value;
+    }
+    this.setState({ name_err, name });
+  };
+  handle_phone = (target) => {
+    const { value } = target;
+    let phone_number = false;
+    let phone_err = false;
+    if (!value.startsWith("09")) {
+      phone_err = "شماره باید با ۰۹ شروع شود";
+    } else if (value.length !== 11) {
+      phone_err = "شماره تلفن باید ۱۱ رقم باشد";
+    } else {
+      phone_err = "ok";
+      phone_number = value;
+    }
+    this.setState({ phone_err, phone_number });
+  };
+
   count_students = (final) => {
     let counted = 0;
     const count = setInterval(() => {
@@ -157,6 +320,50 @@ class HomePage extends Component {
       }
     }
   };
+  send_gift_request_2 = () => {
+    const phone_number = this.state.phone_number_2;
+    const send_obj = { phone_number: phone_number, type: 1 };
+    this.setState({ pause_2: true });
+    axios
+      .post(
+        `https://kadschool.com/backend/kad_api/call_request_marketing`,
+        send_obj
+      )
+      .then((res) => {
+        const { status } = res.data;
+        //console.log(res.data);
+        this.setState({ pause_2: false });
+        if (status) {
+          this.setState({ final_message_2: "درخواست شما با موفقیت ثبت شد" });
+        } else {
+          this.setState({
+            final_message_2: "درخواست شما قبلا ثبت شده ",
+          });
+        }
+        setTimeout(() => {
+          this.setState({ final_message_2: false });
+        }, 2000);
+      })
+      .catch((e) => {
+        this.setState({ pause_2: false });
+        this.props.handle_error(e);
+      });
+  };
+  handle_phone_2 = (e) => {
+    const { value } = e.target;
+    //console.log(value);
+    let phone_number_2 = false;
+    let phone_err_2 = false;
+    if (!value.startsWith("09")) {
+      phone_err_2 = "شماره باید با ۰۹ شروع شود";
+    } else if (value.length !== 11) {
+      phone_err_2 = "شماره تلفن باید ۱۱ رقم باشد";
+    } else {
+      phone_err_2 = "ok";
+      phone_number_2 = value;
+    }
+    this.setState({ phone_err_2, phone_number_2 });
+  };
   render() {
     const rocketOptions = {
       loop: true,
@@ -194,25 +401,41 @@ class HomePage extends Component {
       animationData: astronut_laptop,
       rendererSettings: {
         preserveAspectRatio: "xMidYMid slice",
-        width: 500,
-        height: 500,
+        width: 300,
+        height: 300,
+      },
+    };
+    const hero_animation_options = {
+      loop: true,
+      autoplay: true,
+      animationData: hero_animation,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+        width: 800,
+        height: 600,
       },
     };
     return (
       <>
         <Helmet>
           <title>کاد اولین و قوی ترین سفینه کنکور</title>
+          <meta name="description" content="" />
+          <meta
+            name="keywords"
+            content="کاد, کلاس اینترنتی, کلاس اینترنتی دریافت, کلاس کنکور, کلاس آنلاین کنکور, کنکور ۱۴۰۳, کنکور,"
+          />
+          <meta
+            name="description"
+            content="آمادگی برای کنکور در تمام رشته‌ها با کلاس‌های آنلاین برتر ما. از ریاضیات و تجربی تا رشته‌های انسانی و هنر، مدرسان ما با تجربه و استعداد آموزشی برجسته، برنامه‌های جامعی را ارائه می‌دهند. با ما بپیوندید و در کنکور با موفقیت بیشتری شرکت کنید و در دانشگاه رشته مورد علاقه خود قبول شوید."
+          />
         </Helmet>
         <div className="home-page">
-          {/* <section className="lottie-test">
-            <Lottie options={rocketOptions} />
-          </section> */}
           <header className="home-page-header mm-width">
             <Link
               onClick={() => {
                 scrollToTop();
               }}
-              to="/Home">
+              to="/HomePage">
               <img src={mainLogo} alt="کاد" width={175} height={42} />
             </Link>
             <span
@@ -221,9 +444,15 @@ class HomePage extends Component {
                 this.menu_handler();
               }}>
               {this.state.menu ? (
-                <img src={closeMenu} alt="بستن منو" className="close-pos" />
+                <img
+                  src={closeMenu}
+                  width={30}
+                  height={30}
+                  alt="بستن منو"
+                  className="close-pos"
+                />
               ) : (
-                <img src={menuIcon} alt="باز کردن منو" />
+                <img src={menuIcon} width={30} height={30} alt="باز کردن منو" />
               )}
             </span>
             <nav
@@ -292,7 +521,13 @@ class HomePage extends Component {
           </header>
           <section className="hero-wrapper">
             <div className="hero-gif">
-              <img src={hero_img} alt="" />
+              <Lottie options={hero_animation_options} />
+              {/* <video
+                loop={true}
+                autoPlay={true}
+                muted
+                src={hero_video}
+                className="video-hero"></video> */}
             </div>
             <div className="hero-text-wrapper">
               <h1 className="hero-title">کاد اولین و قوی‌ترین سفینه کنکور</h1>
@@ -303,14 +538,63 @@ class HomePage extends Component {
                 میتونیم شکستشون بدیم؟
               </p>
               <span className="get-on-board">
-                <p>سوار سفینه کاد بشو و هدیه 4 میلیون و 950 هزار تومانی بگیر</p>
-                <span className="hero-input-wrapper">
-                  <input type="text" placeholder="نام و نام خانوادگی" />
+                <span className="hero-gift-text-img">
+                  <span className="img-animate">
+                    <img
+                      src={hero_little_icon}
+                      alt="جایزه بگیر"
+                      width={30}
+                      height={30}
+                    />
+                  </span>
+                  <p>
+                    سوار سفینه کاد بشو و هدیه <font>۱ میلیون تومانی</font>{" "}
+                    تومانی بگیر
+                  </p>
                 </span>
                 <span className="hero-input-wrapper">
-                  <input type="number" placeholder="شماره تماس" />
-                  <span className="fly-btn">پرواز سفینه</span>
+                  <input
+                    type="text"
+                    onInput={({ target }) => {
+                      this.handle_name(target);
+                    }}
+                    placeholder="نام و نام خانوادگی"
+                  />
                 </span>
+                <span className="hero-input-wrapper">
+                  <input
+                    type="number"
+                    onInput={({ target }) => {
+                      this.handle_phone(target);
+                    }}
+                    placeholder="شماره تماس"
+                  />
+                  {this.state.phone_err === "ok" &&
+                  this.state.name_err === "ok" ? (
+                    <span
+                      onClick={() => this.send_gift_request()}
+                      className="fly-btn">
+                      {this.state.pause ? <LittleLoading /> : "پرواز سفینه"}
+                    </span>
+                  ) : (
+                    <span className="fly-btn dont-fly-yet">پرواز سفینه</span>
+                  )}
+                </span>
+                {this.state.phone_err && this.state.phone_err !== "ok" ? (
+                  <span className="input-error">{this.state.phone_err}</span>
+                ) : (
+                  ""
+                )}
+                {this.state.name_err && this.state.name_err !== "ok" ? (
+                  <span className="input-error">{this.state.name_err}</span>
+                ) : (
+                  ""
+                )}
+                {this.state.final_message ? (
+                  <span className="final-msg">{this.state.final_message}</span>
+                ) : (
+                  ""
+                )}
               </span>
             </div>
           </section>
@@ -416,7 +700,7 @@ class HomePage extends Component {
                     ? "resoan-back-btn"
                     : "resoan-back-btn rev"
                 }>
-                <img src={leftIcon} alt="بعدی" />
+                <img src={leftIcon} alt="بعدی" width={47} height={47} />
               </span>
             </div>
             <div className="astronut-img">
@@ -427,75 +711,394 @@ class HomePage extends Component {
               <Lottie options={res_astronut} />
             </div>
           </section>
-          <section className="teachers-wrapper mm-width" id="#sina">
+          <section className="teachers-wrapper mm-width">
             <h2 className="semi-title">استادان حرفه ای کاد</h2>
-            <div className="teachers">
-              <div className="teacher">
+            <div className="teachers" ref={this.teachers_ref}>
+              <Link
+                to="/Teacher/1949"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
                 <span className="teacher-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_عماد_فیض_آبادی.webp"
+                    alt="استاد عماد فیض آبادی"></img>
                 </span>
-                <h3 className="teacher-name">نام استاد</h3>
-              </div>
-              <div className="teacher">
+                <h3 className="teacher-name">استاد عماد فیض آبادی</h3>
+              </Link>
+              <Link
+                to="/Teacher/6512"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
                 <span className="teacher-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_حمید_سودیان.webp"
+                    alt="استاد حمید سودیان"></img>
                 </span>
-                <h3 className="teacher-name">نام استاد</h3>
-              </div>
-              <div className="teacher">
+                <h3 className="teacher-name">استاد حمید سودیان</h3>
+              </Link>
+              <Link
+                to="/Teacher/7137"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
                 <span className="teacher-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_آروین_حسینی.webp"
+                    alt="استاد آروین حسینی"></img>
                 </span>
-                <h3 className="teacher-name">نام استاد</h3>
-              </div>
-              <div className="teacher">
+                <h3 className="teacher-name">استاد آروین حسینی</h3>
+              </Link>
+              <Link
+                to="/Teacher/7711"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
                 <span className="teacher-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_امیر_محمد_دهقان.webp"
+                    alt="استاد امیر محمد دهقان"></img>
                 </span>
-                <h3 className="teacher-name">نام استاد</h3>
-              </div>
-              <div className="teacher">
+                <h3 className="teacher-name">استاد امیر محمد دهقان</h3>
+              </Link>
+              <Link
+                to="/Teacher/7792"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
                 <span className="teacher-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_هامون_سبطی.webp"
+                    alt="استاد هامون سبطی"></img>
                 </span>
-                <h3 className="teacher-name">نام استاد</h3>
-              </div>
+                <h3 className="teacher-name">استاد هامون سبطی</h3>
+              </Link>
+              <Link
+                to="/Teacher/8325"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_نیما_جواهری.webp"
+                    alt="استاد نیما جواهری"></img>
+                </span>
+                <h3 className="teacher-name">استاد نیما جواهری</h3>
+              </Link>
+              <Link
+                to="/Teacher/9558"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_مهران_ترکمان.webp"
+                    alt="استاد مهران ترکمان"></img>
+                </span>
+                <h3 className="teacher-name">استاد مهران ترکمان</h3>
+              </Link>
+              <Link
+                to="/not-found"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_مهسا_عفتی.webp"
+                    alt="استاد مهسا عفتی"></img>
+                </span>
+                <h3 className="teacher-name">استاد مهسا عفتی</h3>
+              </Link>
+              <Link
+                to="/not-found"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_سارا_شریفی.webp"
+                    alt="استاد سارا شریفی"></img>
+                </span>
+                <h3 className="teacher-name"> استاد سارا شریفی</h3>
+              </Link>
+              <Link
+                to="/not-found"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src={teacher_img_3}
+                    alt="رضا امیر"></img>
+                </span>
+                <h3 className="teacher-name">استاد رضا امیر</h3>
+              </Link>
+              <Link
+                to="/not-found"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src={teacher_img_4}
+                    alt="مهندس علیرضا علمداری"></img>
+                </span>
+                <h3 className="teacher-name">مهندس علیرضا علمداری</h3>
+              </Link>
+              <Link
+                to="/not-found"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src={teacher_img_5}
+                    alt="مهندس علیرضا ایدلخانی"></img>
+                </span>
+                <h3 className="teacher-name">مهندس علیرضا ایدلخانی</h3>
+              </Link>
+              <Link
+                to="/not-found"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher">
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src={teacher_img_6}
+                    alt="علیرضا احمدی"></img>
+                </span>
+                <h3 className="teacher-name">علیرضا احمدی</h3>
+              </Link>
             </div>
+            <span
+              onClick={() => {
+                this.move_teacher("forward");
+              }}
+              className="resoan-back-btn">
+              <img src={leftIcon} alt="بعدی" width={47} height={47} />
+            </span>
+            <span
+              onClick={() => {
+                this.move_teacher("back");
+              }}
+              className="resoan-back-btn rev">
+              <img src={leftIcon} alt="بعدی" width={47} height={47} />
+            </span>
           </section>
-          <section className="good-students-wrapper mm-width" id="rotbe_bartar">
+          <section className="good-students-wrapper mm-width">
             <h2 className="semi-title">بخشی از رتبه‌های برتر کاد</h2>
-            <div className="good-students">
+            <div className="good-students" ref={this.students_ref}>
               <div className="good-student">
                 <span className="good-student-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_1}
+                    alt="مائده ملکی"></img>
                 </span>
-                <h3 className="good-student-name">نام رتبه برتر</h3>
+                <h3 className="good-student-name">مائده ملکی</h3>
               </div>
               <div className="good-student">
                 <span className="good-student-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_13}
+                    alt="علی اصغر وجدانی"></img>
                 </span>
-                <h3 className="good-student-name">نام رتبه برتر</h3>
+                <h3 className="good-student-name">علی اصغر وجدانی</h3>
               </div>
               <div className="good-student">
                 <span className="good-student-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_12}
+                    alt="رها روزبهانی"></img>
                 </span>
-                <h3 className="good-student-name">نام رتبه برتر</h3>
+                <h3 className="good-student-name">رها روزبهانی</h3>
               </div>
               <div className="good-student">
                 <span className="good-student-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_10}
+                    alt="امیرحسین چهاردولی"></img>
                 </span>
-                <h3 className="good-student-name">نام رتبه برتر</h3>
+                <h3 className="good-student-name">امیرحسین چهاردولی</h3>
               </div>
               <div className="good-student">
                 <span className="good-student-img-wrapper">
-                  <img src="" alt=""></img>
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_11}
+                    alt="فردین برهور"></img>
                 </span>
-                <h3 className="good-student-name">نام رتبه برتر</h3>
+                <h3 className="good-student-name">فردین برهور</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_9}
+                    alt="آریا نظری فر"></img>
+                </span>
+                <h3 className="good-student-name">آریا نظری فر</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_8}
+                    alt="مطهره السادات هاشمی"></img>
+                </span>
+                <h3 className="good-student-name">مطهره السادات هاشمی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_7}
+                    alt="متین قدیمی"></img>
+                </span>
+                <h3 className="good-student-name">متین قدیمی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_6}
+                    alt="فاطمه میر"></img>
+                </span>
+                <h3 className="good-student-name">فاطمه میر</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_5}
+                    alt="سام نظری"></img>
+                </span>
+                <h3 className="good-student-name">سام نظری</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_4}
+                    alt="سینا سیفی"></img>
+                </span>
+                <h3 className="good-student-name">سینا سیفی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_3}
+                    alt="زهرا علینقیان"></img>
+                </span>
+                <h3 className="good-student-name">زهرا علینقیان</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_2}
+                    alt="صالح اسماعیل زاده"></img>
+                </span>
+                <h3 className="good-student-name">صالح اسماعیل زاده</h3>
               </div>
             </div>
+            <span
+              onClick={() => {
+                this.move_student("forward");
+              }}
+              className="resoan-back-btn">
+              <img src={leftIcon} alt="بعدی" width={47} height={47} />
+            </span>
+            <span
+              onClick={() => {
+                this.move_student("back");
+              }}
+              className="resoan-back-btn rev">
+              <img src={leftIcon} alt="بعدی" width={47} height={47} />
+            </span>
           </section>
           <section className="comments-on-kad-wrapper mm-width">
             <h2 className="semi-title">نظر دوستاتون در مورد کاد</h2>
@@ -503,102 +1106,187 @@ class HomePage extends Component {
               <div className={"comments cm-" + this.state.comment_pos}>
                 <div className="home-comment">
                   <p className="home-comment-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliquat enim ad minim veniam.
+                    من امسال در کلاس های فلسفه،ادبیات،عربی، درک و دریافت شعر و
+                    مشاوره موسسه کاد شرکت کردم کلاس ها همگی به شدت جذاب و عالی
+                    بود و کاری میکرد دانش آموز با شور و علاقه،سر کلاس حاضر بشه.
+                    پاسخگویی پشتیبانی هم خیلی سریع و خوب بود بی شک دانش آموز
+                    موسسه کاد بودن،از بهترین و به یادماندنی ترین و زیبا ترین
+                    تجربه های دوران تحصیل من خواهد بود. خیلی خوشحالم که با کاد
+                    آشنا شدم
                   </p>
                   <span className="home-user-wrapper">
                     <span className="img-bgc">
                       <img
                         src={avatar}
                         alt="اسم کاربر"
+                        width={80}
+                        height={96}
                         className="home-comment-avatar-img"
                       />
                     </span>
-                    <span className="home-comment-user-name">اسم کاربر</span>
-                    <span className="home-comment-user-subject">
-                      رشته کاربر
+                    <span className="home-comment-user-name">
+                      نفیسه گل چشمه
                     </span>
+                    <span className="home-comment-user-subject">انسانی</span>
                   </span>
                 </div>
                 <div className="home-comment">
                   <p className="home-comment-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliquat enim ad minim veniam.
+                    خب حقیقتش من کلاس های علوم فنون دکتر سبطی و همایش دکتر
+                    ترکمان و دکتر سودیان رو شرکت کردم و سطح استاد ها فوق العادس
+                    و نحوه تدریس هم عالیه در مورد تاثیری که برای من داشته اینه
+                    که راحت تر و سریع تر میتونم تست حل کنم گره های درسی هم که
+                    برای رفع اشکال داشتیم عالی بود و همه سوالام رو پاسخ میدادن
                   </p>
                   <span className="home-user-wrapper">
                     <span className="img-bgc">
                       <img
                         src={avatar}
                         alt="اسم کاربر"
+                        width={80}
+                        height={96}
                         className="home-comment-avatar-img"
                       />
                     </span>
-                    <span className="home-comment-user-name">اسم کاربر</span>
-                    <span className="home-comment-user-subject">
-                      رشته کاربر
-                    </span>
+                    <span className="home-comment-user-name">شیدا رضایی</span>
+                    <span className="home-comment-user-subject">انسانی</span>
                   </span>
                 </div>
                 <div className="home-comment">
                   <p className="home-comment-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliquat enim ad minim veniam.
+                    من در کلاسای فلسفه منطق استاد جواهری و ریاضی استاد حسینی و
+                    عربی ترکمان شرکت کردم خیلی راضی بودم ازشون سطح سوادشون بسیار
+                    عالی و قدرت بیانشون بسیار تاثیر گذار بود. خیلی ممنون از
+                    موسسه خوبتون درپناه حق باشید
                   </p>
                   <span className="home-user-wrapper">
                     <span className="img-bgc">
                       <img
                         src={avatar}
                         alt="اسم کاربر"
+                        width={80}
+                        height={96}
                         className="home-comment-avatar-img"
                       />
                     </span>
-                    <span className="home-comment-user-name">اسم کاربر</span>
-                    <span className="home-comment-user-subject">
-                      رشته کاربر
-                    </span>
+                    <span className="home-comment-user-name">محسن مرادی</span>
+                    <span className="home-comment-user-subject">انسانی</span>
                   </span>
                 </div>
                 <div className="home-comment">
                   <p className="home-comment-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliquat enim ad minim veniam.
+                    من در همه درس های انسانی کاد شرکت کردم و با اینکه از اسفند
+                    تو کلاسا حاضر شدم واقعا مفید بود مخصوصا فلسفه و منطق که برای
+                    فهم درست و کامل متن درس خیلی اهمیت داره.ریاضی هم که برای من
+                    از اول یک غول بود تا اخر سال کم کم قبحش برام ریخت و تونستم
+                    از درصد 7 به درصد 72 برسم.عربی و علوم فنون هم عالییییی بودن
                   </p>
                   <span className="home-user-wrapper">
                     <span className="img-bgc">
                       <img
                         src={avatar}
                         alt="اسم کاربر"
+                        width={80}
+                        height={96}
                         className="home-comment-avatar-img"
                       />
                     </span>
-                    <span className="home-comment-user-name">اسم کاربر</span>
-                    <span className="home-comment-user-subject">
-                      رشته کاربر
-                    </span>
+                    <span className="home-comment-user-name">نادیا هوشمند</span>
+                    <span className="home-comment-user-subject">انسانی</span>
                   </span>
                 </div>
                 <div className="home-comment">
                   <p className="home-comment-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliquat enim ad minim veniam.
+                    امسال شانس یاری نکرد نشد ۳ ماه آخرو استفاده کنم متاسفانه اما
+                    در کل کاد عالیه از هر نظر مخصوصا پشتیبانی و رفع اشکال شیش
+                    هیچ از بقیه موسسات جلوتره امسال هم احتمالا پشت کنکور میمونم
+                    و دوباره همه کلاس های انسانی رو ثبت نام میکنم
                   </p>
                   <span className="home-user-wrapper">
                     <span className="img-bgc">
                       <img
                         src={avatar}
                         alt="اسم کاربر"
+                        width={80}
+                        height={96}
                         className="home-comment-avatar-img"
                       />
                     </span>
-                    <span className="home-comment-user-name">اسم کاربر</span>
-                    <span className="home-comment-user-subject">
-                      رشته کاربر
+                    <span className="home-comment-user-name">مهدی عبادی</span>
+                    <span className="home-comment-user-subject">انسانی</span>
+                  </span>
+                </div>
+                <div className="home-comment">
+                  <p className="home-comment-text">
+                    من توی کلاس ادبیات اختصاصی و عربی و فلسفه و دینی و زبان شرکت
+                    کردم و خیلی راضیم و خداروشکر نتیجش رو توی کنکور دیدم. این که
+                    توی اکثر جلسات بهمون تکلیف میدن و آزمون منظم ازمون میگیرن
+                    برای منی که نیازه زور بالا سرم باشه خیلی خوب بود. در کل
+                    ممنونم از همه استادای کاد
+                  </p>
+                  <span className="home-user-wrapper">
+                    <span className="img-bgc">
+                      <img
+                        src={avatar}
+                        alt="اسم کاربر"
+                        width={80}
+                        height={96}
+                        className="home-comment-avatar-img"
+                      />
                     </span>
+                    <span className="home-comment-user-name">
+                      محدثه خوش باور
+                    </span>
+                    <span className="home-comment-user-subject">انسانی</span>
+                  </span>
+                </div>
+                <div className="home-comment">
+                  <p className="home-comment-text">
+                    {" "}
+                    من امسال از آبان کلاس ها رو ثبت نام کردن قبلش یک موسسه دیگه
+                    بودم که به خاطر حاشیه های زیاد سر کلاس ترجیح دادم با این که
+                    هزینه کلاس رو بهم بر نگردوندن بیام کاد ثبت نام کنن خداییش
+                    کارتون درسته از همه نظر به همه دوستای کنکوری سال دیگم هم
+                    معرفیتون کردم
+                  </p>
+                  <span className="home-user-wrapper">
+                    <span className="img-bgc">
+                      <img
+                        src={avatar}
+                        alt="اسم کاربر"
+                        width={80}
+                        height={96}
+                        className="home-comment-avatar-img"
+                      />
+                    </span>
+                    <span className="home-comment-user-name">گلنوش خرمی</span>
+                    <span className="home-comment-user-subject">انسانی</span>
+                  </span>
+                </div>
+                <div className="home-comment">
+                  <p className="home-comment-text">
+                    من اوایل که اومدم کاد چون بعضی دوستام موسسات دیگه رفته بودن
+                    نگران بودم که نکنه زیاد کلاسا خوب نباشن اما هر چی رفتم جلو
+                    خیالم راحت تر شد خوبی کاد نسبت به خیلی از کلاسای دیگه اینه
+                    که جو دانش اموزای کلاساش با بقیه خیلی متفاوته یک جورایی
+                    انگار گزینش شدن و همه دنبال درسن و خب این خیلی به من کمک کرد
+                    بر خلاف همون دوستام که از وسطای سال درگیر حرف این معلم و اون
+                    معلم شدن. آزمون ها و بانک تستی هم که طی سال دادن واقعا عالی
+                    بود و من همه تست ها رو تحلیل میکردم و خیلی مشابهش توی کنکور
+                    اومد
+                  </p>
+                  <span className="home-user-wrapper">
+                    <span className="img-bgc">
+                      <img
+                        src={avatar}
+                        alt="اسم کاربر"
+                        width={80}
+                        height={96}
+                        className="home-comment-avatar-img"
+                      />
+                    </span>
+                    <span className="home-comment-user-name">محمد حسینی</span>
+                    <span className="home-comment-user-subject">انسانی</span>
                   </span>
                 </div>
               </div>
@@ -608,29 +1296,92 @@ class HomePage extends Component {
             </div>
           </section>
           <section className="jump-on-spaceship-wrapper">
-            <span className="right-img-wrapper jump-img-wrapper"></span>
+            <span className="right-img-wrapper jump-img-wrapper">
+              <img
+                src={jump_img}
+                width={72}
+                height={72}
+                alt="سوار سفینه کاد شو"
+              />
+            </span>
             <div className="forms-data">
-              <h2 className="jump-title">
-                سوار سفینه کاد بشو و هدیه 4 میلیون و 950 هزار تومانی بگیر
-              </h2>
-              <span className="jump-input-wrapper">
-                <input type="text" placeholder="نام و نام خانوادگی" />
+              <span className="jump-titles-wrapper">
+                <h2 className="jump-title">
+                  اگه هنوزم سوالی داری یا از چیزی نگرانی کاد با تک تک اتم هاش
+                  کنارته
+                </h2>
+                <h3 className="seconf-jum-title">
+                  کافیه مشخصاتت رو بهمون پیام بدی تا در سریع ترین زمان باهات
+                  تماس بگیریم
+                </h3>
               </span>
               <span className="jump-input-wrapper">
-                <input type="number" placeholder="شماره تلفن" />
-                <span className="fly-spaceship-btn">پرواز سفینه</span>
+                <input
+                  type="text"
+                  placeholder="نام و نام خانوادگی"
+                  onInput={({ target }) => {
+                    this.handle_name(target);
+                  }}
+                />
+              </span>
+              <span className="jump-input-wrapper">
+                <input
+                  type="number"
+                  placeholder="شماره تلفن"
+                  onInput={({ target }) => {
+                    this.handle_phone(target);
+                  }}
+                />
+                {this.state.phone_err === "ok" &&
+                this.state.name_err === "ok" ? (
+                  <span
+                    onClick={() => {
+                      this.send_gift_request();
+                    }}
+                    className="fly-spaceship-btn">
+                    {this.state.pause ? <LittleLoading /> : "پرواز سفینه"}
+                  </span>
+                ) : (
+                  <span className="fly-spaceship-btn no-fly">پرواز سفینه</span>
+                )}
               </span>
             </div>
-            <span className="left-img-wrapper jump-img-wrapper"></span>
+            <span className="left-img-wrapper jump-img-wrapper">
+              <img
+                src={jump_img}
+                width={72}
+                height={72}
+                alt="سوار سفینه کاد شو"
+              />
+            </span>
+            <span className="jump-error-place">
+              {this.state.final_message ? (
+                <span className="jump-final-msg">
+                  {this.state.final_message}
+                </span>
+              ) : (
+                ""
+              )}
+              {this.state.name_err && this.state.name_err !== "ok" ? (
+                <span className="jump-err">{this.state.name_err}</span>
+              ) : (
+                ""
+              )}
+              {this.state.phone_err && this.state.phone_err !== "ok" ? (
+                <span className="jump-err">{this.state.phone_err}</span>
+              ) : (
+                ""
+              )}
+            </span>
           </section>
           <footer className="home-footer mm-width">
             <Link
               onClick={() => {
                 scrollToTop();
               }}
-              to="/Home"
+              to="/HomePage"
               className="home-page-link">
-              <img src={mainLogo} alt="کاد" />
+              <img src={mainLogo} alt="کاد" width={175} height={42} />
             </Link>
             <div className="home-footer-cols">
               <div className="hf-col hf-col-1">
@@ -639,9 +1390,41 @@ class HomePage extends Component {
                   هدیه یک میلیون تومانیت رو همین الان از کاد بگیر
                 </p>
                 <span className="jump-input-wrapper">
-                  <input type="number" placeholder="شماره تلفن" />
-                  <span className="fly-spaceship-btn">پرواز سفینه</span>
+                  <input
+                    onInput={(e) => {
+                      this.handle_phone_2(e);
+                    }}
+                    type="number"
+                    placeholder="شماره تلفن"
+                  />
+                  {this.state.phone_err_2 === "ok" ? (
+                    <span
+                      onClick={() => {
+                        this.send_gift_request_2();
+                      }}
+                      className="fly-spaceship-btn">
+                      {this.state.pause_2 ? <LittleLoading /> : "پرواز سفینه"}
+                    </span>
+                  ) : (
+                    <span className="fly-spaceship-btn wait-footer-home">
+                      پرواز سفینه
+                    </span>
+                  )}
                 </span>
+                {this.state.final_message_2 ? (
+                  <span className="hf-final-msg">
+                    {this.state.final_message_2}
+                  </span>
+                ) : (
+                  ""
+                )}
+                {this.state.phone_err_2 && this.state.phone_err_2 !== "ok" ? (
+                  <span className="hf-error-wrapper">
+                    {this.state.phone_err_2}
+                  </span>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="hf-col hf-col-2">
                 <h2 className="hf-footer-title">دسترسی سریع</h2>

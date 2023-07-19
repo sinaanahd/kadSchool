@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import scrollToTop from "../functions/scroll";
 import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
-import login_bgc from "../../assets/images/login-img.svg";
+import login_bgc from "../../assets/images/login-img.webp";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
 
@@ -56,7 +55,7 @@ class SetPassword extends Component {
       // prettier-ignore
       axios
         .patch(
-          `https://daryaftyar.ir/backend/kad_api/password/${phone_number}`,
+          `https://kadschool.com/backend/kad_api/password/${phone_number}`,
           { new_password: pass_1 }
         )
         .then((res) => {
@@ -81,6 +80,7 @@ class SetPassword extends Component {
       <>
         <Helmet>
           <title>تعیین رمز عبور </title>
+          <meta name="description" content="تعیین رمز عبور برای کاد" />
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -88,7 +88,7 @@ class SetPassword extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Home" className="main-logo">
+          <Link to="/HomePage" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">

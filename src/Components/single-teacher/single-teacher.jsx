@@ -3,19 +3,29 @@ import withWebsiteData from "../hoc/with-website-data";
 import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
 import LittleLoading from "../reuseables/little-loading";
-import arrow from "../../assets/images/dow-arroow-filter.svg";
-import downArrowBlue from "../../assets/images/down-arrow-blue.svg";
-import avatar from "../../assets/images/avatar.svg";
+import arrow from "../../assets/images/dow-arroow-filter.webp";
+import downArrowBlue from "../../assets/images/down-arrow-blue.webp";
+import avatar from "../../assets/images/avatar.webp";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import scrollToTop from "../functions/scroll";
+import AparatVideo from "../video/aparat-video";
 class SingleTeacher extends Component {
   state = {
     more_cm: false,
     kelas_carouse_pos: 0,
     open_sample_drop_down: false,
+    more_cv: false,
   };
   componentDidMount() {
-    const page_id = parseInt(window.location.pathname.split("/")[2]);
+    const page_slug = window.location.pathname.split("/")[2];
+    let page_id;
+    const test_slug = decodeURIComponent(page_slug);
+    if (/\d/.test(test_slug)) {
+      page_id = parseInt(page_slug);
+    } else {
+      page_id = decodeURIComponent(page_slug);
+    }
+    //console.log(page_id);
     this.props.find_single_teacher(page_id);
     const data_check = setInterval(() => {
       if (this.props.single_teacher) {
@@ -25,7 +35,6 @@ class SingleTeacher extends Component {
       }
     }, 2000);
   }
-
   handle_cm = () => {
     const more_cm = !this.state.more_cm;
     this.setState({ more_cm });
@@ -47,6 +56,10 @@ class SingleTeacher extends Component {
     else {
       this.setState({ open_sample_drop_down: false });
     }
+  };
+  handle_more_cv = () => {
+    const more_cv = !this.state.more_cv;
+    this.setState({ more_cv });
   };
   render() {
     const { single_teacher } = this.props;
@@ -78,12 +91,29 @@ class SingleTeacher extends Component {
           ),
         }
       : false;
+    const teacher_intro = single_teacher
+      ? {
+          ...single_teacher.sample_files.video_sample_files.find(
+            (f) => f.file_type === "رزومه ویدیویی استاد"
+          ),
+        }
+      : false;
     return (
       <>
         <Helmet>
           <title>
             {single_teacher ? single_teacher.fullname : "اسم استاد"}
           </title>
+          <meta
+            name="description"
+            content={`صفحه و اطلاعات و رزومه استاد  ${
+              single_teacher ? single_teacher.fullname : ""
+            }`}
+          />
+          <meta
+            name="keywords"
+            content={`${single_teacher ? single_teacher.fullname + "," : ""}`}
+          />
         </Helmet>
         <section className="single-teacher-wrapper bgc-wrapper">
           <div className="single-teacher mm-width">
@@ -109,11 +139,21 @@ class SingleTeacher extends Component {
                 </span>
                 <span className="teacher-resume-wrapper">
                   <h3 className="resume-title">رزومه</h3>
-                  <ul className="teacher-resume-items">
+                  <ul
+                    className={
+                      this.state.more_cv
+                        ? "teacher-resume-items"
+                        : "teacher-resume-items less"
+                    }>
                     {single_teacher ? (
-                      single_teacher.cv.text_cv.length !== 0 ? (
-                        single_teacher.cv.text_cv.map((tr, i) => (
-                          <li key={i++}>{tr}</li>
+                      single_teacher.cv.full_cv.length !== 0 ? (
+                        single_teacher.cv.full_cv.map((tr, i) => (
+                          <React.Fragment key={i++}>
+                            <li className="cv-title">{tr.title} : </li>
+                            {tr.arrayed_text.map((t, j) => (
+                              <li key={j++}>{t}</li>
+                            ))}
+                          </React.Fragment>
                         ))
                       ) : (
                         <li>روزمه ای وارد نشده</li>
@@ -122,11 +162,35 @@ class SingleTeacher extends Component {
                       <></>
                     )}
                   </ul>
+                  {single_teacher ? (
+                    single_teacher.cv.text_cv.length > 3 ? (
+                      <span
+                        className={
+                          this.state.more_cv ? "more-cv less-cv" : "more-cv"
+                        }
+                        onClick={() => {
+                          this.handle_more_cv();
+                        }}>
+                        {this.state.more_cv ? "بستن" : "ادامه"}
+                      </span>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
                 </span>
               </div>
               <div className="intriduction-wrapper">
                 <h3 className="intro-title">معرفی</h3>
-                <div className="intro-video-wrapper"></div>
+                <div className="intro-video-wrapper">
+                  {teacher_intro && Object.keys(teacher_intro).length !== 0 ? (
+                    <AparatVideo src={teacher_intro.file_link} />
+                  ) : (
+                    "ویدیو معرفی هنوز قرار نگرفته است"
+                  )}
+                  {/* <AparatVideo /> */}
+                </div>
               </div>
               <div className="teachers-courses-wrapper">
                 <h3 className="course-title">کلاس ها</h3>
@@ -163,7 +227,7 @@ class SingleTeacher extends Component {
                               <img src={k.image_link} alt={k.kelas_title} />
                             </span>
                             <h2>{k.kelas_title}</h2>
-                            <p>{k.descriptions}</p>
+                            <p>{k.descriptions[0]}</p>
                           </Link>
                         ))
                       ) : (
@@ -195,24 +259,49 @@ class SingleTeacher extends Component {
               <div className="teachers-sample-wrapper">
                 <h3 className="teacher-sample-title">نمونه تدریس</h3>
                 <div className="samples">
+                  {/* <div className="sample-wrapper">
+                    <AparatVideo />
+                  </div>
+                  <div className="sample-wrapper">
+                    <AparatVideo />
+                  </div>
+                  <div className="sample-wrapper">
+                    <AparatVideo />
+                  </div>
+                  <div className="sample-wrapper">
+                    <AparatVideo />
+                  </div>
+                  <div className="sample-wrapper">
+                    <AparatVideo />
+                  </div>
+                  <div className="sample-wrapper">
+                    <AparatVideo />
+                  </div>
+                  <div className="sample-wrapper">
+                    <AparatVideo />
+                  </div>
+                  <div className="sample-wrapper">
+                    <AparatVideo />
+                  </div> */}
                   {single_teacher ? (
                     nemone_tadris && Object.keys(nemone_tadris).length !== 0 ? (
                       <div
                         className="sample-wrapper"
                         key={nemone_tadris.file_id}>
-                        {" "}
-                        <span className="img-wrapper">
+                        {/* <span className="img-wrapper">
                           <img src={nemone_tadris.file_link} alt="" />{" "}
-                        </span>
-                        <h4 className="sample-title">
+                        </span> */}
+                        <AparatVideo />
+                        {/* <h4 className="sample-title">
                           {nemone_tadris.file_id}
                         </h4>
-                        <p>{nemone_tadris.teacher_id}</p>{" "}
+                        <p>{nemone_tadris.teacher_id}</p>{" "} */}
                       </div>
                     ) : (
                       <span className="no-sample-teach">
                         نمونه تدریسی برای نمایش وجود ندارد
                       </span>
+                      // <></>
                     )
                   ) : (
                     <LittleLoading />
@@ -317,7 +406,7 @@ class SingleTeacher extends Component {
                   </span>
                 </div>
               </div>
-              <div className="students-comments-wrapper">
+              {/* <div className="students-comments-wrapper">
                 <h3 className="semi-2-title">نظرات دانش آموزان</h3>
                 <textarea
                   name=""
@@ -403,7 +492,7 @@ class SingleTeacher extends Component {
                     <img src={downArrowBlue} alt="" />
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import Header from "../header/header";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
-import hello_svg from "../../assets/images/hello-page.svg";
+import hello_svg from "../../assets/images/hello-page.webp";
 import convert_to_persian from "../functions/convert-to-persian";
 
 class Support extends Component {
@@ -14,12 +14,22 @@ class Support extends Component {
       <>
         <Helmet>
           <title>پشتیبانی</title>
+          <link rel="preload" as="image" href={hello_svg} />
+          <meta
+            name="description"
+            content="در اینجا ما می‌توانیم به شما درباره تقریباً هر چیزی که نیاز دارید کمک کنیم و شما می‌توانید با ما برای مشاوره یا کمک تماس بگیرید. به ما بپیوندید و عضو خانواده بزرگ کاد باشید."
+          />
         </Helmet>
         <section className="bgc-wrapper hello-page-section">
           <div className="hello-page mm-width">
             <SideBar />
             <div className="main-content">
-              <img src={hello_svg} />
+              <img
+                src={hello_svg}
+                alt="پشتیبانی کاد"
+                width={400}
+                height={400}
+              />
               <h1 className="title">سلام همراه خوب کاد</h1>
               <h2 className="sub-titile">احتمالا الان نیاز به کمک ما داری</h2>
               <div className="help-ways">

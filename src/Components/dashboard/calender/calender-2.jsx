@@ -33,10 +33,10 @@ class Calender_2 extends Component {
             </span> */}
             <span
               onClick={() => {
-                change_active_date("Friday");
+                change_active_date("Saturday");
                 this.handle_animation();
               }}
-              className={active_day !== "Friday" ? "day" : "day active"}>
+              className={active_day !== "Saturday" ? "day" : "day active"}>
               شنبه
             </span>
             <span
@@ -104,6 +104,7 @@ class Calender_2 extends Component {
             animate={this.state.animate}
             kelases={kelases ? kelases : false}
             teachers={teachers ? teachers : false}
+            active_day={active_day}
           />
         </div>
       </div>

@@ -7,8 +7,8 @@ import { Redirect } from 'react-router-dom';
 import Dashboard from './Components/dashboard/dashboard';
 import Courses from './Components/courses/courses';
 import RecordedCourses from "./Components/recorded-courses/recorded-courses";
-import Topics from './Components/topics/topics';
-import FinancialStuff from './Components/finalcial-stuff/financial-stuff';
+// import Topics from './Components/topics/topics';
+// import FinancialStuff from './Components/finalcial-stuff/financial-stuff';
 import Profile from './Components/profile/profile';
 import UnderConstruction from './Components/under-construction/under-construction';
 import Login from './Components/login/login';
@@ -21,7 +21,7 @@ import SingleProd from "./Components/single-prod/single-prod";
 import SingleTeacher from "./Components/single-teacher/single-teacher";
 import SingleCourse from "./Components/single-course/single-course";
 import Cart from './Components/cart/cart';
-import Fianance from "./Components/fianance/fianance";
+// import Fianance from "./Components/fianance/fianance";
 import newSingleSession from './Components/single-session/new-single-session';
 import setPassword from './Components/set-password/set-password';
 import Teachers from './Components/Teachers/teachers';
@@ -43,12 +43,12 @@ class App extends Component {
     return (<>
       <Switch>
 
-        <Route path="/Home" component={HomePage} />
+        <Route path="/HomePage" component={HomePage} />
         <Route path="/Dashboard" component={Dashboard} />
-        <Route path="/Topics" component={Topics} />
+        {/* <Route path="/Topics" component={Topics} /> */}
         <Route path="/Profile" component={Profile} />
         {/* <Route path="/Finance" component={FinancialStuff} /> */}
-        <Route path="/Finance" component={Fianance} />
+        {/* <Route path="/Finance" component={Fianance} /> */}
         <Route path="/Why-kad" component={WhyKad} />
         <Route path="/Payment" component={Payment} />
         <Route path="/Courses" component={Courses} />
@@ -74,7 +74,7 @@ class App extends Component {
         <Route path="/Teachers/" component={Teachers} />
         <Route path="/Teacher/:id" component={SingleTeacher} />
         <Route path="/SingleCourse/:id" component={SingleCourse} />
-        <Redirect from="/" exact to="/Home" />
+        <Redirect from="/" exact to="/HomePage" />
         <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/not-found" component={UnderConstruction} />
         <Redirect to="/not-found" />

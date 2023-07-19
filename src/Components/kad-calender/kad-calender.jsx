@@ -12,6 +12,10 @@ class Kad_calender extends Component {
       <>
         <Helmet>
           <title>تقویم کاد</title>
+          <meta
+            name="description"
+            content="در اینجا شما می‌توانید تقویم آموزشی کاد را مشاهده کنید و از برنامه هفتگی ما مطلع شوید و همچنین هیچ رویدادی را از دست ندهید. برنامه‌های یادگیری ما را با دقت دنبال کنید و از تمام رویدادهای آینده ما باخبر شوید."
+          />
         </Helmet>
         <section className="bgc-wrapper">
           <div className="weekplan-kad-wrapper mm-width">

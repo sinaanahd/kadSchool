@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import scrollToTop from "../functions/scroll";
+
 import withWebsiteData from "../hoc/with-website-data";
 import mainLogo from "../../assets/images/main-logo.webp";
-import login_bgc from "../../assets/images/login-img.svg";
+import login_bgc from "../../assets/images/login-img.webp";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
 
@@ -90,6 +90,8 @@ class LoginPass extends Component {
       <>
         <Helmet>
           <title>ورود به سایت</title>
+          <meta name="description" content="ورود به وسیله رمز عبور در کاد" />
+          <meta name="keywords" content="ورود به وسیله رمز عبور کاد" />
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -97,7 +99,7 @@ class LoginPass extends Component {
             alt="عکس پس زمینه برای صفحه ورود"
             className="login-bgc"
           />
-          <Link to="/Home" className="main-logo">
+          <Link to="/Dashboard" className="main-logo">
             <img src={mainLogo} alt="وب سایت کاد" />
           </Link>
           <div className="login-wrapper mm-width">

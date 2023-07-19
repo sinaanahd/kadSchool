@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import sideBarIcon_1 from "../../assets/images/side-bar-icon-1.svg";
-import sideBarIcon_blue_1 from "../../assets/images/side-bar-icon-blue-1.svg";
-import sideBarIcon_2 from "../../assets/images/side-bar-icon-2.svg";
-import sideBarIcon_blue_2 from "../../assets/images/side-bar-icon-blue-2.svg";
-import sideBarIcon_3 from "../../assets/images/side-bar-icon-3.svg";
-import sideBarIcon_blue_3 from "../../assets/images/side-bar-icon-blue-3.svg";
-import sideBarIcon_4 from "../../assets/images/side-bar-icon-4-new.svg";
-import sideBarIcon_blue_4 from "../../assets/images/side-bar-icon-blue-4.svg";
-import sideBarIcon_5 from "../../assets/images/side-bar-icon-5-new.svg";
-import sideBarIcon__blue_5 from "../../assets/images/side-bar-icon-blue-5-new.svg";
-import sideBarIcon_6 from "../../assets/images/side-bar-icon-6.svg";
-import sideBarIcon_7 from "../../assets/images/side-bar-icon-7.svg";
-import sideBarIcon_blue_7 from "../../assets/images/side-bar-icon-blue-7.svg";
+import sideBarIcon_1 from "../../assets/images/side-bar-icon-1.webp";
+import sideBarIcon_blue_1 from "../../assets/images/side-bar-icon-blue-1.webp";
+import sideBarIcon_2 from "../../assets/images/side-bar-icon-2.webp";
+import sideBarIcon_blue_2 from "../../assets/images/side-bar-icon-blue-2.webp";
+import sideBarIcon_3 from "../../assets/images/side-bar-icon-3.webp";
+import sideBarIcon_blue_3 from "../../assets/images/side-bar-icon-blue-3.webp";
+import sideBarIcon_4 from "../../assets/images/side-bar-icon-4-new.webp";
+import sideBarIcon_blue_4 from "../../assets/images/side-bar-icon-blue-4.webp";
+import sideBarIcon_5 from "../../assets/images/side-bar-icon-5-new.webp";
+import sideBarIcon__blue_5 from "../../assets/images/side-bar-icon-blue-5-new.webp";
+import sideBarIcon_6 from "../../assets/images/side-bar-icon-6.webp";
+import sideBarIcon_7 from "../../assets/images/side-bar-icon-7.webp";
+import sideBarIcon_blue_7 from "../../assets/images/side-bar-icon-blue-7.webp";
 import scrollToTop from "../functions/scroll";
 
 let location;
@@ -27,7 +27,7 @@ class SideBar extends Component {
   render() {
     location = window.location.pathname.split("/")[1];
     return (
-      <div className="side-bar-wrapper">
+      <aside className="side-bar-wrapper">
         <div className="items">
           <Link
             onClick={() => {
@@ -146,7 +146,7 @@ class SideBar extends Component {
           className="setting">
           <img src={sideBarIcon_6} alt="تنظیمات" width={24} height={24} />
         </Link>
-      </div>
+      </aside>
     );
   }
 }

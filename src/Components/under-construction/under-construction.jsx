@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
 
-import banner_img from "../../assets/images/under-construction.svg";
+import banner_img from "../../assets/images/under-construction.webp";
 class UnderConstruction extends Component {
   state = {
     para_text: "",
@@ -34,13 +34,27 @@ class UnderConstruction extends Component {
       <>
         <Helmet>
           <title>در حال ساخت این صفحه هستیم</title>
+          <link
+            rel="preload"
+            as="image"
+            href="../../assets/images/under-construction.webp"
+          />
+          <meta
+            name="description"
+            content="این صفحه در حال طراحی و ساخت است به زودی آماده میشه."
+          />
         </Helmet>
         <section className="under-construction-section bgc-wrapper">
           <div className="under-construction mm-width">
             <SideBar />
             <div className="main-content">
               <h1>{this.state.para_text}</h1>
-              <img src={banner_img} alt="صفحه در حال ساخته شدن است" />
+              <img
+                width={800}
+                height={498}
+                src={banner_img}
+                alt="صفحه در حال ساخته شدن است"
+              />
             </div>
           </div>
         </section>

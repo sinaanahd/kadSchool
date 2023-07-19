@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet";
 import withWebsiteData from "../hoc/with-website-data";
 import SideBar from "../side-bar/side-bar";
 
-import pay_green from "../../assets/images/pay-green.svg";
-import pay_red from "../../assets/images/pay-red.svg";
+import pay_green from "../../assets/images/pay-green.webp";
+import pay_red from "../../assets/images/pay-red.webp";
 
 class Payment extends Component {
   state = {

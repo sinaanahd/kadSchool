@@ -123,7 +123,7 @@ function withWebsiteData(Component) {
     };
     componentDidMount() {
       //this.get_banners();
-      this.get_kelasses();
+      //this.get_kelasses();
       const is_time = last_login_check(last_login, this_time_login);
       if (is_time) {
         this.get_banners();
@@ -908,12 +908,12 @@ function withWebsiteData(Component) {
     user_pay_info = (user_id) => {
       axios
         .get(
-          //`https://kadschool.com/backend/kad_api/financial_records/${user_id}`
-          `https://kadschool.com/backend/kad_api/financial_records/${9166}`
+          `https://kadschool.com/backend/kad_api/financial_records/${user_id}`
+          //`https://kadschool.com/backend/kad_api/financial_records/${9166}`
         )
         .then((res) => {
           const user_pay_info = res.data;
-          console.log(user_pay_info);
+          //console.log(user_pay_info);
           if (user_pay_info.length !== 0) {
             const check_kelasses = this.state.ref_kelasses;
             const check_teachers = this.state.ref_teachers;

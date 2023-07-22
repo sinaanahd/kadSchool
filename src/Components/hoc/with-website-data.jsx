@@ -4,6 +4,7 @@ import Header from "../header/header";
 import NewFooter from "../footer/new-footer";
 import last_login_check from "../functions/last-login-check";
 import { Helmet } from "react-helmet";
+import convert_to_persian from "../functions/convert-to-persian";
 const local_user = JSON.parse(localStorage.getItem("user-kad"))
   ? JSON.parse(localStorage.getItem("user-kad"))
   : false;
@@ -392,10 +393,32 @@ function withWebsiteData(Component) {
         .get("https://kadschool.com/backend/kad_api/kelases")
         .then((res) => {
           const ref_kelasses = res.data;
+
           ref_kelasses.forEach((kelas) => {
             const kelas_name = kelas.kelas_title + "";
             const slug_name = kelas_name.replaceAll(" ", "-");
             kelas.slug_name = slug_name;
+          });
+          ref_kelasses.forEach((kelas) => {
+            const duplicates = ref_kelasses.filter(
+              (rk) =>
+                rk.slug_name === kelas.slug_name &&
+                rk.kelas_id !== kelas.kelas_id
+            );
+
+            if (duplicates.length === 1) {
+              const slug = duplicates[0].slug_name;
+              if (!/\d/.test(slug)) {
+                duplicates[0].slug_name += "-۱";
+              }
+            } else if (duplicates.length > 1) {
+              let last_index = 1;
+              duplicates.forEach((dk) => {
+                if (!/\d/.test(dk.slug_name)) {
+                  dk.slug_name += "-" + convert_to_persian(last_index++);
+                }
+              });
+            }
           });
           const all_kelasses = [...ref_kelasses];
           const free_courses = [...all_kelasses.filter((k) => k.price === 0)];
@@ -658,7 +681,7 @@ function withWebsiteData(Component) {
           kelas.sample_files = kelas_sample_files;
           this.setState({ single_prod: kelas ? kelas : false });
         } else {
-          window.location.pathname = "/not-found";
+          // window.location.pathname = "/not-found";
         }
       } else if (local_teachers && local_kelasses && local_sample_files) {
         this.setState(
@@ -885,12 +908,12 @@ function withWebsiteData(Component) {
     user_pay_info = (user_id) => {
       axios
         .get(
-          `https://kadschool.com/backend/kad_api/financial_records/${user_id}`
-          //`https://kadschool.com/backend/kad_api/financial_records/${9166}`
+          //`https://kadschool.com/backend/kad_api/financial_records/${user_id}`
+          `https://kadschool.com/backend/kad_api/financial_records/${9166}`
         )
         .then((res) => {
           const user_pay_info = res.data;
-          //console.log(user_pay_info);
+          console.log(user_pay_info);
           if (user_pay_info.length !== 0) {
             const check_kelasses = this.state.ref_kelasses;
             const check_teachers = this.state.ref_teachers;

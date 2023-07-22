@@ -45,10 +45,7 @@ class App extends Component {
 
         <Route path="/HomePage" component={HomePage} />
         <Route path="/Dashboard" component={Dashboard} />
-        {/* <Route path="/Topics" component={Topics} /> */}
         <Route path="/Profile" component={Profile} />
-        {/* <Route path="/Finance" component={FinancialStuff} /> */}
-        {/* <Route path="/Finance" component={Fianance} /> */}
         <Route path="/Why-kad" component={WhyKad} />
         <Route path="/Payment" component={Payment} />
         <Route path="/Courses" component={Courses} />
@@ -66,14 +63,14 @@ class App extends Component {
         <Route path="/SetPassword" component={setPassword} />
         <Route path="/Set-new-password" component={SetNewPassword} />
         <Route path="/Support" component={Support} />
-        <Route path="/Shop" component={Shop} />
         <Route path="/Cart" component={Cart} />
         <Route path="/FAQ" component={FAQ} />
         <Route path="/Needed-apps" component={NeededApps} />
-        <Route path="/SingleProd/:id" component={SingleProd} />
+        <Route path="/Shop/product/:id" exact component={SingleProd} />
+        <Route path="/Shop" component={Shop} />
+        <Route path="/Teachers/:id" exact component={SingleTeacher} />
         <Route path="/Teachers/" component={Teachers} />
-        <Route path="/Teacher/:id" component={SingleTeacher} />
-        <Route path="/SingleCourse/:id" component={SingleCourse} />
+        <Route path="/Dore/:id" component={SingleCourse} />
         <Redirect from="/" exact to="/HomePage" />
         <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/not-found" component={UnderConstruction} />

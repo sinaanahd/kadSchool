@@ -399,7 +399,7 @@ class PopUp extends Component {
                           scrollToTop();
                         }}
                         key={t.teacher_id}
-                        to={`/Teacher/${t.slug_name}`}>
+                        to={`/Teachers/${t.slug_name}`}>
                         صفحه رزومه {t.fullname}
                       </Link>
                     ))

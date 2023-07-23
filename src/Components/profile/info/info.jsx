@@ -266,7 +266,7 @@ class Info extends Component {
       <div className="info-wrapper">
         <div className="col-1 cols">
           <span className="input-wrapper">
-            <label for="full-name">
+            <label htmlFor="full-name">
               نام و نام خانوادگی : ({user ? user.name : <LittleLoading />})
             </label>
             <input
@@ -448,7 +448,7 @@ class Info extends Component {
             <></>
           )}
           <span className="input-wrapper">
-            <label for="home-number" className="title">
+            <label htmlFor="home-number" className="title">
               شماره ثابت : (
               {user ? (
                 user.home_phone_number !== null ? (
@@ -701,7 +701,7 @@ class Info extends Component {
           <div className="change-pass-wrapper">
             <span className="change-pass-title">تغییر رمز عبور</span>
             <span className="pass-input-wrapper">
-              <label for="pass-1" className="input-tt">
+              <label htmlFor="pass-1" className="input-tt">
                 رمز عبور
               </label>
               <input
@@ -714,7 +714,7 @@ class Info extends Component {
               />
             </span>
             <span className="pass-input-wrapper">
-              <label for="pass-2" className="input-tt">
+              <label htmlFor="pass-2" className="input-tt">
                 تکرار رمز عبور
               </label>
               <input

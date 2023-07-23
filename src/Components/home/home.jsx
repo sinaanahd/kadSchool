@@ -715,7 +715,7 @@ class HomePage extends Component {
             <h2 className="semi-title">استادان حرفه ای کاد</h2>
             <div className="teachers" ref={this.teachers_ref}>
               <Link
-                to="/Teacher/1949"
+                to="/Teachers/استاد-عماد-فیض-آبادی"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -731,7 +731,7 @@ class HomePage extends Component {
                 <h3 className="teacher-name">استاد عماد فیض آبادی</h3>
               </Link>
               <Link
-                to="/Teacher/6512"
+                to="/Teachers/استاد-حمید-سودیان"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -747,7 +747,7 @@ class HomePage extends Component {
                 <h3 className="teacher-name">استاد حمید سودیان</h3>
               </Link>
               <Link
-                to="/Teacher/7137"
+                to="/Teachers/استاد-آروین-حسینی"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -763,7 +763,7 @@ class HomePage extends Component {
                 <h3 className="teacher-name">استاد آروین حسینی</h3>
               </Link>
               <Link
-                to="/Teacher/7711"
+                to="/Teachers/استاد-امیر-محمد-دهقان"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -779,7 +779,7 @@ class HomePage extends Component {
                 <h3 className="teacher-name">استاد امیر محمد دهقان</h3>
               </Link>
               <Link
-                to="/Teacher/7792"
+                to="/Teachers/استاد-هامون-سبطی"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -795,7 +795,7 @@ class HomePage extends Component {
                 <h3 className="teacher-name">استاد هامون سبطی</h3>
               </Link>
               <Link
-                to="/Teacher/8325"
+                to="/Teachers/استاد-نیما-جواهری"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -811,7 +811,7 @@ class HomePage extends Component {
                 <h3 className="teacher-name">استاد نیما جواهری</h3>
               </Link>
               <Link
-                to="/Teacher/9558"
+                to="/Teachers/استاد-مهران-ترکمان"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -827,7 +827,7 @@ class HomePage extends Component {
                 <h3 className="teacher-name">استاد مهران ترکمان</h3>
               </Link>
               <Link
-                to="/not-found"
+                to="/Teachers/استاد-مهسا-عفتی"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -843,7 +843,7 @@ class HomePage extends Component {
                 <h3 className="teacher-name">استاد مهسا عفتی</h3>
               </Link>
               <Link
-                to="/not-found"
+                to="/Teachers/استاد-سارا-شریفی"
                 onClick={() => {
                   scrollToTop();
                 }}

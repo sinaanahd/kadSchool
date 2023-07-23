@@ -21,7 +21,7 @@ class SingleProd extends Component {
     pop_up: false,
   };
   componentDidMount() {
-    const page_slug = window.location.pathname.split("/")[2];
+    const page_slug = window.location.pathname.split("/")[3];
     let page_id;
     const test_slug = decodeURIComponent(page_slug);
     if (/\d/.test(test_slug)) {
@@ -146,7 +146,7 @@ class SingleProd extends Component {
                               onClick={() => {
                                 scrollToTop();
                               }}
-                              to={`/Teacher/${t.slug_name}`}
+                              to={`/Teachers/${t.slug_name}`}
                               key={t.teacher_id}>
                               {t.fullname}
                             </Link>

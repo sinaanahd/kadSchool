@@ -211,7 +211,7 @@ class SingleCourse extends Component {
                               onClick={() => {
                                 scrollToTop();
                               }}
-                              to={`/SingleProd/${k.slug_name}`}
+                              to={`/Shop/product/${k.slug_name}`}
                               className="img-wrapper">
                               <img
                                 src={k.image_link}
@@ -224,7 +224,7 @@ class SingleCourse extends Component {
                                 onClick={() => {
                                   scrollToTop();
                                 }}
-                                to={`/Teacher/${single_course.teachers[i].slug_name}`}>
+                                to={`/Teachers/${single_course.teachers[i].slug_name}`}>
                                 {single_course.teachers[i].fullname}
                               </Link>
                             </h3>

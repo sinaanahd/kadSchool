@@ -19,7 +19,7 @@ class Teacher extends Component {
           onClick={() => {
             scrollToTop();
           }}
-          to={`/Teacher/${teacher.slug_name}`}
+          to={`/Teachers/${teacher.slug_name}`}
           className="img-wrapper">
           <img
             loading="lazy"
@@ -34,7 +34,7 @@ class Teacher extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to={`/Teacher/${teacher.slug_name}`}>
+            to={`/Teachers/${teacher.slug_name}`}>
             {teacher.fullname}
           </Link>
         </h2>

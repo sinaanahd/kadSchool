@@ -220,7 +220,7 @@ class SingleTeacher extends Component {
                             onClick={() => {
                               scrollToTop();
                             }}
-                            to={`/SingleProd/${k.kelas_id}`}
+                            to={`/Shop/product/${k.slug_name}`}
                             key={k.kelas_id}
                             className="course">
                             <span className="img-wrapper">

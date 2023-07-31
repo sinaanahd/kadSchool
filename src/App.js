@@ -37,15 +37,16 @@ import './App.css';
 import KadCalender from './Components/kad-calender/kad-calender';
 import Rules from './Components/rules/rules';
 import TopStudents from './Components/top-students/top-students';
+import Apolo11 from './Components/campaign/apolo-11/apolo-11';
 class App extends Component {
   state = {}
   render() {
     return (<>
       <Switch>
-
         <Route path="/HomePage" component={HomePage} />
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/Profile" component={Profile} />
+        <Route path="/apolo-11" component={Apolo11} />
         <Route path="/Why-kad" component={WhyKad} />
         <Route path="/Payment" component={Payment} />
         <Route path="/Courses" component={Courses} />

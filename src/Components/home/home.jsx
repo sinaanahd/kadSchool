@@ -6,21 +6,21 @@ import scrollToTop from "../functions/scroll";
 import withWebsiteData from "../hoc/with-website-data";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
+import HomeHeader from "./header/home-header";
+import HomeFooter from "./footer/home-footer";
 
 import rocket from "../lotties/rocket.json";
 import astronut from "../lotties/astronot.json";
 import astronut_laptop from "../lotties/space-developer.json";
 import hero_animation from "../lotties/hero-animation.json";
 
-import mainLogo from "../../assets/images/main-logo-white-1.webp";
-import menuIcon from "../../assets/images/menu-white.webp";
+// import mainLogo from "../../assets/images/main-logo-white-1.webp";
 import leftIcon from "../../assets/images/CaretLeft.webp";
 import avatar from "../../assets/images/home-cm-avatar.webp";
-import aparatLogo from "../../assets/images/aparat.webp";
-import telegramIcon from "../../assets/images/telegram-icon.webp";
-import whatsappIcon from "../../assets/images/whatsapp-icon.webp";
-import instagramIcon from "../../assets/images/instagram-icon.webp";
-import closeMenu from "../../assets/images/close-menu-white.webp";
+// import aparatLogo from "../../assets/images/aparat.webp";
+// import telegramIcon from "../../assets/images/telegram-icon.webp";
+// import whatsappIcon from "../../assets/images/whatsapp-icon.webp";
+// import instagramIcon from "../../assets/images/instagram-icon.webp";
 import jump_img from "../../assets/images/jump-img.webp";
 import hero_little_icon from "../../assets/images/space-ship-new.webp";
 
@@ -63,7 +63,6 @@ class HomePage extends Component {
     comment_way: "forward",
     active_teacher: 1,
     active_student: 1,
-    menu: false,
     name: false,
     phone_number: false,
     phone_number_2: false,
@@ -276,10 +275,7 @@ class HomePage extends Component {
       }
     }
   };
-  menu_handler = () => {
-    const menu = this.state.menu;
-    this.setState({ menu: !menu });
-  };
+
   res_carousel = () => {
     const res_carouse_pos = this.state.res_carouse_pos;
     const res_way = this.state.res_way;
@@ -430,95 +426,7 @@ class HomePage extends Component {
           />
         </Helmet>
         <div className="home-page">
-          <header className="home-page-header mm-width">
-            <Link
-              onClick={() => {
-                scrollToTop();
-              }}
-              to="/HomePage">
-              <img src={mainLogo} alt="کاد" width={175} height={42} />
-            </Link>
-            <span
-              className="menu-burger"
-              onClick={() => {
-                this.menu_handler();
-              }}>
-              {this.state.menu ? (
-                <img
-                  src={closeMenu}
-                  width={30}
-                  height={30}
-                  alt="بستن منو"
-                  className="close-pos"
-                />
-              ) : (
-                <img src={menuIcon} width={30} height={30} alt="باز کردن منو" />
-              )}
-            </span>
-            <nav
-              className={
-                this.state.menu
-                  ? "links-wrapper home-res-menu"
-                  : "links-wrapper"
-              }>
-              <ul>
-                <li className="login-li">
-                  <Link
-                    onClick={() => {
-                      scrollToTop();
-                    }}
-                    to={!user ? "/Login" : "/Profile"}>
-                    ورود | ثبت نام
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    onClick={() => {
-                      scrollToTop();
-                    }}
-                    to="/Dashboard">
-                    میز مطالعه
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    onClick={() => {
-                      scrollToTop();
-                    }}
-                    to="/Shop">
-                    فروشگاه
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    onClick={() => {
-                      scrollToTop();
-                    }}
-                    to="/Teachers">
-                    استادان کاد
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    onClick={() => {
-                      scrollToTop();
-                    }}
-                    to="/Support">
-                    پشتیبانی
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    onClick={() => {
-                      scrollToTop();
-                    }}
-                    to="/Rules">
-                    قوانین
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </header>
+          <HomeHeader user={user} />
           <section className="hero-wrapper">
             <div className="hero-gif">
               <Lottie options={hero_animation_options} />
@@ -573,7 +481,8 @@ class HomePage extends Component {
                   this.state.name_err === "ok" ? (
                     <span
                       onClick={() => this.send_gift_request()}
-                      className="fly-btn">
+                      className="fly-btn"
+                    >
                       {this.state.pause ? <LittleLoading /> : "پرواز سفینه"}
                     </span>
                   ) : (
@@ -630,7 +539,8 @@ class HomePage extends Component {
             <div
               className={
                 "reasons-wrapper res-pos-" + this.state.res_carouse_pos
-              }>
+              }
+            >
               <div className={"reasons pos-" + this.state.carousel_pos}>
                 <div className="reason">
                   <h3 className="reason-title">رفع اشکال به سرعت نور</h3>
@@ -699,7 +609,8 @@ class HomePage extends Component {
                   this.state.res_way === "forward"
                     ? "resoan-back-btn"
                     : "resoan-back-btn rev"
-                }>
+                }
+              >
                 <img src={leftIcon} alt="بعدی" width={47} height={47} />
               </span>
             </div>
@@ -719,14 +630,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_عماد_فیض_آبادی.webp"
-                    alt="استاد عماد فیض آبادی"></img>
+                    alt="استاد عماد فیض آبادی"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد عماد فیض آبادی</h3>
               </Link>
@@ -735,14 +648,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_حمید_سودیان.webp"
-                    alt="استاد حمید سودیان"></img>
+                    alt="استاد حمید سودیان"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد حمید سودیان</h3>
               </Link>
@@ -751,14 +666,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_آروین_حسینی.webp"
-                    alt="استاد آروین حسینی"></img>
+                    alt="استاد آروین حسینی"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد آروین حسینی</h3>
               </Link>
@@ -767,14 +684,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_امیر_محمد_دهقان.webp"
-                    alt="استاد امیر محمد دهقان"></img>
+                    alt="استاد امیر محمد دهقان"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد امیر محمد دهقان</h3>
               </Link>
@@ -783,14 +702,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_هامون_سبطی.webp"
-                    alt="استاد هامون سبطی"></img>
+                    alt="استاد هامون سبطی"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد هامون سبطی</h3>
               </Link>
@@ -799,14 +720,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_نیما_جواهری.webp"
-                    alt="استاد نیما جواهری"></img>
+                    alt="استاد نیما جواهری"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد نیما جواهری</h3>
               </Link>
@@ -815,14 +738,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_مهران_ترکمان.webp"
-                    alt="استاد مهران ترکمان"></img>
+                    alt="استاد مهران ترکمان"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد مهران ترکمان</h3>
               </Link>
@@ -831,14 +756,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_مهسا_عفتی.webp"
-                    alt="استاد مهسا عفتی"></img>
+                    alt="استاد مهسا عفتی"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد مهسا عفتی</h3>
               </Link>
@@ -847,62 +774,70 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_سارا_شریفی.webp"
-                    alt="استاد سارا شریفی"></img>
+                    alt="استاد سارا شریفی"
+                  ></img>
                 </span>
                 <h3 className="teacher-name"> استاد سارا شریفی</h3>
               </Link>
               <Link
-                to="/not-found"
+                to="/Teachers/استاد-رضا-امیر"
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src={teacher_img_3}
-                    alt="رضا امیر"></img>
+                    alt="رضا امیر"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">استاد رضا امیر</h3>
               </Link>
               <Link
-                to="/not-found"
+                to="/Teachers/استاد-علیرضا-علمداری"
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src={teacher_img_4}
-                    alt="مهندس علیرضا علمداری"></img>
+                    alt="مهندس علیرضا علمداری"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">مهندس علیرضا علمداری</h3>
               </Link>
               <Link
-                to="/not-found"
+                to="/Teachers/استاد-علیرضا-ایدلخانی"
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src={teacher_img_5}
-                    alt="مهندس علیرضا ایدلخانی"></img>
+                    alt="مهندس علیرضا ایدلخانی"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">مهندس علیرضا ایدلخانی</h3>
               </Link>
@@ -911,14 +846,16 @@ class HomePage extends Component {
                 onClick={() => {
                   scrollToTop();
                 }}
-                className="teacher">
+                className="teacher"
+              >
                 <span className="teacher-img-wrapper">
                   <img
                     width={224}
                     loading="lazy"
                     height={298.13}
                     src={teacher_img_6}
-                    alt="علیرضا احمدی"></img>
+                    alt="علیرضا احمدی"
+                  ></img>
                 </span>
                 <h3 className="teacher-name">علیرضا احمدی</h3>
               </Link>
@@ -927,14 +864,16 @@ class HomePage extends Component {
               onClick={() => {
                 this.move_teacher("forward");
               }}
-              className="resoan-back-btn">
+              className="resoan-back-btn"
+            >
               <img src={leftIcon} alt="بعدی" width={47} height={47} />
             </span>
             <span
               onClick={() => {
                 this.move_teacher("back");
               }}
-              className="resoan-back-btn rev">
+              className="resoan-back-btn rev"
+            >
               <img src={leftIcon} alt="بعدی" width={47} height={47} />
             </span>
           </section>
@@ -948,7 +887,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_1}
-                    alt="مائده ملکی"></img>
+                    alt="مائده ملکی"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">مائده ملکی</h3>
               </div>
@@ -959,7 +899,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_13}
-                    alt="علی اصغر وجدانی"></img>
+                    alt="علی اصغر وجدانی"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">علی اصغر وجدانی</h3>
               </div>
@@ -970,7 +911,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_12}
-                    alt="رها روزبهانی"></img>
+                    alt="رها روزبهانی"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">رها روزبهانی</h3>
               </div>
@@ -981,7 +923,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_10}
-                    alt="امیرحسین چهاردولی"></img>
+                    alt="امیرحسین چهاردولی"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">امیرحسین چهاردولی</h3>
               </div>
@@ -992,7 +935,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_11}
-                    alt="فردین برهور"></img>
+                    alt="فردین برهور"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">فردین برهور</h3>
               </div>
@@ -1003,7 +947,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_9}
-                    alt="آریا نظری فر"></img>
+                    alt="آریا نظری فر"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">آریا نظری فر</h3>
               </div>
@@ -1014,7 +959,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_8}
-                    alt="مطهره السادات هاشمی"></img>
+                    alt="مطهره السادات هاشمی"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">مطهره السادات هاشمی</h3>
               </div>
@@ -1025,7 +971,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_7}
-                    alt="متین قدیمی"></img>
+                    alt="متین قدیمی"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">متین قدیمی</h3>
               </div>
@@ -1036,7 +983,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_6}
-                    alt="فاطمه میر"></img>
+                    alt="فاطمه میر"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">فاطمه میر</h3>
               </div>
@@ -1047,7 +995,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_5}
-                    alt="سام نظری"></img>
+                    alt="سام نظری"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">سام نظری</h3>
               </div>
@@ -1058,7 +1007,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_4}
-                    alt="سینا سیفی"></img>
+                    alt="سینا سیفی"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">سینا سیفی</h3>
               </div>
@@ -1069,7 +1019,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_3}
-                    alt="زهرا علینقیان"></img>
+                    alt="زهرا علینقیان"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">زهرا علینقیان</h3>
               </div>
@@ -1080,7 +1031,8 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_2}
-                    alt="صالح اسماعیل زاده"></img>
+                    alt="صالح اسماعیل زاده"
+                  ></img>
                 </span>
                 <h3 className="good-student-name">صالح اسماعیل زاده</h3>
               </div>
@@ -1089,14 +1041,16 @@ class HomePage extends Component {
               onClick={() => {
                 this.move_student("forward");
               }}
-              className="resoan-back-btn">
+              className="resoan-back-btn"
+            >
               <img src={leftIcon} alt="بعدی" width={47} height={47} />
             </span>
             <span
               onClick={() => {
                 this.move_student("back");
               }}
-              className="resoan-back-btn rev">
+              className="resoan-back-btn rev"
+            >
               <img src={leftIcon} alt="بعدی" width={47} height={47} />
             </span>
           </section>
@@ -1242,7 +1196,6 @@ class HomePage extends Component {
                 </div>
                 <div className="home-comment">
                   <p className="home-comment-text">
-                    {" "}
                     من امسال از آبان کلاس ها رو ثبت نام کردن قبلش یک موسسه دیگه
                     بودم که به خاطر حاشیه های زیاد سر کلاس ترجیح دادم با این که
                     هزینه کلاس رو بهم بر نگردوندن بیام کاد ثبت نام کنن خداییش
@@ -1338,7 +1291,8 @@ class HomePage extends Component {
                     onClick={() => {
                       this.send_gift_request();
                     }}
-                    className="fly-spaceship-btn">
+                    className="fly-spaceship-btn"
+                  >
                     {this.state.pause ? <LittleLoading /> : "پرواز سفینه"}
                   </span>
                 ) : (
@@ -1374,236 +1328,7 @@ class HomePage extends Component {
               )}
             </span>
           </section>
-          <footer className="home-footer mm-width">
-            <Link
-              onClick={() => {
-                scrollToTop();
-              }}
-              to="/HomePage"
-              className="home-page-link">
-              <img src={mainLogo} alt="کاد" width={175} height={42} />
-            </Link>
-            <div className="home-footer-cols">
-              <div className="hf-col hf-col-1">
-                <p className="get-present">دریافت هدیه</p>
-                <p className="present-text">
-                  هدیه یک میلیون تومانیت رو همین الان از کاد بگیر
-                </p>
-                <span className="jump-input-wrapper">
-                  <input
-                    onInput={(e) => {
-                      this.handle_phone_2(e);
-                    }}
-                    type="number"
-                    placeholder="شماره تلفن"
-                  />
-                  {this.state.phone_err_2 === "ok" ? (
-                    <span
-                      onClick={() => {
-                        this.send_gift_request_2();
-                      }}
-                      className="fly-spaceship-btn">
-                      {this.state.pause_2 ? <LittleLoading /> : "پرواز سفینه"}
-                    </span>
-                  ) : (
-                    <span className="fly-spaceship-btn wait-footer-home">
-                      پرواز سفینه
-                    </span>
-                  )}
-                </span>
-                {this.state.final_message_2 ? (
-                  <span className="hf-final-msg">
-                    {this.state.final_message_2}
-                  </span>
-                ) : (
-                  ""
-                )}
-                {this.state.phone_err_2 && this.state.phone_err_2 !== "ok" ? (
-                  <span className="hf-error-wrapper">
-                    {this.state.phone_err_2}
-                  </span>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="hf-col hf-col-2">
-                <h2 className="hf-footer-title">دسترسی سریع</h2>
-                <ul>
-                  <li>
-                    <Link
-                      onClick={() => {
-                        scrollToTop();
-                      }}
-                      to="/Support">
-                      پشتیبانی
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onClick={() => {
-                        scrollToTop();
-                      }}
-                      to="/FAQ">
-                      سوالات متداول
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onClick={() => {
-                        scrollToTop();
-                      }}
-                      to="/Needed-apps">
-                      نرم افزار‌های مورد نیاز
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="hf-col hf-col-3">
-                <h2 className="hf-footer-title">درباره کاد</h2>
-                <ul>
-                  <li>
-                    <Link
-                      onClick={() => {
-                        scrollToTop();
-                      }}
-                      to="/Top-students">
-                      رتبه‌های برتر کاد
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onClick={() => {
-                        scrollToTop();
-                      }}
-                      to="/Why-kad">
-                      چرا کاد؟
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onClick={() => {
-                        scrollToTop();
-                      }}
-                      to="/Teachers">
-                      استادان کاد
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onClick={() => {
-                        scrollToTop();
-                      }}
-                      to="/Kad-calender">
-                      تقویم کاد
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onClick={() => {
-                        scrollToTop();
-                      }}
-                      to="/Rules">
-                      قوانین کاد
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="hf-col hf-col-4">
-                <div className="social-icons">
-                  <a
-                    href="https://b2n.ir/y31513"
-                    target="_blank"
-                    className="icon">
-                    <img
-                      width={20}
-                      height={21}
-                      src={aparatLogo}
-                      alt="آپارات کاد"
-                    />
-                  </a>
-                  <a
-                    href="https://b2n.ir/y01578"
-                    target="_blank"
-                    className="icon">
-                    <img
-                      width={20}
-                      height={19.35}
-                      src={instagramIcon}
-                      alt="اینستاگرام کاد"
-                    />
-                  </a>
-                  <a
-                    href="https://b2n.ir/r59262"
-                    target="_blank"
-                    className="icon">
-                    <img
-                      width={20}
-                      height={19.35}
-                      src={whatsappIcon}
-                      alt="واتسپ کاد"
-                    />
-                  </a>
-                  <a
-                    href="https://b2n.ir/u76961"
-                    target="_blank"
-                    className="icon">
-                    <img
-                      width={20}
-                      height={18.36}
-                      src={telegramIcon}
-                      alt="تلگرام کاد"
-                    />
-                  </a>
-                </div>
-                <div className="map-enamad">
-                  <span className="map">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.0909715519983!2d51.3952713!3d35.699378900000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e0122d3305d81%3A0xc26623dede1f537d!2z2qnYp9iv!5e0!3m2!1sen!2s!4v1684677706408!5m2!1sen!2s"
-                      width="180"
-                      height="133"
-                      title="نقشه کاد"
-                      style={{ border: 0 }}
-                      allowFullScreen=""
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"></iframe>
-                  </span>
-                  <span className="enamad">
-                    <p>
-                      <a
-                        style={{
-                          textAlign: "center",
-                          margin: "auto",
-                          display: "block",
-                          background: "white",
-                          padding: "5px",
-                        }}
-                        aria-label="اینماد"
-                        href="https://trustseal.enamad.ir/?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
-                        target="_blank"
-                        rel="noopener">
-                        <img
-                          data-lazyloaded="1"
-                          src="https://Trustseal.eNamad.ir/logo.aspx?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
-                          id="Jmy33pCxvf9GCBxttooi"
-                          style={{ cursor: "pointer" }}
-                          data-src="https://Trustseal.eNamad.ir/logo.aspx?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
-                          alt="اینماد"
-                          className="litespeed-loaded"
-                          data-was-processed="true"
-                          width={20}
-                          height={20}
-                        />
-                      </a>
-                    </p>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <p className="hf-copy-text">
-              کلیه حقوق مادی و معنوی این سایت در اختیار انتشارات دریافت می باشد
-              و کپی برداری از کلیه محتوای آن غیر مجاز است
-            </p>
-          </footer>
+          <HomeFooter />
         </div>
       </>
     );

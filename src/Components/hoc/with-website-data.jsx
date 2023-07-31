@@ -119,11 +119,9 @@ function withWebsiteData(Component) {
         state: false,
         message: "",
       },
-      active_day: "Friday",
+      active_day: "Saturday",
     };
     componentDidMount() {
-      //this.get_banners();
-      //this.get_kelasses();
       const is_time = last_login_check(last_login, this_time_login);
       if (is_time) {
         this.get_banners();
@@ -175,12 +173,11 @@ function withWebsiteData(Component) {
         } else {
           this.get_kelasses();
         }
-        this.get_jalasat();
+        //this.get_jalasat();
         if (local_jalasat) {
           this.setState({ ref_jalasat: local_jalasat });
         } else {
           this.get_jalasat();
-          //console.log("jalase");
         }
         if (local_free_courses) {
           this.setState({ free_courses: local_free_courses });
@@ -252,6 +249,7 @@ function withWebsiteData(Component) {
           }
           localStorage.setItem("sample-weekplan", JSON.stringify(week_plan));
           this.setState({ sample_week_plan: week_plan });
+          // console.log(week_plan);
         })
         .catch((e) => {
           this.handle_error(e);
@@ -681,7 +679,7 @@ function withWebsiteData(Component) {
           kelas.sample_files = kelas_sample_files;
           this.setState({ single_prod: kelas ? kelas : false });
         } else {
-           window.location.pathname = "/not-found";
+          window.location.pathname = "/not-found";
         }
       } else if (local_teachers && local_kelasses && local_sample_files) {
         this.setState(
@@ -908,8 +906,8 @@ function withWebsiteData(Component) {
     user_pay_info = (user_id) => {
       axios
         .get(
-          `https://kadschool.com/backend/kad_api/financial_records/${user_id}`
-          //`https://kadschool.com/backend/kad_api/financial_records/${9166}`
+          //`https://kadschool.com/backend/kad_api/financial_records/${user_id}`
+          `https://kadschool.com/backend/kad_api/financial_records/${9166}`
         )
         .then((res) => {
           const user_pay_info = res.data;
@@ -983,6 +981,14 @@ function withWebsiteData(Component) {
         });
       }, 1000);
     };
+    make_user_empty = () => {
+      localStorage.removeItem("user-kad");
+      localStorage.removeItem("kad-cart");
+      localStorage.removeItem("kad-phone-number");
+      this.setState({ user: false, cart: false }, () => {
+        window.location.pathname = "/Login";
+      });
+    };
     render() {
       return (
         <>
@@ -999,6 +1005,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
           window.location.pathname === "/HomePage" ||
+          window.location.pathname === "/apolo-11" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (
@@ -1047,6 +1054,7 @@ function withWebsiteData(Component) {
             user_pay_info={this.state.user_pay_info}
             sample_week_plan={this.state.sample_week_plan}
             motiv_quote={this.state.motiv_quote}
+            make_user_empty={this.make_user_empty}
           />
           {this.state.err.state ? (
             <div className={this.state.err.classes.map((c) => `${c}`)}>
@@ -1059,7 +1067,8 @@ function withWebsiteData(Component) {
             <span
               className={
                 "cart-update-wrapper-hoc " + this.state.added_to_cart_animate
-              }>
+              }
+            >
               {this.state.added_to_cart === "added"
                 ? "محصول با موفقیت اضافه شد"
                 : "محصول با موفقیت حذف شد"}
@@ -1074,6 +1083,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
           window.location.pathname === "/HomePage" ||
+          window.location.pathname === "/apolo-11" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (

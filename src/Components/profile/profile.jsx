@@ -18,7 +18,7 @@ class Profile extends Component {
   };
 
   render() {
-    const { user, handle_error, subjects, years, inside_user, user_pay_info } =
+    const { user, handle_error, subjects, years, inside_user, user_pay_info , make_user_empty} =
       this.props;
     return (
       <>
@@ -62,6 +62,7 @@ class Profile extends Component {
                         subjects={subjects}
                         ref_years={years}
                         inside_user={inside_user}
+                        make_user_empty={make_user_empty}
                       />
                     ) : this.state.page === "fianance" ? (
                       <ProfileFinanace

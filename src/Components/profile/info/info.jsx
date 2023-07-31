@@ -261,7 +261,7 @@ class Info extends Component {
       });
   };
   render() {
-    const { user, ref_years, subjects } = this.props;
+    const { user, ref_years, subjects ,make_user_empty} = this.props;
     return (
       <div className="info-wrapper">
         <div className="col-1 cols">
@@ -751,6 +751,11 @@ class Info extends Component {
             ) : (
               ""
             )}
+          </div>
+          <div className="exit-from-panel" onClick={()=>{
+            make_user_empty();
+          }}>
+            خروج از حساب کاربری
           </div>
         </div>
       </div>

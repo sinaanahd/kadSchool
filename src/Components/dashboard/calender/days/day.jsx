@@ -27,7 +27,7 @@ class Day extends Component {
       } else if (now > finish) {
         status = "finished";
       } else if (now < start) {
-        start = "notStarted";
+        status = "notStarted";
       }
     } else {
       status = "notStarted";
@@ -82,11 +82,12 @@ class Day extends Component {
           </span>
         </span>
         {this.state.status === "online" ? (
-          <Link
-            to={`/SingleSession/${my_class.jalase_id}`}
-            className="dots-wrapper">
-            ...
-          </Link>
+          // <Link
+          //   to={`/SingleSession/${my_class.jalase_id}`}
+          //   className="dots-wrapper">
+          //   ...
+          // </Link>
+          <span className="dots-wrapper">...</span>
         ) : (
           <span className="dots-wrapper">...</span>
         )}

@@ -9,6 +9,7 @@ import cross_menu_icon from "../../assets/images/cross-menu.webp";
 class Header extends Component {
   state = {
     menu: false,
+    exit : "",
   };
   constructor(props) {
     super(props);
@@ -69,6 +70,9 @@ class Header extends Component {
                 <>
                   <span className="name">{user.name}</span>
                   <img width={27} height={26} src={userIcon} alt={user.name} />
+                  <span className={"exit-from-panel " + this.state.exit}>
+                    خروج از حساب کاربری
+                  </span>
                 </>
               ) : (
                 <>

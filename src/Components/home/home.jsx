@@ -26,9 +26,6 @@ import hero_little_icon from "../../assets/images/space-ship-new.webp";
 
 // sample teacher
 
-import teacher_img_3 from "../../assets/images/kad-teacher-3.webp";
-import teacher_img_4 from "../../assets/images/kad-teacher-4.webp";
-import teacher_img_5 from "../../assets/images/kad-teacher-5.webp";
 import teacher_img_6 from "../../assets/images/kad-teacher-6.webp";
 
 import good_students_1 from "../../assets/images/svg/g-s-1.svg";
@@ -799,7 +796,7 @@ class HomePage extends Component {
                     width={224}
                     loading="lazy"
                     height={298.13}
-                    src={teacher_img_3}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_نیما_جواهری.webp"
                     alt="رضا امیر"
                   ></img>
                 </span>
@@ -817,7 +814,7 @@ class HomePage extends Component {
                     width={224}
                     loading="lazy"
                     height={298.13}
-                    src={teacher_img_4}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_علیرضا_علمداری.webp"
                     alt="مهندس علیرضا علمداری"
                   ></img>
                 </span>
@@ -835,7 +832,7 @@ class HomePage extends Component {
                     width={224}
                     loading="lazy"
                     height={298.13}
-                    src={teacher_img_5}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_علیرضا_ایدلخانی.webp"
                     alt="مهندس علیرضا ایدلخانی"
                   ></img>
                 </span>

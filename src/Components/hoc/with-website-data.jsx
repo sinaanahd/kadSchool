@@ -196,9 +196,15 @@ function withWebsiteData(Component) {
         this.get_cart(local_user.user_id);
         this.user_pay_info(local_user.user_id);
       }
-      if (window.location.pathname !== "/HomePage") {
+      if (
+        window.location.pathname !== "/HomePage" &&
+        window.location.pathname !== "/apollo-11"
+      ) {
         document.querySelector("#root").classList.add("root_test");
       }
+      // if (window.location.pathname !== "/apollo-11") {
+      //   document.querySelector("#root").classList.add("root_test");
+      // }
     }
     get_motivation_quote = () => {
       axios
@@ -993,11 +999,25 @@ function withWebsiteData(Component) {
       return (
         <>
           <Helmet>
-            <link
-              rel="preload"
-              as="image"
-              href="../../assets/images/paper-bg.webp"
-            />
+            {window.location.pathname === "/HomePage" ? (
+              <link
+                rel="preload"
+                as="image"
+                href="../../assets/images/landing-bg.webp"
+              />
+            ) : window.location.pathname === "/apollo-11" ? (
+              <link
+                rel="preload"
+                as="image"
+                href="../../assets/images/bg-dark.webp"
+              />
+            ) : (
+              <link
+                rel="preload"
+                as="image"
+                href="../../assets/images/paper-bg.webp"
+              />
+            )}
           </Helmet>
           {window.location.pathname === "/Login" ||
           window.location.pathname === "/LoginPass" ||
@@ -1005,7 +1025,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
           window.location.pathname === "/HomePage" ||
-          window.location.pathname === "/apolo-11" ||
+          window.location.pathname === "/apollo-11" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (
@@ -1083,7 +1103,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
           window.location.pathname === "/HomePage" ||
-          window.location.pathname === "/apolo-11" ||
+          window.location.pathname === "/apollo-11" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (

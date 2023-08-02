@@ -46,7 +46,7 @@ class App extends Component {
         <Route path="/HomePage" component={HomePage} />
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/Profile" component={Profile} />
-        <Route path="/apolo-11" component={Apolo11} />
+        <Route path="/apollo-11" component={Apolo11} />
         <Route path="/Why-kad" component={WhyKad} />
         <Route path="/Payment" component={Payment} />
         <Route path="/Courses" component={Courses} />

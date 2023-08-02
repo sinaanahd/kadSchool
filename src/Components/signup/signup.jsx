@@ -94,7 +94,6 @@ class SignUp extends Component {
         .post(`https://kadschool.com/backend/kad_api/register_user`, obj)
         .then((res) => {
           let data = res.data;
-          console.log(res.data);
           axios
             .get(`https://kadschool.com/backend/kad_api/user/${data.user_id}`)
             .then((res) => {
@@ -148,7 +147,8 @@ class SignUp extends Component {
           className="login-wrapper-section"
           onClick={() => {
             this.close_pop_up();
-          }}>
+          }}
+        >
           <img
             src={login_bgc}
             alt="عکس پس زمینه برای صفحه ورود"
@@ -188,7 +188,8 @@ class SignUp extends Component {
                     className="rules-text"
                     onClick={() => {
                       this.handle_rule_pop_up();
-                    }}>
+                    }}
+                  >
                     قوانین و مقررات
                   </font>{" "}
                   کاد موافقم
@@ -197,7 +198,8 @@ class SignUp extends Component {
                   onClick={() => {
                     this.agree_handler();
                   }}
-                  className={this.state.agree ? "check checked" : "check"}>
+                  className={this.state.agree ? "check checked" : "check"}
+                >
                   {this.state.agree ? <img src={checked_img} /> : <></>}
                 </span>
               </span>
@@ -206,7 +208,8 @@ class SignUp extends Component {
                   onClick={() => {
                     this.send_data();
                   }}
-                  className="button-span">
+                  className="button-span"
+                >
                   {this.state.pause ? <LittleLoading /> : "ثبت نام"}
                 </span>
               ) : (

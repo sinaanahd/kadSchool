@@ -12,6 +12,9 @@ class Dashboard extends Component {
   state = {
     classes: true,
   };
+  componentDidMount() {
+    this.props.get_sample_week_plan();
+  }
   render() {
     const {
       user,

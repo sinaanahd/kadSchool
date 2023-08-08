@@ -336,6 +336,7 @@ function withWebsiteData(Component) {
       const check_teachers = this.state.ref_teachers;
       const check_kelasses = this.state.ref_kelasses;
       const request_wait = this.state.request_wait;
+      //this.setState({ cart_products });
 
       if (check_kelasses && check_teachers) {
         const ref_teachers = [...this.state.ref_teachers];
@@ -345,7 +346,7 @@ function withWebsiteData(Component) {
             const cart_product = {
               ...ref_kelasses.find((k) => k.kelas_id === id),
             };
-            if (cart_product) {
+            if (Object.keys(cart_product).length !== 0) {
               const kelas_teachers = [];
               cart_product.teachers.forEach((t_id) => {
                 const teacher = {
@@ -1075,6 +1076,7 @@ function withWebsiteData(Component) {
             sample_week_plan={this.state.sample_week_plan}
             motiv_quote={this.state.motiv_quote}
             make_user_empty={this.make_user_empty}
+            get_sample_week_plan={this.get_sample_week_plan}
           />
           {this.state.err.state ? (
             <div className={this.state.err.classes.map((c) => `${c}`)}>

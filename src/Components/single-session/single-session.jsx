@@ -38,7 +38,7 @@ class SingleSession extends Component {
             <SideBar />
             <div className="main-content">
               <h1 className="title">{this.state.course.jalase_title}</h1>
-              <AparatVideo />
+              {/* <AparatVideo /> */}
               <span className="single-details">توضیحات</span>
               <p className="single-text">
                 {this.state.course ? (
@@ -77,7 +77,8 @@ class SingleSession extends Component {
                     onClick={() => {
                       this.show_no_content();
                     }}
-                    className="btn">
+                    className="btn"
+                  >
                     دانلود جزوه
                   </span>
                 )}

@@ -9,7 +9,7 @@ import cross_menu_icon from "../../assets/images/cross-menu.webp";
 class Header extends Component {
   state = {
     menu: false,
-    exit : "",
+    exit: "",
   };
   constructor(props) {
     super(props);
@@ -36,7 +36,8 @@ class Header extends Component {
             className="menu-icon"
             onClick={() => {
               this.menu_toggle();
-            }}>
+            }}
+          >
             {this.state.menu ? (
               <img width={23} height={23} src={cross_menu_icon} />
             ) : (
@@ -65,7 +66,8 @@ class Header extends Component {
             </Link>
             <Link
               to={user ? "/Profile" : "/Login"}
-              className="user-name-wrapper">
+              className="user-name-wrapper"
+            >
               {user ? (
                 <>
                   <span className="name">{user.name}</span>
@@ -93,7 +95,8 @@ class Header extends Component {
             ref={this.myRef}
             onClick={() => {
               this.close_menu();
-            }}>
+            }}
+          >
             <SideBar />
           </div>
         ) : (

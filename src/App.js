@@ -38,6 +38,7 @@ import KadCalender from './Components/kad-calender/kad-calender';
 import Rules from './Components/rules/rules';
 import TopStudents from './Components/top-students/top-students';
 import Apolo11 from './Components/campaign/apolo-11/apolo-11';
+import ReferalSignup from './Components/referal/referal-signup';
 class App extends Component {
   state = {}
   render() {
@@ -72,6 +73,7 @@ class App extends Component {
         <Route path="/Teachers/:id" exact component={SingleTeacher} />
         <Route path="/Teachers/" component={Teachers} />
         <Route path="/Dore/:id" component={SingleCourse} />
+        <Route path="/Referal-signup/:id" component={ReferalSignup} />
         <Redirect from="/" exact to="/HomePage" />
         <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/not-found" component={UnderConstruction} />

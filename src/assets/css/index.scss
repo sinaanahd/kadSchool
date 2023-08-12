@@ -3025,6 +3025,30 @@ input[type=number] {
         background-color: $redColor;
         cursor: not-allowed;
     }
+    .input-with-btn{
+        max-width: 100%;
+        width: 331px;
+        @include flexMixin(row,space-between,center);
+        gap: 10px;
+        margin: 10px 0 0;
+        input{
+            width: 100%;
+            height: 53px;
+            border-radius: 8px;
+            outline: 0px solid #000;
+            border: 2px solid $mainColor;
+            padding: 0 10px;
+            font-display: swap;
+            font-family: "main-font", Arial, sans-serif;
+        }
+        .button-span{
+            height: 53px;
+            flex: 0 0 120px;
+        }
+    }
+    .error-place.code-err{
+        margin: 10px 0 0;
+    }
     select {
         width: 331px;
         height: 53px;

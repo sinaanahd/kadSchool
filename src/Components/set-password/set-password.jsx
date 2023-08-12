@@ -16,9 +16,9 @@ class SetPassword extends Component {
   };
   componentDidMount() {
     const { user } = this.props;
-    if (user) {
-      window.location.pathname = "/Dashboard";
-    }
+    // if (user) {
+    //   window.location.pathname = "/Dashboard";
+    // }
   }
   get_pass_1 = (value) => {
     let pass_err = false;
@@ -81,6 +81,7 @@ class SetPassword extends Component {
         <Helmet>
           <title>تعیین رمز عبور </title>
           <meta name="description" content="تعیین رمز عبور برای کاد" />
+          <meta name="robots" content="noindex" />
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -120,7 +121,8 @@ class SetPassword extends Component {
                   className="enter button-span"
                   onClick={() => {
                     this.change_pass();
-                  }}>
+                  }}
+                >
                   {this.state.pause ? <LittleLoading /> : "تایید"}
                 </span>
               ) : (

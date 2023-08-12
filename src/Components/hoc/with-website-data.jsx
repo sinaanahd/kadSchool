@@ -1025,6 +1025,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/Forget-password" ||
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
+          window.location.pathname.includes("/Referal-signup") ||
           window.location.pathname === "/HomePage" ||
           window.location.pathname === "/apollo-11" ||
           window.location.pathname === "/SetPassword" ? (
@@ -1104,6 +1105,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/Forget-password" ||
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
+          window.location.pathname.includes("/Referal-signup") ||
           window.location.pathname === "/HomePage" ||
           window.location.pathname === "/apollo-11" ||
           window.location.pathname === "/SetPassword" ? (

@@ -32,6 +32,7 @@ class SingleSession extends Component {
       <>
         <Helmet>
           <title>{this.state.course.jalase_title}</title>
+          <meta name="robots" content="noindex" />
         </Helmet>
         <section className="bgc-wrapper single-session-section">
           <div className="single-session mm-width">

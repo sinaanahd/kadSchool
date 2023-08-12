@@ -142,6 +142,7 @@ class SignUp extends Component {
         <Helmet>
           <title>ثبت نام در کاد</title>
           <meta name="description" content="صفحه ثبت نام کاد" />
+          <meta name="robots" content="noindex" />
         </Helmet>
         <section
           className="login-wrapper-section"

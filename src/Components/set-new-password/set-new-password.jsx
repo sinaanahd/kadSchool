@@ -82,6 +82,7 @@ class SetNewPassword extends Component {
         <Helmet>
           <title> تعیین رمز عبور جدید </title>
           <meta name="description" content="تعیین رمز عبور جدید" />
+          <meta name="robots" content="noindex" />
         </Helmet>
         <section className="login-wrapper-section">
           <img
@@ -121,7 +122,8 @@ class SetNewPassword extends Component {
                   className="enter button-span"
                   onClick={() => {
                     this.change_pass();
-                  }}>
+                  }}
+                >
                   {this.state.pause ? <LittleLoading /> : "تایید"}
                 </span>
               ) : (

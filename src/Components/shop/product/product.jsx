@@ -51,7 +51,8 @@ class Product extends Component {
             scrollToTop();
           }}
           to={`/Shop/product/${kelas.slug_name}`}
-          className="prod-img-wrapper">
+          className="prod-img-wrapper"
+        >
           <img
             src={kelas.image_link}
             alt={kelas.kelas_title}
@@ -65,7 +66,8 @@ class Product extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to={`/Shop/product/${kelas.slug_name}`}>
+            to={`/Shop/product/${kelas.slug_name}`}
+          >
             {kelas.kelas_title}
           </Link>
         </h2>
@@ -79,7 +81,8 @@ class Product extends Component {
                 ? this.state.dore_kelases.slug_name
                 : false
             }`}
-            className="prod-class">
+            className="prod-class"
+          >
             {this.state.dore_kelases ? (
               this.state.dore_kelases.dore_title
             ) : (
@@ -93,8 +96,9 @@ class Product extends Component {
                   onClick={() => {
                     scrollToTop();
                   }}
-                  to={`/Teacher/${t.slug_name}`}
-                  key={t.teacher_id}>
+                  to={`/Teachers/${t.slug_name}`}
+                  key={t.teacher_id}
+                >
                   {t.fullname}
                 </Link>
               ))
@@ -133,7 +137,8 @@ class Product extends Component {
               className="prod-add-to-cart"
               onClick={() => {
                 handle_cart(kelas.kelas_id);
-              }}>
+              }}
+            >
               <img
                 src={cartWhite}
                 alt="اضافه کردن به سبد خرید"
@@ -153,7 +158,8 @@ class Product extends Component {
               className="prod-add-to-cart"
               onClick={() => {
                 handle_cart(kelas.kelas_id);
-              }}>
+              }}
+            >
               <img
                 src={cartWhite}
                 alt="اضافه کردن به سبد خرید"

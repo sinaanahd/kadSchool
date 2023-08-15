@@ -103,7 +103,8 @@ class SingleProd extends Component {
                           className="add-to-cart-btn"
                           onClick={() => {
                             handle_cart(single_prod.kelas_id);
-                          }}>
+                          }}
+                        >
                           <img src={cart_img} alt="" />
                           {request_id !== single_prod.kelas_id ? (
                             "حذف از سبد خرید"
@@ -116,7 +117,8 @@ class SingleProd extends Component {
                           className="add-to-cart-btn"
                           onClick={() => {
                             handle_cart(single_prod.kelas_id);
-                          }}>
+                          }}
+                        >
                           <img src={cart_img} alt="" />
                           {request_id !== single_prod.kelas_id ? (
                             "افزودن به سبد خرید"
@@ -147,7 +149,8 @@ class SingleProd extends Component {
                                 scrollToTop();
                               }}
                               to={`/Teachers/${t.slug_name}`}
-                              key={t.teacher_id}>
+                              key={t.teacher_id}
+                            >
                               {t.fullname}
                             </Link>
                           ))
@@ -209,7 +212,7 @@ class SingleProd extends Component {
                   </span>
                 </div>
                 <div className="prod-in-one-look">
-                  <h2 className="semi-title">دوره در یک نگاه:</h2>
+                  <h2 className="semi-title">کلاس در یک نگاه:</h2>
                   <ul className="prod-texts">
                     {single_prod ? (
                       single_prod.descriptions.length !== 0 ? (
@@ -246,28 +249,32 @@ class SingleProd extends Component {
                   className="box"
                   onClick={() => {
                     this.handle_pop_up("intro");
-                  }}>
-                  <p>معرفی دوره</p>
+                  }}
+                >
+                  <p>معرفی کلاس</p>
                 </div>
                 <div
                   className="box"
                   onClick={() => {
                     this.handle_pop_up("sample");
-                  }}>
+                  }}
+                >
                   <p>نمونه تدریس و فایل ها</p>
                 </div>
                 <div
                   className="box"
                   onClick={() => {
                     this.handle_pop_up("faq");
-                  }}>
+                  }}
+                >
                   <p>سوالات متداول</p>
                 </div>
                 <div
                   className="box"
                   onClick={() => {
                     this.handle_pop_up("resume");
-                  }}>
+                  }}
+                >
                   <p>رزومه استاد</p>
                 </div>
               </div>
@@ -286,7 +293,8 @@ class SingleProd extends Component {
                     this.state.more_cm
                       ? "comments-wrapper open-cm"
                       : "comments-wrapper"
-                  }>
+                  }
+                >
                   <div className="comment">
                     <span className="name-avatar">
                       <img src={avatar} alt="" />
@@ -357,7 +365,8 @@ class SingleProd extends Component {
                     onClick={() => {
                       this.handle_cm();
                     }}
-                    className={this.state.more_cm ? "more close" : "more"}>
+                    className={this.state.more_cm ? "more close" : "more"}
+                  >
                     {this.state.more_cm ? "کمتر" : "بیشتر"}
                     <img src={downArrowBlue} alt="" />
                   </span>

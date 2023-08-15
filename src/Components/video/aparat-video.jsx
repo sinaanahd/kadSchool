@@ -2,6 +2,7 @@ import React, { Component } from "react";
 class AparatVideo extends Component {
   state = {};
   render() {
+    const { src } = this.props;
     return (
       <div className="aparat-video-wrapper">
         <div className="h_iframe-aparat_embed_frame">
@@ -10,7 +11,8 @@ class AparatVideo extends Component {
             allowFullScreen={true}
             webkitallowfullscreen={true.toString()}
             mozallowfullscreen={true.toString()}
-            src="https://www.aparat.com/video/video/embed/videohash/ECMpS/vt/frame"></iframe>
+            src={src}
+          ></iframe>
         </div>
       </div>
     );

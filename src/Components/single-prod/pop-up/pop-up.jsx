@@ -67,12 +67,20 @@ class PopUp extends Component {
           ),
         }
       : false;
+    const intro_video = sample_files
+      ? {
+          ...sample_files.video_sample_files.find(
+            (sv) => sv.file_type === "معرفی کلاس"
+          ),
+        }
+      : false;
     return (
       <div
         className={this.state.animate + "pop-up-wrapper " + type}
         onClick={(e) => {
           handle_pop_up(type, e);
-        }}>
+        }}
+      >
         <div className="main-data">
           <span className="pop-up-title">
             {type === "intro"
@@ -88,8 +96,11 @@ class PopUp extends Component {
           {type === "intro" ? (
             <>
               <span className="video-place">
-                ویدیو قرار داده نشده
-                {/* <AparatVideo /> */}
+                {Object.keys(intro_video).length !== 0 ? (
+                  <AparatVideo src={intro_video.file_link} />
+                ) : (
+                  "ویدیو قرار داده نشده"
+                )}
               </span>
               <p className="pop-up-text intro-text">
                 {dore
@@ -120,7 +131,8 @@ class PopUp extends Component {
                       className="sample-btn"
                       onClick={() => {
                         this.show_samples_link("jozveha");
-                      }}>
+                      }}
+                    >
                       نمونه جزوه
                       {jozeha.length !== 0 &&
                       jozeha &&
@@ -130,7 +142,8 @@ class PopUp extends Component {
                             <a
                               target="_blank"
                               key={j.file_id}
-                              href={j.file_link}>
+                              href={j.file_link}
+                            >
                               دانلود جزوه
                             </a>
                           ))}
@@ -145,7 +158,8 @@ class PopUp extends Component {
                       className="sample-btn"
                       onClick={() => {
                         this.show_samples_link("azmonha");
-                      }}>
+                      }}
+                    >
                       نمونه آزمون
                       {azmonha.length !== 0 &&
                       azmonha &&
@@ -155,7 +169,8 @@ class PopUp extends Component {
                             <a
                               target="_blank"
                               key={a.file_id}
-                              href={a.file_link}>
+                              href={a.file_link}
+                            >
                               دانلود آزمون
                             </a>
                           ))}
@@ -170,7 +185,8 @@ class PopUp extends Component {
                       className="sample-btn"
                       onClick={() => {
                         this.show_samples_link("taklifha");
-                      }}>
+                      }}
+                    >
                       نمونه تکلیف
                       {taklifha.length !== 0 &&
                       taklifha &&
@@ -180,7 +196,8 @@ class PopUp extends Component {
                             <a
                               target="_blank"
                               key={t.file_id}
-                              href={t.file_link}>
+                              href={t.file_link}
+                            >
                               دانلود تکلیف
                             </a>
                           ))}
@@ -211,7 +228,8 @@ class PopUp extends Component {
                         className="pop-qustion-img-arrow"
                         onClick={() => {
                           this.handle_faq(f.Q);
-                        }}>
+                        }}
+                      >
                         <img
                           src={arrowDown}
                           className={
@@ -227,7 +245,8 @@ class PopUp extends Component {
                         this.state.faq_number === f.Q
                           ? "answer-faq vis"
                           : "answer-faq"
-                      }>
+                      }
+                    >
                       {f.A}
                     </p>
                   </span>
@@ -399,7 +418,8 @@ class PopUp extends Component {
                           scrollToTop();
                         }}
                         key={t.teacher_id}
-                        to={`/Teachers/${t.slug_name}`}>
+                        to={`/Teachers/${t.slug_name}`}
+                      >
                         صفحه رزومه {t.fullname}
                       </Link>
                     ))

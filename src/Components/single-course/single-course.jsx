@@ -50,8 +50,7 @@ class SingleCourse extends Component {
   };
   course_carousel = (way) => {
     const class_carousel_pos = this.state.class_carousel_pos;
-    const my_length =
-      Math.floor(this.props.single_course.kelases.length / 4) - 1;
+    const my_length = Math.floor(this.props.single_course.kelases.length / 4);
     if (way === "next") {
       if (my_length !== class_carousel_pos)
         this.setState({ class_carousel_pos: class_carousel_pos + 1 });
@@ -97,6 +96,13 @@ class SingleCourse extends Component {
           ),
         ]
       : false;
+    const intro_video = single_course
+      ? {
+          ...single_course.sample_files.video_sample_files.filter(
+            (f) => f.file_type === "معرفی دوره" && !f.is_for_jalase
+          ),
+        }
+      : false;
     return (
       <>
         <Helmet>
@@ -128,7 +134,8 @@ class SingleCourse extends Component {
                           ? "course-description visible-desc"
                           : "course-description"
                         : "course-description"
-                    }>
+                    }
+                  >
                     {single_course ? (
                       single_course.descriptions.length !== 0 ? (
                         single_course.descriptions.map((d, i) => (
@@ -146,7 +153,8 @@ class SingleCourse extends Component {
                           onClick={() => {
                             this.handle_desc();
                           }}
-                          className="more-description">
+                          className="more-description"
+                        >
                           {this.state.more_desc ? "کمتر ... " : "بیشتر ..."}
                         </li>
                       ) : (
@@ -159,7 +167,12 @@ class SingleCourse extends Component {
                 </div>
                 <div className="class-details">
                   <span className="video-wrapper">
-                    ویدیو برای دوره قرار نگرفته است
+                    {Object.keys(intro_video).length !== 0 ? (
+                      <AparatVideo src={intro_video.file_link} />
+                    ) : (
+                      "ویدیو برای دوره قرار نگرفته است"
+                    )}
+
                     {/* <AparatVideo /> */}
                   </span>
                   <span className="class-time">
@@ -187,7 +200,8 @@ class SingleCourse extends Component {
                       className="prev arrows"
                       onClick={() => {
                         this.course_carousel("prev");
-                      }}>
+                      }}
+                    >
                       <img
                         src={teacherNext}
                         alt="بعدی"
@@ -202,7 +216,8 @@ class SingleCourse extends Component {
                   <div
                     className={
                       "teachers-wrapper car-" + this.state.class_carousel_pos
-                    }>
+                    }
+                  >
                     {single_course.kelases ? (
                       single_course.kelases.map((k, i) => (
                         <div className="teacher" key={i++}>
@@ -212,7 +227,8 @@ class SingleCourse extends Component {
                                 scrollToTop();
                               }}
                               to={`/Shop/product/${k.slug_name}`}
-                              className="img-wrapper">
+                              className="img-wrapper"
+                            >
                               <img
                                 src={k.image_link}
                                 alt={k.kelas_title}
@@ -224,7 +240,8 @@ class SingleCourse extends Component {
                                 onClick={() => {
                                   scrollToTop();
                                 }}
-                                to={`/Teachers/${single_course.teachers[i].slug_name}`}>
+                                to={`/Teachers/${single_course.teachers[i].slug_name}`}
+                              >
                                 {single_course.teachers[i].fullname}
                               </Link>
                             </h3>
@@ -240,7 +257,8 @@ class SingleCourse extends Component {
                                 className="add-teacher"
                                 onClick={() => {
                                   handle_cart(k.kelas_id);
-                                }}>
+                                }}
+                              >
                                 {request_id === k.kelas_id ? (
                                   <LittleLoading />
                                 ) : (
@@ -290,7 +308,8 @@ class SingleCourse extends Component {
                                 className="add-teacher"
                                 onClick={() => {
                                   handle_cart(k.kelas_id);
-                                }}>
+                                }}
+                              >
                                 {request_id === k.kelas_id ? (
                                   <LittleLoading />
                                 ) : (
@@ -337,7 +356,8 @@ class SingleCourse extends Component {
                                 scrollToTop();
                               }}
                               to={"/Login"}
-                              className="add-teacher">
+                              className="add-teacher"
+                            >
                               <img src={plusWhiteCircle} alt="" />
                               {k.price ? (
                                 k.discounted_price ? (
@@ -385,7 +405,8 @@ class SingleCourse extends Component {
                       className="next arrows"
                       onClick={() => {
                         this.course_carousel("next");
-                      }}>
+                      }}
+                    >
                       <img
                         src={teacherNext}
                         alt="بعدی"
@@ -453,7 +474,8 @@ class SingleCourse extends Component {
                     className="sample-btn"
                     onClick={() => {
                       this.handle_sample("jozve");
-                    }}>
+                    }}
+                  >
                     نمونه جزوه
                     {this.state.open_sample_drop_down === "jozve" ? (
                       single_course ? (
@@ -464,7 +486,8 @@ class SingleCourse extends Component {
                                 key={sf.file_id}
                                 target="_blank"
                                 href={sf.file_link}
-                                className="sample-file">
+                                className="sample-file"
+                              >
                                 دانلود نمونه جزوه
                               </a>
                             ))}
@@ -485,7 +508,8 @@ class SingleCourse extends Component {
                     className="sample-btn"
                     onClick={() => {
                       this.handle_sample("test");
-                    }}>
+                    }}
+                  >
                     نمونه آزمون
                     {this.state.open_sample_drop_down === "test" ? (
                       single_course ? (
@@ -496,7 +520,8 @@ class SingleCourse extends Component {
                                 key={sf.file_id}
                                 target="_blank"
                                 href={sf.file_link}
-                                className="sample-file">
+                                className="sample-file"
+                              >
                                 دانلود نمونه آزمون
                               </a>
                             ))}
@@ -517,7 +542,8 @@ class SingleCourse extends Component {
                     className="sample-btn"
                     onClick={() => {
                       this.handle_sample("taklif");
-                    }}>
+                    }}
+                  >
                     نمونه تکلیف
                     {this.state.open_sample_drop_down === "taklif" ? (
                       single_course ? (
@@ -528,7 +554,8 @@ class SingleCourse extends Component {
                                 key={sf.file_id}
                                 target="_blank"
                                 href={sf.file_link}
-                                className="sample-file">
+                                className="sample-file"
+                              >
                                 دانلود نمونه تکلیف
                               </a>
                             ))}
@@ -562,7 +589,8 @@ class SingleCourse extends Component {
                     this.state.more_cm
                       ? "comments-wrapper open-cm"
                       : "comments-wrapper"
-                  }>
+                  }
+                >
                   <div className="comment">
                     <span className="name-avatar">
                       <img src={avatar} alt="" />
@@ -635,7 +663,8 @@ class SingleCourse extends Component {
                     onClick={() => {
                       this.handle_cm();
                     }}
-                    className={this.state.more_cm ? "more close" : "more"}>
+                    className={this.state.more_cm ? "more close" : "more"}
+                  >
                     {this.state.more_cm ? "کمتر" : "بیشتر"}
                     <img src={downArrowBlue} alt="" />
                   </span>

@@ -85,11 +85,11 @@ class SingleTeacher extends Component {
         ]
       : false;
     const nemone_tadris = single_teacher
-      ? {
+      ? [
           ...single_teacher.sample_files.video_sample_files.filter(
             (f) => f.file_type === "نمونه تدریس"
           ),
-        }
+        ]
       : false;
     const teacher_intro = single_teacher
       ? {
@@ -144,7 +144,8 @@ class SingleTeacher extends Component {
                       this.state.more_cv
                         ? "teacher-resume-items"
                         : "teacher-resume-items less"
-                    }>
+                    }
+                  >
                     {single_teacher ? (
                       single_teacher.cv.full_cv.length !== 0 ? (
                         single_teacher.cv.full_cv.map((tr, i) => (
@@ -170,7 +171,8 @@ class SingleTeacher extends Component {
                         }
                         onClick={() => {
                           this.handle_more_cv();
-                        }}>
+                        }}
+                      >
                         {this.state.more_cv ? "بستن" : "ادامه"}
                       </span>
                     ) : (
@@ -201,7 +203,8 @@ class SingleTeacher extends Component {
                         className="prev-course arrows"
                         onClick={() => {
                           this.handle_carousel_move("prev");
-                        }}>
+                        }}
+                      >
                         <img src={arrow} alt="قبلی" />
                       </span>
                     ) : (
@@ -212,7 +215,8 @@ class SingleTeacher extends Component {
                   )}
 
                   <div
-                    className={"courses car-" + this.state.kelas_carouse_pos}>
+                    className={"courses car-" + this.state.kelas_carouse_pos}
+                  >
                     {single_teacher ? (
                       single_teacher.kelases.length !== 0 ? (
                         single_teacher.kelases.map((k) => (
@@ -222,7 +226,8 @@ class SingleTeacher extends Component {
                             }}
                             to={`/Shop/product/${k.slug_name}`}
                             key={k.kelas_id}
-                            className="course">
+                            className="course"
+                          >
                             <span className="img-wrapper">
                               <img src={k.image_link} alt={k.kelas_title} />
                             </span>
@@ -245,7 +250,8 @@ class SingleTeacher extends Component {
                         className="next-course arrows"
                         onClick={() => {
                           this.handle_carousel_move("next");
-                        }}>
+                        }}
+                      >
                         <img src={arrow} alt="بعدی" />
                       </span>
                     ) : (
@@ -285,18 +291,11 @@ class SingleTeacher extends Component {
                   </div> */}
                   {single_teacher ? (
                     nemone_tadris && Object.keys(nemone_tadris).length !== 0 ? (
-                      <div
-                        className="sample-wrapper"
-                        key={nemone_tadris.file_id}>
-                        {/* <span className="img-wrapper">
-                          <img src={nemone_tadris.file_link} alt="" />{" "}
-                        </span> */}
-                        <AparatVideo />
-                        {/* <h4 className="sample-title">
-                          {nemone_tadris.file_id}
-                        </h4>
-                        <p>{nemone_tadris.teacher_id}</p>{" "} */}
-                      </div>
+                      nemone_tadris.map((n) => (
+                        <div className="sample-wrapper" key={n.file_id}>
+                          <AparatVideo src={n.file_link} />
+                        </div>
+                      ))
                     ) : (
                       <span className="no-sample-teach">
                         نمونه تدریسی برای نمایش وجود ندارد
@@ -312,7 +311,8 @@ class SingleTeacher extends Component {
                     className="sample-btn"
                     onClick={() => {
                       this.handle_sample("jozve");
-                    }}>
+                    }}
+                  >
                     نمونه جزوه
                     {this.state.open_sample_drop_down === "jozve" ? (
                       single_teacher ? (
@@ -323,7 +323,8 @@ class SingleTeacher extends Component {
                                 key={sf.file_id}
                                 target="_blank"
                                 href={sf.file_link}
-                                className="sample-file">
+                                className="sample-file"
+                              >
                                 دانلود نمونه جزوه
                               </a>
                             ))}
@@ -344,7 +345,8 @@ class SingleTeacher extends Component {
                     className="sample-btn"
                     onClick={() => {
                       this.handle_sample("test");
-                    }}>
+                    }}
+                  >
                     نمونه آزمون
                     {this.state.open_sample_drop_down === "test" ? (
                       single_teacher ? (
@@ -355,7 +357,8 @@ class SingleTeacher extends Component {
                                 key={sf.file_id}
                                 target="_blank"
                                 href={sf.file_link}
-                                className="sample-file">
+                                className="sample-file"
+                              >
                                 دانلود نمونه آزمون
                               </a>
                             ))}
@@ -376,7 +379,8 @@ class SingleTeacher extends Component {
                     className="sample-btn"
                     onClick={() => {
                       this.handle_sample("taklif");
-                    }}>
+                    }}
+                  >
                     نمونه تکلیف
                     {this.state.open_sample_drop_down === "taklif" ? (
                       single_teacher ? (
@@ -387,7 +391,8 @@ class SingleTeacher extends Component {
                                 key={sf.file_id}
                                 target="_blank"
                                 href={sf.file_link}
-                                className="sample-file">
+                                className="sample-file"
+                              >
                                 دانلود نمونه تکلیف
                               </a>
                             ))}

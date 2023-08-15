@@ -7641,6 +7641,133 @@ input[type=number] {
 }
 
 
+/* make week plan */
+.make-week-plan{
+    gap: 20px;
+    *{
+        font-family: "yekan-bakh" !important;
+    }
+    .title{
+        font-size: 30px;
+        color: $mainColor;
+    }
+    .page-desc{
+        font-size: 20px;
+        color: #000;
+    }
+    .select-your-course{
+        @include flexMixin(column,flex-start,flex-start);
+        width: 100%;
+        gap: 10px;
+    }
+    .semi-title{
+        color: $darkBlue;
+    }
+    .course-details{
+        font-size: 20px;
+    }
+    .courses-wrapper{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        row-gap: 20px;
+        column-gap: 20px;
+        width: 100%;
+    }
+    .select-course-option{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        border: 2px solid $redColor;
+        padding: 10px 20px;
+        border-radius: 16px;
+        cursor: pointer;
+        gap: 10px;
+    }
+    .course-name{
+        color: $redColor;
+        width: 100%;
+        text-align: center;
+        font-size: 25px;
+    }
+    .data-box{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+    }
+    .select-day-wrapper{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 20px;
+        ;
+    }
+    .select-your-day{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+    }
+    .week-day{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        border: 2px solid $redColor;
+        border-radius: 16px;
+        padding: 10px 20px;
+        gap : 20px;
+        cursor: pointer;
+    }
+    .week-day-name{
+        color: $redColor;
+        font-size: 20px;
+    }
+    .selected.select-course-option ,.selected.week-day  {
+        border-color: $greenColor;
+
+        .course-name , .week-day-name {
+            color: $greenColor;
+        }
+    }
+    .final-result-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 20px;
+    }
+    .selected-data{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        border: 2px solid $darkBlue;
+        padding: 30px;
+        border-radius: 16px;
+        color: $darkBlue;
+        gap: 20px;
+        font-size:25px;
+    }
+    .make-plan-btn{
+        width: 200px;
+        background-color: $darkBlue;
+        @include flexMixin(row,center,center);
+        color: #fff;
+        height: 50px;
+        font-size: 25px;
+        border-radius: 16px;
+    }
+    .plan-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 20px;
+    }
+    .single-plan {
+        width: 100%;
+        @include flexMixin(column,center,center);
+        gap: 10px;
+    }
+    .times-wrapper{
+        width: 100%;
+        @include flexMixin(row, center, center);
+        gap: 10px;
+        span{
+            width: 100%;
+        }
+    }
+}
+/* make week plan */
+
 /* expriment */
 // .scene{
 //     width: 200px;

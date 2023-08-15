@@ -39,6 +39,7 @@ import Rules from './Components/rules/rules';
 import TopStudents from './Components/top-students/top-students';
 import Apolo11 from './Components/campaign/apolo-11/apolo-11';
 import ReferalSignup from './Components/referal/referal-signup';
+import StudyPlan from './Components/study-plan/study-plan';
 class App extends Component {
   state = {}
   render() {
@@ -74,6 +75,7 @@ class App extends Component {
         <Route path="/Teachers/" component={Teachers} />
         <Route path="/Dore/:id" component={SingleCourse} />
         <Route path="/Referal-signup/:id" component={ReferalSignup} />
+        <Route path="/study-plan" component={StudyPlan} />
         <Redirect from="/" exact to="/HomePage" />
         <Route path="/UnderConstruction" component={UnderConstruction} />
         <Route path="/not-found" component={UnderConstruction} />

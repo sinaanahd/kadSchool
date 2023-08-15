@@ -666,21 +666,77 @@ function withWebsiteData(Component) {
             const teacher = {
               ...ref_teachers.find((t) => t.teacher_id === t_id),
             };
-            if (Object.keys(teacher).length !== 0) kelas_teachers.push(teacher);
+            if (Object.keys(teacher).length !== 0) {
+              kelas_teachers.push(teacher);
+              teacher.sample_files.video_sample_files_ids.forEach((sv_id) => {
+                const sample_video = {
+                  ...sample_files.video_sample_files.find(
+                    (sv) => sv.file_id === sv_id
+                  ),
+                };
+                if (Object.keys(sample_video).length !== 0) {
+                  kelas_sample_files.video_sample_files.push(sample_video);
+                }
+              });
+              teacher.sample_files.pdf_sample_files_ids.forEach((sf_id) => {
+                const sample_video = {
+                  ...sample_files.pdf_sample_files.find(
+                    (sv) => sv.file_id === sf_id
+                  ),
+                };
+                if (Object.keys(sample_video).length !== 0) {
+                  kelas_sample_files.video_sample_files.push(sample_video);
+                }
+              });
+            }
           });
-          kelas_sample_files.pdf_sample_files = [
-            ...sample_files.pdf_sample_files.filter((sf) => sf.kelas_id === id),
-          ];
-          kelas_sample_files.video_sample_files = [
-            ...sample_files.video_sample_files.filter(
-              (sv) => sv.kelas_id === id
-            ),
-          ];
+          kelas.sample_files.video_sample_files_ids.forEach((sv_id) => {
+            const sample_video = {
+              ...sample_files.video_sample_files.find(
+                (sv) => sv.file_id === sv_id
+              ),
+            };
+            if (Object.keys(sample_video).length !== 0) {
+              kelas_sample_files.video_sample_files.push(sample_video);
+            }
+          });
+          kelas.sample_files.pdf_sample_files_ids.forEach((sf_id) => {
+            const sample_video = {
+              ...sample_files.pdf_sample_files.find(
+                (sv) => sv.file_id === sf_id
+              ),
+            };
+            if (Object.keys(sample_video).length !== 0) {
+              kelas_sample_files.video_sample_files.push(sample_video);
+            }
+          });
+
+          // kelas_sample_files.pdf_sample_files = [
+          //   ...sample_files.pdf_sample_files.filter((sf) => sf.file_id === id),
+          // ];
           kelas.teachers = kelas_teachers;
           const dore = {
             ...ref_doreha.find((d) => d.dore_id === kelas.parent_dore_id),
           };
-          if (Object.keys(dore).length !== 0) kelas.dore = dore;
+          if (Object.keys(dore).length !== 0) {
+            kelas.dore = dore;
+            // const dore_sample = {
+            //   ...sample_files.pdf_sample_files.find(
+            //     (file) => file.dore_id === dore.dore_id
+            //   ),
+            // };
+            // if (Object.keys(dore_sample).length !== 0) {
+            //   kelas_sample_files.pdf_sample_files.push(dore_sample);
+            // }
+            // const dore_sample_v = {
+            //   ...sample_files.video_sample_files.find(
+            //     (file) => file.dore_id === dore.dore_id
+            //   ),
+            // };
+            // if (Object.keys(dore_sample_v).length !== 0) {
+            //   kelas_sample_files.video_sample_files.push(dore_sample_v);
+            // }
+          }
         }
         if (Object.keys(kelas).length !== 0) {
           kelas.sample_files = kelas_sample_files;
@@ -749,12 +805,12 @@ function withWebsiteData(Component) {
             }
             dore_sample_files.pdf_sample_files = [
               ...sample_files.pdf_sample_files.filter(
-                (pf) => pf.dore_id === id
+                (pf) => pf.dore_id === dore.dore_id
               ),
             ];
             dore_sample_files.video_sample_files = [
               ...sample_files.video_sample_files.filter(
-                (vf) => vf.dore_id === id
+                (vf) => vf.dore_id === dore.dore_id
               ),
             ];
           });
@@ -765,7 +821,7 @@ function withWebsiteData(Component) {
             dore.sample_files = dore_sample_files;
             if (dore_kelases.length <= 4) dore.teacher_carousel = false;
             else dore.teacher_carousel = true;
-            //console.log(dore);
+            console.log(dore);
             this.setState({ single_course: dore });
           } else {
             window.location.pathname = "/not-found";

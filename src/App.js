@@ -38,8 +38,12 @@ import KadCalender from './Components/kad-calender/kad-calender';
 import Rules from './Components/rules/rules';
 import TopStudents from './Components/top-students/top-students';
 import Apolo11 from './Components/campaign/apolo-11/apolo-11';
+import Apollo_11_2 from './Components/campaign/apolo-11/apollo-11-2';
 import ReferalSignup from './Components/referal/referal-signup';
 import StudyPlan from './Components/study-plan/study-plan';
+// context refactor
+import NewShop from './Components/shop/new-shop';
+// context refactor
 class App extends Component {
   state = {}
   render() {
@@ -49,6 +53,7 @@ class App extends Component {
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/Profile" component={Profile} />
         <Route path="/apollo-11" component={Apolo11} />
+        <Route path="/apollo-prizes" component={Apollo_11_2} />
         <Route path="/Why-kad" component={WhyKad} />
         <Route path="/Payment" component={Payment} />
         <Route path="/Courses" component={Courses} />
@@ -74,6 +79,13 @@ class App extends Component {
         <Route path="/Teachers/:id" exact component={SingleTeacher} />
         <Route path="/Teachers/" component={Teachers} />
         <Route path="/Dore/:id" component={SingleCourse} />
+        {/* 
+          re-design / re-factor
+        */}
+        <Route path="/new-shop/:kind/:title" component={NewShop} />
+        {/* 
+          re-design / re-factor
+        */}
         <Route path="/Referal-signup/:id" component={ReferalSignup} />
         <Route path="/study-plan" component={StudyPlan} />
         <Redirect from="/" exact to="/HomePage" />

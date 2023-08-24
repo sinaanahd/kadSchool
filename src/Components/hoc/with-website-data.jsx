@@ -198,7 +198,8 @@ function withWebsiteData(Component) {
       }
       if (
         window.location.pathname !== "/HomePage" &&
-        window.location.pathname !== "/apollo-11"
+        window.location.pathname !== "/apollo-11" &&
+        window.location.pathname !== "/apollo-prizes"
       ) {
         document.querySelector("#root").classList.add("root_test");
       }
@@ -821,7 +822,7 @@ function withWebsiteData(Component) {
             dore.sample_files = dore_sample_files;
             if (dore_kelases.length <= 4) dore.teacher_carousel = false;
             else dore.teacher_carousel = true;
-            console.log(dore);
+            // console.log(dore);
             this.setState({ single_course: dore });
           } else {
             window.location.pathname = "/not-found";
@@ -1084,6 +1085,7 @@ function withWebsiteData(Component) {
           window.location.pathname.includes("/Referal-signup") ||
           window.location.pathname === "/HomePage" ||
           window.location.pathname === "/apollo-11" ||
+          window.location.pathname === "/apollo-prizes" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (
@@ -1164,6 +1166,7 @@ function withWebsiteData(Component) {
           window.location.pathname.includes("/Referal-signup") ||
           window.location.pathname === "/HomePage" ||
           window.location.pathname === "/apollo-11" ||
+          window.location.pathname === "/apollo-prizes" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (

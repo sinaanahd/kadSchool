@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
 import withWebsiteData from "../hoc/with-website-data";
 
-import banner from "../../assets/images/week-plan-banner.jpg";
+import banner from "../../assets/images/new-week-plan.webp";
 
 class Kad_calender extends Component {
   state = {};

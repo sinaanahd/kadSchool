@@ -462,7 +462,7 @@ class Apollo_11 extends Component {
             </div>
           </section>
           <section className="video-section-wrapper">
-            <div className="aparat-video-wrapper">
+            {/* <div className="aparat-video-wrapper">
               <div className="h_iframe-aparat_embed_frame">
                 <span style={{ display: "block", paddingTop: "57%" }}></span>
                 <iframe
@@ -472,7 +472,7 @@ class Apollo_11 extends Component {
                   src="https://www.aparat.com/video/video/embed/videohash/ECMpS/vt/frame"
                 ></iframe>
               </div>
-            </div>
+            </div> */}
             <p
               onClick={() => {
                 window.scrollTo({

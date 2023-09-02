@@ -37,26 +37,8 @@ class ReferalSignUp extends Component {
   componentDidMount() {
     const { user } = this.props;
     if (user) {
-      window.location.pathname = "/Profile";
+      // window.location.pathname = "/Profile";
     }
-    // prettier-ignore
-    // const obj = {
-    //   phone_number: "09333333335",
-    //   name: "اسم تست",
-    //   grade: 10,
-    //   major: "ریاضی",
-    //   "admin_id": 1,
-    // };
-    // axios
-    //   .post(`https://kadschool.com/backend/kad_api/register_user`, obj)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     axios
-    //       .get(`https://kadschool.com/backend/kad_api/user/${res.data.user_id}`)
-    //       .then((res_2) => {
-    //         console.log(res_2.data);
-    //       });
-    //   });
   }
   handle_phone_err = (value) => {
     let phone = false;
@@ -140,7 +122,11 @@ class ReferalSignUp extends Component {
             .then((res) => {
               const user = res.data;
               this.props.inside_user(user);
-              window.location.pathname = "/SetPassword";
+              if (admin_id === "6") {
+                window.location.pathname = "/Shop/product/فلسفه-و-منطق-۱";
+              } else {
+                window.location.pathname = "/SetPassword";
+              }
               this.setState({ pause: false });
             })
             .catch((err) => this.props.handle_error(err));

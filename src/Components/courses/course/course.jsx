@@ -18,7 +18,8 @@ class Course extends Component {
           kelas.is_online
             ? "course active " + this.state.animate
             : "course " + this.state.animate
-        }>
+        }
+      >
         <img
           src={kelas.image_link}
           alt={kelas.kelas_title}
@@ -26,11 +27,12 @@ class Course extends Component {
           height={246}
         />
         <a
-          href={kelas.skyRoom_link}
+          href={kelas.direct_link}
           className="enter-class"
           onClick={(e) => {
             open_class_pop_up(e, kelas.active);
-          }}>
+          }}
+        >
           ورود به کلاس
         </a>
         <Link
@@ -38,7 +40,8 @@ class Course extends Component {
             scrollToTop();
           }}
           to={`/Course/${kelas.kelas_id}`}
-          className="recorded-sessions">
+          className="recorded-sessions"
+        >
           جلسات ضبط شده
         </Link>
       </div>

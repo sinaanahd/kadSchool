@@ -195,7 +195,7 @@ class ProfileFinanace extends Component {
                         />
                         <span className="names">
                           <span className="prod-name">
-                            {p.data_kelasses[0].kelas_title}
+                            {p.data_kelasses[0].kelas_title_and_ostad_name}
                           </span>
                           <span className="teacher-name">
                             {p.data_kelasses[0].data_teachers.fullname}
@@ -263,7 +263,8 @@ class ProfileFinanace extends Component {
                         }.pay_id
                       );
                     }}
-                    className="next-pay-btn">
+                    className="next-pay-btn"
+                  >
                     {this.state.cash_pause ? (
                       <LittleLoading />
                     ) : (

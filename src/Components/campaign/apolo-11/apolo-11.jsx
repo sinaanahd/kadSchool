@@ -328,6 +328,7 @@ class Apollo_11 extends Component {
               // console.log(user);
               this.props.inside_user(user);
               this.setState({ pause: false });
+              window.location.pathname = "/apollo-prizes";
             })
             .catch((err) => this.props.handle_error(err));
         })
@@ -398,7 +399,7 @@ class Apollo_11 extends Component {
             this.setState({ pause: false });
             const user = res.data;
             this.props.inside_user(user);
-            // window.location.pathname = "/Dashboard";
+            window.location.pathname = "/apollo-prizes";
           })
           .catch((err) => {
             this.props.handle_error(err);
@@ -443,10 +444,14 @@ class Apollo_11 extends Component {
               </p>
               <p
                 onClick={() => {
-                  window.scrollTo({
-                    top: this.box.current.getBoundingClientRect().y - 200,
-                    behavior: "smooth",
-                  });
+                  if (!user) {
+                    window.scrollTo({
+                      top: this.box.current.getBoundingClientRect().y - 200,
+                      behavior: "smooth",
+                    });
+                  } else {
+                    window.location.pathname = "/apollo-prizes";
+                  }
                 }}
                 className="lets-do-apolo"
               >
@@ -475,10 +480,14 @@ class Apollo_11 extends Component {
             </div> */}
             <p
               onClick={() => {
-                window.scrollTo({
-                  top: this.box.current.getBoundingClientRect().y + 300,
-                  behavior: "smooth",
-                });
+                if (!user) {
+                  window.scrollTo({
+                    top: this.box.current.getBoundingClientRect().y + 300,
+                    behavior: "smooth",
+                  });
+                } else {
+                  window.location.pathname = "/apollo-prizes";
+                }
               }}
               className="lets-do-apolo"
             >

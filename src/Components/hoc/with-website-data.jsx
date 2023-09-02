@@ -190,7 +190,7 @@ function withWebsiteData(Component) {
           this.get_sample_files();
         }
       }
-      //this.get_user(3098);
+      //this.get_user(9166);
       if (local_user) {
         this.get_user(local_user.user_id);
         this.get_cart(local_user.user_id);
@@ -514,6 +514,7 @@ function withWebsiteData(Component) {
     get_user = (user_id) => {
       axios
         .get(`https://kadschool.com/backend/kad_api/user/${user_id}`)
+        //.get(`https://kadschool.com/backend/kad_api/user/${9166}`)
         .then((res) => {
           const user = res.data;
           //console.log("get log", res.data);
@@ -547,7 +548,11 @@ function withWebsiteData(Component) {
         if (ref_kelasses) {
           user.kelases.forEach((k_id) => {
             const kelas = { ...ref_kelasses.find((k) => k.kelas_id === k_id) };
-            if (Object.keys(kelas).length !== 0) user_kelasses.push(kelas);
+            if (Object.keys(kelas).length !== 0) {
+              const direct_link = user.kelases_direct_links[kelas.kelas_id];
+              kelas.direct_link = direct_link;
+              user_kelasses.push(kelas);
+            }
           });
         }
         user.kelases = user_kelasses;
@@ -568,6 +573,7 @@ function withWebsiteData(Component) {
             });
           }
         }
+
         user.week_plan = week_plan;
         localStorage.setItem("user-kad", JSON.stringify(user));
         this.setState({ user });
@@ -970,8 +976,8 @@ function withWebsiteData(Component) {
     user_pay_info = (user_id) => {
       axios
         .get(
-          //`https://kadschool.com/backend/kad_api/financial_records/${user_id}`
-          `https://kadschool.com/backend/kad_api/financial_records/${9166}`
+          `https://kadschool.com/backend/kad_api/financial_records/${user_id}`
+          //`https://kadschool.com/backend/kad_api/financial_records/${9166}`
         )
         .then((res) => {
           const user_pay_info = res.data;

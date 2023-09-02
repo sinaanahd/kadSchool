@@ -127,6 +127,12 @@ class Apollo_11_2 extends Component {
     active_course: "همه درس ها",
     show_options: false,
   };
+  componentDidMount() {
+    const { user } = this.props;
+    if (!user) {
+      window.location.pathname = "/apollo-11";
+    }
+  }
   find_active = (id) => {
     const videos = [...this.state.videos];
     const active_more = videos.find((v) => v.id === id);
@@ -163,14 +169,14 @@ class Apollo_11_2 extends Component {
     this.setState({ filtered_videos });
   };
   render() {
-    const { kelasses, teachers } = this.props;
+    const { kelasses, user } = this.props;
     return (
       <>
         <Helmet>
           <title>جوایز کمپین آپولو ۱۱</title>
         </Helmet>
         <div className="campaign-wrapper apolo-11 apolo-11-2">
-          <HomeHeader />
+          <HomeHeader user={user} />
           <section className="welcome-to-prize-part mm-width">
             <div className="welcome-text-wrapper">
               <h1 className="title-2">جوایز کمپین آپولو ۱۱</h1>

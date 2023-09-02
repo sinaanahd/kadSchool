@@ -73,8 +73,9 @@ class Courses extends Component {
                     Object.keys(active_kelass).length !== 0 ? (
                       <a
                         target="_blank"
-                        href={active_kelass.skyRoom_link}
-                        className="enter-online-class">
+                        href={active_kelass.direct_link}
+                        className="enter-online-class"
+                      >
                         ورود به کلاس درحال برگزاری
                       </a>
                     ) : (
@@ -82,7 +83,8 @@ class Courses extends Component {
                         onClick={() => {
                           this.have_no_class();
                         }}
-                        className="enter-online-class">
+                        className="enter-online-class"
+                      >
                         {this.state.enter_btn_text}
                       </span>
                     )}
@@ -136,12 +138,12 @@ class Courses extends Component {
                           <span className="spot-title">لایسنس اسپات پلیر:</span>
                           <span className="code-copy">
                             <span className="spot-be-data">
-                              {/* {user.} */}
+                              {user.spot_license}
                             </span>
                             <img
                               src={copy_icon}
                               onClick={() => {
-                                copy_to_clip_board();
+                                copy_to_clip_board(user.spot_license);
                               }}
                               alt="کپی کردن"
                               width={20}

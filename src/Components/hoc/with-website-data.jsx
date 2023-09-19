@@ -399,7 +399,7 @@ function withWebsiteData(Component) {
         .get("https://kadschool.com/backend/kad_api/kelases")
         .then((res) => {
           const ref_kelasses = res.data;
-
+          //console.log(ref_kelasses);
           ref_kelasses.forEach((kelas) => {
             const kelas_name = kelas.kelas_title + "";
             const slug_name = kelas_name.replaceAll(" ", "-");
@@ -512,16 +512,17 @@ function withWebsiteData(Component) {
       this.modify_cart(user_id, items_ids);
     };
     get_user = (user_id) => {
+      //.get(`https://kadschool.com/backend/kad_api/user/${9166}`)
       axios
         .get(`https://kadschool.com/backend/kad_api/user/${user_id}`)
-        //.get(`https://kadschool.com/backend/kad_api/user/${9166}`)
         .then((res) => {
           const user = res.data;
-          //console.log("get log", res.data);
+          // console.log("get log", res.data);
           this.fill_user_datas(user);
         })
         .catch((e) => {
           this.handle_error(e);
+          console.log(e);
         });
     };
     fill_user_datas = (user) => {

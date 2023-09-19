@@ -12,16 +12,45 @@ class Courses extends Component {
   state = {
     pop_up: false,
     enter_btn_text: "ورود به کلاس درحال برگزاری",
+    active_kelass: this.props.user
+      ? { ...this.props.user.kelases.find((kelas) => kelas.is_online === true) }
+      : false,
   };
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
   }
+  componentDidMount() {
+    this.props.get_kelasses();
+    this.find_active_kelass();
+  }
   open_class_pop_up = (e, entry) => {
-    if (!entry) {
-      this.setState({ pop_up: true });
+    //console.log(entry);
+    // if (!entry) {
+    //   this.setState({ pop_up: true });
+    // }
+    const today = new Date();
+    const day = today.toLocaleDateString("en", { weekday: "long" });
+    const hour = today.getHours();
+    const today_class_time = {
+      ...entry.find((time) => time.week_day_english === day),
+    };
+    if (Object.keys(today_class_time).length !== 0) {
+      let { start_time, finish_time } = today_class_time;
+      start_time = parseInt(start_time.split(":")[0]);
+      finish_time = parseInt(finish_time.split(":")[0]);
+      console.log(start_time, finish_time, hour);
+      if (hour >= start_time && hour <= finish_time) {
+        console.log("time");
+      } else {
+        e.preventDefault();
+        this.setState({ pop_up: true });
+      }
+    } else {
       e.preventDefault();
+      this.setState({ pop_up: true });
     }
+
     setTimeout(() => {
       if (this.myRef.current !== null) {
         this.myRef.current.classList.remove("animate-pop-up");
@@ -34,13 +63,22 @@ class Courses extends Component {
   have_no_class = () => {
     const enter_btn_text = " شما کلاس فعالی ندارید";
     this.setState({ enter_btn_text });
-    console.log();
+  };
+  find_active_kelass = () => {
+    setInterval(() => {
+      const active_kelass = this.props.user
+        ? {
+            ...this.props.user.kelases.find(
+              (kelas) => kelas.is_online === true
+            ),
+          }
+        : false;
+      this.setState({ active_kelass });
+      // console.log("test");
+    }, 5000);
   };
   render() {
     const { user } = this.props;
-    const active_kelass = user
-      ? { ...user.kelases.find((kelas) => kelas.is_online === true) }
-      : false;
     return (
       <>
         <Helmet>
@@ -69,11 +107,11 @@ class Courses extends Component {
               user.kelases.length !== 0 ? (
                 <div className="spot-courses">
                   <div className="enter-class-spotplayer-info">
-                    {active_kelass &&
-                    Object.keys(active_kelass).length !== 0 ? (
+                    {this.state.active_kelass &&
+                    Object.keys(this.state.active_kelass).length !== 0 ? (
                       <a
                         target="_blank"
-                        href={active_kelass.direct_link}
+                        href={this.state.active_kelass.direct_link}
                         className="enter-online-class"
                       >
                         ورود به کلاس درحال برگزاری

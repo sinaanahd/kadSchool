@@ -30,7 +30,8 @@ class Course extends Component {
           href={kelas.direct_link}
           className="enter-class"
           onClick={(e) => {
-            open_class_pop_up(e, kelas.active);
+            open_class_pop_up(e, kelas.stream_plans);
+            //open_class_pop_up(e, 11);
           }}
         >
           ورود به کلاس

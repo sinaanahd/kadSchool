@@ -623,6 +623,24 @@ class HomePage extends Component {
             <h2 className="semi-title">استادان حرفه ای کاد</h2>
             <div className="teachers" ref={this.teachers_ref}>
               <Link
+                to="/Teachers/استاد-هامون-سبطی"
+                onClick={() => {
+                  scrollToTop();
+                }}
+                className="teacher"
+              >
+                <span className="teacher-img-wrapper">
+                  <img
+                    width={224}
+                    loading="lazy"
+                    height={298.13}
+                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_هامون_سبطی.webp"
+                    alt="استاد هامون سبطی"
+                  ></img>
+                </span>
+                <h3 className="teacher-name">استاد هامون سبطی</h3>
+              </Link>
+              <Link
                 to="/Teachers/استاد-عماد-فیض-آبادی"
                 onClick={() => {
                   scrollToTop();
@@ -694,24 +712,7 @@ class HomePage extends Component {
                 </span>
                 <h3 className="teacher-name">استاد امیر محمد دهقان</h3>
               </Link>
-              <Link
-                to="/Teachers/استاد-هامون-سبطی"
-                onClick={() => {
-                  scrollToTop();
-                }}
-                className="teacher"
-              >
-                <span className="teacher-img-wrapper">
-                  <img
-                    width={224}
-                    loading="lazy"
-                    height={298.13}
-                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_هامون_سبطی.webp"
-                    alt="استاد هامون سبطی"
-                  ></img>
-                </span>
-                <h3 className="teacher-name">استاد هامون سبطی</h3>
-              </Link>
+
               <Link
                 to="/Teachers/استاد-نیما-جواهری"
                 onClick={() => {

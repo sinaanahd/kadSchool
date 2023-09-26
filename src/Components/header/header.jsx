@@ -10,6 +10,7 @@ class Header extends Component {
   state = {
     menu: false,
     exit: "",
+    sticky: false,
   };
   constructor(props) {
     super(props);
@@ -27,11 +28,28 @@ class Header extends Component {
   close_menu = () => {
     this.setState({ menu: false });
   };
+  componentDidMount() {
+    // const body = document.querySelector("body");
+    // console.log(body);
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset >= 30) {
+        this.setState({ sticky: true });
+      } else {
+        this.setState({ sticky: false });
+      }
+    });
+  }
   render() {
     const { user, cart } = this.props;
     return (
       <>
-        <header className="main-header mm-width">
+        <header
+          className={
+            this.state.sticky
+              ? "main-header mm-width sticky-2"
+              : "main-header mm-width"
+          }
+        >
           <div
             className="menu-icon"
             onClick={() => {

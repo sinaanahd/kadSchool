@@ -5,6 +5,7 @@ import NewFooter from "../footer/new-footer";
 import last_login_check from "../functions/last-login-check";
 import { Helmet } from "react-helmet";
 import convert_to_persian from "../functions/convert-to-persian";
+import TopSiteSlider from "../top-site-slider/top-site-slider";
 const local_user = JSON.parse(localStorage.getItem("user-kad"))
   ? JSON.parse(localStorage.getItem("user-kad"))
   : false;
@@ -512,7 +513,7 @@ function withWebsiteData(Component) {
       this.modify_cart(user_id, items_ids);
     };
     get_user = (user_id) => {
-      //.get(`https://kadschool.com/backend/kad_api/user/${9166}`)
+      // .get(`https://kadschool.com/backend/kad_api/user/${9166}`)
       axios
         .get(`https://kadschool.com/backend/kad_api/user/${user_id}`)
         .then((res) => {
@@ -952,7 +953,7 @@ function withWebsiteData(Component) {
           });
           kelas.jalasat = kelas_jalasat;
         }
-        // console.log(kelas);
+        console.log(kelas);
         this.setState({ single_kelas: kelas });
       } else {
         if (local_courses && local_jalasat && local_kelasses) {
@@ -1084,6 +1085,8 @@ function withWebsiteData(Component) {
               />
             )}
           </Helmet>
+          <TopSiteSlider />
+
           {window.location.pathname === "/Login" ||
           window.location.pathname === "/LoginPass" ||
           window.location.pathname === "/Forget-password" ||
@@ -1143,6 +1146,7 @@ function withWebsiteData(Component) {
             motiv_quote={this.state.motiv_quote}
             make_user_empty={this.make_user_empty}
             get_sample_week_plan={this.get_sample_week_plan}
+            sample_files={this.state.sample_files}
           />
           {this.state.err.state ? (
             <div className={this.state.err.classes.map((c) => `${c}`)}>

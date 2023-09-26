@@ -42,7 +42,7 @@ class RecordedCourses extends Component {
   //   this.setState({ kelas, jalasat, course });
   // };
   render() {
-    const { single_kelas } = this.props;
+    const { single_kelas, sample_files } = this.props;
     return (
       <>
         <Helmet>
@@ -60,6 +60,7 @@ class RecordedCourses extends Component {
                       jalase={j}
                       key={i++}
                       course={single_kelas.course ? single_kelas.course : false}
+                      sample_files={sample_files}
                     />
                   ))
                 ) : (

@@ -7,15 +7,32 @@ import menuIcon from "../../../assets/images/menu-white.webp";
 import mainLogo from "../../../assets/images/main-logo-white-1.webp";
 
 class HomeHeader extends Component {
-  state = { menu: false };
+  state = { menu: false, sticky: false };
   menu_handler = () => {
     const menu = this.state.menu;
     this.setState({ menu: !menu });
   };
+  componentDidMount() {
+    // const body = document.querySelector("body");
+    // console.log(body);
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset >= 100) {
+        this.setState({ sticky: true });
+      } else {
+        this.setState({ sticky: false });
+      }
+    });
+  }
   render() {
     const { user } = this.props;
     return (
-      <header className="home-page-header mm-width">
+      <header
+        className={
+          this.state.sticky
+            ? "home-page-header mm-width scrolled"
+            : "home-page-header mm-width"
+        }
+      >
         <Link
           onClick={() => {
             scrollToTop();

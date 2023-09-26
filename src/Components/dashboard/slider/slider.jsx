@@ -19,11 +19,6 @@ class Slider extends Component {
   }
   auto_move = () => {
     const active_item = this.state.active_item;
-    // console.log(
-    //   active_item,
-    //   this.props.main_page_banners.length,
-    //   active_item !== this.props.main_page_banners.length
-    // );
     if (active_item !== this.props.main_page_banners.length) {
       this.move_slider("next");
     } else {
@@ -185,7 +180,8 @@ class Slider extends Component {
             }}
             onTouchMove={(e) => {
               this.handle_touch_move(e);
-            }}></div>
+            }}
+          ></div>
           {main_page_banners ? (
             main_page_banners.map((b, i) => (
               <div className="slide" key={i++}>

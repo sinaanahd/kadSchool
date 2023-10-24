@@ -28,19 +28,20 @@ import hero_little_icon from "../../assets/images/space-ship-new.webp";
 
 import teacher_img_6 from "../../assets/images/kad-teacher-6.webp";
 
-import good_students_1 from "../../assets/images/svg/g-s-1.svg";
-import good_students_2 from "../../assets/images/svg/g-s-2.svg";
-import good_students_3 from "../../assets/images/svg/g-s-3.svg";
-import good_students_4 from "../../assets/images/svg/g-s-4.svg";
-import good_students_5 from "../../assets/images/svg/g-s-5.svg";
-import good_students_6 from "../../assets/images/svg/g-s-6.svg";
-import good_students_7 from "../../assets/images/svg/g-s-7.svg";
-import good_students_8 from "../../assets/images/svg/g-s-8.svg";
-import good_students_9 from "../../assets/images/svg/g-s-9.svg";
-import good_students_10 from "../../assets/images/svg/g-s-10.svg";
-import good_students_11 from "../../assets/images/svg/g-s-11.svg";
-import good_students_12 from "../../assets/images/svg/g-s-12.svg";
-import good_students_13 from "../../assets/images/svg/g-s-13.svg";
+import good_students_1 from "../../assets/images/rotbe-bartar/rotbe-1.webp";
+import good_students_2 from "../../assets/images/rotbe-bartar/rotbe-2.webp";
+import good_students_3 from "../../assets/images/rotbe-bartar/rotbe-3.webp";
+import good_students_4 from "../../assets/images/rotbe-bartar/rotbe-4.webp";
+import good_students_5 from "../../assets/images/rotbe-bartar/rotbe-5.webp";
+import good_students_6 from "../../assets/images/rotbe-bartar/rotbe-6.webp";
+import good_students_7 from "../../assets/images/rotbe-bartar/rotbe-7.webp";
+import good_students_8 from "../../assets/images/rotbe-bartar/rotbe-8.webp";
+import good_students_9 from "../../assets/images/rotbe-bartar/rotbe-9.webp";
+import good_students_10 from "../../assets/images/rotbe-bartar/rotbe-10.webp";
+import good_students_11 from "../../assets/images/rotbe-bartar/rotbe-11.webp";
+import good_students_12 from "../../assets/images/rotbe-bartar/rotbe-12.webp";
+import good_students_13 from "../../assets/images/rotbe-bartar/rotbe-13.webp";
+import good_students_14 from "../../assets/images/rotbe-bartar/rotbe-14.webp";
 
 const len = 8;
 const user = JSON.parse(localStorage.getItem("user-kad"))
@@ -785,7 +786,7 @@ class HomePage extends Component {
                 </span>
                 <h3 className="teacher-name"> استاد سارا شریفی</h3>
               </Link>
-              <Link
+              {/* <Link
                 to="/Teachers/استاد-رضا-امیر"
                 onClick={() => {
                   scrollToTop();
@@ -797,12 +798,12 @@ class HomePage extends Component {
                     width={224}
                     loading="lazy"
                     height={298.13}
-                    src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_نیما_جواهری.webp"
-                    alt="رضا امیر"
+                    src="https://kadschool.com/Teachers/استاد-نیما-جواهری"
+                    alt="نیما جواهری"
                   ></img>
                 </span>
-                <h3 className="teacher-name">استاد رضا امیر</h3>
-              </Link>
+                <h3 className="teacher-name">استاد نیما جواهری</h3>
+              </Link> */}
               <Link
                 to="/Teachers/استاد-علیرضا-علمداری"
                 onClick={() => {
@@ -885,142 +886,10 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_1}
-                    alt="مائده ملکی"
+                    alt="امین ساعی"
                   ></img>
                 </span>
-                <h3 className="good-student-name">مائده ملکی</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_13}
-                    alt="علی اصغر وجدانی"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">علی اصغر وجدانی</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_12}
-                    alt="رها روزبهانی"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">رها روزبهانی</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_10}
-                    alt="امیرحسین چهاردولی"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">امیرحسین چهاردولی</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_11}
-                    alt="فردین برهور"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">فردین برهور</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_9}
-                    alt="آریا نظری فر"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">آریا نظری فر</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_8}
-                    alt="مطهره السادات هاشمی"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">مطهره السادات هاشمی</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_7}
-                    alt="متین قدیمی"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">متین قدیمی</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_6}
-                    alt="فاطمه میر"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">فاطمه میر</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_5}
-                    alt="سام نظری"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">سام نظری</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_4}
-                    alt="سینا سیفی"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">سینا سیفی</h3>
-              </div>
-              <div className="good-student">
-                <span className="good-student-img-wrapper">
-                  <img
-                    loading="lazy"
-                    width={224}
-                    height={298}
-                    src={good_students_3}
-                    alt="زهرا علینقیان"
-                  ></img>
-                </span>
-                <h3 className="good-student-name">زهرا علینقیان</h3>
+                <h3 className="good-student-name">امین ساعی</h3>
               </div>
               <div className="good-student">
                 <span className="good-student-img-wrapper">
@@ -1029,10 +898,154 @@ class HomePage extends Component {
                     width={224}
                     height={298}
                     src={good_students_2}
-                    alt="صالح اسماعیل زاده"
+                    alt="فاطمه حسینی لیاولی"
                   ></img>
                 </span>
-                <h3 className="good-student-name">صالح اسماعیل زاده</h3>
+                <h3 className="good-student-name">فاطمه حسینی لیاولی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_3}
+                    alt="کیان حلاجی"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">کیان حلاجی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_4}
+                    alt="نرجس کریمیان‌زاده"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">نرجس کریمیان‌زاده</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_5}
+                    alt="منیره گرفیروزجائی"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">منیره گرفیروزجائی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_6}
+                    alt="ساجده جلیلی"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">ساجده جلیلی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_7}
+                    alt="سید آمانج حسینی"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">سید آمانج حسینی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_8}
+                    alt="زیبا سادات حسینی‌نژاد"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">زیبا سادات حسینی‌نژاد</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_9}
+                    alt="سانیا پورقاسمی"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">سانیا پورقاسمی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_10}
+                    alt="محسن قاسمی"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">محسن قاسمی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_11}
+                    alt="عرفان رجب پور"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">عرفان رجب پور</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_12}
+                    alt="معصومه مسرور"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">معصومه مسرور</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_13}
+                    alt="مهشید سلیمی"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">مهشید سلیمی</h3>
+              </div>
+              <div className="good-student">
+                <span className="good-student-img-wrapper">
+                  <img
+                    loading="lazy"
+                    width={224}
+                    height={298}
+                    src={good_students_14}
+                    alt="فاطمه مالو"
+                  ></img>
+                </span>
+                <h3 className="good-student-name">فاطمه مالو</h3>
               </div>
             </div>
             <span

@@ -15,6 +15,7 @@ class Courses extends Component {
     active_kelass: this.props.user
       ? { ...this.props.user.kelases.find((kelas) => kelas.is_online === true) }
       : false,
+    user_debt: false,
   };
   constructor(props) {
     super(props);
@@ -23,29 +24,37 @@ class Courses extends Component {
   componentDidMount() {
     this.props.get_kelasses();
     this.find_active_kelass();
+    if (this.props.user) {
+      this.check_user_acc();
+    }
   }
   open_class_pop_up = (e, entry) => {
     //console.log(entry);
     // if (!entry) {
     //   this.setState({ pop_up: true });
     // }
+    // e.preventDefault();
+
     const today = new Date();
     const day = today.toLocaleDateString("en", { weekday: "long" });
     const hour = today.getHours();
+    const minutes = today.getMinutes();
     const today_class_time = {
       ...entry.find((time) => time.week_day_english === day),
     };
     if (Object.keys(today_class_time).length !== 0) {
       let { start_time, finish_time } = today_class_time;
+      const start_minute = parseInt(start_time.split(":")[1]);
       start_time = parseInt(start_time.split(":")[0]);
       finish_time = parseInt(finish_time.split(":")[0]);
-      console.log(start_time, finish_time, hour);
-      if (hour >= start_time && hour <= finish_time) {
+      if (start_time * 60 + start_minute - (hour * 60 + minutes) < 15) {
         console.log("time");
       } else {
         e.preventDefault();
         this.setState({ pop_up: true });
       }
+      // if (hour >= start_time && hour <= finish_time) {
+      // }
     } else {
       e.preventDefault();
       this.setState({ pop_up: true });
@@ -76,6 +85,15 @@ class Courses extends Component {
       this.setState({ active_kelass });
       // console.log("test");
     }, 5000);
+  };
+  check_user_acc = () => {
+    const { kelases222 } = this.props.user;
+    const kel = [...kelases222];
+    kel.forEach((k) => {
+      if (!k.has_access) {
+        this.setState({ user_debt: true });
+      }
+    });
   };
   render() {
     const { user } = this.props;
@@ -192,12 +210,24 @@ class Courses extends Component {
                       </div>
                     </div>
                   </div>
+                  {this.state.user_debt ? (
+                    <div className="alert-debt">
+                      دوست عزیزم ! به علت عدم پرداخت صورتحسابت ، دسترسیت به بعضی
+                      از کلاس‌ها موقتا غیر فعال شده ... برای پرداخت ، از قسمت
+                      پروفایل به صفحه ی مالی برو و اگر مشکلی بود با پشتیبانی کاد
+                      تماس بگیر .
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+
                   <div className="courses-wrapper">
                     {user.kelases.map((k) => (
                       <Course
                         key={k.kelas_id}
                         open_class_pop_up={this.open_class_pop_up}
                         kelas={k}
+                        user={user}
                       />
                     ))}
                   </div>

@@ -37,7 +37,7 @@ class ReferalSignUp extends Component {
   componentDidMount() {
     const { user } = this.props;
     if (user) {
-      // window.location.pathname = "/Profile";
+      window.location.pathname = "/Profile";
     }
   }
   handle_phone_err = (value) => {

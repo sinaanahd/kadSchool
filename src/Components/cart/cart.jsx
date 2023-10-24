@@ -4,6 +4,7 @@ import withWebsiteData from "../hoc/with-website-data";
 import SideBar from "../side-bar/side-bar";
 import convert_to_persian from "../functions/convert-to-persian";
 import spilit_in_three from "../functions/spilit_in_three";
+import Discount from "./discount/discount";
 
 import deleteIcon from "../../assets/images/delete-icon-dark-blue.webp";
 import arrow_up from "../../assets/images/arrow-blue-up.webp";
@@ -24,7 +25,6 @@ class Cart extends Component {
       )
       .then((res) => {
         const payment_link = res.data;
-        //console.log(payment_link.link);
         window.open(payment_link.link);
         this.setState({ cash_pause: false });
       })
@@ -135,7 +135,7 @@ class Cart extends Component {
                     )}
                   </div>
                   <div className="how-to-pay-wrapper">
-                    <h2 className="semi-title">نحوه پرداخت</h2>
+                    <h2 className="semi-title">پرداخت اقساطی</h2>
                     <div className="pay-details">
                       <span className="pay-titles">
                         <span className="pay-item-title">شماره قسط</span>
@@ -165,23 +165,36 @@ class Cart extends Component {
                       )}
                     </div>
                     {ghests ? (
-                      <span
-                        className="pay-btn"
-                        onClick={() => {
-                          this.get_link(1);
-                        }}>
-                        {this.state.cash_pause ? (
-                          <LittleLoading />
-                        ) : (
-                          "پرداخت اولین قسط"
-                        )}
-                      </span>
+                      <>
+                        <span
+                          className="pay-btn"
+                          onClick={() => {
+                            this.get_link(1);
+                          }}
+                        >
+                          {this.state.cash_pause ? (
+                            <LittleLoading />
+                          ) : (
+                            "پرداخت اولین قسط"
+                          )}
+                        </span>
+                        {/* <div className="discont-not-cash">
+                          <input
+                            type="text"
+                            className="discount-code-input"
+                            name="discount-input"
+                            placeholder="کد تخفیف خود را وارد کنید"
+                          />
+                          <span className="submit-discount-code">ثبت کد</span>
+                        </div> */}
+                      </>
                     ) : (
                       <span
                         className="pay-btn"
                         onClick={() => {
                           wants_ghesti(user.user_id);
-                        }}>
+                        }}
+                      >
                         {gh_wait ? <LittleLoading /> : "پرداخت اقساطی"}
                       </span>
                     )}
@@ -212,7 +225,12 @@ class Cart extends Component {
                       <span className="details-item">
                         <span className="d-i-title">سود شما از این خرید:</span>
                         <span className="amount">
-                          {spilit_in_three(convert_to_persian(0))} تومان
+                          {spilit_in_three(
+                            convert_to_persian(
+                              cart ? cart.pure_price - cart.final_price : 0
+                            )
+                          )}{" "}
+                          تومان
                         </span>
                       </span>
                       <span className="details-item">
@@ -243,7 +261,8 @@ class Cart extends Component {
                           onClick={() => {
                             this.get_link(0);
                           }}
-                          className="pay-btn-bank">
+                          className="pay-btn-bank"
+                        >
                           {this.state.cash_pause ? (
                             <LittleLoading />
                           ) : (
@@ -255,10 +274,7 @@ class Cart extends Component {
                       <LittleLoading />
                     )}
                   </div>
-                  {/* <div className="discount-code">
-                    <span className="discount-title">کد تخفیف</span>
-                    <img src={arrow_up} alt="" />
-                  </div> */}
+                  <Discount />
                 </div>
               </div>
             </div>

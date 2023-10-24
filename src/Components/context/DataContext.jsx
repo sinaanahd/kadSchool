@@ -3,32 +3,28 @@ import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 import last_login_check from "../functions/last-login-check";
 import convert_to_persian from "../functions/convert-to-persian";
-const local_kelasses = JSON.parse(localStorage.getItem("kelasses"))
-  ? JSON.parse(localStorage.getItem("kelasses"))
-  : false;
-const local_teachers = JSON.parse(localStorage.getItem("teachers"))
-  ? JSON.parse(localStorage.getItem("teachers"))
-  : false;
-const local_doreha = JSON.parse(localStorage.getItem("doreha"))
-  ? JSON.parse(localStorage.getItem("doreha"))
-  : false;
-const local_courses = JSON.parse(localStorage.getItem("courses"))
-  ? JSON.parse(localStorage.getItem("courses"))
-  : false;
+const local_kelasses = JSON.parse(localStorage.getItem("kelasses")) || false;
+const local_teachers = JSON.parse(localStorage.getItem("teachers")) || false;
+const local_doreha = JSON.parse(localStorage.getItem("doreha")) || false;
+const local_courses = JSON.parse(localStorage.getItem("courses")) || false;
+const local_sample_files =
+  JSON.parse(localStorage.getItem("sample_files")) || false;
 const DataContext = createContext();
 const DataProvider = ({ children }) => {
   const [ref_kelasses, setKelasses] = useState(local_kelasses);
   const [ref_teachers, setTeachers] = useState(local_teachers);
   const [ref_doreha, setDoreha] = useState(local_doreha);
   const [ref_courses, setCourses] = useState(local_courses);
+  const [sample_files, setSampleFiles] = useState(local_sample_files);
   useEffect(() => {
     //const is_time = last_login_check(last_time, now_time);
     get_kelasses();
     get_teachers();
     get_doreha();
     get_courses();
+    get_sample_files();
   }, []);
-  const get_kelasses = (e) => {
+  const get_kelasses = () => {
     axios
       .get("https://kadschool.com/backend/kad_api/kelases")
       .then((res) => {
@@ -65,7 +61,7 @@ const DataProvider = ({ children }) => {
         console.log(e);
       });
   };
-  const get_teachers = (e) => {
+  const get_teachers = () => {
     axios
       .get("https://kadschool.com/backend/kad_api/teachers")
       .then((res) => {
@@ -74,7 +70,6 @@ const DataProvider = ({ children }) => {
           const name = t.fullname + "";
           const slug_name = name.replaceAll(" ", "-");
           t.slug_name = slug_name;
-          // console.log(t, slug_name);
         });
         setTeachers(ref_teachers);
         localStorage.setItem("teachers", JSON.stringify(ref_teachers));
@@ -111,9 +106,27 @@ const DataProvider = ({ children }) => {
         console.log(e);
       });
   };
+  const get_sample_files = () => {
+    axios
+      .get("https://kadschool.com/backend/kad_api/sample_files")
+      .then((res) => {
+        const sample_files = res.data;
+        localStorage.setItem("sample_files", JSON.stringify(sample_files));
+        setSampleFiles(sample_files);
+      })
+      .catch((e) => {
+        this.handle_error(e);
+      });
+  };
   return (
     <DataContext.Provider
-      value={{ ref_kelasses, ref_teachers, ref_doreha, ref_courses }}
+      value={{
+        kelasses: ref_kelasses,
+        teachers: ref_teachers,
+        doreha: ref_doreha,
+        courses: ref_courses,
+        sample_files,
+      }}
     >
       {children}
     </DataContext.Provider>

@@ -14,12 +14,14 @@ class RecordedCourses extends Component {
     // this.find_class();
     let my_path = window.location.pathname;
     my_path = parseInt(my_path.split("/")[2]);
+    this.props.get_sample_files();
+    this.props.get_jalasat();
     this.props.find_class(my_path);
     const data_check = setInterval(() => {
       if (this.props.single_kelas) {
         clearInterval(data_check);
       } else {
-        this.find_class(my_path);
+        // this.find_class(my_path);
       }
     }, 2000);
   }

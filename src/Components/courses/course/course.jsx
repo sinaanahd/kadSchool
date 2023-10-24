@@ -10,6 +10,13 @@ class Course extends Component {
       this.setState({ animate: " " });
     }, 100);
   }
+  check_class = (id) => {
+    const { kelases222 } = this.props.user;
+    const kelas = { ...kelases222.find((k) => k.kelas_id === id) };
+    if (Object.keys(kelas).length !== 0) {
+      return kelas.has_access;
+    }
+  };
   render() {
     const { open_class_pop_up, kelas, temp_id } = this.props;
     return (
@@ -26,25 +33,31 @@ class Course extends Component {
           width={246}
           height={246}
         />
-        <a
-          href={kelas.direct_link}
-          className="enter-class"
-          onClick={(e) => {
-            open_class_pop_up(e, kelas.stream_plans);
-            //open_class_pop_up(e, 11);
-          }}
-        >
-          ورود به کلاس
-        </a>
-        <Link
-          onClick={() => {
-            scrollToTop();
-          }}
-          to={`/Course/${kelas.kelas_id}`}
-          className="recorded-sessions"
-        >
-          جلسات ضبط شده
-        </Link>
+        {this.check_class(kelas.kelas_id) ? (
+          <>
+            <a
+              href={kelas.direct_link}
+              className="enter-class"
+              onClick={(e) => {
+                open_class_pop_up(e, kelas.stream_plans);
+                //open_class_pop_up(e, 11);
+              }}
+            >
+              ورود به کلاس
+            </a>
+            <Link
+              onClick={() => {
+                scrollToTop();
+              }}
+              to={`/Course/${kelas.kelas_id}`}
+              className="recorded-sessions"
+            >
+              جلسات ضبط شده
+            </Link>
+          </>
+        ) : (
+          <span className="no-acc">دسترسی شما قطع شده است</span>
+        )}
       </div>
     );
   }

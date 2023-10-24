@@ -43,6 +43,9 @@ import ReferalSignup from './Components/referal/referal-signup';
 import StudyPlan from './Components/study-plan/study-plan';
 // context refactor
 import NewShop from './Components/shop/new-shop';
+import R_SingleTeacher from './Components/single-teacher/r-single-teacher';
+import specialDiscount from './Components/special-discount/special-discount';
+import SingleClass from './Components/single-prod/single-class';
 // context refactor
 class App extends Component {
   state = {}
@@ -83,9 +86,16 @@ class App extends Component {
           re-design / re-factor
         */}
         <Route path="/new-shop/:kind/:title" component={NewShop} />
+        <Route path="/r-Teachers/:id" component={R_SingleTeacher} />
+        <Route path="/r-class/:id" component={SingleClass} />
         {/* 
           re-design / re-factor
         */}
+
+
+        {/*  special discount */}
+        <Route path="/special-discount" component={specialDiscount} />
+        {/*  special discount */}
         <Route path="/Referal-signup/:id" component={ReferalSignup} />
         <Route path="/study-plan" component={StudyPlan} />
         <Redirect from="/" exact to="/HomePage" />

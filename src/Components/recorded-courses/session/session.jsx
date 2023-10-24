@@ -9,14 +9,14 @@ class Session extends Component {
     show_item: false,
   };
   componentDidMount() {
-    console.log(this.props.jalase, this.props.course);
+    //console.log(this.props.jalase, this.props.course);
   }
   fill_sample_files = () => {
     const { jalase, sample_files } = this.props;
     const files = [];
     jalase.sample_files.pdf_sample_files_ids.forEach((id) => {
       const file = sample_files.pdf_sample_files.find((f) => f.file_id === id);
-      console.log(file);
+      // console.log(file);
       if (file) {
         files.push(file);
       }

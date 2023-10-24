@@ -129,19 +129,23 @@ input[type=number] {
     .top-slide-btn{
         position: absolute;
         left: 20px;
-        transform: rotateY(180deg);
+        transform: rotate(90deg);
         z-index: 3;
+        background-color: #ffffff81;
+        border-radius: 50%;
+        @include flexMixin(row,center,center);
+        width: 40px;
+        height: 40px;
         img{
-            width: 40px;
+            width: 100%;
+            max-width: 25px;
             cursor: pointer;
-            background-color: #fff;
-            border-radius: 50%;
         }
     }
     .next{
         right: 20px;
         left: unset;
-        transform: rotateY(0deg);
+        transform: rotate(-90deg);
     }
     .top-slider-link-btn{
         position: absolute;
@@ -2061,6 +2065,10 @@ input[type=number] {
         row-gap: 40px;
         margin: 0 0 40px;
     }
+    .alert-debt{
+        color: $redColor;
+        font-size: 20px;
+    }
     .course{
         border-radius: 8px;
         @include flexMixin(column,space-between,center);
@@ -2074,6 +2082,14 @@ input[type=number] {
         transform: scale(1);
         img{
             border-radius: 8px;
+        }
+        .no-acc{
+            color: $redColor;
+            height: 100%;
+            @include flexMixin(row,center,center);
+            border: 2px solid $redColor;
+            border-radius: 8px;
+            width: 100%;
         }
         .enter-class{
             @include styler(#fff,$yellowColor,16px,8px);
@@ -5599,7 +5615,7 @@ input[type=number] {
         }
     }
     .discount-code{
-        width: 218px;
+        width: 100%;
         height: 56px;
         border-radius: 8px;
         background-color: #fff;
@@ -5608,10 +5624,35 @@ input[type=number] {
         @include flexMixin(row,space-between,center);
         margin: 20px 0 0;
         padding: 0px 10px;
-        font-size: 24px;
-        img{
-            transform: rotate(180deg);
-        }
+        gap: 10px;
+    }
+    .submit-discount-code{
+        flex: 0 0 90px;
+        @include flexMixin(row,center,center);
+        color: #fff;
+        background-color: $mainColor;
+        height: 30px;
+        border-radius: 10px;
+    }
+    .discount-code-input{
+        width: 100%;
+        height: 30px;
+        font-family: "main-font", Arial, sans-serif;
+        padding: 0 10px;
+        border-radius: 10px;
+        outline: 0px solid #000;
+        border: 2px solid $mainColor;
+        font-size: 12px;
+    }
+    .dicount-code-problem{
+        width: 100%;
+        margin: 20px 0 0;
+        background-color: $redColor;
+        font-size: 15px;
+        color: #fff;
+        @include flexMixin(row,center,center);
+        height: 40px;
+        border-radius: 16px;
     }
 }
 /* cart page */
@@ -5922,7 +5963,19 @@ input[type=number] {
             height: auto;
             opacity: 1;
         }
-            
+        .spot-descriptions{
+            width: 100%;
+            @include flexMixin(column,flex-start,flex-start);
+            gap: 10px;
+            ol{
+                padding: 0 20px;
+                @include flexMixin(column,flex-start,flex-start);
+                gap: 10px;
+            }
+        }
+    }
+    .spot-descriptions{
+        display: none;
     }
     .os{
         @include flexMixin(row,flex-start,center);
@@ -6698,6 +6751,959 @@ input[type=number] {
 }
 /* apolo-11-2 */
 
+
+/* special discount code */
+@keyframes scale_change {
+    from{
+        transform: scale(0.95);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+@keyframes tilt_animation {
+    from{
+        transform: rotate(40deg);
+    }
+    to{
+        transform: rotate(690px);
+    }
+}
+@keyframes move_animation {
+    from{
+        transform: translate(-10px , 0);
+    }
+    to{
+        transform: translate(0px, 0);
+    }
+}
+.discount-page-secret{
+    .secret-hero-section{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 50px;
+        img{
+            animation: scale_change 2s ease-in-out 0s infinite alternate-reverse;
+        }
+    }
+    .hero-texts-wrapper{
+        flex: 0 0 600px;
+        max-width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+    }
+    .secret-title{
+        font-size: 35px;
+    }
+    .secret-text{
+        font-size: 17px;
+        line-height: 37px;
+        text-align: justify;
+    }
+    .secret-hero-img-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-end,center);
+    }
+    .stage-show-data{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 20px;
+        margin: 40px 0;
+        position: relative;
+    }
+    .secret-semi-title{
+        font-size: 30px;
+    }
+    .stage-desc{
+        font-size: 20px;
+        line-height: 35px;
+        text-align: center;
+        width: calc(100% - 100px);
+    }
+    .all-stages{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        margin: 30px 0 0;
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+    .stage-wrapper{
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+        width: 100%;
+        padding: 22px;
+        background-color: #00000029;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+    .secret-stage-title{
+        font-size: 20px;
+    }
+    .secret-stage-status{
+        width: 200px;
+        height: 32px;
+        @include flexMixin(row,center,center);
+        background-color: #fff;
+        color: #000;
+        // border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 2px 0 0;
+        position: absolute;
+        top: 20px;
+        right: -60px;
+        transform: rotate(45deg);
+    }
+    .secret-stage-text{
+        font-size: 15px;
+        line-height: 30px;
+        margin: 20px 0 0;
+        padding: 0 20px;
+        text-align: justify;
+    }
+    .abs-1-img{
+        position: absolute;
+        top: 200px;
+        @include flexMixin(row,center,center);
+        width: 200px;
+        right: -170px;
+        z-index: 0;
+        transform: rotate(90deg);
+        img{
+            animation: move_animation 1s ease-in-out 0s infinite alternate-reverse;
+        }
+    }
+    .abs-2-img{
+        position: absolute;
+        bottom: 50px;
+        @include flexMixin(row,center,center);
+        width: 200px;
+        left: -150px;
+        z-index: 0;
+        transform: rotate(-90deg);
+        img{
+            animation: move_animation 1s ease-in-out 0s infinite alternate-reverse;
+        }
+    }
+    .lets-start{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 30px;
+        margin: 40px 0;
+    }
+    .secret-start-text{
+        font-size: 20px;
+        width: 100%;
+        text-align: center;
+    }
+    .start-special-discount-btn{
+        width: 200px;
+        font-size: 25px;
+        @include flexMixin(row,center,center);
+        background-color: #A667C0;
+        height: 60px;
+        border-radius: 10px;
+        padding: 2px 0 0;
+    }
+    .refresh-page{
+        width: 80px;
+        height: 80px;
+        font-size: 13px;
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        border-radius: 50%;
+        @include flexMixin(row,center,center);
+        text-align: center;
+        backdrop-filter: blur(10px);
+        background-color: #00000029;
+        border: 2px solid #A667C0;
+        color: #A667C0;
+        font-weight: bold;
+    }
+    .after-join-data {
+        width: 100%;
+        @include flexMixin(column, flex-start, center);
+        gap: 20px;
+    }
+    .your-discount-code{
+        padding: 20px;
+        @include flexMixin(row,center,center);
+        gap: 30px;
+        font-size: 20px;
+        border-radius: 20px;
+        border: 2px solid #A667C0;
+    }
+    .your-code{
+        border-bottom : 2px solid #A667C0;
+        border-radius: 20px;
+        font-size: 20px;
+        padding: 0 10px 5px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .copy-code{
+        font-size: 12px;
+        background-color: #A667C0;
+        @include flexMixin(row,center,center);
+        cursor: pointer;
+        width: 80px;
+        height: 30px;
+        border-radius: 6px;
+    }
+    .btns-wrapper{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 30px;
+        margin: 30px 0 0;
+        font-size: 22px;
+        a{
+            background-color: #A667C0;
+            width: 150px;
+            @include flexMixin(row,center,center);
+            border-radius: 10px;
+            height: 50px;
+            padding: 2px 0 0;
+            transition: $transition;
+            border: 2px solid #A667C0;
+            &:hover{
+                background-color: transparent;
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+/* special discount code */
+
+/* re design */
+
+/* re-single_teacher */
+.re{
+    font-family: "yekan-bakh" !important;
+}
+
+.re-teacher-main-wrapper{
+    width: 100%;
+    @include flexMixin(column,flex-start,center);
+    background-color: #e5eaff;
+    gap: 20px;
+    padding: 50px 0;
+    section{
+        max-width: 1300px;
+    }
+    .teacher-intro-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 43px;
+    }
+    .teahcer-img{
+        max-width: 200px;
+        @include flexMixin(row,center,center);
+        img{
+            border-radius: 20px;
+        }
+    }
+    .teacher-text-data{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 35px;
+    }
+    .main-title{
+        font-size: 30px;
+    }
+    .teacher-short-desc{
+        font-size: 18px;
+        line-height: 35px;
+    }
+    .full-resume-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 54px;
+    }
+    .resume-col{
+        @include flexMixin(column,flex-start,center);
+        gap: 31px;
+        width: 100%;
+    }
+    .resume-item{
+        width: 100%;
+        background: rgba(116, 83, 198, 0.10);
+        padding: 35px 60px;
+        border-radius: 50px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 30px;
+    }
+    .resume-title-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 20px;
+        font-size: 20px;
+        img{
+            width: 80px;
+        }
+        h2{
+            padding: 5px 0 0 0;
+        }
+    }
+    .resume-content-items{
+        padding: 0;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 15px;
+        width: 100%;
+        li{
+            list-style: none;
+            @include flexMixin(row,flex-start,center);
+            width: 100%;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 25px;
+            &::before{
+                flex: 0 0 14px;
+                background-color: #1B0B4E;
+                border-radius: 50%;
+                height: 14px;
+                content: " ";
+            }
+        }
+    }
+    .teacher-classes-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 54px;
+        margin: 50px 0 0;
+    }
+    .sectoin-title{
+        font-size: 30px;
+    }
+    .classes-carousel-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 100px;
+    }
+    .arrow-wrapper{
+        flex: 0 0 50px;
+        height: 50px;
+        border-radius: 50%;
+        @include flexMixin(row,center,center);
+        background-color: #1B0B4E;
+        cursor: pointer;
+        transition: $transition;
+        img{
+            max-width: 15px;
+        }
+    }
+    .classes-carousel-place{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 17px;
+        overflow-x: hidden;
+    }
+    .teachers-classe{
+        flex: 0 0 243px;
+        background-color: #1B0B4E;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 27px 20px 20px;
+        color: #fff;
+        position: relative;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 15px;
+        transition: $transition;
+        img{
+            border-radius: 20px;
+        }
+    }
+    .class-name{
+        font-size: 18px;
+    }
+    .prices-wrapper{
+        width: 100%;
+        @include flexMixin(row,space-between,flex-start);
+        font-size: 16px;
+    }
+    .prices-place{
+        @include flexMixin(column,flex-start,flex-end);
+        span{
+            @include flexMixin(row,center,center);
+            gap: 5px;
+        }
+    }
+    .add-to-cart{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        font-size: 18px;
+        background-color: #A667CA;
+        height: 42px;
+        border-radius: 50px;
+    }
+    .dore-label{
+        position: absolute;
+        left: 20px;
+        top: 10px;
+        font-size: 15px;
+        @include flexMixin(row,center,center);
+        padding: 0 15px;
+        background-color: #F09D00;
+        border-radius: 12px;
+        height: 35px;
+    }
+    .video-intros-wrapper{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 20px;
+    }
+    .teacher-video-place{
+        flex: 0 0 33%;
+        border-radius: 20px;
+        background: rgba(116, 83, 198, 0.10);
+        padding: 40px 30px;
+        gap: 30px;
+        font-size: 20px;
+        @include flexMixin(column,flex-start,center);
+        margin: 50px 0 0;
+    }
+    .video-need-div{
+        width: 100%;
+        box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 19px;
+    }
+    .files-section-wrapper{
+        width: 100%;
+        margin: 50px 0 0;
+        @include flexMixin(column,flex-start,center);
+        gap: 52px;
+    }
+    .file-section-header{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+    }
+    .sample-files-btns-wrapper{
+        @include flexMixin(row,flex-end,center);
+        gap: 24px;
+        font-size: 18px;
+        width: 100%;
+    }
+    .sample-file-btn{
+        width: 170px;
+        height: 48px;
+        border-radius: 20px;
+        border: 1px solid #000;
+        @include flexMixin(row,center,center);
+    }
+    .file-section-title{
+        min-width: 200px;
+        font-size: 30px;
+    }
+    .sample-file-btn.active{
+        background-color: #7453C6;
+        color: #fff;
+        border : 1px solid #7453C6;
+    }
+    .files-places{
+        width: 100%;
+        background: rgba(116, 83, 198, 0.10);
+        border-radius: 20px;
+        @include flexMixin(column,center,center);
+        padding: 50px;
+        gap: 30px;
+    }
+    .file-row{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+    }
+    .name-wrapper{
+        min-width: 150px;
+    }
+    .faq-section-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+        margin: 50px 0 0;
+    }
+    .faq-section-title{
+        font-size: 30px;
+    }
+    .faq-item{
+        width: 100%;
+        color: #fff;
+        background-color: #1B0B4E;
+        border-radius: 12px;
+        padding: 50px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 16px;
+        overflow-y: hidden;
+    }
+    .faq-header{
+        @include flexMixin(row,space-between,center);
+        width: 100%;
+        img{
+            width: 40px;
+            background: rgba(166, 103, 202, 0.30);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: $transition;
+        }
+    }
+    .faq-question{
+        font-size: 25px;
+    }
+    .faq-answer{
+        font-size: 18px;
+        line-height: 35px;
+        display: none;
+    }
+    .faq-item.opened{
+        .faq-answer {
+            display: block;
+        }
+    }
+}
+/* re-single_teacher */
+
+/* re design single kelas */
+.re-design-single-class{
+    font-family: "yekan-bakh";
+    @include flexMixin(column,flex-start,center);
+    width: 100%;
+    background-color: #f8f9ff;
+    padding: 20px 0;
+    .re-single-header-info{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 40px;
+        img{
+            border-radius: 20px;
+        }
+    }
+    .re-class-text-info{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+    }
+    .class-title{
+        font-size: 30px;
+    }
+    .info-teacher-name{
+        font-size: 20px;
+        font-weight: normal;
+    }
+    .info-desc-text{
+        font-size: 18px;
+        line-height: 30px;
+        margin: 25px 0 0;
+        text-align: justify;
+    }
+    .additional-datas-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 30px;
+        margin: 80px 0;
+    }
+    .right-col{
+        flex: 0 0 511px;
+        @include flexMixin(column,flex-start,center);
+        gap: 30px;
+    }
+    .teachers-data{
+        width: 100%;
+        background-color: #eef4ff;
+        @include flexMixin(row,flex-start,flex-start);
+        padding: 36px;
+        border-radius: 16px;
+        gap: 17px;
+        img{
+            border-radius: 16px;
+        }
+    }
+    .teacher-text-data{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 10px;
+        width: 100%;
+    }
+    .info-title{
+        font-size: 25px;
+    }
+    .info-description{
+        font-size: 15px;
+        line-height: 27px;
+        text-align: justify;
+    }
+    .leave-page-btn{
+        font-size: 18px;
+        @include flexMixin(row,center,center);
+        border: 1px solid #000;
+        border-radius: 20px;
+        width: 120px;
+        padding: 2px 0 0;
+        transition: $transition;
+        &:hover{
+            background-color: #000;
+            color: #fff;
+        }
+    }
+    .dore-info-wrapper{
+        width: 100%;
+        background-color: #eef4ff;
+        @include flexMixin(column, flex-start, flex-start);
+        padding: 36px;
+        border-radius: 16px;
+        gap: 17px;
+    }
+    .left-col{
+        width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .files-section{
+        flex: 0 0 411px;
+        background-color: #eef4ff;
+        padding: 50px;
+        border-radius: 16px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 30px;
+    }
+    .files-title{
+        font-size: 20px;
+    }
+    .sample-files-btns-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+    }
+    .sample-file-btn{
+        width: 100px;
+        @include flexMixin(row,center,center);
+        border: 1px solid #000;
+        font-size: 15px;
+        padding: 2px 0 0;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+    .files-places{
+        @include flexMixin(column,flex-start,center);
+        gap: 30px;
+        width: 100%;
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+    .file-row{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 30px;
+        font-size: 18px;
+    }
+    .name-wrapper{
+       flex: 0 0 150px;
+    }
+    .class-times-wrapper{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 10px;
+    }
+    .class-time-title{
+        font-size: 25px;
+    }
+    .dates{
+        @include flexMixin(row,flex-start,center);
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+    .day{
+        width: 70px;
+        height: 58px;
+        @include flexMixin(column,center,center);
+        border-radius: 13px;
+        border: 1px solid #7453C6;
+        font-size: 15px;
+        padding: 8px 0;
+    }
+    .start-date-title{
+        font-size: 18px;
+        margin: 14px 0 0;
+    }
+    .start-date{
+        @include flexMixin(column, center, center);
+        border-radius: 13px;
+        border: 1px solid #7453C6;
+        font-size: 15px;
+        font-weight: bold;
+        width: 80px;
+        height: 30px;
+    }
+    .prices{
+        margin: 30px 0 0;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 10px;
+    }
+    .discount-status{
+        @include flexMixin(row,flex-start,center);
+        gap: 15px;
+    }
+    .discount-label{
+        font-size: 12px;
+        width: 43px;
+        height: 28px;
+        border-radius: 7px;
+        background-color: #1B0B4E;
+        color: #FFC000;
+        @include flexMixin(row,center,center);
+    }
+    .real-price-number{
+        font-size: 16px;
+        color: #BABABA;
+        text-decoration: line-through;
+    }
+    .final-price{
+        @include flexMixin(row,flex-start,center);
+        gap: 7px;
+        font-size: 17px;
+        .price{
+            font-weight: bold;
+            font-size: 22px;
+        }
+    }
+    .buy-class-btn{
+        width: 221px;
+        height: 47px;
+        border-radius: 30px;
+        @include flexMixin(row,center,center);
+        color: #fff;
+        background-color: #A667CA;
+        cursor: pointer;
+        transition: $transition;
+        border: 2px solid #A667CA;
+        font-size: 18px;
+        &:hover{
+            color: #A667CA;
+            background-color: #fff;
+        }
+    }
+    .banners-place{
+        flex: 0 0 100%;
+        img{
+            border-radius: 20px;
+            width: 100%;
+        }
+    }
+    .classes-wrapper-section{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 40px;
+        margin: 0 0 50px;
+    }
+    .class-section-title{
+        font-size: 30px;
+    }
+    .classes-carousel{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        gap: 100px;
+    }
+    .classes-place{
+        @include flexMixin(row,flex-start,center);
+        width: 100%;
+        gap: 18px;
+        overflow-x: hidden;
+    }
+    .class-item{
+        flex: 0 0 329px;
+        max-width: 100%;
+        @include flexMixin(row,flex-start,flex-start);
+        gap: 13px;
+        background-color: #1B0B4E;
+        color: #fff;
+        border-radius: 15px;
+        padding: 15px;
+        position: relative;
+        height: 206px;
+        img{
+            width: 130px;
+            border-radius: 15px;
+        }
+    }
+    .img-dore-place{
+        flex: 0 0 130px;
+        @include flexMixin(column,flex-start,center);
+        gap: 15px;
+    }
+    .dore-label {
+        font-size: 13px;
+        @include flexMixin(row,space-between,center);
+        width: 100%;
+        border-radius: 12px;
+        padding: 0 10px;
+    }
+    .dore-content{
+        height: 30px;
+        @include flexMixin(row,center,center);
+        background-color: #F09D00;
+        width: 60px;
+        border-radius: 30px;
+        padding: 2px 0 0;
+    }
+    .class-text-data{
+        @include flexMixin(column,flex-start,flex-start);
+        width: 100%;
+    }
+    .teacher-name-data{
+        font-size: 18px;
+    }
+    .cours-name-data{
+        margin: 5px 0 10px;
+        font-weight: normal;
+        font-size: 15px;
+    }
+    .prices-data-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-end);
+    }
+    .price-title{
+        width: 100%;
+        font-size: 15px;
+    }
+    .prices-kind-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-end);
+        font-size: 15px;
+    }
+    
+    .real-discounted{
+        font-weight: 100;
+        font-size: 13px;
+        color: #FFFFFFB2;
+    }
+    .real-price{
+        font-weight: bold;
+    }
+    .add-to-cart-btn{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        height: 29px;
+        border-radius: 30px;
+        background-color: #A667CA;
+        margin: 10px 0 0;
+        padding: 2px 0 0;
+    }
+    .arrow-next{
+        flex: 0 0 48px;
+        width: 48px;
+        height: 48px;
+        @include flexMixin(row,center,center);
+        background-color: #1B0B4E;
+        border-radius: 50%;
+        cursor: pointer;
+        img{
+            width: 14px;
+        }
+    }
+    .re-students-comments-section{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        margin: 100px 0;
+        position: relative;
+    }
+    .section-header{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 25px;
+        margin: 0 0 30px;
+        img{
+            width: 60px;
+        }
+    }
+    .section-title{
+        font-size: 30px;
+    }
+    .cm-row{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        overflow-x: hidden;
+        gap: 16px;
+        margin: 0 0 16px;
+    }
+    .cm-wrapper{
+        flex: 0 0 380px;
+        height: 220px;
+        border-radius: 16px;
+        background: rgba(229, 222, 255, 0.40);
+        @include flexMixin(column,flex-start,center);
+        padding: 32px;
+        gap: 10px;
+        font-size: 15px;
+        text-align: justify;
+    }
+    .cm-header{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        font-size: 14px;
+    }
+    .overlay{
+        position: absolute;
+        background: linear-gradient(270deg, rgba(245, 249, 254, 0.88) 0.07%, rgba(245, 249, 254, 0.00) 8.95%, rgba(245, 249, 254, 0.00) 67.96%, rgba(245, 249, 254, 0.00) 91.97%, rgba(245, 249, 254, 0.88) 100.33%);
+        width: 100%;
+        top: 80px;
+        height: 470px;
+    }
+    .faq-section-wrapper {
+        width: 100%;
+        @include flexMixin(column, flex-start, flex-start);
+        gap: 20px;
+        margin: 50px 0 0;
+        .section-header{
+            img{
+                width: 100px;
+            }
+        }
+    }
+    .faq-section-title {
+        font-size: 30px;
+    }
+
+    .faq-item {
+        width: 100%;
+        color: #fff;
+        background-color: #1B0B4E;
+        border-radius: 12px;
+        padding: 50px;
+        @include flexMixin(column, flex-start, flex-start);
+        gap: 16px;
+        overflow-y: hidden;
+    }
+
+    .faq-header {
+        @include flexMixin(row, space-between, center);
+        width: 100%;
+
+        img {
+            width: 40px;
+            background: rgba(166, 103, 202, 0.30);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: $transition;
+        }
+    }
+
+    .faq-question {
+        font-size: 25px;
+    }
+
+    .faq-answer {
+        font-size: 18px;
+        line-height: 35px;
+        display: none;
+    }
+
+    .faq-item.opened {
+        .faq-answer {
+            display: block;
+        }
+    }
+}
+/* re design single kelas */
+
+/* re design */
 
 
 /* responsive */
@@ -8328,60 +9334,3 @@ input[type=number] {
     }
 }
 /* new shop test */
-
-
-/* expriment */
-// .scene{
-//     width: 200px;
-//     height: 200px;
-//     perspective: 600px;
-//     position: fixed;
-//     bottom: 10px;
-//     left: 10px;
-//     .cube {
-//         width: 100%;
-//         height: 100%;
-//         position: relative;
-//         transform-style: preserve-3d; 
-//         transition: transform 1s;
-//         transform: translateZ(-100px);
-//     }
-    
-//     .cube__face {
-//         @include flexMixin(row,center,center);
-//         position: absolute;
-//         width: 200px;
-//         height: 200px;
-//     }
-//     .cube__face--front {
-//         transform: rotateY(0deg) translateZ(100px);
-//         background-color: rgba(255, 0, 0, 0.497);
-//     }
-
-//     .cube__face--right {
-//         transform: rotateY(90deg) translateZ(100px);
-//         background-color: rgba(0, 0, 255, 0.613);
-//     }
-
-//     .cube__face--back {
-//         transform: rotateY(180deg) translateZ(100px);
-//         background-color: rgba(255, 0, 255, 0.491);
-//     }
-
-//     .cube__face--left {
-//         transform: rotateY(-90deg) translateZ(100px);
-//         background-color: rgba(0, 128, 0, 0.45);
-//     }
-
-//     .cube__face--top {
-//         transform: rotateX(90deg) translateZ(100px);
-//         background-color: rgba(255, 255, 0, 0.371)
-//     }
-
-//     .cube__face--bottom {
-//         transform: rotateX(-90deg) translateZ(100px);
-//         background-color: rgba(255, 192, 203, 0.342);
-//     }
-// }
-
-/* expriment */

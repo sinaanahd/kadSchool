@@ -123,6 +123,17 @@ function withWebsiteData(Component) {
       active_day: "Saturday",
     };
     componentDidMount() {
+      // const salary = [
+      //   8, 8, 8, 9, 8, 8, 7, 1, 7, 8, 8, 8, 9, 7, 8, 8, 8, 8, 8, 7, 7, 8, 9, 8,
+      //   8, 10, 7, 8, 8, 8, 7, 7, 8, 8, 7, 7, 8, 9, 7, 9, 9, 7, 8, 9, 8, 8, 8, 8,
+      //   10, 8, 9, 8, 7, 8, 8, 8, 7, 9, 7, 8, 7, 9, 9, 8, 8, 9, 8, 9, 8, 9, 8, 8,
+      //   8, 9, 9, 9, 8, 9, 8, 8, 7, 8, 9,
+      // ];
+      // let sum = 0;
+      // salary.forEach((s) => {
+      //   sum += s;
+      // });
+      // console.log(sum, salary.length);
       const is_time = last_login_check(last_login, this_time_login);
       if (is_time) {
         this.get_banners();
@@ -191,7 +202,7 @@ function withWebsiteData(Component) {
           this.get_sample_files();
         }
       }
-      //this.get_user(9166);
+      // this.get_user(9166);
       if (local_user) {
         this.get_user(local_user.user_id);
         this.get_cart(local_user.user_id);
@@ -200,6 +211,7 @@ function withWebsiteData(Component) {
       if (
         window.location.pathname !== "/HomePage" &&
         window.location.pathname !== "/apollo-11" &&
+        window.location.pathname !== "/special-discount" &&
         window.location.pathname !== "/apollo-prizes"
       ) {
         document.querySelector("#root").classList.add("root_test");
@@ -313,6 +325,7 @@ function withWebsiteData(Component) {
           const sample_files = res.data;
           localStorage.setItem("sample_files", JSON.stringify(sample_files));
           this.setState({ sample_files });
+          // alert();
         })
         .catch((e) => {
           this.handle_error(e);
@@ -513,12 +526,13 @@ function withWebsiteData(Component) {
       this.modify_cart(user_id, items_ids);
     };
     get_user = (user_id) => {
-      // .get(`https://kadschool.com/backend/kad_api/user/${9166}`)
+      //.get(`https://kadschool.com/backend/kad_api/user/${9166}`)
+      // .get(`https://kadschool.com/backend/kad_api/user/${1034}`)
       axios
         .get(`https://kadschool.com/backend/kad_api/user/${user_id}`)
         .then((res) => {
+          console.log("get log", res.data);
           const user = res.data;
-          // console.log("get log", res.data);
           this.fill_user_datas(user);
         })
         .catch((e) => {
@@ -953,7 +967,7 @@ function withWebsiteData(Component) {
           });
           kelas.jalasat = kelas_jalasat;
         }
-        console.log(kelas);
+        // console.log(kelas);
         this.setState({ single_kelas: kelas });
       } else {
         if (local_courses && local_jalasat && local_kelasses) {
@@ -1054,9 +1068,10 @@ function withWebsiteData(Component) {
       }, 1000);
     };
     make_user_empty = () => {
-      localStorage.removeItem("user-kad");
-      localStorage.removeItem("kad-cart");
-      localStorage.removeItem("kad-phone-number");
+      // localStorage.removeItem("user-kad");
+      // localStorage.removeItem("kad-cart");
+      // localStorage.removeItem("kad-phone-number");
+      window.localStorage.clear();
       this.setState({ user: false, cart: false }, () => {
         window.location.pathname = "/Login";
       });
@@ -1096,6 +1111,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/HomePage" ||
           window.location.pathname === "/apollo-11" ||
           window.location.pathname === "/apollo-prizes" ||
+          window.location.pathname === "/special-discount" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (
@@ -1147,6 +1163,7 @@ function withWebsiteData(Component) {
             make_user_empty={this.make_user_empty}
             get_sample_week_plan={this.get_sample_week_plan}
             sample_files={this.state.sample_files}
+            get_sample_files={this.get_sample_files}
           />
           {this.state.err.state ? (
             <div className={this.state.err.classes.map((c) => `${c}`)}>
@@ -1178,6 +1195,7 @@ function withWebsiteData(Component) {
           window.location.pathname === "/HomePage" ||
           window.location.pathname === "/apollo-11" ||
           window.location.pathname === "/apollo-prizes" ||
+          window.location.pathname === "/special-discount" ||
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (

@@ -202,7 +202,7 @@ function withWebsiteData(Component) {
           this.get_sample_files();
         }
       }
-      // this.get_user(9166);
+      this.get_user(9166);
       if (local_user) {
         this.get_user(local_user.user_id);
         this.get_cart(local_user.user_id);
@@ -531,7 +531,7 @@ function withWebsiteData(Component) {
       axios
         .get(`https://kadschool.com/backend/kad_api/user/${user_id}`)
         .then((res) => {
-          console.log("get log", res.data);
+          // console.log("get log", res.data);
           const user = res.data;
           this.fill_user_datas(user);
         })
@@ -997,15 +997,15 @@ function withWebsiteData(Component) {
         )
         .then((res) => {
           const user_pay_info = res.data;
-          //console.log(user_pay_info);
+          console.log(user_pay_info);
           if (user_pay_info.length !== 0) {
             const check_kelasses = this.state.ref_kelasses;
             const check_teachers = this.state.ref_teachers;
             if (check_kelasses && check_teachers) {
               const kelasses = [...this.state.ref_kelasses];
               const teachers = [...this.state.ref_teachers];
-              const data_kelasses = [];
               user_pay_info.forEach((upi) => {
+                const data_kelasses = [];
                 upi.kelases_ids.forEach((k_id) => {
                   const kelas = {
                     ...kelasses.find((k) => k_id === k.kelas_id),

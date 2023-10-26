@@ -37,16 +37,17 @@ class ProfileFinanace extends Component {
     this.setState({ cash_pause: true });
     console.log(pay_id, num);
     // prettier-ignore
-    const send_pay_id = { "pay_id": pay_id };
+    // const send_pay_id = { "pay_id": pay_id };
+    const send_pay_id = { pay_id : pay_id };
     axios
       .get(
-        `https://kadschool.com/backend/kad_api/payment_link/${user.user_id}-${num}`,
-        send_pay_id
+        `https://kadschool.com/backend/kad_api/payment_link/${user.user_id}-${num}-${pay_id}`
+        // `https://kadschool.com/backend/kad_api/payment_link2`
       )
       .then((res) => {
         const payment_link = res.data;
-        console.log(payment_link);
-        //window.open(payment_link.link);
+        // console.log(payment_link);
+        window.open(payment_link.link);
         this.setState({ cash_pause: false });
       })
       .catch((e) => {
@@ -96,14 +97,14 @@ class ProfileFinanace extends Component {
                 {user_pay_info
                   ? Object.keys({
                       ...user_pay_info.find(
-                        (upi) => upi.status_text === "پرداخت نشده"
+                        (upi) => upi.status_text !== "پرداخت شده"
                       ),
                     }).length !== 0
                     ? split_in_three(
                         convert_to_persian(
                           {
                             ...user_pay_info.find(
-                              (upi) => upi.status_text === "پرداخت نشده"
+                              (upi) => upi.status_text !== "پرداخت شده"
                             ),
                           }.price
                         )
@@ -113,55 +114,6 @@ class ProfileFinanace extends Component {
               </span>
             </div>
           </div>
-          {/* <div className="gift-cart-wrapper">
-            <h2 className="gift-card-title">گیفت کارد کاد</h2>
-            <div className="link-boxes-wrapper n-m">
-              <span className="link-title">لینک‌عضویت مخصوص تو</span>
-              <span className="input-type">
-                <img
-                  src={copyIcon}
-                  alt=""
-                  onClick={() => {
-                    this.handle_copy_to_clipboard(
-                      "daryaftyar-react.netlify.app",
-                      0
-                    );
-                  }}
-                />
-                <span className="link-data">
-                  https://daryaftyar-react.netlify.app/
-                </span>
-                {this.state.copied_item[0].copied ? (
-                  <span className="copied-text">کپی شد !</span>
-                ) : (
-                  <></>
-                )}
-              </span>
-            </div>
-            <div className="link-boxes-wrapper">
-              <span className="link-title">کد تخفیف مخصوص تو</span>
-              <span className="input-type">
-                <img
-                  src={copyIcon}
-                  alt=""
-                  onClick={() => {
-                    this.handle_copy_to_clipboard(
-                      "daryaftyar-react.netlify.app",
-                      1
-                    );
-                  }}
-                />
-                <span className="link-data">
-                  https://daryaftyar-react.netlify.app/
-                </span>
-                {this.state.copied_item[1].copied ? (
-                  <span className="copied-text">کپی شد !</span>
-                ) : (
-                  <></>
-                )}
-              </span>
-            </div>
-          </div> */}
         </div>
         <h2 className="semi-title">سفارشات و پرداخت اقساط</h2>
         <div className="orders-payments-wrapper">
@@ -226,14 +178,14 @@ class ProfileFinanace extends Component {
                   {user_pay_info
                     ? Object.keys({
                         ...user_pay_info.find(
-                          (upi) => upi.status_text === "پرداخت نشده"
+                          (upi) => upi.status_text !== "پرداخت شده"
                         ),
                       }).length !== 0
                       ? split_in_three(
                           convert_to_persian(
                             {
                               ...user_pay_info.find(
-                                (upi) => upi.status_text === "پرداخت نشده"
+                                (upi) => upi.status_text !== "پرداخت شده"
                               ),
                             }.price
                           )
@@ -245,7 +197,7 @@ class ProfileFinanace extends Component {
               {user_pay_info ? (
                 Object.keys({
                   ...user_pay_info.find(
-                    (upi) => upi.status_text === "پرداخت نشده"
+                    (upi) => upi.status_text !== "پرداخت شده"
                   ),
                 }).length !== 0 ? (
                   <span
@@ -253,12 +205,12 @@ class ProfileFinanace extends Component {
                       this.pay_next_ghest(
                         {
                           ...user_pay_info.find(
-                            (upi) => upi.status_text === "پرداخت نشده"
+                            (upi) => upi.status_text !== "پرداخت شده"
                           ),
                         }.ghest_index,
                         {
                           ...user_pay_info.find(
-                            (upi) => upi.status_text === "پرداخت نشده"
+                            (upi) => upi.status_text !== "پرداخت شده"
                           ),
                         }.pay_id
                       );
@@ -272,7 +224,7 @@ class ProfileFinanace extends Component {
                     ${
                       {
                         ...user_pay_info.find(
-                          (upi) => upi.status_text === "پرداخت نشده"
+                          (upi) => upi.status_text !== "پرداخت شده"
                         ),
                       }.ghest_index
                     }

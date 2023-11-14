@@ -33,9 +33,10 @@ body {
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
+    background-image: url("../images/bg-dark.webp");
 }
 .root_test {
-    background-image: url("../images/paper-bg.webp");
+    background-image: url("../images/bg-dark.webp");
 }
 .mm-width{
     max-width: 1300px;
@@ -118,13 +119,19 @@ input[type=number] {
     height: fit-content;
     position: relative;
     margin-bottom: -10px;
+    overflow-x: hidden;
+    .top-site-slider-slides {
+        @include flexMixin(row, flex-start, center);
+    }
     .img-place{
-        width: 100%;
+        flex: 0 0 100%;
         position: relative;
         z-index: 2;
         img{
             width: 100%;
         }
+        transition: $transition;
+        transform: translateX(0px);
     }
     .top-slide-btn{
         position: absolute;
@@ -159,6 +166,9 @@ input[type=number] {
         border-radius: 30px;
         font-size: 17px;
     }
+}
+.display-none{
+    display: none;
 }
 /* top site slider */
 
@@ -708,7 +718,6 @@ input[type=number] {
     }
     
 }
-
 /* home page ( Landing ) */
 /* home header */
 .home-page-header {
@@ -734,7 +743,7 @@ input[type=number] {
     
         li {
             list-style: none;
-    
+            color: #fff;
             a {
                 transition: $transition;
                 color: #fff;
@@ -745,6 +754,21 @@ input[type=number] {
                     transform: scale(1.1);
                 }
             }
+        }
+    }
+    .login-li{
+        position: relative;
+        cursor: pointer;
+        .exit-from-website{
+            position: absolute;
+            top: 40px;
+            width: 200px;
+            right: 0;
+            background-color: #fff;
+            border-radius: 12px;
+            color: red;
+            @include flexMixin(row,center,center);
+            height: 50px;
         }
     }
 }
@@ -894,7 +918,19 @@ input[type=number] {
         @include flexMixin(row, center, center);
     }
 }
-
+.f-not-home{
+    color: #fff;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #080e20 72.79%);
+    width: 100%;
+    padding: 50px 0 0;
+}
+.not-home{
+    position: relative;
+}
+.is-home{
+    position: relative;
+    margin-bottom: -70px;
+}
 /* home Footer */
 /* footer */
 .main-footer{
@@ -1181,7 +1217,8 @@ input[type=number] {
     flex : 0 0 96px;
     height: 630px;
     padding: 20px 0 10px;
-    @include flexMixin(column,space-between,center);
+    // @include flexMixin(column,space-between,center);
+    display: none;
     background-color: $mainColor;
     color: #fff;
     border-radius: 8px;
@@ -3025,7 +3062,7 @@ input[type=number] {
 
 /* under construction */
 .under-construction-section{
-    padding: 0 0 100px;
+    padding: 50px 0 100px;
     .under-construction{
         width: 100%;
         @include flexMixin(row,flex-start,center);
@@ -3034,7 +3071,7 @@ input[type=number] {
     .main-content{
         @include flexMixin(column,center,center);
         gap: 40px;
-        color: $mainColor;
+        color: #fff;
         font-size: 20px;
         text-align: center;
         width: 100%;
@@ -3404,17 +3441,16 @@ input[type=number] {
         @include flexMixin(column,flex-start,center);
         gap: 32px;
         padding: 24px 60px;
-        background-color: #fff;
         border-radius: 16px;
-        border: 2px solid #959595;
     }
     .title{
         font-size: 24px;
+        color: #fff;
     }
     .teachers{
         display: grid;
         grid-template-columns: repeat(5,1fr);
-        row-gap: 50px;
+        row-gap: 24px;
         column-gap: 24px;
         width: 100%;
     }
@@ -3425,21 +3461,34 @@ input[type=number] {
         transition: $transition;
         transform: scale(1);
         opacity: 1;
+        background-color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
     }
     .animate-teachers{
         transform: scale(0);
         opacity: 0;
     }
     .img-wrapper{
-        width: 100%;
-        height: 255px;
-        border-radius: 16px;
-        // background-color: #d9d9d9;
+        width: 100%!important;
         @include flexMixin(row,center,center);
-        overflow: hidden;
+        img{
+            width: 100%;
+            border-radius: 0px;
+        }
     }
     .teacher-name{
-        font-size: 18px;
+        font-size: 16px;
+    }
+    .course-name{
+        font-size: 14px;
+        color: #fff;
+        background-color: #A667C0;
+        width: 100%;
+        @include flexMixin(row,center,center);
+        height: 45px;
+        position: relative;
+        top: 3px;
     }
 }
 /* Teachers Page */
@@ -3862,6 +3911,35 @@ input[type=number] {
 }
 /* free-course */
 
+/* new panel notice */
+.new-panel-notice{
+    width: 100%;
+    @include flexMixin(column,flex-start,center);
+    gap: 20px;
+    color: #fff;
+    margin: 50px 0;
+    padding: 0 10px;
+    .title{
+        font-size: 30px;
+        text-align: center;
+    }
+    .desc{
+        font-size: 17px;
+        line-height: 40px;
+        text-align: justify;
+    }
+    .lets-go{
+        width: 300px;
+        @include flexMixin(row,center,center);
+        height: 60px;
+        background-color: #A667C0;
+        border-radius: 12px;
+        font-size: 20px;
+    }
+}
+/* new panel notice */
+
+
 /* shop Page */
 @keyframes grow_little {
     from{
@@ -3885,7 +3963,7 @@ input[type=number] {
     }
     .page-title{
         font-size: 24px;
-        color: $darkBlue;
+        color: #fff;
         width: 100%;
     }
     .slider-wrapper{
@@ -3936,6 +4014,10 @@ input[type=number] {
         font-size: 20px;
         font-weight: bold;
         text-align: center;
+        color: #fff;
+    }
+    .filter-title{
+        color: #fff;
     }
     .categories-wrapper{
         width: 100%;
@@ -4253,6 +4335,7 @@ input[type=number] {
 /* single prod page */
 .single-prod-wrapper{
     width: 100%;
+    color: #fff;
     .main-single-prod{
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
@@ -4264,7 +4347,7 @@ input[type=number] {
     }
     .title{
         font-size: 24px;
-        color: $darkBlue;
+        color: #fff;
         width: 100%;
     }
     .prod-details-wrapper{
@@ -4429,6 +4512,7 @@ input[type=number] {
         border-radius: 8px;
         background-color: #fff;
         padding: 16px;
+        color: #000;
         @include flexMixin(column,flex-start,center);
         gap: 10px;
         .pop-up-title{
@@ -4613,6 +4697,7 @@ input[type=number] {
 /* single course */
 .single-course-wrapper{
     width: 100%;
+    color: #fff;
     .single_course{
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
@@ -4623,7 +4708,7 @@ input[type=number] {
         @include flexMixin(column,flex-start,center);
     }
     .title{
-        color: $darkBlue;
+        color: #fff;
         font-size: 24px;
         width: 100%;
         margin: 0 0 30px;
@@ -4633,7 +4718,7 @@ input[type=number] {
         @include flexMixin(row,space-between,flex-start);
     }
     .h2-before{
-        color: #000;
+        color: #fff;
         font-size: 20px;
         width: 100%;
         @include flexMixin(row,flex-start,center);
@@ -4649,6 +4734,7 @@ input[type=number] {
     }
     .intro-course{
         width: 100%;
+        padding: 0 0 50px;
     }
     .course-description{
         width: 100%;
@@ -4674,13 +4760,13 @@ input[type=number] {
         }
         .more-description{
             position: absolute;
-            bottom: 0;
+            bottom: 0px;
             width: 100%;
             left: 0;
             @include flexMixin(row,center,flex-end);
             padding: 10px;
-            background: linear-gradient(360deg, #F9F9F9 24.95%, rgba(249, 249, 249, 0) 87.1%);
-            height: 150px;
+            background: #fff;
+            height: 50px;
             color: $mainColor;
             border-radius: 8px;
             cursor: pointer;
@@ -4714,6 +4800,7 @@ input[type=number] {
         background-color: #fff;
         box-shadow: $boxShadow;
         border-radius: 8px;
+        color: #000;
         @include flexMixin(row,flex-start,center);
         gap: 5px;
         padding: 0 14px;
@@ -4811,6 +4898,7 @@ input[type=number] {
         box-shadow: $boxShadow;
         width: 100%;
         border-radius: 8px;
+        color: #000;
         @include flexMixin(column, flex-start, center);
         padding: 6px;
         .img-wrapper{
@@ -4962,6 +5050,7 @@ input[type=number] {
         cursor: pointer;
         img {
                 width: 15px;
+                filter: contrast(0);
             }
     }
     .next{
@@ -4978,7 +5067,7 @@ input[type=number] {
     .semi-2-title {
         width: 100%;
         font-size: 20px;
-        color: $darkBlue;
+        color: #fff;
         @include flexMixin(row, flex-start, center);
         gap: 5px;
 
@@ -5065,17 +5154,16 @@ input[type=number] {
 
     .more {
         position: absolute;
-        bottom: 0;
+        bottom: 0px;
         width: 100%;
-        height: 200px;
+        height: 50px;
         @include flexMixin(row, center, flex-end);
         color: $mainColor;
         gap: 12px;
         font-size: 14px;
         padding: 0 0 20px;
+        background-color: #fff;
         cursor: pointer;
-        background: linear-gradient(360deg, #F9F9F9 0%, rgba(255, 255, 255, 0.0260417) 86.46%, rgba(255, 233, 233, 0) 88.77%, rgba(255, 255, 255, 0) 88.77%, rgba(255, 255, 255, 0) 88.77%);
-
         img {
             position: relative;
             top: -4px;
@@ -5085,9 +5173,7 @@ input[type=number] {
 
     .more.close {
         position: relative;
-        height: 40px;
-        background: unset;
-
+        height: 60px;
         img {
             transform: rotate(180deg);
         }
@@ -5098,6 +5184,7 @@ input[type=number] {
 /* teacher page */
 .single-teacher-wrapper{
     width: 100%;
+    color: #fff;
     .single-teacher{
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
@@ -5108,7 +5195,7 @@ input[type=number] {
         width: 100%;
     }
     .title{
-        color: $darkBlue;
+        color: #fff;
         font-size: 24px;
         width: 100%;
         margin: 0 0 16px;
@@ -5123,7 +5210,7 @@ input[type=number] {
         flex: 0 0 190px;
         gap: 12px;
         h2{
-            color: $darkBlue;
+            color: #fff;
             font-size: 20px;
         }
     }
@@ -5136,6 +5223,7 @@ input[type=number] {
     }
     .resume-title{
         margin: 0 0 18px;
+        color: #fff;
     }
     .teacher-resume-items{
         width: 100%;
@@ -5160,6 +5248,7 @@ input[type=number] {
         }
         .cv-title{
             font-size: 18px;
+            color: #fff;
             &::before{
                 display: none;
             }
@@ -5223,6 +5312,7 @@ input[type=number] {
         width: 1000px;
         overflow: hidden;
         padding:20px 10px;
+        color: #000;
     }
     .car-0{
         .course{
@@ -5412,7 +5502,7 @@ input[type=number] {
         font-size: 14px;
     }
     h3{
-        color: #000;
+        color: #fff;
         font-size: 20px;
         @include flexMixin(row,flex-start,center);
         gap: 5px;
@@ -5443,7 +5533,7 @@ input[type=number] {
     }
     .title{
         width: 100%;
-        color: $mainColor;
+        color: #fff;
         font-size: 24px;
     }
     .cols-wrapper{
@@ -5466,7 +5556,7 @@ input[type=number] {
     }
     .semi-title{
         font-size: 24px;
-        color: $mainColor;
+        color: #fff;
         width: 100%;
     }
     .cart-item{
@@ -5542,6 +5632,7 @@ input[type=number] {
     .pay-titles,.pay-item{
         width: 100%;
         @include flexMixin(row,flex-start,center);
+        color: #fff;
         *{
             flex: 1;
         }
@@ -5553,6 +5644,7 @@ input[type=number] {
     .pay-item-title{
         flex: 0 0 33%;
         font-size: 18px;
+        color: #fff;
     }
     .pay-btn{
         color: $yellowColor;
@@ -7706,6 +7798,248 @@ input[type=number] {
 /* re design */
 
 
+/* new cart page */
+.cart-page-new {
+    width: 100%;
+    @include flexMixin(column, flex-start, flex-start);
+    gap: 24px;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 36px 43px;
+    margin: 50px 0 0;
+    .cart-main-data {
+        width: 100%;
+        @include flexMixin(row, flex-start, flex-start);
+        gap: 20px;
+    }
+
+    .title {
+        font-size: 21px;
+    }
+
+    .left-col {
+        flex: 0 0 300px;
+        @include flexMixin(column, flex-start, center);
+        gap: 20px;
+    }
+
+    .final-cart-data {
+        width: 100%;
+        @include flexMixin(column, flex-start, flex-start);
+        border: 1px solid #A667CA;
+        border-radius: 12px;
+        padding: 17px 15px;
+        gap: 11px;
+    }
+
+    .final-data-item {
+        width: 100%;
+        @include flexMixin(row, space-between, center);
+        font-size: 13px;
+        color: #8A8A8A;
+    }
+
+    .sumation {
+        font-size: 15px;
+        color: #000;
+        font-weight: bold;
+    }
+
+    .item-num {
+        font-size: 13px;
+    }
+
+    .sumbit-order-btn {
+        width: 100%;
+        @include flexMixin(row, center, center);
+        font-size: 15px;
+        font-weight: bold;
+        height: 36px;
+        border-radius: 6px;
+        color: #fff;
+        background-color: #A667CA;
+        cursor: pointer;
+        transition: $transition;
+        border: 1px solid #A667CA;
+
+        &:hover {
+            color: #A667CA;
+            background-color: #fff;
+        }
+    }
+
+    .choose-title {
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .options {
+        width: 100%;
+        @include flexMixin(row, center, center);
+        gap: 5px;
+    }
+
+    .option-btn {
+        min-width: 90px;
+        padding: 0 10px;
+        background-color: #A667CA;
+        color: #fff;
+        border-radius: 6px;
+        height: 30px;
+        font-size: 13px;
+        @include flexMixin(row, center, center);
+        font-weight: bold;
+        cursor: pointer;
+        transition: $transition;
+        border: 1px solid #A667CA;
+
+        &:hover {
+            color: #A667CA;
+            background-color: #fff;
+        }
+    }
+
+    .all-ghests {
+        width: 100%;
+        @include flexMixin(column, flex-start, center);
+        margin: 10px 0;
+    }
+
+    .header-ghest {
+        font-weight: bold;
+    }
+
+    .ghest-wrapper {
+        width: 100%;
+        @include flexMixin(row, flex-start, center);
+
+        * {
+            flex: 1;
+        }
+    }
+
+    .ghest-num {
+        width: 100%;
+        @include flexMixin(row, center, center);
+        gap: 3px;
+        height: 50px;
+        border-left: 1px solid #000;
+        border-top: 1px solid #000;
+
+        * {
+            flex: unset;
+        }
+    }
+
+    .num-data {
+        flex: 0 0 140px;
+    }
+
+    .first-col {
+        border-right: 1px solid #000;
+        flex: 0 0 50px;
+    }
+
+    .top-border {
+        border-top: 1px solid #000;
+    }
+
+    .pay-in-ghesti-btn {
+        width: 100%;
+        @include flexMixin(row, center, center);
+        height: 40px;
+        background-color: #A667CA;
+        border: 1px solid #A667CA;
+        transition: $transition;
+        cursor: pointer;
+        border-radius: 6px;
+        color: #fff;
+        font-weight: bold;
+
+        &:hover {
+            color: #A667CA;
+            background-color: #fff;
+        }
+    }
+
+    .cart-items-part {
+        width: 100%;
+        @include flexMixin(column, flex-start, flex-start);
+        gap: 20px;
+        border-radius: 12px;
+        background: #F7F7F7;
+        padding: 28px 21px;
+    }
+
+    .semi-title {
+        font-size: 21px;
+    }
+
+    .items-wrapper {
+        width: 100%;
+        @include flexMixin(column, flex-start, flex-start);
+        gap: 10px;
+    }
+
+    .cart-item {
+        width: 100%;
+        @include flexMixin(row, space-between, center);
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 10px;
+        gap: 20px;
+
+        * {
+            flex: 1;
+        }
+    }
+
+    .img-wrapper-box {
+        @include flexMixin(row, flex-start, center);
+        max-width: 150px;
+    }
+
+    .img-wrapper {
+        max-width: 100px;
+        border-radius: 12px;
+    }
+
+    .wrap-responsive {
+        width: 100%;
+        @include flexMixin(row, flex-start, center);
+    }
+
+    .class-name {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .teacher-name {
+        font-size: 15px;
+    }
+
+    .prices {
+        @include flexMixin(column, center, center);
+        gap: 10px;
+        font-size: 16px;
+    }
+
+    .delete-from-cart {
+        @include flexMixin(row, center, center);
+        background-color: #A667CA;
+        color: #fff;
+        height: 30px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 6px;
+        flex: 0 0 150px;
+    }
+
+}
+/* new cart page */
+
+
 /* responsive */
 @media (max-width: 1200px) {
     .home-page {
@@ -7870,6 +8204,16 @@ input[type=number] {
     }
 }
 @media  (max-width: 991px) {
+    .top-site-slider-wrapper{
+        .top-slide-btn{
+            width: 20px;
+            height: 20px;
+            img{
+                width: 10px;
+            }
+            top: 5px;
+        }
+    }
     .main-header {
         z-index: 100;
         border-bottom: 0px solid #000;
@@ -7906,6 +8250,7 @@ input[type=number] {
         .reponsive-icon-for-login {
             display: block;
         }
+        
     }
     .sticky-2{
         top: 0px;
@@ -8742,6 +9087,8 @@ input[type=number] {
     .home-page-header{
         flex-direction: row-reverse;
         width: calc(100vw - 30px);
+        
+        
         .links-wrapper{
             display: none;
         }
@@ -8756,7 +9103,25 @@ input[type=number] {
             ul{
                 @include flexMixin(column,flex-start,center);
                 gap: 10px;
-                position: relative;
+                .login-li {
+                    gap: 10px;
+                    position: relative;
+                    @include flexMixin(column, flex-start, flex-start);
+                    height: auto;
+                    padding: 10px 20px;
+                    .exit-from-website {
+                        position: relative;
+                        top: unset;
+                        right: unset;
+                        height: unset;
+                        background-color: #fff;
+                        border-radius: 3px;
+                        padding: 10px;
+                        @include flexMixin(row,center,center);
+                        font-size: 15px;
+                        width: 100%;
+                    }
+                }
             }
             li{
                 width: calc(100% - 30px);
@@ -8767,6 +9132,7 @@ input[type=number] {
                 border-radius:  10px;
                 font-size: 20px;
             }
+
         }
         .menu-burger{
             @include flexMixin(row,center,center);
@@ -9184,6 +9550,52 @@ input[type=number] {
             flex: 0 0 100%;
         }
     }
+    /* new cart page */
+    .cart-page-new {
+        .cart-main-data{
+            @include flexMixin(column,flex-start,center);
+        }
+        .left-col{
+            width: 100%;
+            flex: unset;
+        }
+        padding: 20px 10px;
+
+        .cart-items-part {
+            padding: 20px 10px;
+        }
+
+        .cart-item {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .wrap-responsive {
+            @include flexMixin(column, space-between, flex-start);
+            margin-right: 30px;
+            padding: 10px 0;
+            gap: 5px;
+        }
+
+        .delete-from-cart {
+            width: 100%;
+            flex: unset;
+        }
+
+        .ghest-num.first-col {
+            flex: 0 0 50px;
+        }
+
+        .ghest-num {
+            flex: 0 0 80px;
+        }
+
+        .ghest-num.num-data {
+            width: 100%;
+            flex: unset;
+        }
+    }
+    /* new cart page */
 }
 
 

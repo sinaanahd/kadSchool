@@ -38,7 +38,6 @@ class ProfileFinanace extends Component {
     console.log(pay_id, num);
     // prettier-ignore
     // const send_pay_id = { "pay_id": pay_id };
-    const send_pay_id = { pay_id : pay_id };
     axios
       .get(
         `https://kadschool.com/backend/kad_api/payment_link/${user.user_id}-${num}-${pay_id}`

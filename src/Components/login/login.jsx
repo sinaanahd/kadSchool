@@ -53,6 +53,7 @@ class Login extends Component {
         this.setState({ pause: false });
         const { been_before, user_id, verification_code } = res.data;
         this.setState({ code_sent_msg: "کد با موفقیت ارسال شد" });
+        console.log(verification_code);
         localStorage.setItem(
           "kad-phone-number",
           JSON.stringify(this.state.phone_number)
@@ -151,7 +152,8 @@ class Login extends Component {
                   className="get-code button-span"
                   onClick={() => {
                     this.get_verification_code();
-                  }}>
+                  }}
+                >
                   {this.state.pause ? <LittleLoading /> : "دریافت کد"}
                 </span>
               )}
@@ -171,7 +173,8 @@ class Login extends Component {
                   onClick={() => {
                     this.check_user();
                   }}
-                  className="enter button-span">
+                  className="enter button-span"
+                >
                   ورود
                 </span>
               ) : (

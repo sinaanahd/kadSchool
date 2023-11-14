@@ -90,10 +90,12 @@ class SignUp extends Component {
         grade: this.convert_year(year),
         major: this.convert_major(subject),
       };
+      console.log(obj);
       axios
         .post(`https://kadschool.com/backend/kad_api/register_user`, obj)
         .then((res) => {
           let data = res.data;
+          console.log(data);
           axios
             .get(`https://kadschool.com/backend/kad_api/user/${data.user_id}`)
             .then((res) => {

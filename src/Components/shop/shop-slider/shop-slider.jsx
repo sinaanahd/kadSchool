@@ -179,23 +179,25 @@ class ShopSlider extends Component {
           }}
           onTouchMove={(e) => {
             this.handle_touch_move(e);
-          }}></div>
+          }}
+        ></div>
         {shop_banners ? (
           shop_banners.map((b, i) => (
             <div className="slide" key={i++}>
-              <img src={b} alt="چرا کاد متفاوت است" width={1144} height={181} />
+              <img src={b.image_link} alt={b.alt} width={1144} height={181} />
             </div>
           ))
         ) : (
           <LittleLoading />
         )}
-        <span
+        {/* <span
           onClick={(e) => {
             handle_shop_pop_up(e);
           }}
-          className="get-council-btn">
+          className="get-council-btn"
+        >
           <img src={council_btn} alt="دریافت مشاوره" />
-        </span>
+        </span> */}
       </div>
     );
   }

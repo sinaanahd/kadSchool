@@ -39,11 +39,6 @@ class Dashboard extends Component {
             name="keywords"
             content="پنل دانش آموزی, کاد, کلاس های اینترنتی دریافت"
           />
-          {main_page_banners
-            ? main_page_banners.map((mpb, i) => (
-                <link key={i++} rel="preload" as="image" href={mpb} />
-              ))
-            : ""}
         </Helmet>
         <section className="bgc-wrapper">
           <div className="dashboard mm-width">

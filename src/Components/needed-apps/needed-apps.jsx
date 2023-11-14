@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import withWebsiteData from "../hoc/with-website-data";
 import SideBar from "../side-bar/side-bar";
-
 import android from "../../assets/images/andriod-logo.webp";
 import mac from "../../assets/images/mac-logo.webp";
 import windows from "../../assets/images/windows-logo.webp";

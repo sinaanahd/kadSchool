@@ -5,30 +5,35 @@ import withWebsiteData from "../hoc/with-website-data";
 
 import banner from "../../assets/images/new-week-plan.webp";
 
-class Kad_calender extends Component {
-  state = {};
-  render() {
-    return (
-      <>
-        <Helmet>
-          <title>تقویم کاد</title>
-          <meta
-            name="description"
-            content="در اینجا شما می‌توانید تقویم آموزشی کاد را مشاهده کنید و از برنامه هفتگی ما مطلع شوید و همچنین هیچ رویدادی را از دست ندهید. برنامه‌های یادگیری ما را با دقت دنبال کنید و از تمام رویدادهای آینده ما باخبر شوید."
-          />
-        </Helmet>
-        <section className="bgc-wrapper">
-          <div className="weekplan-kad-wrapper mm-width">
-            <SideBar />
-            <div className="main-content">
-              <h1 className="title">تقویم کاد</h1>
-              <img src={banner} alt="برنامه هفتگی کاد" />
-            </div>
+const Kad_calender = () => {
+  return (
+    <>
+      <Helmet>
+        <title>تقویم کاد</title>
+        <meta
+          name="description"
+          content="در اینجا شما می‌توانید تقویم آموزشی کاد را مشاهده کنید و از برنامه هفتگی ما مطلع شوید و همچنین هیچ رویدادی را از دست ندهید. برنامه‌های یادگیری ما را با دقت دنبال کنید و از تمام رویدادهای آینده ما باخبر شوید."
+        />
+      </Helmet>
+      <section className="bgc-wrapper">
+        <div className="weekplan-kad-wrapper mm-width">
+          <SideBar />
+          <div className="main-content">
+            <h1 className="title">تقویم کاد</h1>
+            <img src={banner} alt="برنامه هفتگی کاد" />
           </div>
-        </section>
-      </>
-    );
-  }
-}
+        </div>
+      </section>
+    </>
+  );
+};
 
-export default withWebsiteData(Kad_calender);
+export default Kad_calender;
+// class Kad_calender2 extends Component {
+//   state = {};
+//   render() {
+//     return (
+
+//     );
+//   }
+// }

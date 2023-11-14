@@ -90,8 +90,9 @@ class HomeFooter extends Component {
       });
   };
   render() {
+    const { not_home } = this.props;
     return (
-      <footer className="home-footer">
+      <footer className={"home-footer " + not_home}>
         <div className="content-force  mm-width">
           <Link
             onClick={() => {

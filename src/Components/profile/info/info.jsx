@@ -217,7 +217,7 @@ class Info extends Component {
       { title: "major", value: subject },
       { title: "year", value: grade },
     ];
-    // console.log(make_full_objects(obj_arr));
+    console.log(make_full_objects(obj_arr));
     const send_obj = make_full_objects(obj_arr);
     if (Object.keys(send_obj).length !== 0) {
       this.setState({ pause: true });
@@ -230,7 +230,7 @@ class Info extends Component {
           const user = res.data;
           inside_user(user);
           this.setState({ pause: false, data_error: "ok" });
-          console.log(user);
+          // console.log(user);
           setTimeout(() => {
             this.setState({ data_error: false });
           }, 3000);
@@ -261,7 +261,7 @@ class Info extends Component {
       });
   };
   render() {
-    const { user, ref_years, subjects ,make_user_empty} = this.props;
+    const { user, ref_years, subjects, make_user_empty } = this.props;
     return (
       <div className="info-wrapper">
         <div className="col-1 cols">
@@ -320,14 +320,16 @@ class Info extends Component {
                     onClick={() => {
                       this.handle_active_option(false);
                     }}
-                    className="days b-options">
+                    className="days b-options"
+                  >
                     {this.state.days.length !== 0 ? (
                       this.state.days.map((d) => (
                         <span
                           onClick={() => {
                             this.handle_day(d);
                           }}
-                          key={d}>
+                          key={d}
+                        >
                           {convert_to_persian(d)}
                         </span>
                       ))
@@ -355,14 +357,16 @@ class Info extends Component {
                     onClick={() => {
                       this.handle_active_option(false);
                     }}
-                    className="months  b-options">
+                    className="months  b-options"
+                  >
                     {this.state.months ? (
                       this.state.months.map((m, i) => (
                         <span
                           onClick={() => {
                             this.handle_month(i);
                           }}
-                          key={i++}>
+                          key={i++}
+                        >
                           {m}
                         </span>
                       ))
@@ -378,7 +382,8 @@ class Info extends Component {
                 onClick={() => {
                   this.handle_active_option("years");
                 }}
-                className="year birthday-input">
+                className="year birthday-input"
+              >
                 <span className="text">
                   {this.state.year ? convert_to_persian(this.state.year) : ""}
                 </span>
@@ -388,14 +393,16 @@ class Info extends Component {
                     onClick={() => {
                       this.handle_active_option(false);
                     }}
-                    className="years  b-options">
+                    className="years  b-options"
+                  >
                     {this.state.years ? (
                       this.state.years.map((y) => (
                         <span
                           onClick={() => {
                             this.handle_year(y);
                           }}
-                          key={y}>
+                          key={y}
+                        >
                           {convert_to_persian(y)}
                         </span>
                       ))
@@ -440,7 +447,8 @@ class Info extends Component {
                     ? user.home_address
                     : "مثال : تهران ٫ خیابان جمالزاده ٫ نرسیده به وحید نظری ٫ پلاک ۱ ٫ واحد ۱"
                   : "مثال : تهران ٫ خیابان جمالزاده ٫ نرسیده به وحید نظری ٫ پلاک ۱ ٫ واحد ۱"
-              }></textarea>
+              }
+            ></textarea>
           </span>
           {this.state.address_err !== "ok" && this.state.address_err ? (
             <span className="data-error-wrapper">{this.state.address_err}</span>
@@ -503,25 +511,29 @@ class Info extends Component {
                   <span
                     onClick={() => {
                       this.handle_subject_text("تجربی");
-                    }}>
+                    }}
+                  >
                     تجربی
                   </span>
                   <span
                     onClick={() => {
                       this.handle_subject_text("ریاضی");
-                    }}>
+                    }}
+                  >
                     ریاضی
                   </span>
                   <span
                     onClick={() => {
                       this.handle_subject_text("انسانی");
-                    }}>
+                    }}
+                  >
                     انسانی
                   </span>
                   <span
                     onClick={() => {
                       this.handle_subject_text("هنر");
-                    }}>
+                    }}
+                  >
                     هنر
                   </span>
                 </span>
@@ -562,31 +574,36 @@ class Info extends Component {
                   <span
                     onClick={() => {
                       this.handle_grade_text("دهم");
-                    }}>
+                    }}
+                  >
                     دهم
                   </span>
                   <span
                     onClick={() => {
                       this.handle_grade_text("یازدهم");
-                    }}>
+                    }}
+                  >
                     یازدهم
                   </span>
                   <span
                     onClick={() => {
                       this.handle_grade_text("دوازدهم");
-                    }}>
+                    }}
+                  >
                     دوازدهم
                   </span>
                   <span
                     onClick={() => {
                       this.handle_grade_text("کنکور");
-                    }}>
+                    }}
+                  >
                     کنکور
                   </span>
                   <span
                     onClick={() => {
                       this.handle_grade_text("فارغ التحصیل");
-                    }}>
+                    }}
+                  >
                     فارغ التحصیل
                   </span>
                 </span>
@@ -601,7 +618,8 @@ class Info extends Component {
               onClick={() => {
                 this.send_data();
               }}
-              className="submit-info-data-btn">
+              className="submit-info-data-btn"
+            >
               {this.state.pause ? <LittleLoading /> : "ثبت تغییرات"}
             </span>
             {/* ) : (
@@ -624,7 +642,8 @@ class Info extends Component {
                 className="select-input"
                 onClick={() => {
                   this.handle_intro_ways();
-                }}>
+                }}
+              >
                 <span className="s-text">{this.state.intro_text}</span>
                 <img width={20} height={12} src={arrow} alt="" />
               </span>
@@ -632,7 +651,8 @@ class Info extends Component {
                 className="submit-ways"
                 onClick={() => {
                   this.handle_recognition();
-                }}>
+                }}
+              >
                 {this.state.pause_2 ? <LittleLoading /> : "ثبت"}
               </span>
               <span
@@ -640,54 +660,62 @@ class Info extends Component {
                   this.state.intro
                     ? "select-options active-intro"
                     : "select-options"
-                }>
+                }
+              >
                 <span
                   className="select-option"
                   onClick={() => {
                     this.select_intro("معرفی دوستان");
-                  }}>
+                  }}
+                >
                   معرفی دوستان
                 </span>
                 <span
                   className="select-option"
                   onClick={() => {
                     this.select_intro("تلگرام");
-                  }}>
+                  }}
+                >
                   تلگرام
                 </span>
                 <span
                   className="select-option"
                   onClick={() => {
                     this.select_intro("اینستاگرام");
-                  }}>
+                  }}
+                >
                   اینستاگرام
                 </span>
                 <span
                   className="select-option"
                   onClick={() => {
                     this.select_intro("شبکه های اجتماعی داخلی");
-                  }}>
+                  }}
+                >
                   شبکه های اجتماعی داخلی
                 </span>
                 <span
                   className="select-option"
                   onClick={() => {
                     this.select_intro("تبلیغات سایت ها");
-                  }}>
+                  }}
+                >
                   تبلیغات سایت ها
                 </span>
                 <span
                   className="select-option"
                   onClick={() => {
                     this.select_intro("معرفی مشاور تحصیلی");
-                  }}>
+                  }}
+                >
                   معرفی مشاور تحصیلی
                 </span>
                 <span
                   className="select-option"
                   onClick={() => {
                     this.select_intro("تماس پشتیبان موسسه");
-                  }}>
+                  }}
+                >
                   تماس پشتیبان موسسه
                 </span>
               </span>
@@ -733,7 +761,8 @@ class Info extends Component {
                 className="change-pass-btn"
                 onClick={() => {
                   this.change_pass();
-                }}>
+                }}
+              >
                 {this.state.pause ? <LittleLoading /> : "تغییر رمز عبور"}
               </span>
             ) : (
@@ -752,9 +781,12 @@ class Info extends Component {
               ""
             )}
           </div>
-          <div className="exit-from-panel" onClick={()=>{
-            make_user_empty();
-          }}>
+          <div
+            className="exit-from-panel"
+            onClick={() => {
+              make_user_empty();
+            }}
+          >
             خروج از حساب کاربری
           </div>
         </div>

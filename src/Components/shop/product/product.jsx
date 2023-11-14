@@ -132,11 +132,11 @@ class Product extends Component {
           )}
         </span>
         {cart ? (
-          cart.items_ids.includes(kelas.kelas_id) ? (
+          cart.ids.includes(kelas.kelas_id) ? (
             <span
               className="prod-add-to-cart"
               onClick={() => {
-                handle_cart(kelas.kelas_id);
+                handle_cart(kelas);
               }}
             >
               <img
@@ -157,7 +157,7 @@ class Product extends Component {
             <span
               className="prod-add-to-cart"
               onClick={() => {
-                handle_cart(kelas.kelas_id);
+                handle_cart(kelas);
               }}
             >
               <img
@@ -167,13 +167,8 @@ class Product extends Component {
                 height={20}
                 loading="lazy"
               />
-              {request_id === kelas.kelas_id ? (
-                <span className="add-to-cart-text">
-                  <LittleLoading />
-                </span>
-              ) : (
-                <span className="add-to-cart-text">افزودن به سبد</span>
-              )}
+
+              <span className="add-to-cart-text">افزودن به سبد</span>
             </span>
           )
         ) : (

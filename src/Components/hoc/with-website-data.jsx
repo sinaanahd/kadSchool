@@ -6,6 +6,8 @@ import last_login_check from "../functions/last-login-check";
 import { Helmet } from "react-helmet";
 import convert_to_persian from "../functions/convert-to-persian";
 import TopSiteSlider from "../top-site-slider/top-site-slider";
+import HomeHeader from "../home/header/home-header";
+import HomeFooter from "../home/footer/home-footer";
 const local_user = JSON.parse(localStorage.getItem("user-kad"))
   ? JSON.parse(localStorage.getItem("user-kad"))
   : false;
@@ -56,6 +58,8 @@ const local_sample_week_plan = JSON.parse(
 )
   ? JSON.parse(localStorage.getItem("sample-weekplan"))
   : false;
+const local_detailed_banners =
+  JSON.parse(localStorage.getItem("detialed_banners")) || false;
 function withWebsiteData(Component) {
   return class withWebsiteData extends Component {
     state = {
@@ -85,6 +89,7 @@ function withWebsiteData(Component) {
       added_to_cart_animate: " animate",
       sample_week_plan: local_sample_week_plan,
       motiv_quote: local_motive_quote,
+      banners: local_detailed_banners,
       subjects: [
         { id: 0, name: "ریاضی" },
 
@@ -123,17 +128,6 @@ function withWebsiteData(Component) {
       active_day: "Saturday",
     };
     componentDidMount() {
-      // const salary = [
-      //   8, 8, 8, 9, 8, 8, 7, 1, 7, 8, 8, 8, 9, 7, 8, 8, 8, 8, 8, 7, 7, 8, 9, 8,
-      //   8, 10, 7, 8, 8, 8, 7, 7, 8, 8, 7, 7, 8, 9, 7, 9, 9, 7, 8, 9, 8, 8, 8, 8,
-      //   10, 8, 9, 8, 7, 8, 8, 8, 7, 9, 7, 8, 7, 9, 9, 8, 8, 9, 8, 9, 8, 9, 8, 8,
-      //   8, 9, 9, 9, 8, 9, 8, 8, 7, 8, 9,
-      // ];
-      // let sum = 0;
-      // salary.forEach((s) => {
-      //   sum += s;
-      // });
-      // console.log(sum, salary.length);
       const is_time = last_login_check(last_login, this_time_login);
       if (is_time) {
         this.get_banners();
@@ -145,6 +139,7 @@ function withWebsiteData(Component) {
         this.get_sample_files();
         this.get_motivation_quote();
         this.get_sample_week_plan();
+        this.get_detailed_banners();
         console.log("got it");
       } else {
         if (local_sample_week_plan) {
@@ -201,8 +196,14 @@ function withWebsiteData(Component) {
         } else {
           this.get_sample_files();
         }
+        if (local_detailed_banners) {
+          this.setState({ banners: local_detailed_banners });
+        } else {
+          this.get_detailed_banners();
+        }
       }
-      this.get_user(9166);
+      this.get_detailed_banners();
+      // this.get_user(9166);
       if (local_user) {
         this.get_user(local_user.user_id);
         this.get_cart(local_user.user_id);
@@ -489,6 +490,33 @@ function withWebsiteData(Component) {
           const ref_courses = res.data;
           this.setState({ ref_courses });
           localStorage.setItem("courses", JSON.stringify(ref_courses));
+        })
+        .catch((e) => {
+          this.handle_error(e);
+        });
+    };
+    get_detailed_banners = () => {
+      axios
+        .get("https://kadschool.com/backend/kad_api/admin_banners")
+        .then((res) => {
+          const data_banners = res.data;
+          const banners = {
+            main_page_banners: [],
+            store_banners: [],
+            home_page_banners: [],
+          };
+          data_banners.forEach((b) => {
+            if (b.banner_type === "main_page_banners") {
+              banners.main_page_banners.push(b);
+            } else if (b.banner_type === "store_banners") {
+              banners.store_banners.push(b);
+            } else if (b.banner_type === "home_page_banners") {
+              banners.home_page_banners.push(b);
+            }
+          });
+          this.setState({ banners });
+          // console.log(banners);
+          localStorage.setItem("detialed_banners", JSON.stringify(banners));
         })
         .catch((e) => {
           this.handle_error(e);
@@ -997,7 +1025,7 @@ function withWebsiteData(Component) {
         )
         .then((res) => {
           const user_pay_info = res.data;
-          console.log(user_pay_info);
+          // console.log(user_pay_info);
           if (user_pay_info.length !== 0) {
             const check_kelasses = this.state.ref_kelasses;
             const check_teachers = this.state.ref_teachers;
@@ -1076,10 +1104,11 @@ function withWebsiteData(Component) {
         window.location.pathname = "/Login";
       });
     };
+
     render() {
       return (
         <>
-          <Helmet>
+          {/* <Helmet>
             {window.location.pathname === "/HomePage" ? (
               <link
                 rel="preload"
@@ -1099,8 +1128,7 @@ function withWebsiteData(Component) {
                 href="../../assets/images/paper-bg.webp"
               />
             )}
-          </Helmet>
-          <TopSiteSlider />
+          </Helmet> */}
 
           {window.location.pathname === "/Login" ||
           window.location.pathname === "/LoginPass" ||
@@ -1115,10 +1143,12 @@ function withWebsiteData(Component) {
           window.location.pathname === "/SetPassword" ? (
             <></>
           ) : (
-            <Header
-              user={this.state.user ? this.state.user : false}
-              cart={this.state.cart ? this.state.cart : false}
-            />
+            // <HomeHeader user={this.state.user} not_home={"not-home"} />
+            // <Header
+            //   user={this.state.user ? this.state.user : false}
+            //   cart={this.state.cart ? this.state.cart : false}
+            // />
+            <></>
           )}
           <Component
             {...this.props}
@@ -1152,8 +1182,12 @@ function withWebsiteData(Component) {
             find_single_teacher={this.find_single_teacher}
             find_class={this.find_class}
             single_kelas={this.state.single_kelas}
-            main_page_banners={this.state.main_page_banners}
-            shop_banners={this.state.shop_banners}
+            main_page_banners={
+              this.state.banners ? this.state.banners.main_page_banners : false
+            }
+            shop_banners={
+              this.state.banners ? this.state.banners.store_banners : false
+            }
             wants_ghesti={this.wants_ghesti}
             ghests={this.state.ghests}
             gh_wait={this.state.gh_wait}
@@ -1192,14 +1226,16 @@ function withWebsiteData(Component) {
           window.location.pathname === "/Set-new-password" ||
           window.location.pathname === "/SignUp" ||
           window.location.pathname.includes("/Referal-signup") ||
+          window.location.pathname === "/SetPassword" ||
           window.location.pathname === "/HomePage" ||
           window.location.pathname === "/apollo-11" ||
           window.location.pathname === "/apollo-prizes" ||
-          window.location.pathname === "/special-discount" ||
-          window.location.pathname === "/SetPassword" ? (
+          window.location.pathname === "/special-discount" ? (
             <></>
           ) : (
-            <NewFooter />
+            // <HomeFooter not_home={"f-not-home"} />
+            // <NewFooter />
+            <></>
           )}
         </>
       );

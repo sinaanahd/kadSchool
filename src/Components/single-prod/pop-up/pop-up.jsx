@@ -13,6 +13,7 @@ class PopUp extends Component {
     setTimeout(() => {
       this.setState({ animate: " " });
     }, 300);
+    // console.log(this.props.sample_files);
     //console.log(this.props.sample_files);
   }
   handle_faq = (faq_number) => {

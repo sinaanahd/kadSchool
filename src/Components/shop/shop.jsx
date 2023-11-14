@@ -1,46 +1,46 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useState } from "react";
 import { Helmet } from "react-helmet";
-import withWebsiteData from "../hoc/with-website-data";
-import SideBar from "../side-bar/side-bar";
 import Product from "./product/product";
 
-import catImg1 from "../../assets/images/cat-img-1.webp";
-import catImg2 from "../../assets/images/cat-img-2.webp";
-import catImg3 from "../../assets/images/cat-img-3.webp";
 import downArrow from "../../assets/images/dow-arroow-filter.webp";
 import LittleLoading from "../reuseables/little-loading";
 import ShopSlider from "./shop-slider/shop-slider";
 import ShopPopUp from "./shop-pop-up/shop-pop-up";
-class Shop extends Component {
-  state = {
-    shown: false,
-    year: false,
-    subject: false,
-    dore: false,
-    course: false,
-    filtered_products: false,
-    shop_pop_up: false,
-  };
-  componentDidMount() {}
-  handle_filter_show = (shown) => {
-    const prev_state = this.state.shown;
-    if (prev_state === shown) {
-      this.setState({ shown: false });
+import { DataContext } from "../context/DataContext";
+
+const Shop = () => {
+  const [shown, set_shown] = useState(false);
+  const [year, set_year] = useState(false);
+  const [subject, set_subject] = useState(false);
+  const [course, set_course] = useState(false);
+  const [dore, set_dore] = useState(false);
+  const [filtered_products, set_filtered_products] = useState(false);
+  const [shop_pop_up, set_shop_pop_up] = useState(false);
+  const {
+    doreha,
+    kelasses,
+    teachers,
+    courses,
+    handle_cart,
+    cart,
+    years,
+    subjects,
+    banners,
+  } = useContext(DataContext);
+  const handle_filter_show = (entry) => {
+    // const prev_state = shown;
+    if (entry === shown) {
+      set_shown(false);
     } else {
-      this.setState({ shown });
+      set_shown(entry);
     }
   };
-  get_year = (year) => {
-    if (year === "all") this.setState({ year: "all" });
-    else this.setState({ year });
-    this.final_klasses(
-      year,
-      this.state.subject,
-      this.state.dore,
-      this.state.course
-    );
+  const get_year = (year) => {
+    if (year === "all") set_year("all");
+    else set_year(year);
+    final_klasses(year, subject, dore, course);
   };
-  year_text = (year) => {
+  const year_text = (year) => {
     switch (year) {
       case 10:
         return "دهم";
@@ -56,20 +56,15 @@ class Shop extends Component {
         return "همه پایه ها";
     }
   };
-  get_subject = (subject) => {
+  const get_subject = (subject) => {
     if (subject === "all") {
-      this.setState({ subject: "all" });
+      set_subject("all");
     } else {
-      this.setState({ subject });
+      set_subject(subject);
     }
-    this.final_klasses(
-      this.state.year,
-      subject,
-      this.state.dore,
-      this.state.course
-    );
+    final_klasses(year, subject, dore, course);
   };
-  subject_text = (subject) => {
+  const subject_text = (subject) => {
     switch (subject) {
       case 0:
         return "ریاضی";
@@ -83,43 +78,30 @@ class Shop extends Component {
         return "همه رشته ها";
     }
   };
-  get_dore = (dore) => {
+  const get_dore = (dore) => {
     if (dore === "all") {
-      this.setState({ dore: "all" });
+      set_dore("all");
     } else {
-      this.setState({ dore });
+      set_dore(dore);
     }
-    this.final_klasses(
-      this.state.year,
-      this.state.subject,
-      dore,
-      this.state.course
-    );
+    final_klasses(year, subject, dore, course);
   };
-  get_course = (course) => {
+  const get_course = (course) => {
     if (course === "all") {
-      this.setState({ course: "all" });
+      set_course("all");
     } else {
-      this.setState({ course });
+      set_course(course);
     }
-    this.final_klasses(
-      this.state.year,
-      this.state.subject,
-      this.state.dore,
-      course
-    );
+    final_klasses(year, subject, dore, course);
   };
-  reset_filter = () => {
-    this.setState({
-      year: false,
-      subject: false,
-      dore: false,
-      course: false,
-      filtered_products: false,
-    });
+  const reset_filter = () => {
+    set_dore(false);
+    set_year(false);
+    set_subject(false);
+    set_course(false);
+    set_filtered_products(false);
   };
-  final_klasses = (year, subject, dore, course) => {
-    const { kelasses } = { ...this.props };
+  const final_klasses = (year, subject, dore, course) => {
     let yaer_kelases = [];
     let subject_kelases = [];
     let dore_kelases = [];
@@ -173,441 +155,306 @@ class Shop extends Component {
         final_kelasses.push({ ...obj, repetitionCount: count });
       }
     });
-    this.setState({ filtered_products: final_kelasses });
+    set_filtered_products(final_kelasses);
   };
-  handle_shop_pop_up = (e) => {
-    const shop_pop_up = this.state.shop_pop_up;
+  const handle_shop_pop_up = (e) => {
     if (shop_pop_up) {
       const classes = [...e.target.classList];
       if (classes.includes("shop-pu-bgc")) {
-        this.setState({ shop_pop_up: !shop_pop_up });
+        set_shop_pop_up(!shop_pop_up);
       }
     } else {
-      this.setState({ shop_pop_up: !shop_pop_up });
+      set_shop_pop_up(!shop_pop_up);
     }
   };
-  render() {
-    const {
-      doreha,
-      kelasses,
-      teachers,
-      initial_data,
-      courses,
-      handle_cart,
-      cart,
-      request_id,
-      get_kelass_data,
-      years,
-      subjects,
-      shop_banners,
-      handle_error,
-    } = this.props;
-
-    return (
-      <>
-        <Helmet>
-          <title>فروشگاه کاد</title>
-          {shop_banners
-            ? shop_banners.map((sb, i) => (
-                <link key={i} rel="preload" as="image" href={sb} />
-              ))
-            : ""}
-          <meta
-            name="description"
-            content="صفحه فروشگاه ما شامل مجموعه‌ای از کلاس‌های آنلاین با کیفیت برتر است که برای  ارائه به دانش‌آموزان برتر در نظر گرفته شده است. این کلاس‌ها فرصتی عالی برای آمادگی برای کنکور در تمامی رشته ها است. با تنوع در موضوعات و استفاده از روش‌های آموزشی جذاب، دانش‌آموزان می‌توانند به طریقی هیجان‌انگیز و موثر در مسیر یادگیری خود پیشروی کنند. به فروشگاه ما بپیوندید و با استفاده از فروشگاه کاد، بهترین کلاس‌های آنلاین را به دست آورید و تجربه آموزشی عالی را تجربه کنید."
-          />
-          <meta name="keywords" content="داشبورد کاربری کاد, میز مطالعه کاد," />
-        </Helmet>
-        <section className="bgc-wrapper shop-wrapper-section">
-          <div className="mm-width shop-wrapper">
-            <SideBar />
-            <div className="main-content">
-              <h1 className="page-title">فروشگاه</h1>
-              <ShopSlider
-                shop_banners={shop_banners}
-                handle_shop_pop_up={this.handle_shop_pop_up}
-              />
-              {/* <div className="categories-wrapper">
-                <span className="category active">
-                  <img src={catImg3} alt="" />
-                  <span className="cat-text">کاد پلاس</span>
+  const shop_banners = banners
+    ? [...banners.filter((b) => b.banner_type === "store_banners")]
+    : [];
+  return (
+    <>
+      <Helmet>
+        <title>فروشگاه کاد</title>
+        <meta
+          name="description"
+          content="صفحه فروشگاه ما شامل مجموعه‌ای از کلاس‌های آنلاین با کیفیت برتر است که برای  ارائه به دانش‌آموزان برتر در نظر گرفته شده است. این کلاس‌ها فرصتی عالی برای آمادگی برای کنکور در تمامی رشته ها است. با تنوع در موضوعات و استفاده از روش‌های آموزشی جذاب، دانش‌آموزان می‌توانند به طریقی هیجان‌انگیز و موثر در مسیر یادگیری خود پیشروی کنند. به فروشگاه ما بپیوندید و با استفاده از فروشگاه کاد، بهترین کلاس‌های آنلاین را به دست آورید و تجربه آموزشی عالی را تجربه کنید."
+        />
+        <meta name="keywords" content="داشبورد کاربری کاد, میز مطالعه کاد," />
+      </Helmet>
+      <section className="bgc-wrapper shop-wrapper-section">
+        <div className="mm-width shop-wrapper">
+          <div className="main-content">
+            <h1 className="page-title">فروشگاه</h1>
+            <ShopSlider
+              shop_banners={shop_banners}
+              handle_shop_pop_up={handle_shop_pop_up}
+            />
+            <p className="shop-desc-p">
+              توی این بخش میتونی لیست همه کلاس های آنلاین کاد رو ببینی😍.منتظر
+              دیدنت سر کلاس ها هستیم.❤️
+            </p>
+            <div className="filters-wrapper">
+              <div
+                className="filter"
+                onClick={() => {
+                  handle_filter_show("grade");
+                }}
+              >
+                <span className="filter-title">پایه تحصیلی </span>
+                <span className="main-filter">
+                  <span className="filter-text">
+                    {year || year === 0 ? year_text(year) : "پایه تحصیلی"}
+                  </span>
+                  <img src={downArrow} alt="باز کردن" width={20} height={12} />
                 </span>
-                <span className="category">
-                  <img src={catImg2} alt="" />
-                  <span className="cat-text">جزوه</span>
-                </span>
-                <span className="category">
-                  <img src={catImg1} alt="" />
-                  <span className="cat-text">کلاس</span>
-                </span>
-              </div> */}
-              <p className="shop-desc-p">
-                توی این بخش میتونی لیست همه کلاس های آنلاین کاد رو ببینی😍.منتظر
-                دیدنت سر کلاس ها هستیم.❤️
-              </p>
-              <div className="filters-wrapper">
-                <div
-                  className="filter"
-                  onClick={() => {
-                    this.handle_filter_show("grade");
-                  }}>
-                  <span className="filter-title">پایه تحصیلی </span>
-                  <span className="main-filter">
-                    <span className="filter-text">
-                      {this.state.year || this.state.year === 0
-                        ? this.year_text(this.state.year)
-                        : "پایه تحصیلی"}
-                    </span>
-                    <img
-                      src={downArrow}
-                      alt="باز کردن"
-                      width={20}
-                      height={12}
-                    />
-                  </span>
+                <span
+                  className={
+                    shown === "grade"
+                      ? "filter-items-wrapper show-filter"
+                      : "filter-items-wrapper"
+                  }
+                >
                   <span
                     className={
-                      this.state.shown === "grade"
-                        ? "filter-items-wrapper show-filter"
-                        : "filter-items-wrapper"
-                    }>
-                    <span
-                      className={
-                        this.state.year === "all"
-                          ? "filter-item active"
-                          : "filter-item"
-                      }
-                      onClick={() => {
-                        this.get_year("all");
-                      }}>
-                      همه پایه ها
-                    </span>
-                    {years ? (
-                      years.map((y) => (
-                        <span
-                          key={y.id}
-                          className={
-                            this.state.year === y.id
-                              ? "filter-item active"
-                              : "filter-item"
-                          }
-                          onClick={() => {
-                            this.get_year(y.id);
-                          }}>
-                          {y.name}
-                        </span>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                    {/* <span
-                      className={
-                        this.state.year === 10
-                          ? "filter-item active"
-                          : "filter-item"
-                      }
-                      onClick={() => {
-                        this.get_year(10);
-                      }}>
-                      دهم
-                    </span>
-                    <span
-                      className={
-                        this.state.year === 11
-                          ? "filter-item active"
-                          : "filter-item"
-                      }
-                      onClick={() => {
-                        this.get_year(11);
-                      }}>
-                      یازدهم
-                    </span>
-                    <span
-                      className={
-                        this.state.year === 12
-                          ? "filter-item active"
-                          : "filter-item"
-                      }
-                      onClick={() => {
-                        this.get_year(12);
-                      }}>
-                      دوازدهم
-                    </span> */}
+                      year === "all" ? "filter-item active" : "filter-item"
+                    }
+                    onClick={() => {
+                      get_year("all");
+                    }}
+                  >
+                    همه پایه ها
                   </span>
-                </div>
-                <div
-                  className="filter"
-                  onClick={() => {
-                    this.handle_filter_show("subject");
-                  }}>
-                  <span className="filter-title">رشته تحصیلی</span>
-                  <span className="main-filter">
-                    <span className="filter-text">
-                      {this.state.subject || this.state.subject === 0
-                        ? this.subject_text(this.state.subject)
-                        : "رشته تحصیلی"}
-                    </span>
-                    <img
-                      src={downArrow}
-                      alt="باز کردن"
-                      width={20}
-                      height={12}
-                    />
-                  </span>
-                  <span
-                    className={
-                      this.state.shown === "subject"
-                        ? "filter-items-wrapper show-filter"
-                        : "filter-items-wrapper"
-                    }>
-                    <span
-                      className={
-                        this.state.subject === "all"
-                          ? "filter-item active"
-                          : "filter-item"
-                      }
-                      onClick={() => {
-                        this.get_subject("all");
-                      }}>
-                      همه رشته ها
-                    </span>
-                    {subjects ? (
-                      subjects.map((s) => (
-                        <span
-                          key={s.id}
-                          className={
-                            this.state.subject === s.id
-                              ? "filter-item active"
-                              : "filter-item"
-                          }
-                          onClick={() => {
-                            this.get_subject(s.id);
-                          }}>
-                          {s.name}
-                        </span>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-
-                    {/* <span
-                      className={
-                        this.state.subject === 1
-                          ? "filter-item active"
-                          : "filter-item"
-                      }
-                      onClick={() => {
-                        this.get_subject(1);
-                      }}>
-                      تجربی
-                    </span>
-                    <span
-                      className={
-                        this.state.subject === 2
-                          ? "filter-item active"
-                          : "filter-item"
-                      }
-                      onClick={() => {
-                        this.get_subject(2);
-                      }}>
-                      انسانی
-                    </span>
-                    <span
-                      className={
-                        this.state.subject === 3
-                          ? "filter-item active"
-                          : "filter-item"
-                      }
-                      onClick={() => {
-                        this.get_subject(3);
-                      }}>
-                      هنر
-                    </span> */}
-                  </span>
-                </div>
-                <div
-                  className="filter"
-                  onClick={() => {
-                    this.handle_filter_show("kind");
-                  }}>
-                  <span className="filter-title">دوره </span>
-                  <span className="main-filter">
-                    <span className="filter-text">
-                      {this.state.dore && this.state.dore !== "all"
-                        ? doreha.find((d) => d.dore_id === this.state.dore)
-                            .dore_title
-                        : this.state.dore === "all"
-                        ? "همه دوره ها"
-                        : "دوره"}{" "}
-                    </span>
-                    <img
-                      src={downArrow}
-                      alt="باز کردن"
-                      width={20}
-                      height={12}
-                    />
-                  </span>
-                  <span
-                    className={
-                      this.state.shown === "kind"
-                        ? "filter-items-wrapper show-filter"
-                        : "filter-items-wrapper"
-                    }>
-                    <span
-                      onClick={() => {
-                        this.get_dore("all");
-                      }}
-                      className={
-                        this.state.dore === "all"
-                          ? "filter-item active"
-                          : "filter-item"
-                      }>
-                      همه دوره ها
-                    </span>
-                    {doreha ? (
-                      doreha.map((d) => (
-                        <span
-                          onClick={() => {
-                            this.get_dore(d.dore_id);
-                          }}
-                          key={d.dore_id}
-                          className={
-                            this.state.dore === d.dore_id
-                              ? "filter-item active"
-                              : "filter-item"
-                          }>
-                          {d.dore_title}
-                        </span>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                    {/* 
-                    <span className="filter-item">نکته و تست</span>
-                    <span className="filter-item">نهایی</span>
-                    <span className="filter-item">تیر آخر</span> */}
-                  </span>
-                </div>
-                <div
-                  className="filter"
-                  onClick={() => {
-                    this.handle_filter_show("course");
-                  }}>
-                  <span className="filter-title">درس </span>
-                  <span className="main-filter">
-                    <span className="filter-text">
-                      {this.state.course && this.state.course !== "all"
-                        ? courses.find((c) => c.course_id === this.state.course)
-                            .name
-                        : this.state.course === "all"
-                        ? "همه درس ها"
-                        : "درس"}{" "}
-                    </span>
-                    <img
-                      src={downArrow}
-                      alt="باز کردن"
-                      width={20}
-                      height={12}
-                    />
-                  </span>
-                  <span
-                    className={
-                      this.state.shown === "course"
-                        ? "filter-items-wrapper course-fu show-filter"
-                        : "filter-items-wrapper course-fu"
-                    }>
-                    <span
-                      onClick={() => {
-                        if (this.state.course) this.get_course("all");
-                      }}
-                      className={
-                        !this.state.course
-                          ? "filter-item active"
-                          : "filter-item"
-                      }>
-                      همه درس ها
-                    </span>
-                    {courses ? (
-                      courses.map((c) => (
-                        <span
-                          onClick={() => {
-                            this.get_course(c.course_id);
-                          }}
-                          key={c.course_id}
-                          className={
-                            this.state.course === c.course_id
-                              ? "filter-item active"
-                              : "filter-item"
-                          }>
-                          {c.name}
-                        </span>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                  </span>
-                </div>
-              </div>
-              <div className="products-wrapper">
-                {!this.state.filtered_products ? (
-                  kelasses && teachers ? (
-                    kelasses.map((k) => (
-                      <Product
-                        get_kelass_data={get_kelass_data}
-                        key={k.kelas_id}
-                        kelas={k}
-                        teachers={teachers ? teachers : false}
-                        initial_data={initial_data}
-                        doreha={doreha ? doreha : false}
-                        handle_cart={handle_cart}
-                        cart={cart ? cart : false}
-                        request_id={request_id}
-                      />
+                  {years ? (
+                    years.map((y) => (
+                      <span
+                        key={y.id}
+                        className={
+                          year === y.id ? "filter-item active" : "filter-item"
+                        }
+                        onClick={() => {
+                          get_year(y.id);
+                        }}
+                      >
+                        {y.name}
+                      </span>
                     ))
                   ) : (
                     <></>
-                  )
-                ) : this.state.filtered_products.length !== 0 ? (
-                  this.state.filtered_products.map((k) => (
+                  )}
+                </span>
+              </div>
+              <div
+                className="filter"
+                onClick={() => {
+                  handle_filter_show("subject");
+                }}
+              >
+                <span className="filter-title">رشته تحصیلی</span>
+                <span className="main-filter">
+                  <span className="filter-text">
+                    {subject || subject === 0
+                      ? subject_text(subject)
+                      : "رشته تحصیلی"}
+                  </span>
+                  <img src={downArrow} alt="باز کردن" width={20} height={12} />
+                </span>
+                <span
+                  className={
+                    shown === "subject"
+                      ? "filter-items-wrapper show-filter"
+                      : "filter-items-wrapper"
+                  }
+                >
+                  <span
+                    className={
+                      subject === "all" ? "filter-item active" : "filter-item"
+                    }
+                    onClick={() => {
+                      get_subject("all");
+                    }}
+                  >
+                    همه رشته ها
+                  </span>
+                  {subjects ? (
+                    subjects.map((s) => (
+                      <span
+                        key={s.id}
+                        className={
+                          subject === s.id
+                            ? "filter-item active"
+                            : "filter-item"
+                        }
+                        onClick={() => {
+                          get_subject(s.id);
+                        }}
+                      >
+                        {s.name}
+                      </span>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </span>
+              </div>
+              <div
+                className="filter"
+                onClick={() => {
+                  handle_filter_show("kind");
+                }}
+              >
+                <span className="filter-title">دوره </span>
+                <span className="main-filter">
+                  <span className="filter-text">
+                    {dore && dore !== "all"
+                      ? doreha.find((d) => d.dore_id === dore).dore_title
+                      : dore === "all"
+                      ? "همه دوره ها"
+                      : "دوره"}{" "}
+                  </span>
+                  <img src={downArrow} alt="باز کردن" width={20} height={12} />
+                </span>
+                <span
+                  className={
+                    shown === "kind"
+                      ? "filter-items-wrapper show-filter"
+                      : "filter-items-wrapper"
+                  }
+                >
+                  <span
+                    onClick={() => {
+                      get_dore("all");
+                    }}
+                    className={
+                      dore === "all" ? "filter-item active" : "filter-item"
+                    }
+                  >
+                    همه دوره ها
+                  </span>
+                  {doreha ? (
+                    doreha.map((d) => (
+                      <span
+                        onClick={() => {
+                          get_dore(d.dore_id);
+                        }}
+                        key={d.dore_id}
+                        className={
+                          dore === d.dore_id
+                            ? "filter-item active"
+                            : "filter-item"
+                        }
+                      >
+                        {d.dore_title}
+                      </span>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </span>
+              </div>
+              <div
+                className="filter"
+                onClick={() => {
+                  handle_filter_show("course");
+                }}
+              >
+                <span className="filter-title">درس </span>
+                <span className="main-filter">
+                  <span className="filter-text">
+                    {course && course !== "all"
+                      ? courses.find((c) => c.course_id === course).name
+                      : course === "all"
+                      ? "همه درس ها"
+                      : "درس"}{" "}
+                  </span>
+                  <img src={downArrow} alt="باز کردن" width={20} height={12} />
+                </span>
+                <span
+                  className={
+                    shown === "course"
+                      ? "filter-items-wrapper course-fu show-filter"
+                      : "filter-items-wrapper course-fu"
+                  }
+                >
+                  <span
+                    onClick={() => {
+                      if (course) get_course("all");
+                    }}
+                    className={!course ? "filter-item active" : "filter-item"}
+                  >
+                    همه درس ها
+                  </span>
+                  {courses ? (
+                    courses.map((c) => (
+                      <span
+                        onClick={() => {
+                          get_course(c.course_id);
+                        }}
+                        key={c.course_id}
+                        className={
+                          course === c.course_id
+                            ? "filter-item active"
+                            : "filter-item"
+                        }
+                      >
+                        {c.name}
+                      </span>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </span>
+              </div>
+            </div>
+            <div className="products-wrapper">
+              {!filtered_products ? (
+                kelasses && teachers ? (
+                  kelasses.map((k) => (
                     <Product
-                      get_kelass_data={get_kelass_data}
                       key={k.kelas_id}
                       kelas={k}
                       teachers={teachers ? teachers : false}
-                      initial_data={initial_data}
                       doreha={doreha ? doreha : false}
                       handle_cart={handle_cart}
                       cart={cart ? cart : false}
-                      request_id={request_id}
                     />
                   ))
                 ) : (
-                  <div className="no-prods-found">
-                    <p>متاسفانه محصولی با امکانات مورد نظر شما یافت نشد</p>
-                    <span
-                      onClick={() => {
-                        this.reset_filter();
-                      }}
-                      className="reset-filter">
-                      بازگردانی فیلتر ها
-                    </span>
-                  </div>
-                )}
-              </div>
+                  <></>
+                )
+              ) : filtered_products.length !== 0 ? (
+                filtered_products.map((k) => (
+                  <Product
+                    key={k.kelas_id}
+                    kelas={k}
+                    teachers={teachers ? teachers : false}
+                    doreha={doreha ? doreha : false}
+                    handle_cart={handle_cart}
+                    cart={cart ? cart : false}
+                  />
+                ))
+              ) : (
+                <div className="no-prods-found">
+                  <p>متاسفانه محصولی با امکانات مورد نظر شما یافت نشد</p>
+                  <span
+                    onClick={() => {
+                      reset_filter();
+                    }}
+                    className="reset-filter"
+                  >
+                    بازگردانی فیلتر ها
+                  </span>
+                </div>
+              )}
             </div>
           </div>
-        </section>
-        {this.state.shop_pop_up ? (
-          <ShopPopUp
-            handle_shop_pop_up={this.handle_shop_pop_up}
-            handle_error={handle_error}
-          />
-        ) : (
-          <></>
-        )}
-      </>
-    );
-  }
-}
+        </div>
+      </section>
+      {shop_pop_up ? (
+        <ShopPopUp handle_shop_pop_up={handle_shop_pop_up} />
+      ) : (
+        <></>
+      )}
+    </>
+  );
+};
 
-export default withWebsiteData(Shop);
+export default Shop;

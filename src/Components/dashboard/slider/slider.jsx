@@ -185,75 +185,17 @@ class Slider extends Component {
           {main_page_banners ? (
             main_page_banners.map((b, i) => (
               <div className="slide" key={i++}>
-                <img src={b} alt={"اسلایدر کاد"} width={436} height={142.69} />
+                <img
+                  src={b.image_link}
+                  alt={b.alt}
+                  width={436}
+                  height={142.69}
+                />
               </div>
             ))
           ) : (
             <LittleLoading />
           )}
-          {/* <div className="slide">
-            <img
-              src={sample_img}
-              width={400}
-              height={181}
-              alt={"sth for test"}
-            />
-            <span className="abs-to-show">1</span>
-          </div>
-          <div className="slide">
-            <img
-              src={sample_img}
-              width={400}
-              height={181}
-              alt={"sth for test"}
-            />
-            <span className="abs-to-show">2</span>
-          </div>
-          <div className="slide">
-            <img
-              src={sample_img}
-              width={400}
-              height={181}
-              alt={"sth for test"}
-            />
-            <span className="abs-to-show">3</span>
-          </div>
-          <div className="slide">
-            <img
-              src={sample_img}
-              width={400}
-              height={181}
-              alt={"sth for test"}
-            />
-            <span className="abs-to-show">4</span>
-          </div>
-          <div className="slide">
-            <img
-              src={sample_img}
-              width={400}
-              height={181}
-              alt={"sth for test"}
-            />
-            <span className="abs-to-show">5</span>
-          </div>
-          <div className="slide">
-            <img
-              src={sample_img}
-              width={400}
-              height={181}
-              alt={"sth for test"}
-            />
-            <span className="abs-to-show">6</span>
-          </div>
-          <div className="slide">
-            <img
-              src={sample_img}
-              width={400}
-              height={181}
-              alt={"sth for test"}
-            />
-            <span className="abs-to-show">7</span>
-          </div> */}
         </div>
       </div>
     );

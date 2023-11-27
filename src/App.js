@@ -1,4 +1,4 @@
-import React, { Component, useContext } from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import {
   Switch,
   Route,
@@ -51,10 +51,22 @@ import HomeHeader from './Components/home/header/home-header';
 import HomeFooter from './Components/home/footer/home-footer';
 import { DataContext } from './Components/context/DataContext';
 import TopSiteSlider from './Components/top-site-slider/top-site-slider';
+import PayResultPage from './Components/pay-result-page/pay-result';
 // context refactor
 
 const App = () => {
-  const {banners} = useContext(DataContext)
+  const {banners} = useContext(DataContext);
+  const [check_page , set_check_page] = useState("");
+  useEffect(()=>{
+    setInterval(()=>{
+      if(check_page !== window.location.pathname){
+        set_check_page(window.location.pathname);
+      }
+    },1000)
+  },[]);
+  const check_page_handler = (e) => {
+     
+  };
   return ( <>
   <TopSiteSlider
         banners={
@@ -64,14 +76,14 @@ const App = () => {
         }
       />
       {
-        window.location.pathname === "/Login" ||
-          window.location.pathname === "/LoginPass" ||
-          window.location.pathname === "/Forget-password" ||
-          window.location.pathname === "/Set-new-password" ||
-          window.location.pathname === "/SignUp" ||
-          window.location.pathname.includes("/Referal-signup") ||
-          window.location.pathname === "/SetPassword" ? <></> : <HomeHeader not_home={
-          window.location.pathname !== "/HomePage" ? "not-home" : "is-home"
+        check_page === "/Login" ||
+          check_page === "/LoginPass" ||
+          check_page === "/Forget-password" ||
+          check_page === "/Set-new-password" ||
+          check_page === "/SignUp" ||
+          check_page.includes("/Referal-signup") ||
+          check_page === "/SetPassword" ? <></> : <HomeHeader not_home={
+          check_page !== "/HomePage" ? "not-home" : "is-home"
         } />
       }
     
@@ -112,6 +124,7 @@ const App = () => {
         <Route path="/Teachers/:id" exact component={SingleTeacher} />
         <Route path="/Teachers/" component={Teachers} />
         <Route path="/Dore/:id" component={SingleCourse} />
+        <Route path="/KADstorePaymentResult/:id-:id-:id" component={PayResultPage} />
         {/* 
           re-design / re-factor
         */}
@@ -135,13 +148,13 @@ const App = () => {
       </Switch>
 
       {
-        window.location.pathname === "/Login" ||
-          window.location.pathname === "/LoginPass" ||
-          window.location.pathname === "/Forget-password" ||
-          window.location.pathname === "/Set-new-password" ||
-          window.location.pathname === "/SignUp" ||
-          window.location.pathname.includes("/Referal-signup") ||
-          window.location.pathname === "/SetPassword" ? <></> : 
+        check_page === "/Login" ||
+          check_page === "/LoginPass" ||
+          check_page === "/Forget-password" ||
+          check_page === "/Set-new-password" ||
+          check_page === "/SignUp" ||
+          check_page.includes("/Referal-signup") ||
+          check_page === "/SetPassword" ? <></> : 
           <HomeFooter not_home="f-not-home" />
       }
     </> );

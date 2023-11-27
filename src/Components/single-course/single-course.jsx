@@ -18,7 +18,7 @@ import scrollToTop from "../functions/scroll";
 import { DataContext } from "../context/DataContext";
 
 const SingleCourse = () => {
-  const { doreha, kelasses, teachers, sample_files, cart, handle_cart } =
+  const { doreha, kelasses, teachers, sample_files, cart, handle_cart, user } =
     useContext(DataContext);
   const [more_desc, set_more_desc] = useState(false);
   const [more_cm, set_more_cm] = useState(false);
@@ -275,7 +275,7 @@ const SingleCourse = () => {
                             )}
                           </span>
                         </span>
-                        {cart ? (
+                        {user && cart ? (
                           cart.ids.includes(k.kelas_id) ? (
                             <span
                               className="add-teacher"

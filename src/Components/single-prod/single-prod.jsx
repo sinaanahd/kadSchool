@@ -14,7 +14,7 @@ import scrollToTop from "../functions/scroll";
 import { DataContext } from "../context/DataContext";
 
 const SingleProd = () => {
-  const { kelasses, teachers, cart, handle_cart, doreha, sample_files } =
+  const { user, kelasses, teachers, cart, handle_cart, doreha, sample_files } =
     useContext(DataContext);
   const [more_cm, set_more_cm] = useState(false);
   const [pop_up, set_pop_up] = useState(false);
@@ -130,27 +130,34 @@ const SingleProd = () => {
                       )}
                     </span>
                   </span>
-                  {cart && single_prod ? (
-                    cart.ids.includes(single_prod.kelas_id) ? (
-                      <span
-                        className="add-to-cart-btn"
-                        onClick={() => {
-                          handle_cart(single_prod);
-                        }}
-                      >
-                        <img src={cart_img} alt="" />
-                        حذف از سبد خرید
-                      </span>
+                  {user ? (
+                    cart && single_prod ? (
+                      cart.ids.includes(single_prod.kelas_id) ? (
+                        <span
+                          className="add-to-cart-btn"
+                          onClick={() => {
+                            handle_cart(single_prod);
+                          }}
+                        >
+                          <img src={cart_img} alt="" />
+                          حذف از سبد خرید
+                        </span>
+                      ) : (
+                        <span
+                          className="add-to-cart-btn"
+                          onClick={() => {
+                            handle_cart(single_prod);
+                          }}
+                        >
+                          <img src={cart_img} alt="" />
+                          افزودن به سبد خرید
+                        </span>
+                      )
                     ) : (
-                      <span
-                        className="add-to-cart-btn"
-                        onClick={() => {
-                          handle_cart(single_prod);
-                        }}
-                      >
+                      <Link to={"/Login"} className="add-to-cart-btn">
                         <img src={cart_img} alt="" />
                         افزودن به سبد خرید
-                      </span>
+                      </Link>
                     )
                   ) : (
                     <Link to={"/Login"} className="add-to-cart-btn">

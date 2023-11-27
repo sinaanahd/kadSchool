@@ -6,6 +6,7 @@ import mainLogo from "../../assets/images/main-logo.webp";
 import login_bgc from "../../assets/images/login-img.webp";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
+import urls from "../urls/url";
 
 class SetPassword extends Component {
   state = {
@@ -16,9 +17,9 @@ class SetPassword extends Component {
   };
   componentDidMount() {
     const { user } = this.props;
-    // if (user) {
-    //   window.location.pathname = "/Dashboard";
-    // }
+    if (user) {
+      window.location.pathname = "/Dashboard";
+    }
   }
   get_pass_1 = (value) => {
     let pass_err = false;
@@ -55,14 +56,14 @@ class SetPassword extends Component {
       // prettier-ignore
       axios
         .patch(
-          `https://kadschool.com/backend/kad_api/password/${phone_number}`,
+          `${urls.password}${phone_number}`,
           { new_password: pass_1 }
         )
         .then((res) => {
           console.log(res.data);
           const { status, message } = res.data;
           if (status) {
-            window.location.pathname = "/Profile";
+            window.location.pathname = "/Shop";
           } else {
             this.setState({ pass_err: message, pause: false });
           }
@@ -136,7 +137,7 @@ class SetPassword extends Component {
                 <></>
               )}
               <span className="skip-this-step">
-                <Link to="/Profile">مرحله بعدی</Link>
+                <Link to="/Shop">مرحله بعدی</Link>
               </span>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import LittleLoading from "../../reuseables/little-loading";
+import urls from "../../urls/url";
 class ShopPopUp extends Component {
   state = {
     name: false,
@@ -16,10 +17,7 @@ class ShopPopUp extends Component {
     const send_obj = { fullname: name, phone_number: phone_number, type: 3 };
     this.setState({ pause: true });
     axios
-      .post(
-        `https://kadschool.com/backend/kad_api/call_request_marketing`,
-        send_obj
-      )
+      .post(`${urls.call_request_marketing}`, send_obj)
       .then((res) => {
         const { status } = res.data;
         //console.log(res.data);
@@ -77,7 +75,8 @@ class ShopPopUp extends Component {
           className="shop-pu-bgc"
           onClick={(e) => {
             handle_shop_pop_up(e);
-          }}>
+          }}
+        >
           <div className="shop-pu-content">
             <h3 className="shop-pu-title">مشاوره ثبت نام</h3>
             <p className="shop-pop-up-desc">
@@ -118,7 +117,8 @@ class ShopPopUp extends Component {
                 onClick={() => {
                   this.send_advice_request();
                 }}
-                className="spu-submit-form">
+                className="spu-submit-form"
+              >
                 {this.state.pause ? <LittleLoading /> : "تایید"}
               </span>
             ) : (

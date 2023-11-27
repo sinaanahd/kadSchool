@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { DataContext } from "../context/DataContext";
 import AparatVideo from "../video/aparat-video";
 import { Helmet } from "react-helmet";
@@ -15,9 +15,16 @@ import tes_img from "../../assets/images/single-teachers-asset/test-resume.webp"
 import arrow from "../../assets/images/single-teachers-asset/arrow.webp";
 import plus from "../../assets/images/single-teachers-asset/faq-icon.webp";
 import LittleLoading from "../reuseables/little-loading";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import scrollToTop from "../functions/scroll";
+import FAQ_new from "../redesign-faq/re-faq";
 
 const R_SingleTeacher = () => {
-  const { teachers, kelasses, doreha, sample_files } = useContext(DataContext);
+  const { teachers, kelasses, doreha, sample_files, handle_cart, cart, user } =
+    useContext(DataContext);
+  const kelas_ref = useRef(false);
+  const [file_type, set_file_type] = useState("jozve");
+  const [kelas_carousel, set_kelas_carousel] = useState(0);
   const find_slug = () => {
     const page_slug = window.location.pathname.split("/")[2];
     let page_id;
@@ -49,24 +56,6 @@ const R_SingleTeacher = () => {
     }
     return final_arr;
   };
-  const fill_sample_files = (e) => {
-    const sample_files_obj = {};
-    if (sample_files && teacher) {
-      sample_files_obj.video = sample_files.video_sample_files.filter((sf) =>
-        teacher.sample_files.video_sample_files_ids.includes(sf.file_id)
-      );
-      sample_files_obj.pdf = sample_files.pdf_sample_files.filter(
-        (sf) =>
-          teacher.sample_files.pdf_sample_files_ids.includes(sf.file_id) &&
-          !sf.is_for_jalase
-      );
-    }
-    // console.log(sample_files_obj);
-    return sample_files_obj;
-  };
-  // useEffect(() => {
-  //   fill_sample_files();
-  // }, []);
   const slug = find_slug();
   const teacher = teachers
     ? Object.keys({
@@ -79,6 +68,76 @@ const R_SingleTeacher = () => {
         }
       : false
     : false;
+  const teacher_kelasses =
+    kelasses && teacher
+      ? kelasses.filter((k) => teacher.kelases.includes(k.kelas_id))
+      : false;
+  const intro_video =
+    sample_files && teacher
+      ? sample_files.video_sample_files.find(
+          (sf) =>
+            teacher.sample_files.video_sample_files_ids.includes(sf.file_id) &&
+            sf.file_type === "رزومه ویدیویی استاد"
+        )
+      : false;
+  const nemone_tadris =
+    sample_files && teacher
+      ? sample_files.video_sample_files.filter(
+          (sf) =>
+            teacher.sample_files.video_sample_files_ids.includes(sf.file_id) &&
+            sf.file_type === "نمونه تدریس"
+        )
+      : false;
+  const free_course =
+    sample_files && teacher
+      ? sample_files.video_sample_files.filter(
+          (sf) =>
+            teacher.sample_files.video_sample_files_ids.includes(sf.file_id) &&
+            sf.file_type === "رزومه ویدیویی استاد"
+        )
+      : false;
+  const jozveha =
+    sample_files && teacher
+      ? sample_files.pdf_sample_files.filter(
+          (f) =>
+            teacher.sample_files.pdf_sample_files_ids.includes(f.file_id) &&
+            f.file_type === "نمونه جزوه" &&
+            !f.is_for_jalase
+        )
+      : false;
+  const azmonha =
+    sample_files && teacher
+      ? sample_files.pdf_sample_files.filter(
+          (f) =>
+            teacher.sample_files.pdf_sample_files_ids.includes(f.file_id) &&
+            f.file_type === "نمونه آزمون" &&
+            !f.is_for_jalase
+        )
+      : false;
+  const takalif =
+    sample_files && teacher
+      ? sample_files.pdf_sample_files.filter(
+          (f) =>
+            teacher.sample_files.pdf_sample_files_ids.includes(f.file_id) &&
+            f.file_type === "نمونه تکلیف" &&
+            !f.is_for_jalase
+        )
+      : false;
+  const handle_kelas_carousel = () => {
+    const childrens = [...kelas_ref.current.children];
+    if (kelas_carousel !== fill_classes(teacher.kelases).length - 1) {
+      // if (kelas_carousel !== 1000) {
+      childrens.forEach((c) => {
+        c.style.transform = `translateX(${(kelas_carousel + 1) * 347}px)`;
+      });
+      set_kelas_carousel(kelas_carousel + 1);
+    } else {
+      childrens.forEach((c) => {
+        c.style.transform = `translateX(${0 * 347}px)`;
+      });
+      set_kelas_carousel(0);
+    }
+  };
   return (
     <>
       <Helmet>
@@ -403,74 +462,144 @@ const R_SingleTeacher = () => {
         <section className="teacher-classes-wrapper">
           <h2 className="sectoin-title">کلاس های استاد</h2>
           <div className="classes-carousel-wrapper">
-            <div className="classes-carousel-place">
-              {teacher ? (
-                fill_classes(teacher.kelases).map((k) => (
+            <div className="classes-carousel-place" ref={kelas_ref}>
+              {teacher && teacher_kelasses ? (
+                teacher_kelasses.map((k) => (
                   <div key={k.kelas_id} className="teachers-classe">
-                    <img
-                      src={k.image_link}
-                      alt={k.kelas_title}
-                      width={203}
-                      height={203}
-                      loading="lazy"
-                    />
-                    <h3 className="class-name">{k.kelas_title}</h3>
+                    <Link
+                      onClick={scrollToTop}
+                      to={`/r-class/${k.kelas_title_and_ostad_name.replaceAll(
+                        " ",
+                        "-"
+                      )}`}
+                    >
+                      <img
+                        src={k.image_link}
+                        alt={k.kelas_title}
+                        width={203}
+                        height={203}
+                        loading="lazy"
+                      />
+                    </Link>
+
+                    <Link
+                      onClick={scrollToTop}
+                      to={`/r-class/${k.kelas_title_and_ostad_name.replaceAll(
+                        " ",
+                        "-"
+                      )}`}
+                      className="class-name"
+                    >
+                      {k.kelas_title}
+                    </Link>
                     <span className="prices-wrapper">
                       <span className="price-label">قیمت :</span>
                       <span className="prices-place">
                         <span className="normal-price">
-                          <span className="p-text">
-                            {split_in_three(convert_to_persian(k.price))}
-                          </span>
-                          تومان
+                          {k.discounted_price ? (
+                            <>
+                              <span className="p-text">
+                                {split_in_three(convert_to_persian(k.price))}
+                              </span>
+                              تومان
+                            </>
+                          ) : (
+                            <>
+                              <span className="p-text">
+                                {split_in_three(convert_to_persian(k.price))}
+                              </span>
+                              تومان
+                            </>
+                          )}
                         </span>
                         <span className="discounted-price">
-                          <span className="p-text">
-                            {split_in_three(
-                              convert_to_persian(k.discounted_price)
-                            )}
-                          </span>
-                          تومان
+                          {k.discounted_price ? (
+                            <>
+                              <span className="p-text">
+                                {split_in_three(
+                                  convert_to_persian(k.discounted_price)
+                                )}
+                              </span>
+                              تومان
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </span>
                       </span>
                     </span>
-                    <span className="add-to-cart">افزودن به سبد خرید</span>
-                    <span className="dore-label">سالیانه</span>
+                    {user ? (
+                      cart ? (
+                        <button
+                          className="add-to-cart"
+                          onClick={() => {
+                            handle_cart(k);
+                          }}
+                        >
+                          {cart.ids.includes(k.kelas_id)
+                            ? "حذف از سبد خرید"
+                            : "افزودن به سبد خرید"}
+                        </button>
+                      ) : (
+                        <span className="add-to-cart">افزودن به سبد خرید</span>
+                      )
+                    ) : (
+                      <Link
+                        to="/Login"
+                        className="add-to-cart"
+                        onClick={scrollToTop}
+                      >
+                        افزودن به سبد خرید
+                      </Link>
+                    )}
+                    {doreha ? (
+                      doreha.find((d) => k.parent_dore_id === d.dore_id) ? (
+                        <span className="dore-label">
+                          {
+                            doreha.find((d) => k.parent_dore_id === d.dore_id)
+                              .dore_title
+                          }
+                        </span>
+                      ) : (
+                        ""
+                      )
+                    ) : (
+                      <LittleLoading />
+                    )}
                   </div>
                 ))
               ) : (
                 <LittleLoading />
               )}
             </div>
-            <span className="arrow-wrapper">
-              <img
-                src={arrow}
-                alt="بعدی"
-                width={15}
-                height={26}
-                loading="lazy"
-              />
-            </span>
+            {teacher ? (
+              fill_classes(teacher.kelases).length > 3 ? (
+                <button
+                  className="arrow-wrapper"
+                  onClick={handle_kelas_carousel}
+                >
+                  <img
+                    src={arrow}
+                    alt="بعدی"
+                    width={15}
+                    height={26}
+                    loading="lazy"
+                  />
+                </button>
+              ) : (
+                <></>
+              )
+            ) : (
+              <></>
+            )}
           </div>
         </section>
         <section className="video-intros-wrapper">
           <div className="teacher-video-place">
             <h2 className="video-title">معرفی استاد</h2>
             <div className="video-need-div">
-              {Object.keys({
-                ...fill_sample_files().video.find(
-                  (v) => v.file_type === "رزومه ویدیویی استاد"
-                ),
-              }).length !== 0 ? (
-                <AparatVideo
-                  src={
-                    {
-                      ...fill_sample_files().video.find(
-                        (v) => v.file_type === "رزومه ویدیویی استاد"
-                      ),
-                    }.file_link
-                  }
-                />
+              {intro_video ? (
+                <AparatVideo src={intro_video.file_link} />
               ) : (
                 "موردی برای نمایش وجود ندارد"
               )}
@@ -479,38 +608,33 @@ const R_SingleTeacher = () => {
           <div className="teacher-video-place">
             <h2 className="video-title">نمونه تدریس ها</h2>
             <div className="video-need-div">
-              {[
-                ...fill_sample_files().video.filter(
-                  (v) => v.file_type === "نمونه تدریس"
-                ),
-              ].length !== 0
-                ? [
-                    ...fill_sample_files().video.filter(
-                      (v) => v.file_type === "نمونه تدریس"
-                    ),
-                  ].map((v) => (
+              {nemone_tadris ? (
+                nemone_tadris.length !== 0 ? (
+                  nemone_tadris.map((v) => (
                     <AparatVideo key={v.file_id} src={v.file_link} />
                   ))
-                : "موردی برای نمایش وجود ندارد"}
+                ) : (
+                  "موردی برای نمایش وجود ندارد"
+                )
+              ) : (
+                <LittleLoading />
+              )}
             </div>
           </div>
           <div className="teacher-video-place">
             <h2 className="video-title">درس های رایگان</h2>
             <div className="video-need-div">
-              {[
-                ...fill_sample_files().video.filter(
-                  (v) => v.file_type === "نمونه تدریس"
-                ),
-              ].length !== 0
-                ? [
-                    ...fill_sample_files().video.filter(
-                      (v) => v.file_type === "نمونه تدریس"
-                    ),
-                  ].map((v) => (
+              {free_course ? (
+                free_course.length !== 0 ? (
+                  free_course.map((v) => (
                     <AparatVideo key={v.file_id} src={v.file_link} />
                   ))
-                : "موردی برای نمایش وجود ندارد"}
-              {/* <AparatVideo src="https://www.aparat.com/video/video/embed/videohash/qIGT8/vt/frame" /> */}
+                ) : (
+                  "موردی برای نمایش وجود ندارد"
+                )
+              ) : (
+                <LittleLoading />
+              )}
             </div>
           </div>
         </section>
@@ -518,154 +642,129 @@ const R_SingleTeacher = () => {
           <div className="file-section-header">
             <h2 className="file-section-title">نمونه فایل ها</h2>
             <div className="sample-files-btns-wrapper">
-              <span className="sample-file-btn active">جزوات</span>
-              <span className="sample-file-btn">آزمون ها</span>
-              <span className="sample-file-btn">تکالیف</span>
+              <button
+                onClick={() => {
+                  set_file_type("jozve");
+                }}
+                className={
+                  file_type === "jozve"
+                    ? "sample-file-btn active"
+                    : "sample-file-btn"
+                }
+              >
+                جزوات
+              </button>
+              <button
+                onClick={() => {
+                  set_file_type("azmon");
+                }}
+                className={
+                  file_type === "azmon"
+                    ? "sample-file-btn active"
+                    : "sample-file-btn"
+                }
+              >
+                آزمون ها
+              </button>
+              <button
+                onClick={() => {
+                  set_file_type("taklif");
+                }}
+                className={
+                  file_type === "taklif"
+                    ? "sample-file-btn active"
+                    : "sample-file-btn"
+                }
+              >
+                تکالیف
+              </button>
             </div>
           </div>
           <div className="files-places">
-            <div className="file-row">
-              <span className="row-item">1</span>
-              <span className="row-item name-wrapper">فسفه و منطق</span>
-              <span className="row-item">15 مهر 1402</span>
-              <span className="row-item">فصل دوم</span>
-              <span className="row-item">دانلود</span>
-            </div>
-            <div className="file-row">
-              <span className="row-item">1</span>
-              <span className="row-item name-wrapper">
-                شهریار بهادری برای تست
-              </span>
-              <span className="row-item">15 مهر 1402</span>
-              <span className="row-item">فصل دوم</span>
-              <span className="row-item">دانلود</span>
-            </div>
-            <div className="file-row">
-              <span className="row-item">1</span>
-              <span className="row-item name-wrapper">فسفه و منطق</span>
-              <span className="row-item">15 مهر 1402</span>
-              <span className="row-item">فصل دوم</span>
-              <span className="row-item">دانلود</span>
-            </div>
+            {file_type === "jozve" ? (
+              jozveha ? (
+                jozveha.length !== 0 ? (
+                  jozveha.map((f, i = 1) => (
+                    <div className="file-row" key={f.file_id}>
+                      <span className="row-item">{i++ + 1}</span>
+                      <span className="row-item name-wrapper">{f.title}</span>
+                      <span className="row-item">15 مهر 1402</span>
+                      <span className="row-item">فصل دوم</span>
+                      <a
+                        target="_blank"
+                        href={f.file_link}
+                        className="row-item"
+                      >
+                        دانلود
+                      </a>
+                    </div>
+                  ))
+                ) : (
+                  "موردی برای نمایش وجود ندارد"
+                )
+              ) : (
+                <LittleLoading />
+              )
+            ) : (
+              <></>
+            )}
+            {file_type === "taklif" ? (
+              takalif ? (
+                takalif.length !== 0 ? (
+                  takalif.map((f, i = 1) => (
+                    <div className="file-row" key={f.file_id}>
+                      <span className="row-item">{i++ + 1}</span>
+                      <span className="row-item name-wrapper">{f.title}</span>
+                      <span className="row-item">15 مهر 1402</span>
+                      <span className="row-item">فصل دوم</span>
+                      <a
+                        target="_blank"
+                        href={f.file_link}
+                        className="row-item"
+                      >
+                        دانلود
+                      </a>
+                    </div>
+                  ))
+                ) : (
+                  "موردی برای نمایش وجود ندارد"
+                )
+              ) : (
+                <LittleLoading />
+              )
+            ) : (
+              <></>
+            )}
+            {file_type === "azmon" ? (
+              azmonha ? (
+                azmonha.length !== 0 ? (
+                  azmonha.map((f, i = 1) => (
+                    <div className="file-row" key={f.file_id}>
+                      <span className="row-item">{i++ + 1}</span>
+                      <span className="row-item name-wrapper">{f.title}</span>
+                      <span className="row-item">15 مهر 1402</span>
+                      <span className="row-item">فصل دوم</span>
+                      <a
+                        target="_blank"
+                        href={f.file_link}
+                        className="row-item"
+                      >
+                        دانلود
+                      </a>
+                    </div>
+                  ))
+                ) : (
+                  "موردی برای نمایش وجود ندارد"
+                )
+              ) : (
+                <LittleLoading />
+              )
+            ) : (
+              <></>
+            )}
           </div>
         </section>
-        <section className="faq-section-wrapper">
-          <h2 className="faq-section-title">سوالات متداول</h2>
-          <div className="faq-item opened">
-            <div className="faq-header">
-              <h3 className="faq-question">لورم ایپسوم و داستان</h3>
-              <img
-                src={plus}
-                alt="باز کردن"
-                width={40}
-                height={40}
-                loading="lazy"
-              />
-            </div>
-            <p className="faq-answer">
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان
-            </p>
-          </div>
-          <div className="faq-item">
-            <div className="faq-header">
-              <h3 className="faq-question">لورم ایپسوم و داستان</h3>
-              <img
-                src={plus}
-                alt="باز کردن"
-                width={40}
-                height={40}
-                loading="lazy"
-              />
-            </div>
-            <p className="faq-answer">
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان
-            </p>
-          </div>
-          <div className="faq-item">
-            <div className="faq-header">
-              <h3 className="faq-question">لورم ایپسوم و داستان</h3>
-              <img
-                src={plus}
-                alt="باز کردن"
-                width={40}
-                height={40}
-                loading="lazy"
-              />
-            </div>
-            <p className="faq-answer">
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان
-            </p>
-          </div>
-          <div className="faq-item">
-            <div className="faq-header">
-              <h3 className="faq-question">لورم ایپسوم و داستان</h3>
-              <img
-                src={plus}
-                alt="باز کردن"
-                width={40}
-                height={40}
-                loading="lazy"
-              />
-            </div>
-            <p className="faq-answer">
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان
-            </p>
-          </div>
-          <div className="faq-item">
-            <div className="faq-header">
-              <h3 className="faq-question">لورم ایپسوم و داستان</h3>
-              <img
-                src={plus}
-                alt="باز کردن"
-                width={40}
-                height={40}
-                loading="lazy"
-              />
-            </div>
-            <p className="faq-answer">
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان
-            </p>
-          </div>
-          <div className="faq-item">
-            <div className="faq-header">
-              <h3 className="faq-question">لورم ایپسوم و داستان</h3>
-              <img
-                src={plus}
-                alt="باز کردن"
-                width={40}
-                height={40}
-                loading="lazy"
-              />
-            </div>
-            <p className="faq-answer">
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان لورم ایپسوم و داستان لورم ایپسوم و داستان
-              لورم ایپسوم و داستان
-            </p>
-          </div>
-        </section>
+        <FAQ_new faq={teacher ? teacher.FAQ : false} />
       </div>
     </>
   );

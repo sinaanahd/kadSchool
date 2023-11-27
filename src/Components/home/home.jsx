@@ -42,6 +42,7 @@ import good_students_11 from "../../assets/images/rotbe-bartar/rotbe-11.webp";
 import good_students_12 from "../../assets/images/rotbe-bartar/rotbe-12.webp";
 import good_students_13 from "../../assets/images/rotbe-bartar/rotbe-13.webp";
 import good_students_14 from "../../assets/images/rotbe-bartar/rotbe-14.webp";
+import urls from "../urls/url";
 
 const len = 8;
 const user = JSON.parse(localStorage.getItem("user-kad"))
@@ -146,10 +147,7 @@ const HomePage = () => {
     set_pause(true);
     // setState({ pause: true });
     axios
-      .post(
-        `https://kadschool.com/backend/kad_api/call_request_marketing`,
-        send_obj
-      )
+      .post(`${urls.call_request_marketing}`, send_obj)
       .then((res) => {
         const { status } = res.data;
         //console.log(res.data);
@@ -331,10 +329,7 @@ const HomePage = () => {
     const send_obj = { phone_number: phone_number, type: 1 };
     set_pause_2(true);
     axios
-      .post(
-        `https://kadschool.com/backend/kad_api/call_request_marketing`,
-        send_obj
-      )
+      .post(`${urls.call_request_marketing}`, send_obj)
       .then((res) => {
         const { status } = res.data;
         //console.log(res.data);

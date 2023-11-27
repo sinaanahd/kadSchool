@@ -7,6 +7,7 @@ import mainLogo from "../../assets/images/main-logo.webp";
 import login_bgc from "../../assets/images/login-img.webp";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
+import urls from "../urls/url";
 
 class ForgetPassword extends Component {
   state = {
@@ -45,9 +46,7 @@ class ForgetPassword extends Component {
   get_verification_code = () => {
     this.setState({ pause: true });
     axios
-      .get(
-        `https://kadschool.com/backend/kad_api/verify_phone_number/${this.state.phone_number}`
-      )
+      .get(`${urls.verify_number}${this.state.phone_number}`)
       .then((res) => {
         this.setState({ pause: false });
         const { been_before, user_id, verification_code } = res.data;
@@ -134,7 +133,8 @@ class ForgetPassword extends Component {
                   className="get-code button-span"
                   onClick={() => {
                     this.get_verification_code();
-                  }}>
+                  }}
+                >
                   {this.state.pause ? <LittleLoading /> : "دریافت کد"}
                 </span>
               )}
@@ -153,7 +153,8 @@ class ForgetPassword extends Component {
                   onClick={() => {
                     this.check_user();
                   }}
-                  className="enter button-span">
+                  className="enter button-span"
+                >
                   تایید
                 </span>
               ) : (

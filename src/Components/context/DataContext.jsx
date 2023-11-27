@@ -6,6 +6,7 @@ import convert_to_persian from "../functions/convert-to-persian";
 import HomeHeader from "../home/header/home-header";
 import HomeFooter from "../home/footer/home-footer";
 import TopSiteSlider from "../top-site-slider/top-site-slider";
+import urls from "../urls/url";
 const kelasses_data = JSON.parse(localStorage.getItem("kelasses")) || false;
 const teachers_data = JSON.parse(localStorage.getItem("teachers")) || false;
 const doreha_data = JSON.parse(localStorage.getItem("doreha")) || false;
@@ -118,7 +119,7 @@ const DataProvider = ({ children }) => {
   }, []);
   const get_kelasses = () => {
     axios
-      .get("https://kadschool.com/backend/kad_api/kelases")
+      .get(urls.kelasses)
       .then((res) => {
         const ref_kelasses = res.data;
         ref_kelasses.forEach((kelas) => {
@@ -155,7 +156,7 @@ const DataProvider = ({ children }) => {
   };
   const get_teachers = () => {
     axios
-      .get("https://kadschool.com/backend/kad_api/teachers")
+      .get(urls.teachers)
       .then((res) => {
         const ref_teachers = res.data;
         ref_teachers.forEach((t) => {
@@ -172,7 +173,7 @@ const DataProvider = ({ children }) => {
   };
   const get_doreha = () => {
     axios
-      .get("https://kadschool.com/backend/kad_api/doreha")
+      .get(urls.doreha)
       .then((res) => {
         const ref_doreha = res.data;
         ref_doreha.forEach((dore) => {
@@ -188,7 +189,7 @@ const DataProvider = ({ children }) => {
   };
   const get_courses = () => {
     axios
-      .get("https://kadschool.com/backend/kad_api/all_courses")
+      .get(urls.all_courses)
       .then((res) => {
         const ref_courses = res.data;
         setCourses(ref_courses);
@@ -200,7 +201,7 @@ const DataProvider = ({ children }) => {
   };
   const get_sample_files = () => {
     axios
-      .get("https://kadschool.com/backend/kad_api/sample_files")
+      .get(urls.sample_files)
       .then((res) => {
         const sample_files = res.data;
         localStorage.setItem("sample_files", JSON.stringify(sample_files));
@@ -212,7 +213,7 @@ const DataProvider = ({ children }) => {
   };
   const get_jalasat = () => {
     axios
-      .get("https://kadschool.com/backend/kad_api/jalasat")
+      .get(urls.jalasat)
       .then((res) => {
         const ref_jalasat = res.data;
         //console.log(ref_jalasat);
@@ -225,7 +226,7 @@ const DataProvider = ({ children }) => {
   };
   const get_banners = () => {
     axios
-      .get("https://kadschool.com/backend/kad_api/admin_banners")
+      .get(urls.banners)
       .then((res) => {
         const banners = res.data;
         set_banners(banners);
@@ -239,7 +240,7 @@ const DataProvider = ({ children }) => {
     //.get(`https://kadschool.com/backend/kad_api/user/${9166}`)
     // .get(`https://kadschool.com/backend/kad_api/user/${1034}`)
     axios
-      .get(`https://kadschool.com/backend/kad_api/user/${user_id}`)
+      .get(`${urls.user}${user_id}`)
       .then((res) => {
         const user = res.data;
         setUser(user);
@@ -252,7 +253,7 @@ const DataProvider = ({ children }) => {
   const get_pay_info = (user_id) => {
     axios
       .get(
-        `https://kadschool.com/backend/kad_api/financial_records/${user_id}`
+        `${urls.finance_records}${user_id}`
         //`https://kadschool.com/backend/kad_api/financial_records/${9166}`
       )
       .then((res) => {
@@ -339,12 +340,12 @@ const DataProvider = ({ children }) => {
         jalasat: ref_jalasat,
         banners,
         user,
+        setUser,
         pay_info,
         handle_cart,
         cart,
         subjects,
         years,
-        setUser,
       }}
     >
       {children}

@@ -9,6 +9,7 @@ import telegramIcon from "../../assets/images/telegram-icon.webp";
 import whatsappIcon from "../../assets/images/whatsapp-icon.webp";
 import instagramIcon from "../../assets/images/instagram-icon.webp";
 import LittleLoading from "../reuseables/little-loading";
+import urls from "../urls/url";
 
 class NewFooter extends Component {
   state = {
@@ -22,10 +23,7 @@ class NewFooter extends Component {
     const send_obj = { phone_number: phone_number, type: 1 };
     this.setState({ pause: true });
     axios
-      .post(
-        `https://kadschool.com/backend/kad_api/call_request_marketing`,
-        send_obj
-      )
+      .post(`${urls.call_request_marketing}`, send_obj)
       .then((res) => {
         const { status } = res.data;
         //console.log(res.data);
@@ -69,7 +67,8 @@ class NewFooter extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to="/HomePage">
+            to="/HomePage"
+          >
             <img
               src={footerLogo}
               width={62}
@@ -97,7 +96,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       this.send_gift_request();
                     }}
-                    className="submit-btn-footer">
+                    className="submit-btn-footer"
+                  >
                     {this.state.pause ? <LittleLoading /> : "ثبت"}
                   </span>
                 ) : (
@@ -127,7 +127,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="/Support">
+                    to="/Support"
+                  >
                     پشتیبانی
                   </Link>
                 </li>
@@ -136,7 +137,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="/FAQ">
+                    to="/FAQ"
+                  >
                     سوالات متداول
                   </Link>
                 </li>
@@ -145,7 +147,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="/Needed-apps">
+                    to="/Needed-apps"
+                  >
                     {" "}
                     نرم افزار های مورد نیاز
                   </Link>
@@ -160,7 +163,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="/Top-students">
+                    to="/Top-students"
+                  >
                     {" "}
                     رتبه های برتر کاد
                   </Link>
@@ -170,7 +174,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="/Why-kad">
+                    to="/Why-kad"
+                  >
                     چرا کاد؟
                   </Link>
                 </li>
@@ -179,7 +184,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="/Teachers">
+                    to="/Teachers"
+                  >
                     استادان کاد
                   </Link>
                 </li>
@@ -188,7 +194,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="/Kad-calender">
+                    to="/Kad-calender"
+                  >
                     تقویم کاد
                   </Link>
                 </li>
@@ -197,7 +204,8 @@ class NewFooter extends Component {
                     onClick={() => {
                       scrollToTop();
                     }}
-                    to="/Rules">
+                    to="/Rules"
+                  >
                     قوانین کاد
                   </Link>
                 </li>
@@ -208,7 +216,8 @@ class NewFooter extends Component {
                 <a
                   href="https://b2n.ir/y31513"
                   target="_blank"
-                  className="icon">
+                  className="icon"
+                >
                   <img
                     width={20}
                     height={21}
@@ -219,7 +228,8 @@ class NewFooter extends Component {
                 <a
                   href="https://b2n.ir/y01578"
                   target="_blank"
-                  className="icon">
+                  className="icon"
+                >
                   <img
                     width={20}
                     height={19.35}
@@ -230,7 +240,8 @@ class NewFooter extends Component {
                 <a
                   href="https://b2n.ir/r59262"
                   target="_blank"
-                  className="icon">
+                  className="icon"
+                >
                   <img
                     width={20}
                     height={19.35}
@@ -241,7 +252,8 @@ class NewFooter extends Component {
                 <a
                   href="https://b2n.ir/u76961"
                   target="_blank"
-                  className="icon">
+                  className="icon"
+                >
                   <img
                     width={20}
                     height={18.36}
@@ -260,7 +272,8 @@ class NewFooter extends Component {
                     style={{ border: 0 }}
                     allowFullScreen=""
                     loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </span>
                 <span className="enamad">
                   <p>
@@ -275,7 +288,8 @@ class NewFooter extends Component {
                       aria-label="اینماد"
                       href="https://trustseal.enamad.ir/?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"
                       target="_blank"
-                      rel="noopener">
+                      rel="noopener"
+                    >
                       <img
                         data-lazyloaded="1"
                         src="https://Trustseal.eNamad.ir/logo.aspx?id=251229&amp;Code=Jmy33pCxvf9GCBxttooi"

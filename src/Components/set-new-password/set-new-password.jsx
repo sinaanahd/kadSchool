@@ -7,6 +7,7 @@ import mainLogo from "../../assets/images/main-logo.webp";
 import login_bgc from "../../assets/images/login-img.webp";
 import axios from "axios";
 import LittleLoading from "../reuseables/little-loading";
+import urls from "../urls/url";
 
 class SetNewPassword extends Component {
   state = {
@@ -56,7 +57,7 @@ class SetNewPassword extends Component {
       // prettier-ignore
       axios
         .patch(
-          `https://kadschool.com/backend/kad_api/password/${phone_number}`,
+          `${urls.password}${phone_number}`,
           { new_password: pass_1 }
         )
         .then((res) => {

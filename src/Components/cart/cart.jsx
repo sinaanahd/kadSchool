@@ -7,6 +7,7 @@ import LittleLoading from "../reuseables/little-loading";
 import axios from "axios";
 import { DataContext } from "../context/DataContext";
 import Cart_item from "./cart-item/cart-item";
+import urls from "../urls/url";
 
 const Cart = () => {
   const { user, cart } = useContext(DataContext);
@@ -24,9 +25,9 @@ const Cart = () => {
   const get_naghd_link = () => {
     set_cash_pause(true);
     axios
-      .get(`https://kadschool.com/backend/kadstore/siteSale/${user.user_id}-0`)
+      .get(`${urls.sale}${user.user_id}-0`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const { error, response, result } = res.data;
         if (result) {
           window.open(response);
@@ -43,9 +44,9 @@ const Cart = () => {
   const get_ghest_link = () => {
     set_ghest_pay_pause(true);
     axios
-      .get(`https://kadschool.com/backend/kadstore/siteSale/${user.user_id}-3`)
+      .get(`${urls.sale}${user.user_id}-3`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const { error, response, result } = res.data;
         if (result) {
           window.open(response);
@@ -62,11 +63,9 @@ const Cart = () => {
   const calculate_ghest = () => {
     set_ghest_pause(true);
     axios
-      .get(
-        `https://kadschool.com/backend/kadstore/ghestiDetails/${cart.final_price}-${ghest_num}`
-      )
+      .get(`${urls.ghest_details}${cart.final_price}-${ghest_num}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const { error, response, result } = res.data;
         if (result) {
           set_ghests(response);
@@ -84,7 +83,7 @@ const Cart = () => {
     const ids = { products_ids: cart.ids };
     set_submit_pause(true);
     axios
-      .patch(`https://kadschool.com/backend/kadstore/cart/${user.user_id}`, ids)
+      .patch(`${urls.buy_cart}${user.user_id}`, ids)
       .then((res) => {
         console.log(res.data);
         const { error, response, result } = res.data;
@@ -96,6 +95,7 @@ const Cart = () => {
           }
         } else {
           alert(error);
+          console.log(error);
         }
         set_submit_pause(false);
       })

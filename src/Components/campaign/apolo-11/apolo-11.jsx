@@ -6,9 +6,7 @@ import React, {
   useContext,
 } from "react";
 import { Helmet } from "react-helmet";
-import withWebsiteData from "../../hoc/with-website-data";
-import HomeHeader from "../../home/header/home-header";
-import HomeFooter from "../../home/footer/home-footer";
+import urls from "../../urls/url";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import LittleLoading from "../../reuseables/little-loading";
 import axios from "axios";
@@ -339,7 +337,7 @@ const Apollo_11 = () => {
         is_from_campaign_mordad_1402: true,
       };
       axios
-        .post(`https://kadschool.com/backend/kad_api/register_user`, obj)
+        .post(`${urls.register_user}`, obj)
         .then((res) => {
           let data = res.data;
           axios
@@ -376,7 +374,7 @@ const Apollo_11 = () => {
   const send_code = () => {
     this.setState({ pause: true });
     axios
-      .get(`https://kadschool.com/backend/kad_api/verify_phone_number/${phone}`)
+      .get(`${urls.verify_number}${phone}`)
       .then((res) => {
         this.setState({ pause: false });
         const { been_before, user_id, verification_code } = res.data;
@@ -406,9 +404,7 @@ const Apollo_11 = () => {
     set_pause(true);
     if (parseInt(code) === parseInt(entry_code)) {
       axios
-        .get(
-          `https://kadschool.com/backend/kad_api/apollo11_add_phone_number/${phone}`
-        )
+        .get(`${urls.apollo}${phone}`)
         .then((res) => {
           //console.log(res.data);
         })
@@ -417,7 +413,7 @@ const Apollo_11 = () => {
         });
       if (been_before) {
         axios
-          .get(`https://kadschool.com/backend/kad_api/user/${user_id}`)
+          .get(`${urls.user}${user_id}`)
           .then((res) => {
             // this.setState({ pause: false });
             set_pause(false);

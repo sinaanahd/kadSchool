@@ -8,6 +8,7 @@ import axios from "axios";
 import RulesPopUp from "../signup/rules-pop-up/rules-pop-up";
 import LittleLoading from "../reuseables/little-loading";
 import login_bgc from "../../assets/images/login-img.webp";
+import urls from "../urls/url";
 class ReferalSignUp extends Component {
   constructor(props) {
     super(props);
@@ -114,11 +115,11 @@ class ReferalSignUp extends Component {
         admin_id: admin_id,
       };
       axios
-        .post(`https://kadschool.com/backend/kad_api/register_user`, obj)
+        .post(`${urls.register_user}`, obj)
         .then((res) => {
           let data = res.data;
           axios
-            .get(`https://kadschool.com/backend/kad_api/user/${data.user_id}`)
+            .get(`${urls.user}${data.user_id}`)
             .then((res) => {
               const user = res.data;
               this.props.inside_user(user);
@@ -166,9 +167,7 @@ class ReferalSignUp extends Component {
   get_verification_code = () => {
     this.setState({ pause_2: true });
     axios
-      .get(
-        `https://kadschool.com/backend/kad_api/verify_phone_number/${this.state.phone}`
-      )
+      .get(`${urls.verify_number}${this.state.phone}`)
       .then((res) => {
         // console.log(res.data);
         const { been_before, user_id, verification_code } = res.data;

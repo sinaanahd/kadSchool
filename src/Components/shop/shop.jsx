@@ -26,6 +26,7 @@ const Shop = () => {
     years,
     subjects,
     banners,
+    user,
   } = useContext(DataContext);
   const handle_filter_show = (entry) => {
     // const prev_state = shown;
@@ -415,6 +416,7 @@ const Shop = () => {
                       doreha={doreha ? doreha : false}
                       handle_cart={handle_cart}
                       cart={cart ? cart : false}
+                      user={user}
                     />
                   ))
                 ) : (
@@ -429,6 +431,7 @@ const Shop = () => {
                     doreha={doreha ? doreha : false}
                     handle_cart={handle_cart}
                     cart={cart ? cart : false}
+                    user={user}
                   />
                 ))
               ) : (

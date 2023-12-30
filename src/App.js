@@ -52,6 +52,11 @@ import HomeFooter from './Components/home/footer/home-footer';
 import { DataContext } from './Components/context/DataContext';
 import TopSiteSlider from './Components/top-site-slider/top-site-slider';
 import PayResultPage from './Components/pay-result-page/pay-result';
+import SingleDore from './Components/single-dore/single-dore';
+import SinglePost from './Components/posts/post/single-post';
+import AllBlogs from './Components/posts/all-posts';
+import NOT_tajrobi from './Components/landing-pages/nokte-o-test/nokte-o-test-ensani';
+import NOT_ensani from './Components/landing-pages/nokte-o-test/nokte-o-test-tajrobi';
 // context refactor
 
 const App = () => {
@@ -64,9 +69,6 @@ const App = () => {
       }
     },1000)
   },[]);
-  const check_page_handler = (e) => {
-     
-  };
   return ( <>
   <TopSiteSlider
         banners={
@@ -131,10 +133,25 @@ const App = () => {
         <Route path="/new-shop/:kind/:title" component={NewShop} />
         <Route path="/r-Teachers/:id" component={R_SingleTeacher} />
         <Route path="/r-class/:id" component={SingleClass} />
+        <Route path="/r-dore/:id" component={SingleDore} />
         {/* 
           re-design / re-factor
         */}
 
+        {/* 
+          landing pages 
+        */}
+        <Route path="/نکته-و-تست-تجربی" component={NOT_tajrobi} />
+        <Route path="/نکته-و-تست-انسانی" component={NOT_ensani} />
+        {/* 
+          landing pages 
+        */}
+
+
+        {/* posts */}
+        <Route path="/blogs/:id" component={SinglePost} />
+        <Route path="/blogs" component={AllBlogs} />
+        {/* posts */}
 
         {/*  special discount */}
         <Route path="/special-discount" component={specialDiscount} />

@@ -1,10 +1,7 @@
 import React, { Component, useState } from "react";
 import { Helmet } from "react-helmet";
 import SideBar from "../side-bar/side-bar";
-import withWebsiteData from "../hoc/with-website-data";
 import FaqQuestion from "./faq-question/faq-question";
-import axios from "axios";
-import LittleLoading from "../reuseables/little-loading";
 
 const FAQ = () => {
   const [tab, set_tab] = useState(1);

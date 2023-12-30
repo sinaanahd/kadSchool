@@ -56,7 +56,7 @@ const R_SingleTeacher = () => {
     }
     return final_arr;
   };
-  const slug = find_slug();
+  const slug = decodeURIComponent(window.location.pathname.split("/")[2]);
   const teacher = teachers
     ? Object.keys({
         ...teachers.find((t) => t.slug_name === slug || t.teacher_id === slug),
@@ -141,12 +141,7 @@ const R_SingleTeacher = () => {
   return (
     <>
       <Helmet>
-        <title>
-          کاد |{" "}
-          {decodeURIComponent(
-            window.location.pathname.split("/")[2]
-          ).replaceAll("-", " ")}
-        </title>
+        <title>کاد | {slug.replaceAll("-", " ")}</title>
       </Helmet>
       <div className="re-teacher-main-wrapper re">
         <section className="teacher-intro-wrapper">
@@ -160,9 +155,7 @@ const R_SingleTeacher = () => {
           </div>
           <div className="teacher-text-data">
             <h1 className="main-title">
-              {decodeURIComponent(
-                window.location.pathname.split("/")[2]
-              ).replaceAll("-", " ")}
+              {slug.replaceAll("-", " ")}
               {/* {teacher ? teacher.fullname : <LittleLoading />} */}
             </h1>
             <p className="teacher-short-desc">
@@ -367,100 +360,11 @@ const R_SingleTeacher = () => {
               <LittleLoading />
             )}
           </div>
-
-          {/* <div className="resume-item">
-            <div className="resume-title-wrapper">
-              <img
-                src={pub_img}
-                width={80}
-                height={80}
-                loading="lazy"
-                alt="تالیفات"
-              />
-              <h2 className="resume-title">تالیفات</h2>
-            </div>
-            <ul className="resume-content-items">
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-            </ul>
-          </div> */}
-          {/* <div className="resume-item">
-            <div className="resume-title-wrapper">
-              <img
-                src={exp_img}
-                width={80}
-                height={80}
-                loading="lazy"
-                alt="تحصیلات"
-              />
-              <h2 className="resume-title">تحصیلات</h2>
-            </div>
-            <ul className="resume-content-items">
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-            </ul>
-          </div> */}
-          {/* <div className="resume-item">
-            <div className="resume-title-wrapper">
-              <img
-                src={qua_img}
-                width={80}
-                height={80}
-                loading="lazy"
-                alt="ویژگی های آموزشی"
-              />
-              <h2 className="resume-title">ویژگی های آموزشی</h2>
-            </div>
-            <ul className="resume-content-items">
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-            </ul>
-          </div> */}
-          {/* <div className="resume-item">
-            <div className="resume-title-wrapper">
-              <img
-                src={ran_img}
-                width={80}
-                height={80}
-                loading="lazy"
-                alt="رتبه های برتر سال های گذشته"
-              />
-              <h2 className="resume-title">رتبه های برتر سال های گذشته</h2>
-            </div>
-            <ul className="resume-content-items">
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-            </ul>
-          </div> */}
-          {/* <div className="resume-item">
-            <div className="resume-title-wrapper">
-              <img
-                src={tes_img}
-                width={80}
-                height={80}
-                loading="lazy"
-                alt="طراحی آزمون"
-              />
-              <h2 className="resume-title">طراحی آزمون</h2>
-            </div>
-            <ul className="resume-content-items">
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-              <li>مدرس کلاس های اینترنتی کاد</li>
-            </ul>
-          </div> */}
         </section>
         <section className="teacher-classes-wrapper">
-          <h2 className="sectoin-title">کلاس های استاد</h2>
+          <h2 className="sectoin-title">
+            کلاس های {slug.replaceAll("-", " ")}
+          </h2>
           <div className="classes-carousel-wrapper">
             <div className="classes-carousel-place" ref={kelas_ref}>
               {teacher && teacher_kelasses ? (
@@ -596,7 +500,7 @@ const R_SingleTeacher = () => {
         </section>
         <section className="video-intros-wrapper">
           <div className="teacher-video-place">
-            <h2 className="video-title">معرفی استاد</h2>
+            <h2 className="video-title">معرفی {slug.replaceAll("-", " ")}</h2>
             <div className="video-need-div">
               {intro_video ? (
                 <AparatVideo src={intro_video.file_link} />
@@ -606,7 +510,9 @@ const R_SingleTeacher = () => {
             </div>
           </div>
           <div className="teacher-video-place">
-            <h2 className="video-title">نمونه تدریس ها</h2>
+            <h2 className="video-title">
+              نمونه تدریس های {slug.replaceAll("-", " ")}
+            </h2>
             <div className="video-need-div">
               {nemone_tadris ? (
                 nemone_tadris.length !== 0 ? (
@@ -622,7 +528,9 @@ const R_SingleTeacher = () => {
             </div>
           </div>
           <div className="teacher-video-place">
-            <h2 className="video-title">درس های رایگان</h2>
+            <h2 className="video-title">
+              درس های رایگان {slug.replaceAll("-", " ")}
+            </h2>
             <div className="video-need-div">
               {free_course ? (
                 free_course.length !== 0 ? (

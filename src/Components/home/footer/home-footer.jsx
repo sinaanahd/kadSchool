@@ -101,7 +101,13 @@ class HomeFooter extends Component {
             to="/HomePage"
             className="home-page-link"
           >
-            <img src={mainLogo} alt="کاد" width={175} height={42} />
+            <img
+              src={mainLogo}
+              alt="کاد"
+              width={175}
+              height={42}
+              loading="lazy"
+            />
           </Link>
           <div className="home-footer-cols">
             <div className="hf-col hf-col-1">
@@ -245,6 +251,7 @@ class HomeFooter extends Component {
                   className="icon"
                 >
                   <img
+                    loading="lazy"
                     width={20}
                     height={21}
                     src={aparatLogo}
@@ -257,6 +264,7 @@ class HomeFooter extends Component {
                   className="icon"
                 >
                   <img
+                    loading="lazy"
                     width={20}
                     height={19.35}
                     src={instagramIcon}
@@ -269,6 +277,7 @@ class HomeFooter extends Component {
                   className="icon"
                 >
                   <img
+                    loading="lazy"
                     width={20}
                     height={19.35}
                     src={whatsappIcon}
@@ -281,6 +290,7 @@ class HomeFooter extends Component {
                   className="icon"
                 >
                   <img
+                    loading="lazy"
                     width={20}
                     height={18.36}
                     src={telegramIcon}

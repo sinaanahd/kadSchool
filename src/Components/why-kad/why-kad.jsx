@@ -35,7 +35,7 @@ const WhyKad = () => {
           <div className="main-content">
             <h1 className="title">چرا کاد ؟</h1>
             <div className={"why-boxes " + animate}>
-              <div className="why-box">
+              {/* <div className="why-box">
                 <img
                   loading="lazy"
                   width={60}
@@ -48,7 +48,7 @@ const WhyKad = () => {
                   توی کاد اگه پیشرفت نکنی کل هزینه دوره در پایان دوره بهت برگشت
                   داده میشه. کاد جای متوسط موندن نیست!
                 </p>
-              </div>
+              </div> */}
               <div className="why-box">
                 <img
                   loading="lazy"

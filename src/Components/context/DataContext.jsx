@@ -71,8 +71,69 @@ const DataProvider = ({ children }) => {
       name: "فارغ التحصیل",
     },
   ];
+  const static_doreha = ref_doreha
+    ? ref_doreha
+    : [
+        {
+          dore_id: 5,
+          dore_title: "سالانه",
+          dore_start_date: "2023-07-29",
+          descriptions: [
+            "توی کلاس های سالیانه 0 تا 100 کلیه مباحث از کلیه پایه ها رو تدریس میکنیم و کلی آزمون آزمایشی هفتگی برات داریم .",
+            "علاوه بر این بهت هر جلسه تکلیف میدیم که بعد از کلاس به امون خدا رها نشی .",
+            "تازه هر جلسه هم آنلاین و هم آفلاین هر تعداد سوالی که داشته باشی رفع اشکال میشه .",
+          ],
+          aparat_link: "",
+          kelases: [
+            9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 22, 23, 24, 26, 45, 46,
+          ],
+          slug_name: "سالانه",
+        },
+        {
+          dore_id: 6,
+          dore_title: "آفلاین",
+          dore_start_date: "2023-07-25",
+          descriptions: [
+            "دوره ی آفلاین شامل بهترین کلاس هاییه که میتونی پیدا کنی !",
+            "نکته ی خوبشم اینه که وقتی ثبت نام کنی ، به کل ویدیو های دوره دسترسی خواهی داشت ...",
+          ],
+          aparat_link: "",
+          kelases: [],
+          slug_name: "آفلاین",
+        },
+        {
+          dore_id: 7,
+          dore_title: "امتحان نهایی",
+          dore_start_date: "2023-12-05",
+          descriptions: ["هنوز توضیحاتی ثبت نشده ."],
+          aparat_link: "",
+          kelases: [34, 37, 38, 39, 40, 41, 42, 43, 44],
+          slug_name: "امتحان-نهایی",
+        },
+        {
+          dore_id: 8,
+          dore_title: "نکته و تست",
+          dore_start_date: "2023-12-07",
+          descriptions: ["توضیحات برای دوره نکته و تست به زودی ثبت میشه !"],
+          aparat_link: "",
+          kelases: [],
+          slug_name: "نکته-و-تست",
+        },
+        {
+          dore_id: 9,
+          dore_title: "مبحثی",
+          dore_start_date: "2023-12-07",
+          descriptions: ["توضیحات دوره مبحثی به زودی ثبت میشه !"],
+          aparat_link: "",
+          kelases: [27, 28, 29],
+          slug_name: "مبحثی",
+        },
+      ];
   useEffect(() => {
     const is_time = last_login_check(last_login, this_time_login);
+    // send_cookie();
+    // get_user(9166);
+
     if (is_time) {
       get_kelasses();
       get_teachers();
@@ -280,18 +341,39 @@ const DataProvider = ({ children }) => {
     const searched_obj = new_cart.items.find(
       (item) => item.kelas_id === obj.kelas_id
     );
-    if (!searched_obj) {
-      new_cart.items.push(obj);
-      new_cart.ids = get_ids(new_cart.items);
-      new_cart.pure_price = calculate_pure_price(new_cart.items);
-      new_cart.discounts = calculate_discounts(new_cart.items);
-      new_cart.final_price = new_cart.pure_price - new_cart.discounts;
+    // if (!searched_obj) {
+    //   new_cart.items.push(obj);
+    //   new_cart.ids = get_ids(new_cart.items);
+    //   new_cart.pure_price = calculate_pure_price(new_cart.items);
+    //   new_cart.discounts = calculate_discounts(new_cart.items);
+    //   new_cart.final_price = new_cart.pure_price - new_cart.discounts;
+    // } else {
+    //   const deleted_cart = delete_from_cart(new_cart, searched_obj.kelas_id);
+    //   new_cart.ids = get_ids(deleted_cart.items);
+    //   new_cart.pure_price = calculate_pure_price(new_cart.items);
+    //   new_cart.discounts = calculate_discounts(new_cart.items);
+    //   new_cart.final_price = new_cart.pure_price - new_cart.discounts;
+    // }
+    if (!user.kelases.includes(obj.kelas_id)) {
+      const searched_obj = new_cart.items.find(
+        (item) => item.kelas_id === obj.kelas_id
+      );
+      if (!searched_obj) {
+        new_cart.items.push(obj);
+        new_cart.ids = get_ids(new_cart.items);
+        new_cart.pure_price = calculate_pure_price(new_cart.items);
+        new_cart.discounts = calculate_discounts(new_cart.items);
+        new_cart.final_price = new_cart.pure_price - new_cart.discounts;
+      } else {
+        const deleted_cart = delete_from_cart(new_cart, searched_obj.kelas_id);
+        new_cart.ids = get_ids(deleted_cart.items);
+        new_cart.pure_price = calculate_pure_price(new_cart.items);
+        new_cart.discounts = calculate_discounts(new_cart.items);
+        new_cart.final_price = new_cart.pure_price - new_cart.discounts;
+      }
+      finilize_cart(new_cart);
     } else {
-      const deleted_cart = delete_from_cart(new_cart, searched_obj.kelas_id);
-      new_cart.ids = get_ids(deleted_cart.items);
-      new_cart.pure_price = calculate_pure_price(new_cart.items);
-      new_cart.discounts = calculate_discounts(new_cart.items);
-      new_cart.final_price = new_cart.pure_price - new_cart.discounts;
+      alert("شما قبلا این محصول رو خریداری کردید");
     }
     finilize_cart(new_cart);
   };
@@ -328,7 +410,6 @@ const DataProvider = ({ children }) => {
     return sum;
   };
   /* cart data */
-
   return (
     <DataContext.Provider
       value={{
@@ -346,6 +427,7 @@ const DataProvider = ({ children }) => {
         cart,
         subjects,
         years,
+        static_doreha,
       }}
     >
       {children}

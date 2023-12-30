@@ -279,7 +279,7 @@ const HomePage = () => {
 
   const res_carousel = () => {
     if (res_way === "forward") {
-      if (res_carouse_pos !== 7) {
+      if (res_carouse_pos !== 6) {
         set_res_carouse_pos(res_carouse_pos + 1);
         // setState({ res_carouse_pos: res_carouse_pos + 1 });
       } else {
@@ -426,11 +426,11 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>کاد اولین و قوی ترین سفینه کنکور</title>
+        <title>کاد | کلاس های مجازی برای دهم ، یازدهم و دوازدهم</title>
         <meta name="description" content="" />
         <meta
           name="keywords"
-          content="کاد, کلاس اینترنتی, کلاس اینترنتی دریافت, کلاس کنکور, کلاس آنلاین کنکور, کنکور ۱۴۰۳, کنکور,"
+          content="کاد, کلاس اینترنتی, کلاس های مجازی برای دهم, کلاس های مجازی برای یازدهم ,کلاس های مجازی برای دوازدهم , کلاس کنکور, کلاس آنلاین کنکور, کنکور ۱۴۰۳, کنکور,"
         />
         <meta
           name="description"
@@ -449,12 +449,16 @@ const HomePage = () => {
               className="video-hero"></video> */}
           </div>
           <div className="hero-text-wrapper">
-            <h1 className="hero-title">کاد اولین و قوی‌ترین سفینه کنکور</h1>
+            <h1 className="hero-title">
+              کاد ، کلاس های مجازی برای
+              <br />
+              دهم ، یازدهم ، دوازدهم و کنکور
+            </h1>
             <p className="hero-text">
-              کاد سفینه فضایی هست برای یک سفر آموزشی هیجان انگیز تا به کمک بقیه
-              فضانورد های کاد با سلاح های مختلفی که داریم به جنگ آدم فضایی های
-              هر سیاره بریم و فتحش کنیم به نظرت پایان سال تحصیلی میتونیم شکستشون
-              بدیم؟
+              کاد ، آموزش رو براتون جذاب میکنه. ما اینجا فقط درس نمیدیم ما
+              پشتیبان شما هم هستیم ماموریت ما فقط این نیست که شما موفق بشید بلکه
+              میخوایم حالتون خوب باشه و از درس خوندن لذت ببرید. ما هم موفقیت و
+              پیشرفت شما رو ببینیم تا حال ما هم خوب بشه.
             </p>
             <span className="get-on-board">
               <span className="hero-gift-text-img">
@@ -466,10 +470,7 @@ const HomePage = () => {
                     height={30}
                   />
                 </span>
-                <p>
-                  سوار سفینه کاد بشو و هدیه <font>۱ میلیون تومانی</font> تومانی
-                  بگیر
-                </p>
+                <p>شماره‌تو بذار تا کلاس رایگان هدیه بگیری</p>
               </span>
               <span className="hero-input-wrapper">
                 <input
@@ -490,10 +491,10 @@ const HomePage = () => {
                 />
                 {phone_err === "ok" && name_err === "ok" ? (
                   <span onClick={() => send_gift_request()} className="fly-btn">
-                    {pause ? <LittleLoading /> : "پرواز سفینه"}
+                    {pause ? <LittleLoading /> : "ثبت شماره"}
                   </span>
                 ) : (
-                  <span className="fly-btn dont-fly-yet">پرواز سفینه</span>
+                  <span className="fly-btn dont-fly-yet">ثبت شماره</span>
                 )}
               </span>
               {phone_err && phone_err !== "ok" ? (
@@ -515,7 +516,7 @@ const HomePage = () => {
           </div>
         </section>
         <section className="achivment-history-wrapper">
-          <h2 className="semi-title">تاریخ فتوحات کاد</h2>
+          <h2 className="semi-title">تو کاد چه خبره ؟</h2>
           <div className="numberical-contents">
             <span className="numerical-item">
               <span className="number">{students}</span>
@@ -523,11 +524,11 @@ const HomePage = () => {
             </span>
             <span className="numerical-item">
               <span className="number">{under_1000}</span>
-              <p className="content-text">رتبه زیر 1000</p>
+              <p className="content-text">رتبه زیر ۱۰۰۰</p>
             </span>
             <span className="numerical-item">
               <span className="number">{un_loved}</span>
-              <p className="content-text">نفر عدم رضایت از کاد</p>
+              <p className="content-text">رتبه زیر ۱۰۰</p>
             </span>
             <span className="numerical-item">
               <span className="number">{konkor}</span>
@@ -541,7 +542,7 @@ const HomePage = () => {
         </section>
         <section className="why-in-kad-we-trust">
           <h2 className="semi-title">
-            چرا تا به امروز 3875 نفر به کاد اعتماد کردن؟
+            چرا تا به امروز ۳۸۷۵ نفر به کاد اعتماد کردن؟
           </h2>
           <div className={"reasons-wrapper res-pos-" + res_carouse_pos}>
             <div className={"reasons pos-" + carousel_pos}>
@@ -596,13 +597,13 @@ const HomePage = () => {
                   پرداخت میکنی نه بیشتر
                 </p>
               </div>
-              <div className="reason">
+              {/* <div className="reason">
                 <h3 className="reason-title">ضمانت بازگشت وجه</h3>
                 <p className="reason-text">
                   توی کاد اگه پیشرفت نکنی کل هزینه دوره در پایان دوره بهت برگشت
                   داده میشه. کاد جای متوسط موندن نیست!
                 </p>
-              </div>
+              </div> */}
             </div>
             <span
               onClick={() => {
@@ -640,7 +641,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_هامون_سبطی.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_7792.webp"
                   alt="استاد هامون سبطی"
                 ></img>
               </span>
@@ -658,7 +659,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_عماد_فیض_آبادی.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_1949.webp"
                   alt="استاد عماد فیض آبادی"
                 ></img>
               </span>
@@ -676,7 +677,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_حمید_سودیان.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_6512.webp"
                   alt="استاد حمید سودیان"
                 ></img>
               </span>
@@ -694,7 +695,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_آروین_حسینی.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_7137.webp"
                   alt="استاد آروین حسینی"
                 ></img>
               </span>
@@ -712,7 +713,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_امیر_محمد_دهقان.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_7711.webp"
                   alt="استاد امیر محمد دهقان"
                 ></img>
               </span>
@@ -731,7 +732,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_نیما_جواهری.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_8325.webp"
                   alt="استاد نیما جواهری"
                 ></img>
               </span>
@@ -749,7 +750,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_مهران_ترکمان.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_9558.webp"
                   alt="استاد مهران ترکمان"
                 ></img>
               </span>
@@ -767,7 +768,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_مهسا_عفتی.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_4605.webp"
                   alt="استاد مهسا عفتی"
                 ></img>
               </span>
@@ -785,30 +786,13 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_سارا_شریفی.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_3548.webp"
                   alt="استاد سارا شریفی"
                 ></img>
               </span>
               <h3 className="teacher-name"> استاد سارا شریفی</h3>
             </Link>
-            {/* <Link
-              to="/Teachers/استاد-رضا-امیر"
-              onClick={() => {
-                scrollToTop();
-              }}
-              className="teacher"
-            >
-              <span className="teacher-img-wrapper">
-                <img
-                  width={224}
-                  loading="lazy"
-                  height={298.13}
-                  src="https://kadschool.com/Teachers/استاد-نیما-جواهری"
-                  alt="نیما جواهری"
-                ></img>
-              </span>
-              <h3 className="teacher-name">استاد نیما جواهری</h3>
-            </Link> */}
+
             <Link
               to="/Teachers/استاد-علیرضا-علمداری"
               onClick={() => {
@@ -821,7 +805,7 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_علیرضا_علمداری.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_4906.webp"
                   alt="مهندس علیرضا علمداری"
                 ></img>
               </span>
@@ -839,14 +823,14 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_استاد_علیرضا_ایدلخانی.webp"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_8981.webp"
                   alt="مهندس علیرضا ایدلخانی"
                 ></img>
               </span>
               <h3 className="teacher-name">مهندس علیرضا ایدلخانی</h3>
             </Link>
             <Link
-              to="/not-found"
+              to="/Teachers/استاد-میلاد-آهنی"
               onClick={() => {
                 scrollToTop();
               }}
@@ -857,11 +841,11 @@ const HomePage = () => {
                   width={224}
                   loading="lazy"
                   height={298.13}
-                  src={teacher_img_6}
-                  alt="علیرضا احمدی"
+                  src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_7610.webp"
+                  alt="میلاد آهنی"
                 ></img>
               </span>
-              <h3 className="teacher-name">علیرضا احمدی</h3>
+              <h3 className="teacher-name">استاد میلاد آهنی</h3>
             </Link>
           </div>
           <span
@@ -1270,8 +1254,7 @@ const HomePage = () => {
           <div className="forms-data">
             <span className="jump-titles-wrapper">
               <h2 className="jump-title">
-                اگه هنوزم سوالی داری یا از چیزی نگرانی کاد با تک تک اتم هاش
-                کنارته
+                اگه هنوزم سوالی داری یا از چیزی نگرانی کاد در کنارته
               </h2>
               <h3 className="seconf-jum-title">
                 کافیه مشخصاتت رو بهمون پیام بدی تا در سریع ترین زمان باهات تماس
@@ -1302,10 +1285,10 @@ const HomePage = () => {
                   }}
                   className="fly-spaceship-btn"
                 >
-                  {pause ? <LittleLoading /> : "پرواز سفینه"}
+                  {pause ? <LittleLoading /> : "ثبت شماره"}
                 </span>
               ) : (
-                <span className="fly-spaceship-btn no-fly">پرواز سفینه</span>
+                <span className="fly-spaceship-btn no-fly">ثبت شماره</span>
               )}
             </span>
           </div>

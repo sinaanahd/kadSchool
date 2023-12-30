@@ -28,7 +28,7 @@ const SignUp = () => {
   });
   useEffect(() => {
     if (user) {
-      window.location.href = window.location.href.replace("SignUp", "Shop");
+      // window.location.href = window.location.href.replace("SignUp", "Shop");
     }
   }, []);
   const handle_rule_pop_up = () => {
@@ -69,7 +69,7 @@ const SignUp = () => {
     let year = myRef.current.selectedIndex - 1;
     let subject = myRef2.current.selectedIndex - 1;
     const new_err_fileds = { ...err_fileds };
-    const entry_name = entry_name;
+    // const entry_name = entry_name;
     // this.setState({ pause: true });
     set_pause(true);
     switch (year) {
@@ -90,18 +90,19 @@ const SignUp = () => {
     if (year !== -1 && subject !== -1 && !name_err) {
       const obj = {
         phone_number: JSON.parse(localStorage.getItem("kad-phone-number")),
+        // phone_number: "09122223345",
         name: entry_name,
         grade: convert_year(year),
         major: convert_major(subject),
       };
-      // console.loåg(obj);
+      // console.log(obj);
       axios
         .post(`${urls.register_user}`, obj)
         .then((res) => {
           let data = res.data;
           // console.log(data);
           axios
-            .get(`${user}${data.user_id}`)
+            .get(`${urls.user}${data.user_id}`)
             .then((res) => {
               const user = res.data;
               // this.props.inside_user(user);

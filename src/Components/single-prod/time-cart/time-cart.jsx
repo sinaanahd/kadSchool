@@ -5,6 +5,7 @@ import convert_to_persian from "../../functions/convert-to-persian";
 import LittleLoading from "../../reuseables/little-loading";
 import { DataContext } from "../../context/DataContext";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import scrollToTop from "../../functions/scroll";
 const Time_cart_data = ({ kelas }) => {
   const { handle_cart, user, cart } = useContext(DataContext);
   return (
@@ -38,7 +39,7 @@ const Time_cart_data = ({ kelas }) => {
       <div className="prices">
         <span className="discount-status">
           {kelas ? (
-            kelas.price !== kelas.discounted_price ? (
+            kelas.discounted_price ? (
               <>
                 <span className="discount-label">تخفیف</span>
                 <span className="real-price-number">
@@ -55,7 +56,7 @@ const Time_cart_data = ({ kelas }) => {
         <span className="final-price">
           <span className="price">
             {kelas ? (
-              kelas.price !== kelas.discounted_price ? (
+              kelas.discounted_price ? (
                 split_in_three(convert_to_persian(kelas.discounted_price))
               ) : (
                 split_in_three(convert_to_persian(kelas.price))
@@ -81,7 +82,7 @@ const Time_cart_data = ({ kelas }) => {
             : "افزودن به سبد خرید"}
         </span>
       ) : (
-        <Link to="/Login" className="buy-class-btn">
+        <Link onClick={scrollToTop} to="/Login" className="buy-class-btn">
           افزودن به سبد خرید
         </Link>
       )}

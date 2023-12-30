@@ -6,6 +6,7 @@ import scrollToTop from "../../functions/scroll";
 import LittleLoading from "../../reuseables/little-loading";
 
 import cartWhite from "../../../assets/images/cart-white.webp";
+
 class Product extends Component {
   state = {
     dore_kelases: false,
@@ -43,7 +44,7 @@ class Product extends Component {
     }
   };
   render() {
-    const { kelas, handle_cart, cart, request_id } = this.props;
+    const { kelas, handle_cart, cart, request_id, user } = this.props;
     return (
       <div className={"product-wrapper " + this.state.animate}>
         <Link
@@ -131,7 +132,7 @@ class Product extends Component {
             <></>
           )}
         </span>
-        {cart ? (
+        {user && cart ? (
           cart.ids.includes(kelas.kelas_id) ? (
             <span
               className="prod-add-to-cart"

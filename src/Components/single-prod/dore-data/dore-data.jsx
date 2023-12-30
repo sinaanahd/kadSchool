@@ -12,7 +12,11 @@ const Dore_data = ({ dore }) => {
       <p className="info-description">
         {dore ? dore.descriptions : <LittleLoading />}
       </p>
-      <Link onClick={scrollToTop} className="leave-page-btn">
+      <Link
+        to={`/r-dore/${dore.slug_name}`}
+        onClick={scrollToTop}
+        className="leave-page-btn"
+      >
         مشاهده دوره
       </Link>
     </section>

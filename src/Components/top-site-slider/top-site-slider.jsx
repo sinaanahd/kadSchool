@@ -55,7 +55,13 @@ class TopSiteSlider extends Component {
                 target="_blank"
                 key={b.banner_id}
               >
-                <img src={b.image_link} alt="اسم برای اسلایدر" />
+                <img
+                  src={b.image_link}
+                  alt="اسم برای اسلایدر"
+                  width={1800}
+                  height={131}
+                  loading="lazy"
+                />
               </a>
             ))
           ) : (

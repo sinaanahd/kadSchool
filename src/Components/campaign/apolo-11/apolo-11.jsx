@@ -332,8 +332,8 @@ const Apollo_11 = () => {
       const obj = {
         phone_number: phone,
         name: name,
-        grade: grade.num,
-        major: subject.num,
+        grade: grade.text,
+        major: subject.text,
         is_from_campaign_mordad_1402: true,
       };
       axios

@@ -14,7 +14,7 @@ const PayResultPage = () => {
         <div className="result-item-wrapper">
           <span className="result-title">وضعیت پرداخت :</span>
           <span className="result-data">
-            {page_slug[1] ? "موفق" : "ناموفق"}
+            {page_slug[1] !== "false" ? "موفق" : "ناموفق"}
           </span>
         </div>
         <div className="result-item-wrapper">

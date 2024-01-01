@@ -7,7 +7,10 @@ import { DataContext } from "../../context/DataContext";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import scrollToTop from "../../functions/scroll";
 const Time_cart_data = ({ kelas }) => {
-  const { handle_cart, user, cart } = useContext(DataContext);
+  const { handle_cart, user, cart, doreha } = useContext(DataContext);
+  const dore = doreha
+    ? doreha.find((d) => d.kelases.includes(kelas.kelas_id))
+    : false;
   return (
     <section className="class-times-wrapper">
       <h2 className="class-time-title">برنامه برگزاری:</h2>
@@ -35,7 +38,13 @@ const Time_cart_data = ({ kelas }) => {
         )}
       </div>
       <h3 className="start-date-title">تاریخ شروع:</h3>
-      <span className="start-date">۲۴ مرداد</span>
+      <span className="start-date">
+        {dore ? (
+          new Date(dore.dore_start_date).toLocaleDateString("fa-ir")
+        ) : (
+          <LittleLoading />
+        )}
+      </span>
       <div className="prices">
         <span className="discount-status">
           {kelas ? (

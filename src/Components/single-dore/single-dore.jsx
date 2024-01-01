@@ -52,7 +52,7 @@ const SingleDore = () => {
           <div className="img-time-wrapper">
             <span className="dore-img-wrapper">
               <img
-                src="https://kadschool.com/media/Kad_Teachers_Photos/Teacher_%D8%A7%D8%B3%D8%AA%D8%A7%D8%AF_%D9%87%D8%A7%D9%85%D9%88%D9%86_%D8%B3%D8%A8%D8%B7%DB%8C.webp"
+                src={s_dore ? s_dore.image_link : ""}
                 alt={slug_name.replaceAll("-", " ")}
                 width={228}
                 height={303}
@@ -92,7 +92,7 @@ const SingleDore = () => {
           </div>
           <div className="all-dore-kelasses-wrapper">
             <div className="all-kelasses">
-              {s_dore ? (
+              {s_dore && kelasses ? (
                 dore_kelasses.map((k) => <Kelas_item k={k} key={k.kelas_id} />)
               ) : (
                 <LittleLoading />

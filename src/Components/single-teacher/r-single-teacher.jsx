@@ -159,11 +159,7 @@ const R_SingleTeacher = () => {
               {/* {teacher ? teacher.fullname : <LittleLoading />} */}
             </h1>
             <p className="teacher-short-desc">
-              قراره توی این بخش چند خطی همون ابتدای صفحه درباره هر استاد توضیح
-              بدیم. مثل اولین متن و توضیحی که توی ویکیپدیا میبینید ( از لحاظ
-              محتوایی ) قراره توی این بخش چند خطی همون ابتدای صفحه درباره هر
-              استاد توضیح بدیم. مثل اولین متن و توضیحی که توی ویکیپدیا میبینید (
-              از لحاظ محتوایی )
+              {teacher ? teacher.cv.text_cv : <LittleLoading />}
             </p>
           </div>
         </section>
@@ -372,7 +368,7 @@ const R_SingleTeacher = () => {
                   <div key={k.kelas_id} className="teachers-classe">
                     <Link
                       onClick={scrollToTop}
-                      to={`/r-class/${k.kelas_title_and_ostad_name.replaceAll(
+                      to={`/Shop/product/${k.kelas_title_and_ostad_name.replaceAll(
                         " ",
                         "-"
                       )}`}
@@ -388,7 +384,7 @@ const R_SingleTeacher = () => {
 
                     <Link
                       onClick={scrollToTop}
-                      to={`/r-class/${k.kelas_title_and_ostad_name.replaceAll(
+                      to={`/Shop/product/${k.kelas_title_and_ostad_name.replaceAll(
                         " ",
                         "-"
                       )}`}

@@ -17,12 +17,13 @@ const Teacher_data = ({ teacher }) => {
           {teacher ? teacher.fullname : <LittleLoading />}
         </h2>
         <p className="info-description">
-          قراره توی این بخش چند خطی همون ابتدای صفحه درباره هر استاد توضیح بدیم.
-          مثل اولین متن و توضیحی که توی ویکیپدیا میبینید ( از لحاظ محتوایی )
+          توضیحات برای استاد این درس هنوز وارد نشده اما شما میتونید با کلیک کردن
+          دکمه زیر رزومه کامل استاد و کلاس های استاد به همراه نمونه تدریس هاش رو
+          ببینید
         </p>
         <Link
           onClick={scrollToTop}
-          to={teacher ? "/r-Teachers/" + teacher.slug_name : ""}
+          to={teacher ? "/Teachers/" + teacher.slug_name : ""}
           className="leave-page-btn"
         >
           درباره استاد

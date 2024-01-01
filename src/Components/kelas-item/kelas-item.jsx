@@ -16,7 +16,10 @@ const Kelas_item = ({ k }) => {
         <Link
           onClick={scrollToTop}
           target="_blank"
-          to={`/r-class/${k.kelas_title_and_ostad_name.replaceAll(" ", "-")}`}
+          to={`/Shop/product/${k.kelas_title_and_ostad_name.replaceAll(
+            " ",
+            "-"
+          )}`}
           className="img-link"
         >
           <img
@@ -32,7 +35,7 @@ const Kelas_item = ({ k }) => {
           {dore ? (
             <Link
               onClick={scrollToTop}
-              to={`/r-dore/${dore.slug_name}`}
+              to={`/Dore/${dore.slug_name}`}
               className="dore-content"
             >
               {dore.dore_title}
@@ -53,7 +56,10 @@ const Kelas_item = ({ k }) => {
           <Link
             onClick={scrollToTop}
             target="_blank"
-            to={`/r-class/${k.kelas_title_and_ostad_name.replaceAll(" ", "-")}`}
+            to={`/Shop/product/${k.kelas_title_and_ostad_name.replaceAll(
+              " ",
+              "-"
+            )}`}
           >
             {k.kelas_title}
           </Link>

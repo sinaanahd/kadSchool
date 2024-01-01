@@ -29,7 +29,7 @@ const Teachers = ({ slug_name, dore_teachers }) => {
         {dore_teachers ? (
           dore_teachers.map((t) => (
             <Link
-              to={"/r-Teachers/" + t.slug_name}
+              to={"/Teachers/" + t.slug_name}
               key={t.teacher_id}
               className="teacher-wrapper"
               onClick={scrollToTop}

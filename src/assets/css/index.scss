@@ -7247,10 +7247,10 @@ input[type=number] {
         background-color: #1B0B4E;
         border-radius: 20px;
         overflow: hidden;
-        padding: 27px 20px 20px;
+        padding: 27px 10px 20px;
         color: #fff;
         position: relative;
-        @include flexMixin(column,flex-start,flex-start);
+        @include flexMixin(column,flex-start,center);
         gap: 15px;
         transition: $transition;
         img{
@@ -7258,7 +7258,7 @@ input[type=number] {
         }
     }
     .class-name{
-        font-size: 18px;
+        font-size: 15px;
     }
     .prices-wrapper{
         width: 100%;
@@ -7286,14 +7286,14 @@ input[type=number] {
     }
     .dore-label{
         position: absolute;
-        left: 20px;
+        left: 10px;
         top: 10px;
-        font-size: 15px;
+        font-size: 14px;
         @include flexMixin(row,center,center);
-        padding: 0 15px;
+        padding: 0 10px;
         background-color: #F09D00;
-        border-radius: 12px;
-        height: 35px;
+        border-radius: 6px;
+        height: 25px;
     }
     .video-intros-wrapper{
         width: 100%;
@@ -7788,7 +7788,7 @@ input[type=number] {
         @include flexMixin(row,flex-start,center);
         width: 100%;
         gap: 18px;
-        overflow-x: hidden;
+        overflow: hidden;
     }
     .arrow-next{
         flex: 0 0 48px;
@@ -7829,24 +7829,29 @@ input[type=number] {
     }
     .cm-row {
         width: 100%;
-        @include flexMixin(row, center, center);
+        @include flexMixin(row, flex-start, center);
         overflow: hidden;
         gap: 16px;
         margin: 0 0 16px;
     
     }
+    .cm-row-2{
+        justify-content: flex-start;
+        flex-direction: row-reverse;
+    }
     .cm-wrapper {
         flex: 0 0 380px;
-        height: 220px;
+        height: auto;
         border-radius: 16px;
         background: rgba(229, 222, 255, 0.40);
-        @include flexMixin(column, flex-start, center);
+        @include flexMixin(column, center, center);
         padding: 32px;
         gap: 10px;
         font-size: 15px;
         text-align: justify;
-        animation: move_forward 25s linear 0.1s infinite alternate;
+        animation: move_forward 40s linear 0.1s infinite alternate;
         transition: $transition;
+        overflow: hidden;
     }
     .cm-row-2 {
         .cm-wrapper {
@@ -7862,7 +7867,7 @@ input[type=number] {
         position: absolute;
         width: 200px;
         top: 80px;
-        height: 470px;
+        height: 400px;
     }
     .over-lay-right {
         right: 0;
@@ -7890,7 +7895,7 @@ input[type=number] {
     background-color: #1B0B4E;
     color: #fff;
     border-radius: 15px;
-    padding: 15px;
+    padding: 15px 10px;
     position: relative;
     height: 206px;
 
@@ -7939,7 +7944,7 @@ input[type=number] {
     .cours-name-data {
         margin: 5px 0 10px;
         font-weight: normal;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .prices-data-wrapper {

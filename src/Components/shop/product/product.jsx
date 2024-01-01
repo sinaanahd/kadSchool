@@ -51,7 +51,10 @@ class Product extends Component {
           onClick={() => {
             scrollToTop();
           }}
-          to={`/Shop/product/${kelas.slug_name}`}
+          to={`/Shop/product/${kelas.kelas_title_and_ostad_name.replaceAll(
+            " ",
+            "-"
+          )}`}
           className="prod-img-wrapper"
         >
           <img
@@ -67,7 +70,10 @@ class Product extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to={`/Shop/product/${kelas.slug_name}`}
+            to={`/Shop/product/${kelas.kelas_title_and_ostad_name.replaceAll(
+              " ",
+              "-"
+            )}`}
           >
             {kelas.kelas_title}
           </Link>

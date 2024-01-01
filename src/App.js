@@ -121,11 +121,14 @@ const App = () => {
         <Route path="/Cart" component={Cart} />
         <Route path="/FAQ" component={FAQ} />
         <Route path="/Needed-apps" component={NewPanelNotice} />
-        <Route path="/Shop/product/:id" exact component={SingleProd} />
+        {/* <Route path="/Shop/product/:id" exact component={SingleProd} /> */}
+        <Route path="/Shop/product/:id" exact component={SingleClass} />
         <Route path="/Shop" component={Shop} />
-        <Route path="/Teachers/:id" exact component={SingleTeacher} />
+        {/* <Route path="/Teachers/:id" exact component={SingleTeacher} /> */}
+        <Route path="/Teachers/:id" exact component={R_SingleTeacher} />
         <Route path="/Teachers/" component={Teachers} />
-        <Route path="/Dore/:id" component={SingleCourse} />
+        {/* <Route path="/Dore/:id" component={SingleCourse} /> */}
+        <Route path="/Dore/:id" component={SingleDore} />
         <Route path="/KADstorePaymentResult/:id-:id-:id" component={PayResultPage} />
         {/* 
           re-design / re-factor

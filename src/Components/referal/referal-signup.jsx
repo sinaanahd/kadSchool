@@ -138,7 +138,11 @@ const ReferalSignUp = () => {
               setUser(user);
               localStorage.setItem("user-kad", JSON.stringify(user));
               if (admin_id === "6") {
-                window.location.pathname = "/Shop/product/نکته-و-تست-فلسفه";
+                window.location.pathname =
+                  "/Shop/product/نکته-و-تست-فلسفه-و-منطق";
+              } else if (admin_id === "16") {
+                window.location.pathname =
+                  "/Shop/product/دین-و-زندگی-دوازدهم-استاد-کبیر";
               } else {
                 window.location.pathname = "/SetPassword";
               }

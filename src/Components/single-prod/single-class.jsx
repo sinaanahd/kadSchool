@@ -1,8 +1,6 @@
 import React, { useState, useContext, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import convert_to_persian from "../functions/convert-to-persian";
-import split_in_three from "../functions/spilit_in_three";
 import { DataContext } from "../context/DataContext";
 
 import banner from "../../assets/images/single-class-assets/purple-watercolor-galaxy-background_23-2149248308 1.png";
@@ -25,10 +23,13 @@ const SingleClass = () => {
   const other_ref = useRef(false);
   const mabhasi_ref = useRef(false);
 
-  const page_slug = decodeURI(window.location.pathname.split("/")[2])
+  const page_slug = decodeURI(window.location.pathname.split("/")[3])
     .replaceAll("---", " 1 ")
     .replaceAll("-", " ")
     .replaceAll(" 1 ", " - ");
+
+  const page_slug_2 = decodeURI(window.location.pathname.split("/")[3]);
+
   const check_arr_includes = (arr1, arr2) => {
     let is = false;
     arr1.forEach((item) => {
@@ -37,7 +38,11 @@ const SingleClass = () => {
     return is;
   };
   const kelas = kelasses
-    ? kelasses.find((k) => k.kelas_title_and_ostad_name === page_slug)
+    ? kelasses.find(
+        (k) =>
+          k.kelas_title_and_ostad_name === page_slug ||
+          k.slug_name === page_slug_2
+      )
     : false;
   const teacher = kelas
     ? teachers
@@ -146,10 +151,12 @@ const SingleClass = () => {
       <Helmet>
         <title>
           کاد |{" "}
-          {decodeURI(window.location.pathname.split("/")[2]).replaceAll(
-            "-",
-            " "
-          )}
+          {kelas
+            ? kelas.kelas_title
+            : decodeURI(window.location.pathname.split("/")[3]).replaceAll(
+                "-",
+                " "
+              )}
         </title>
       </Helmet>
       <div className="re-design-single-class">
@@ -169,7 +176,7 @@ const SingleClass = () => {
               {teacher ? (
                 <Link
                   onClick={scrollToTop}
-                  to={"/r-Teachers/" + teacher.slug_name}
+                  to={"/Teachers/" + teacher.slug_name}
                 >
                   {teacher.fullname}
                 </Link>
@@ -194,9 +201,9 @@ const SingleClass = () => {
               azmonha={azmonha}
             />
             <Time_cart_data kelas={kelas} />
-            <section className="banners-place">
+            {/* <section className="banners-place">
               <img src={banner} alt="" />
-            </section>
+            </section> */}
           </div>
         </div>
         <section className="classes-wrapper-section mm-width">

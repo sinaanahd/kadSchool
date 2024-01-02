@@ -17,9 +17,17 @@ const Teacher_data = ({ teacher }) => {
           {teacher ? teacher.fullname : <LittleLoading />}
         </h2>
         <p className="info-description">
-          توضیحات برای استاد این درس هنوز وارد نشده اما شما میتونید با کلیک کردن
+          {teacher ? (
+            teacher.description ? (
+              teacher.description
+            ) : (
+              `توضیحات برای استاد این درس هنوز وارد نشده اما شما میتونید با کلیک کردن
           دکمه زیر رزومه کامل استاد و کلاس های استاد به همراه نمونه تدریس هاش رو
-          ببینید
+          ببینید`
+            )
+          ) : (
+            <LittleLoading />
+          )}
         </p>
         <Link
           onClick={scrollToTop}

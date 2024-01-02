@@ -159,7 +159,15 @@ const R_SingleTeacher = () => {
               {/* {teacher ? teacher.fullname : <LittleLoading />} */}
             </h1>
             <p className="teacher-short-desc">
-              {teacher ? teacher.cv.text_cv : <LittleLoading />}
+              {teacher ? (
+                teacher.description ? (
+                  teacher.description
+                ) : (
+                  teacher.cv.text_cv
+                )
+              ) : (
+                <LittleLoading />
+              )}
             </p>
           </div>
         </section>

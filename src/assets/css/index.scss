@@ -8606,6 +8606,369 @@ input[type=number] {
 /* new cart page */
 
 
+/* landings : nokte o test */
+@keyframes shake-landing {
+    from{
+        transform: rotate(10deg);
+    }
+    to{
+        transform: rotate(-10deg);
+    }
+}
+@keyframes shake-landing-2 {
+    from{
+        transform: rotate(10deg) scale(0.8);
+    }
+    to{
+        transform: rotate(-10deg) scale(1);
+    }
+}
+@keyframes move_gift {
+    0%{
+        right: -10px;
+    }
+    20%{
+        opacity: 0.5;
+        transform: scale(1.5);
+    }
+    40%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    60%{
+        opacity: 0.5;
+        transform: scale(1.5);
+    }
+    100%{
+        right: calc(100%);
+    }
+}
+.not-landing-wrapper{
+    width: 100%;
+    padding: 80px 0;
+    color: #fff;
+    .landing-intro-wrapper{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+    }
+    .page-title{
+        font-size:60px;
+        font-weight: bold;
+        color: $yellowColor;
+    }
+    .intro-texts{
+        @include flexMixin(column,flex-start,flex-start);
+        max-width: 500px;
+        width: 100%;
+        gap: 20px;
+    }
+    .intro-para-text{
+        font-size: 20px;
+        line-height: 40px;
+        text-align: justify;
+    }
+    .intro-img-wrapper{
+        @include flexMixin(row,center,center);
+        img{
+            animation: shake-landing 1s linear 1s infinite alternate-reverse;
+        }
+    }
+    .dore-prophits-section{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 50px;
+        padding: 60px 45px;
+        margin: 60px 0;
+        border-radius: 20px;
+        background: #03034159;
+        backdrop-filter: blur(6.2774505615234375px);
+    }
+    .section-title{
+        font-size: 40px;
+        color: $yellowColor;
+        font-weight: bold;
+    }
+    .all-profits-wrapper{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        row-gap: 17px;
+        column-gap: 17px;
+    }
+    .profit-wrapper{
+        @include flexMixin(column,flex-start,center);
+        gap: 10px;
+        padding: 33px 38px;
+        border-radius: 14px;
+        opacity: 0.5;
+        background: rgba(153, 194, 255, 0.30);
+        backdrop-filter: blur(5.858953952789307px);
+        transition: $transition;
+    }
+    .profit-wrapper.active{
+        background: rgba(153, 194, 255, 0.50);
+        opacity: 1;
+    }
+    .profit-title{
+        font-size: 20px;
+    }
+    .dore-kelases-section{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 20px;
+    }
+    .all-dore-kelasses-wrapper{
+        width: 100%;
+        @include flexMixin(row,center,flex-start);
+        gap: 15px;
+    }
+    .active-kelas-col{
+        flex: 0 0 574px;
+    }
+    .other-class-col{
+        width: 100%;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 15px;
+        max-width: 574px;
+    }
+    .kelas-item-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 15px;
+        border-radius: 15px;
+        max-width: 574px;
+        padding: 20px 27px;
+        background: #03034159;
+        backdrop-filter: blur(6.2774505615234375px);
+        position: relative;
+    }
+    .kelas-img-wrapper{
+        flex: 0 0 160px;
+        img{
+            border-radius: 14px;
+        }
+    }
+    .kelas-text-contet{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 10px;
+        width: 100%;
+    }
+    .kelas-teacher-name{
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .kelas-name-text{
+        font-size: 18px;
+        font-weight: unset;
+    }
+    .price-title-text{
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .add-btn-prices-wrapper{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        gap: 30px;
+    }
+    .prices-wrapper{
+        @include flexMixin(column,center,flex-end);
+        gap: 6px;
+        width: 100%;
+    }
+    .price-box{
+        font-size: 18px;
+        @include flexMixin(row,center,center);
+        gap: 3px;
+    }
+    .old-price{
+        color: rgba(255, 255, 255, 0.50);
+        font-size: 17px;
+        text-decoration: line-through;
+    }
+    .currency-wrapper{
+        font-size: 14px;
+    }
+    .add-to-cart-btn{
+        flex: 0 0 170px;
+        height: 34px;
+        border-radius: 37px;
+        background-color: #99C2FF;
+        border : 1px solid #99C2FF;
+        font-weight: bold;
+        color: #000;
+        font-size: 16px;
+        @include flexMixin(row,center,center);
+        cursor: pointer;
+        transition: $transition;
+        &:hover{
+            color: #99C2FF;
+            background: #03034159;
+            backdrop-filter: blur(6.2774505615234375px);
+        }
+    }
+    .action-btns{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        @include flexMixin(row,flex-end,center);
+        gap: 10px;
+    }
+    .actin-btn{
+        width: 30px;
+        height: 30px;
+        @include flexMixin(row,center,center);
+        border: 0px solid #99C2FF;
+        border-radius: 50%;
+        background-color: transparent;
+        color: #99C2FF;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .active-kelas-col{
+        padding: 20px 27px;
+        background: #03034159;
+        backdrop-filter: blur(6.2774505615234375px);
+        position: relative;
+        max-width: 574px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+        .kelas-item-wrapper{
+            padding: 0;
+            background-color: transparent;
+        }
+    }
+    .kelas-desc-wrapper{
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 15px;
+        width: 100%;
+        position: relative;
+    }
+    .arrows-wrapper{
+        position: absolute;
+        left: 0px;
+        top: 2px;
+        @include flexMixin(row,flex-end,center);
+        gap: 10px;
+        .arrow{
+            cursor: pointer;
+            @include flexMixin(row,center,center);
+            width: 25px;
+            height: 25px;
+            background-color: unset;
+            border: 0px solid #000;
+            img{
+                max-height: 100%;
+            }
+        }
+        .reverse{
+            transform: rotate(180deg);
+        }
+    }
+    .kelas-desc-title{
+        font-size: 18px;
+    }
+    .kelas-desc-text{
+        width: 100%;
+        padding: 20px;
+        border-radius: 12px;
+        background: rgba(153, 194, 255, 0.30);
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .sample-videos-wrapper{
+        width: 100%;
+        overflow: hidden;
+        padding: 20px;
+        border-radius: 12px;
+        background: rgba(153, 194, 255, 0.30);
+        font-size: 16px;
+        @include flexMixin(row,flex-start,center);
+        flex-wrap: nowrap;
+        gap: 10px;
+        position: relative;
+        min-height: 211px;
+        &::before , &::after{
+            content: " ";
+            display: block;
+            width: 20px;
+            height : 100%;
+            background: #334373;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 12;
+        }
+        &::after {
+            right: unset;
+            left: 0;
+        }
+    }
+    .sample-video{
+        display: block;
+        flex: 0 0 300px;
+        transition: $transition;
+        position: relative;
+        z-index: 9;
+    }
+    .special-discount-section{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        margin: 100px 0 0;
+    }
+    .special-text-wrapper{
+        max-width: 500px;
+        @include flexMixin(column,flex-start,flex-start);
+        gap: 20px;
+        width: 100%;
+    }
+    .special-img-wrapper{
+        img{
+            animation: shake-landing-2 0.8s linear 1s infinite alternate-reverse;
+        }
+    }
+    .special-part-text{
+        font-size: 20px;
+        line-height: 35px;
+        a{
+            color: $yellowColor;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+    }
+    .all-sample-videos-section{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        gap: 30px;
+        margin: 100px 0 0;
+    }
+    .all-sample-videos-wrapper{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        row-gap : 20px;
+        column-gap: 20px;
+    }
+    .sample-video-wrapper{
+        width: 100%;
+        @include flexMixin(column,flex-start,center);
+        padding: 30px 22px;
+        background: #03034159;
+        backdrop-filter: blur(6.2774505615234375px);
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+    }
+    .needed-div-aparat-video-wrapper{
+        width: 100%;
+        display: block;
+    }
+    .video-title{
+        font-size: 20px;
+    }
+    
+}
+/* landings : nokte o test */
+
 /* responsive */
 @media (max-width: 1200px) {
     .home-page {

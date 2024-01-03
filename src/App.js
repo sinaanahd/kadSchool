@@ -55,8 +55,8 @@ import PayResultPage from './Components/pay-result-page/pay-result';
 import SingleDore from './Components/single-dore/single-dore';
 import SinglePost from './Components/posts/post/single-post';
 import AllBlogs from './Components/posts/all-posts';
-import NOT_tajrobi from './Components/landing-pages/nokte-o-test/nokte-o-test-ensani';
-import NOT_ensani from './Components/landing-pages/nokte-o-test/nokte-o-test-tajrobi';
+import NOT_ensani from './Components/landing-pages/nokte-o-test/nokte-o-test-ensani';
+import NOT_tajrobi from './Components/landing-pages/nokte-o-test/nokte-o-test-tajrobi';
 // context refactor
 
 const App = () => {

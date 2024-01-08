@@ -763,6 +763,16 @@ input[type=number] {
 }
 /* home page ( Landing ) */
 /* home header */
+@keyframes change_color {
+    from {
+        color : #ff7300;
+        transform: scale(0.9);
+    }
+    to{
+        color: #c56d00;
+        transform: scale(1.1);
+    }
+}
 .home-page-header {
     position: absolute;
     z-index: 999;
@@ -787,6 +797,7 @@ input[type=number] {
         li {
             list-style: none;
             color: #fff;
+            position: relative;
             a {
                 transition: $transition;
                 color: #fff;
@@ -796,6 +807,13 @@ input[type=number] {
                     color: $yellowColor;
                     transform: scale(1.1);
                 }
+            }
+            svg{
+                position: absolute;
+                top: -15px;
+                right:-15px;
+                font-size: 20px;
+                animation: change_color 0.5s linear 0.1s infinite alternate-reverse;
             }
         }
     }
@@ -8708,6 +8726,7 @@ input[type=number] {
     .profit-wrapper.active{
         background: rgba(153, 194, 255, 0.50);
         opacity: 1;
+        transform: scale(1.04);
     }
     .profit-title{
         font-size: 20px;
@@ -10864,6 +10883,90 @@ input[type=number] {
             img{
                 width: 50px;
             }
+        }
+    }
+    .not-landing-wrapper{
+        overflow-x: hidden;
+        .landing-intro-wrapper{
+            @include flexMixin(column-reverse , flex-start,center);
+            gap: 10px;
+        }
+        .page-title{
+            font-size: 40px;
+            text-align: center;
+            width: 100%;
+        }
+        .section-title{
+            font-size: 30px;
+            width: 100%;
+            text-align: center;
+        }
+        .dore-prophits-section{
+            padding: 10px;
+        }
+        .all-profits-wrapper{
+            @include flexMixin(row,flex-start,center);
+            overflow: scroll;
+            flex-wrap: nowrap;
+            gap: 10px;
+        }
+        .profit-wrapper{
+            flex: 0 0 90%;
+            background: rgba(153, 194, 255, 0.5);
+            opacity: 1;
+            transform: scale(1)!important;
+        }
+        .all-dore-kelasses-wrapper{
+            @include flexMixin(column,flex-start,center);
+            gap: 10px;
+        }
+        .kelas-item-wrapper{
+            @include flexMixin(column,flex-start,center);
+        }
+        .kelas-img-wrapper{
+            width: 100%;
+            flex: unset;
+            img{
+                width: 100%;
+            }
+        }
+        .add-btn-prices-wrapper{
+            @include flexMixin(column,flex-start,center);
+        }
+        .add-to-cart-btn{
+            width: 100%;
+            flex: unset;
+            height: 35px;
+        }
+        .kelas-text-contet{
+            align-items: center;
+        }
+        .prices-wrapper{
+            align-items: center;
+        }
+        .arrows-wrapper{
+            position: unset;
+        }
+        .action-btns{
+            top: 5px;
+            left: 5px;
+        }
+        .special-discount-section{
+            @include flexMixin(column-reverse,flex-start,center);
+            gap: 20px;
+        }
+        .reverse-section{
+            flex-direction: column;
+        }
+        .special-part-text{
+            @include flexMixin(column,flex-start,center);
+            gap: 20px;
+            a{
+                font-size: 30px;
+            }
+        }
+        .all-sample-videos-wrapper{
+            @include flexMixin(column,flex-start,center);
         }
     }
 }

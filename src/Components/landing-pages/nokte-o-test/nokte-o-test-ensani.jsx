@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import LandingKelas from "./landing-kelas/landing-kelas";
 import LandingActiveKelas from "./landing-actice-kelas.jsx/landing-active-kelas";
@@ -8,9 +8,12 @@ import call_img from "../../../assets/images/landings/nokte-o-test/landing-image
 import AparatVideo from "../../video/aparat-video";
 import { DataContext } from "../../context/DataContext";
 import LittleLoading from "../../reuseables/little-loading";
+
 const NOT_ensani = () => {
   const { sample_files } = useContext(DataContext);
   const box_ref = useRef(null);
+  const profits_ref = useRef(false);
+  const [active_profit, set_active_profit] = useState(0);
   const { kelasses } = useContext(DataContext);
   const kelas_ids = [57, 59, 58, 56, 55];
   const dore_kelasses = kelasses
@@ -25,6 +28,29 @@ const NOT_ensani = () => {
         kelas_ids.includes(v.kelas_id)
       )
     : false;
+  const handle_profit_active_change = () => {
+    const all_profits = [...profits_ref.current.children];
+    const active =
+      active_profit === all_profits.length - 1 ? 0 : active_profit + 1;
+    all_profits.forEach((p) => {
+      if (all_profits[active] === p) {
+        p.classList.add("active");
+      } else {
+        p.classList.remove("active");
+      }
+    });
+    set_active_profit(active);
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      const page_check =
+        decodeURI(window.location.pathname) === "/نکته-و-تست-انسانی";
+      console.log(page_check);
+      if (page_check) {
+        handle_profit_active_change();
+      }
+    }, 3000);
+  }, [active_profit]);
   return (
     <>
       <Helmet>
@@ -58,7 +84,7 @@ const NOT_ensani = () => {
         </section>
         <section className="dore-prophits-section">
           <h2 className="section-title">مزایا دوره نکته و تست انسانی</h2>
-          <div className="all-profits-wrapper">
+          <div className="all-profits-wrapper" ref={profits_ref}>
             <div className="profit-wrapper active">
               <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
               <p className="profit-text">
@@ -118,9 +144,11 @@ const NOT_ensani = () => {
           </div>
         </section>
         <section className="dore-kelases-section">
-          <h2 className="section-title">کلاس های دوره نکته و تست انسانی</h2>
-          <div className="all-dore-kelasses-wrapper" ref={box_ref}>
-            <LandingActiveKelas kelas_id={active_kelas} refrence={box_ref} />
+          <h2 className="section-title" ref={box_ref}>
+            کلاس های دوره نکته و تست انسانی
+          </h2>
+          <div className="all-dore-kelasses-wrapper">
+            <LandingActiveKelas kelas_id={active_kelas} />
             <div className="other-class-col">
               {dore_kelasses ? (
                 dore_kelasses.map((k) => (
@@ -165,7 +193,7 @@ const NOT_ensani = () => {
             />
           </div>
         </section>
-        <section className="special-discount-section">
+        <section className="special-discount-section reverse-section">
           <div className="special-img-wrapper">
             <img
               src={call_img}

@@ -11,19 +11,9 @@ import LittleLoading from "../../../reuseables/little-loading";
 const LandingActiveKelas = ({ kelas_id }) => {
   const { kelasses, teachers, user, cart, handle_cart, sample_files } =
     useContext(DataContext);
-  const [active_carousel, set_active_carousel] = useState(0);
-  const kelas = kelasses
-    ? kelasses.find((k) => k.kelas_id === kelas_id)
-    : false;
-  const teacher =
-    kelas && teachers
-      ? teachers.find((t) => t.teacher_id === kelas.teachers[0])
-      : false;
-  const videos = sample_files
-    ? sample_files.video_sample_files.filter((sv) => sv.kelas_id === kelas_id)
-    : //   sample_files.video_sample_files.filter((sv) => sv.dore_id === 5)
-      false;
   const videos_ref = useRef(false);
+
+  const [active_carousel, set_active_carousel] = useState(0);
   const handle_carousel = (way) => {
     const all_videos = [...videos_ref.current.children];
     if (way === "next" && active_carousel !== videos.length - 1) {
@@ -38,6 +28,17 @@ const LandingActiveKelas = ({ kelas_id }) => {
       set_active_carousel(active_carousel - 1);
     }
   };
+  const kelas = kelasses
+    ? kelasses.find((k) => k.kelas_id === kelas_id)
+    : false;
+  const teacher =
+    kelas && teachers
+      ? teachers.find((t) => t.teacher_id === kelas.teachers[0])
+      : false;
+  const videos = sample_files
+    ? sample_files.video_sample_files.filter((sv) => sv.kelas_id === kelas_id)
+    : //   sample_files.video_sample_files.filter((sv) => sv.dore_id === 5)
+      false;
   return (
     <>
       <div className="active-kelas-col">
@@ -141,7 +142,13 @@ const LandingActiveKelas = ({ kelas_id }) => {
               }}
               className="arrow reverse"
             >
-              <img src={arrow} alt="قبلی" />
+              <img
+                src={arrow}
+                width={15}
+                height={25}
+                loading="lazy"
+                alt="قبلی"
+              />
             </button>
             <button
               onClick={() => {
@@ -149,7 +156,13 @@ const LandingActiveKelas = ({ kelas_id }) => {
               }}
               className="arrow"
             >
-              <img src={arrow} alt="بعدی" />
+              <img
+                src={arrow}
+                width={15}
+                height={25}
+                loading="lazy"
+                alt="بعدی"
+              />
             </button>
           </div>
           <div className="sample-videos-wrapper" ref={videos_ref}>

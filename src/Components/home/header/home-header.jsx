@@ -2,7 +2,7 @@ import React, { Component, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import scrollToTop from "../../functions/scroll";
 import { DataContext } from "../../context/DataContext";
-
+import { BsFire } from "react-icons/bs";
 import closeMenu from "../../../assets/images/close-menu-white.webp";
 import menuIcon from "../../../assets/images/menu-white.webp";
 import mainLogo from "../../../assets/images/main-logo-white-1.webp";
@@ -99,14 +99,6 @@ const HomeHeader = ({ not_home }) => {
                 ورود | ثبت نام
               </Link>
             )}
-            {/* <Link
-                onClick={() => {
-                  scrollToTop();
-                }}
-                to={! ? "/Login" : "./"}
-              >
-                ورود | ثبت نام
-              </Link> */}
           </li>
           <li>
             <Link
@@ -148,16 +140,28 @@ const HomeHeader = ({ not_home }) => {
               پشتیبانی
             </Link>
           </li>
-          <li>
+          {/* <li className="new-label">
+            <BsFire />
             <Link
               onClick={() => {
                 scrollToTop();
               }}
-              to="/apollo-11"
+              to="/نکته-و-تست-تجربی"
             >
-              آپولو ۱۱
+              نکته و تست تجربی
             </Link>
           </li>
+          <li className="new-label">
+            <BsFire />
+            <Link
+              onClick={() => {
+                scrollToTop();
+              }}
+              to="/نکته-و-تست-انسانی"
+            >
+              نکته و تست انسانی
+            </Link>
+          </li> */}
         </ul>
       </nav>
     </header>

@@ -11,6 +11,8 @@ const kelasses_data = JSON.parse(localStorage.getItem("kelasses")) || false;
 const teachers_data = JSON.parse(localStorage.getItem("teachers")) || false;
 const doreha_data = JSON.parse(localStorage.getItem("doreha")) || false;
 const courses_data = JSON.parse(localStorage.getItem("courses")) || false;
+const ref_courses_data =
+  JSON.parse(localStorage.getItem("ref-courses")) || false;
 const sample_files_data =
   JSON.parse(localStorage.getItem("sample_files")) || false;
 const jalasat_data = JSON.parse(localStorage.getItem("jalasat")) || false;
@@ -34,6 +36,7 @@ const DataProvider = ({ children }) => {
   const [ref_teachers, setTeachers] = useState(teachers_data);
   const [ref_doreha, setDoreha] = useState(doreha_data);
   const [ref_courses, setCourses] = useState(courses_data);
+  const [ref_ref_courses, set_ref_courses] = useState(ref_courses_data);
   const [sample_files, setSampleFiles] = useState(sample_files_data);
   const [ref_jalasat, setJalasat] = useState(jalasat_data);
   const [banners, set_banners] = useState(banners_data);
@@ -134,6 +137,7 @@ const DataProvider = ({ children }) => {
       get_sample_files();
       get_jalasat();
       get_banners();
+      get_ref_courses();
     } else {
       if (!kelasses_data) {
         get_kelasses();
@@ -146,6 +150,9 @@ const DataProvider = ({ children }) => {
       }
       if (!courses_data) {
         get_courses();
+      }
+      if (!ref_courses_data) {
+        get_ref_courses();
       }
       if (!sample_files_data) {
         get_sample_files();
@@ -235,6 +242,18 @@ const DataProvider = ({ children }) => {
         });
         setDoreha(ref_doreha);
         localStorage.setItem("doreha", JSON.stringify(ref_doreha));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  const get_ref_courses = () => {
+    axios
+      .get(urls.courses)
+      .then((res) => {
+        const ref_courses = res.data;
+        set_ref_courses(ref_courses);
+        localStorage.setItem("ref-courses", JSON.stringify(ref_courses));
       })
       .catch((e) => {
         console.log(e);
@@ -420,6 +439,7 @@ const DataProvider = ({ children }) => {
         subjects,
         years,
         static_doreha,
+        ref_ref_courses,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ const urls = {
   teachers: `${base_site}teachers`,
   doreha: `${base_site}doreha`,
   all_courses: `${base_site}all_courses`,
+  courses: `${base_site}courses`,
   sample_files: `${base_site}sample_files`,
   jalasat: `${base_site}jalasat`,
   banners: `${base_site}admin_banners`,

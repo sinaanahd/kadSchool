@@ -13,6 +13,9 @@ class Teacher extends Component {
   }
   render() {
     const { teacher, courses } = this.props;
+    const course = courses
+      ? courses.find((c) => teacher.course === c.course_id)
+      : false;
     return (
       <div className={"teacher " + this.state.animate} key={teacher.teacher_id}>
         <Link
@@ -20,7 +23,8 @@ class Teacher extends Component {
             scrollToTop();
           }}
           to={`/Teachers/${teacher.slug_name}`}
-          className="img-wrapper">
+          className="img-wrapper"
+        >
           <img
             loading="lazy"
             width={192}
@@ -34,16 +38,13 @@ class Teacher extends Component {
             onClick={() => {
               scrollToTop();
             }}
-            to={`/Teachers/${teacher.slug_name}`}>
+            to={`/Teachers/${teacher.slug_name}`}
+          >
             {teacher.fullname}
           </Link>
         </h2>
         <h3 className="course-name">
-          {courses ? (
-            { ...courses.find((c) => c.course_id === teacher.course) }.name
-          ) : (
-            <LittleLoading />
-          )}
+          {course ? course.name : <LittleLoading />}
         </h3>
       </div>
     );

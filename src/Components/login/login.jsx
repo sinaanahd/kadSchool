@@ -84,7 +84,7 @@ const Login = () => {
             // this.props.inside_user(user);
             setUser(user);
             localStorage.setItem("user-kad", JSON.stringify(user));
-            window.location.pathname = "/Shop";
+            window.location.pathname = "/HomePage";
           })
           .catch((err) => {
             // this.props.handle_error(err);

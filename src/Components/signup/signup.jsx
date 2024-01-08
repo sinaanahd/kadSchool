@@ -108,7 +108,7 @@ const SignUp = () => {
               // this.props.inside_user(user);
               setUser(user);
               localStorage.setItem("user-kad", JSON.stringify(user));
-              window.location.pathname = "/SetPassword";
+              window.location.pathname = "/HomePage";
               // this.setState({ pause: false });
               set_pause(true);
             })

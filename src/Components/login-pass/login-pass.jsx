@@ -74,7 +74,7 @@ const LoginPass = () => {
                 localStorage.setItem("user-kad", JSON.stringify(user));
                 // this.props.inside_user(user);
                 //console.log(user);
-                window.location.pathname = "/Dashboard";
+                window.location.pathname = "/HomePage";
                 localStorage.setItem(
                   "kad-phone-number",
                   JSON.stringify(phone_number)

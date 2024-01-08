@@ -5,7 +5,7 @@ import Teacher from "./teacher/teacher";
 import { DataContext } from "../context/DataContext";
 
 const Teachers = () => {
-  const { teachers, courses } = useContext(DataContext);
+  const { teachers, ref_ref_courses } = useContext(DataContext);
   return (
     <>
       <Helmet>
@@ -28,7 +28,7 @@ const Teachers = () => {
                   <Teacher
                     key={t.teacher_id}
                     teacher={t}
-                    courses={courses ? courses : false}
+                    courses={ref_ref_courses ? ref_ref_courses : false}
                   />
                 ))
               ) : (
@@ -41,16 +41,5 @@ const Teachers = () => {
     </>
   );
 };
-
-// class Teachers3 extends Component {
-//   state = {};
-//   componentDidMount() {}
-//   render() {
-//     const { teachers, courses } = this.props;
-//     return (
-
-//     );
-//   }
-// }
 
 export default Teachers;

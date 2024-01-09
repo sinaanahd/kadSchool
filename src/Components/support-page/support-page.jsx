@@ -31,19 +31,19 @@ const Support = () => {
                 </a>
               </span>
               <span className="ways-to-contact-wrapper">
-                <span className="way-title">شماره همراه: </span>
-                <a href="tel:+989051300693">
-                  {"۰" + convert_to_persian(9051300693)}
+                <span className="way-title">شماره ثابت: </span>
+                <a href="tel:+982162999110">
+                  {"۰" + convert_to_persian(2162999110)}
                 </a>
               </span>
               <span className="ways-to-contact-wrapper">
                 <span className="way-title">پشتیبانی تلگرامی:</span>
                 <a href="https://t.me/kadadmim">t.me/kadadmim</a>
               </span>
-              <span className="ways-to-contact-wrapper">
+              {/* <span className="ways-to-contact-wrapper">
                 <span className="way-title">پشتیبانی واتسپ:</span>
                 <a href="https://wa.me/+989051300693">wa.me/09051300693</a>
-              </span>
+              </span> */}
             </div>
           </div>
         </div>

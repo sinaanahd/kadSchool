@@ -43,6 +43,7 @@ import good_students_12 from "../../assets/images/rotbe-bartar/rotbe-12.webp";
 import good_students_13 from "../../assets/images/rotbe-bartar/rotbe-13.webp";
 import good_students_14 from "../../assets/images/rotbe-bartar/rotbe-14.webp";
 import urls from "../urls/url";
+import Navigate_to_specials from "../navigate-to-specilas/navigate-to-specials";
 
 const len = 8;
 const user = JSON.parse(localStorage.getItem("user-kad"))
@@ -438,6 +439,7 @@ const HomePage = () => {
         />
       </Helmet>
       <div className="home-page">
+        <Navigate_to_specials />
         <section className="hero-wrapper">
           <div className="hero-gif">
             <Lottie options={hero_animation_options} />

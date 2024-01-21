@@ -7,6 +7,7 @@ import LittleLoading from "../reuseables/little-loading";
 import ShopSlider from "./shop-slider/shop-slider";
 import ShopPopUp from "./shop-pop-up/shop-pop-up";
 import { DataContext } from "../context/DataContext";
+import Navigate_to_specials from "../navigate-to-specilas/navigate-to-specials";
 
 const Shop = () => {
   const [shown, set_shown] = useState(false);
@@ -185,6 +186,7 @@ const Shop = () => {
         <div className="mm-width shop-wrapper">
           <div className="main-content">
             <h1 className="page-title">فروشگاه</h1>
+            <Navigate_to_specials />
             <ShopSlider
               shop_banners={shop_banners}
               handle_shop_pop_up={handle_shop_pop_up}

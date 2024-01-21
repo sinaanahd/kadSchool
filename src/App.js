@@ -57,6 +57,7 @@ import SinglePost from './Components/posts/post/single-post';
 import AllBlogs from './Components/posts/all-posts';
 import NOT_ensani from './Components/landing-pages/nokte-o-test/nokte-o-test-ensani';
 import NOT_tajrobi from './Components/landing-pages/nokte-o-test/nokte-o-test-tajrobi';
+import SemiShop from './Components/shop/semi-shop/semi-shop';
 // context refactor
 
 const App = () => {
@@ -123,6 +124,7 @@ const App = () => {
         <Route path="/Needed-apps" component={NewPanelNotice} />
         {/* <Route path="/Shop/product/:id" exact component={SingleProd} /> */}
         <Route path="/Shop/product/:id" exact component={SingleClass} />
+        <Route path="/Shop/:id" exact component={SemiShop} />
         <Route path="/Shop" component={Shop} />
         {/* <Route path="/Teachers/:id" exact component={SingleTeacher} /> */}
         <Route path="/Teachers/:id" exact component={R_SingleTeacher} />

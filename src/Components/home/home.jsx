@@ -1,4 +1,10 @@
-import React, { Component, useState, useRef, useEffect } from "react";
+import React, {
+  Component,
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+} from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Lottie from "react-lottie";
@@ -44,6 +50,8 @@ import good_students_13 from "../../assets/images/rotbe-bartar/rotbe-13.webp";
 import good_students_14 from "../../assets/images/rotbe-bartar/rotbe-14.webp";
 import urls from "../urls/url";
 import Navigate_to_specials from "../navigate-to-specilas/navigate-to-specials";
+import { DataContext } from "../context/DataContext";
+import Kelas_item from "../kelas-item/kelas-item";
 
 const len = 8;
 const user = JSON.parse(localStorage.getItem("user-kad"))
@@ -74,7 +82,7 @@ const HomePage = () => {
   const [pause_2, set_pause_2] = useState(false);
   const [final_message, set_final_message] = useState(false);
   const [final_message_2, set_final_message_2] = useState(false);
-
+  const { kelasses } = useContext(DataContext);
   useEffect(() => {
     setTimeout(() => {
       count_students(3875);
@@ -517,6 +525,21 @@ const HomePage = () => {
             </span>
           </div>
         </section>
+        {kelasses ? (
+          <section className="show-latest-kelasses-wrapper">
+            <h2 className="semi-title">جدیدترین کلاس های کاد</h2>
+            <div className="all-kelasses">
+              {kelasses.slice(0, 12).map((k) => (
+                <Kelas_item key={k.kelas_id} k={k} />
+              ))}
+            </div>
+            <Link to="/Shop" className="go-to-shop-btn" onClick={scrollToTop}>
+              مشاهده تمامی کلاس ها
+            </Link>
+          </section>
+        ) : (
+          <></>
+        )}
         <section className="achivment-history-wrapper">
           <h2 className="semi-title">تو کاد چه خبره ؟</h2>
           <div className="numberical-contents">

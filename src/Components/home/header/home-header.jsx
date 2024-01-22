@@ -39,6 +39,7 @@ const HomeHeader = ({ not_home }) => {
       <Link
         onClick={() => {
           scrollToTop();
+          set_menu(false);
         }}
         to="/HomePage"
       >
@@ -61,49 +62,66 @@ const HomeHeader = ({ not_home }) => {
         ) : (
           <img src={menuIcon} width={30} height={30} alt="باز کردن منو" />
         )}
+        <span className="menu-text">منو</span>
       </span>
       <nav className={menu ? "links-wrapper home-res-menu" : "links-wrapper"}>
         <ul>
+          <li className="vis-in-mobile">
+            <Link
+              onClick={() => {
+                scrollToTop();
+                set_menu(false);
+              }}
+              to="/HomePage"
+            >
+              <img
+                src={mainLogo}
+                alt="کاد"
+                width={100}
+                height={24}
+                className="main-logo-mobile"
+              />
+            </Link>
+            {menu ? (
+              <img
+                src={closeMenu}
+                width={20}
+                height={20}
+                alt="بستن منو"
+                className="close-pos"
+                onClick={menu_handler}
+              />
+            ) : (
+              <img
+                src={menuIcon}
+                width={20}
+                height={20}
+                alt="باز کردن منو"
+                onClick={menu_handler}
+              />
+            )}
+          </li>
           <li>
             <a href="https://panel.kadschool.com" target="_blank">
               پنل دانش آموزان
             </a>
           </li>
           <li className="login-li">
-            {user ? (
-              <>
-                <span
-                  href="https://student.kadschool.com"
-                  target="_blank"
-                  onClick={() => {
-                    set_exit(!exit);
-                  }}
-                >
-                  ورود | ثبت نام
-                </span>{" "}
-                {exit ? (
-                  <span className="exit-from-website" onClick={clear_user}>
-                    خروج از حساب کاربری
-                  </span>
-                ) : (
-                  <></>
-                )}
-              </>
-            ) : (
-              <Link
-                onClick={() => {
-                  scrollToTop();
-                }}
-                to="/Login"
-              >
-                ورود | ثبت نام
-              </Link>
-            )}
+            <Link
+              onClick={() => {
+                scrollToTop();
+                set_menu(false);
+              }}
+              to={!user ? "/Login" : "/Shop"}
+            >
+              ورود | ثبت نام
+            </Link>
           </li>
           <li>
             <Link
               onClick={() => {
                 scrollToTop();
+                set_menu(false);
               }}
               to="/Cart"
             >
@@ -114,6 +132,7 @@ const HomeHeader = ({ not_home }) => {
             <Link
               onClick={() => {
                 scrollToTop();
+                set_menu(false);
               }}
               to="/Shop"
             >
@@ -124,6 +143,7 @@ const HomeHeader = ({ not_home }) => {
             <Link
               onClick={() => {
                 scrollToTop();
+                set_menu(false);
               }}
               to="/Teachers"
             >
@@ -134,17 +154,20 @@ const HomeHeader = ({ not_home }) => {
             <Link
               onClick={() => {
                 scrollToTop();
+                set_menu(false);
               }}
               to="/Support"
             >
               پشتیبانی
             </Link>
           </li>
+          <li onClick={clear_user}>خروج</li>
           {/* <li className="new-label">
             <BsFire />
             <Link
               onClick={() => {
                 scrollToTop();
+                set_menu(false)
               }}
               to="/نکته-و-تست-تجربی"
             >
@@ -156,6 +179,7 @@ const HomeHeader = ({ not_home }) => {
             <Link
               onClick={() => {
                 scrollToTop();
+                set_menu(false)
               }}
               to="/نکته-و-تست-انسانی"
             >
@@ -167,23 +191,5 @@ const HomeHeader = ({ not_home }) => {
     </header>
   );
 };
-
-// export default HomeHeader;
-// class HomeHeader extends Component {
-//   state = { menu: false, sticky: false, exit: false };
-//   menu_handler = () => {
-//     const menu = menu;
-//     setState({ menu: !menu });
-//   };
-//   clear_user = () => {
-//     window.localStorage.clear();
-//     window.location.pathname = "/Login";
-//   };
-//   componentDidMount() {}
-//   render() {
-//     const { user, not_home } = props;
-//     return <></>;
-//   }
-// }
 
 export default HomeHeader;

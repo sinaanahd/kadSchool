@@ -58,6 +58,7 @@ import AllBlogs from './Components/posts/all-posts';
 import NOT_ensani from './Components/landing-pages/nokte-o-test/nokte-o-test-ensani';
 import NOT_tajrobi from './Components/landing-pages/nokte-o-test/nokte-o-test-tajrobi';
 import SemiShop from './Components/shop/semi-shop/semi-shop';
+import NoticeBox from './Components/notice-box/notice-box';
 // context refactor
 
 const App = () => {
@@ -178,7 +179,8 @@ const App = () => {
           check_page.includes("/Referal-signup") ||
           check_page === "/SetPassword" ? <></> : 
           <HomeFooter not_home="f-not-home" />
-      }
+        }
+        <NoticeBox />
     </> );
 }
 export default App;

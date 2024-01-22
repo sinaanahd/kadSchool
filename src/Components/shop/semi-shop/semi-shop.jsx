@@ -26,13 +26,13 @@ const SemiShop = () => {
   const decide_page = () => {
     switch (page_slug) {
       case "امتحان-نهایی-دهم":
-        return [34, 64, 61, 44, 41, 37];
+        return [34, 64, 44, 41, 37, 61];
       case "امتحان-نهایی-یازدهم":
-        return [63, 34, 43, 42, 40, 38];
+        return [34, 43, 40, 42, 38, 63];
       case "امتحان-نهایی-دوازدهم":
-        return [22, 34, 24, 26, 39, 62, 65, 34];
+        return [34, 22, 26, 24, 39, 62, 65, 34];
       case "نکته-و-تست-کنکور-اختصاصی":
-        return [54, 53, 52, 51];
+        return [55, 57, 56, 58, 59, 54, 53, 52, 51];
       case "آفلاین":
         return [27, 28, 29, 18, 19, 20];
       default:
@@ -40,10 +40,18 @@ const SemiShop = () => {
     }
   };
   const kelas_ids = decide_page();
-  const products =
-    kelasses && teachers
-      ? kelasses.filter((k) => kelas_ids.includes(k.kelas_id))
-      : false;
+  const find_kelas_in_order = (e) => {
+    const all_kelasses = [];
+    kelas_ids.forEach((k_id) => {
+      const kelas = kelasses.find((k) => k.kelas_id === k_id);
+      if (kelas) {
+        all_kelasses.push(kelas);
+      }
+    });
+    return all_kelasses;
+  };
+  const products = kelasses && teachers ? find_kelas_in_order() : false;
+
   return (
     <>
       <Helmet>
@@ -57,7 +65,7 @@ const SemiShop = () => {
       <section className="bgc-wrapper shop-wrapper-section semi-shop">
         <div className="mm-width shop-wrapper">
           <div className="main-content">
-            <h1 className="page-title">
+            <h1 className="page-title font-bold">
               کلاس های {page_slug.replaceAll("-", " ")}
             </h1>
             <Navigate_to_specials />

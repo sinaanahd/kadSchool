@@ -142,6 +142,15 @@ const R_SingleTeacher = () => {
     <>
       <Helmet>
         <title>کاد | {slug.replaceAll("-", " ")}</title>
+        <meta name="description" content={teacher ? teacher.description : ""} />
+        <meta
+          name="keywords"
+          content={
+            teacher
+              ? teacher.fullname + "," + teacher.fullname.replace("استاد", "")
+              : ""
+          }
+        />
       </Helmet>
       <div className="re-teacher-main-wrapper re">
         <section className="teacher-intro-wrapper">

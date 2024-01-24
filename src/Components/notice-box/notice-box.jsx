@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { PiGiftDuotone } from "react-icons/pi";
 import convert_to_persian from "../functions/convert-to-persian";
+import copy_to_clip_board from "../functions/copy-to-clip-board";
 const NoticeBox = () => {
   const [active, set_active] = useState(false);
+  const [copy, set_copy] = useState(false);
   let count = 0;
   useEffect(() => {
     if (count === 0) {
@@ -40,7 +42,32 @@ const NoticeBox = () => {
       {active ? (
         <div className="pop-image-show-container">
           <div className="pop-up-img-wrapper mm-width">
-            <p className="desc-text font-bold">
+            <p className="desc-text">
+              کمپین <font className="font-bold">۳۰ درصد تخفیف</font> کلیه کلاس
+              های کاد <font className="font-bold">پنجم</font> و{" "}
+              <font className="font-bold">ششم</font> بهمن برای راهنمایی بیشتر به
+              شماره{" "}
+              <font
+                className="font-bold"
+                onClick={() => {
+                  copy_to_clip_board("09128965613");
+                  set_copy(true);
+                }}
+              >
+                ۰۹۱۲۸۹۶۵۶۱۳
+              </font>{" "}
+              <font
+                className="small-text font-bold"
+                onClick={() => {
+                  copy_to_clip_board("09128965613");
+                  set_copy(true);
+                }}
+              >
+                ( {copy ? "کپی شد!" : "کپی"} )
+              </font>
+              پیامک دهید.
+            </p>
+            {/* <p className="desc-text font-bold">
               میدونستی ما کلی مشاور داریم که منتظر شنیدن صدای شمان ؟
               <br />
               شما میتونی با مشاور های ما تماس بگیری و کلاسی رو که میخوای بخری،
@@ -54,7 +81,7 @@ const NoticeBox = () => {
               <a href="tel:+982162999110" className="call-us-now-btn">
                 {"۰۲۱-" + convert_to_persian(62999110)}
               </a>
-            </span>
+            </span> */}
             <div className="pop-up-btns">
               <button
                 className="close-btn pop-up-btn"

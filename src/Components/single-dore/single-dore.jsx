@@ -46,6 +46,8 @@ const SingleDore = () => {
     <>
       <Helmet>
         <title>کاد | دوره {slug_name.replaceAll("-", " ")}</title>
+        <meta name="keywords" content={slug_name.replaceAll("-", " ")} />
+        <meta name="description" content={s_dore ? s_dore.descriptions : ""} />
       </Helmet>
       <div className="re-single-dore">
         <section className="dore-intro mm-width">
@@ -100,7 +102,10 @@ const SingleDore = () => {
             </div>
           </div>
         </section>
-        <WhyDore slug_name={slug_name.replaceAll("-", " ")} />
+        <WhyDore
+          slug_name={slug_name.replaceAll("-", " ")}
+          reasons={s_dore ? s_dore.reasons_full : []}
+        />
         <VideosSection
           slug_name={slug_name.replaceAll("-", " ")}
           videos={videos}

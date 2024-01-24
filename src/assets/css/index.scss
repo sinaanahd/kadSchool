@@ -7748,9 +7748,16 @@ input[type=number] {
     .class-title{
         font-size: 30px;
     }
+    .teachers-wrapper{
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        flex-wrap: wrap;
+    }
     .info-teacher-name{
         font-size: 20px;
         font-weight: normal;
+        text-align: center;
     }
     .info-desc-text{
         font-size: 18px;
@@ -9256,6 +9263,7 @@ input[type=number] {
     .desc-text{
         font-size: 20px;
         text-align: center;
+        padding: 50px 0;
     }
     .btn-wrappers{
         width: 100%;
@@ -9272,6 +9280,14 @@ input[type=number] {
         animation: move_up_down_res_4 1s linear 0.1s infinite alternate;
         color: #fff;
         border-radius: 5px;
+    }
+    font{
+        color: #7E2553;
+        margin: 0 3px;
+    }
+    .small-text{
+        font-size: 15px;
+        text-decoration: underline;
     }
 }
 

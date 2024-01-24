@@ -44,9 +44,12 @@ const SingleClass = () => {
           k.slug_name === page_slug_2
       )
     : false;
-  const teacher = kelas
+  const teacher = teachers
+    ? teachers.find((t) => kelas.teachers[0] === t.teacher_id)
+    : false;
+  const kelas_teachers = kelas
     ? teachers
-      ? teachers.find((t) => t.teacher_id === kelas.teachers[0])
+      ? teachers.filter((t) => kelas.teachers.includes(t.teacher_id))
       : false
     : false;
 
@@ -158,6 +161,19 @@ const SingleClass = () => {
                 " "
               )}
         </title>
+        <meta
+          name="keywords"
+          content={`${
+            kelas
+              ? kelas.kelas_title_and_ostad_name + "," + kelas.kelas_title
+              : ""
+          },${
+            kelas_teachers
+              ? kelas_teachers.map((t) => t.fullname.replace("استاد", ""))
+              : ""
+          }`}
+        />
+        <meta name="description" content={kelas ? kelas.descriptions : ""} />
       </Helmet>
       <div className="re-design-single-class">
         <section className="re-single-header-info mm-width">
@@ -172,18 +188,24 @@ const SingleClass = () => {
             <h1 className="class-title">
               {kelas ? kelas.kelas_title : <LittleLoading />}
             </h1>
-            <h2 className="info-teacher-name">
-              {teacher ? (
-                <Link
-                  onClick={scrollToTop}
-                  to={"/Teachers/" + teacher.slug_name}
-                >
-                  {teacher.fullname}
-                </Link>
+            <div className="teachers-wrapper">
+              {kelas_teachers ? (
+                kelas_teachers.map((teacher, i) => (
+                  <h2 className="info-teacher-name" key={teacher.teacher_id}>
+                    <Link
+                      onClick={scrollToTop}
+                      to={"/Teachers/" + teacher.slug_name}
+                    >
+                      {teacher.fullname}
+                    </Link>
+                    {i !== kelas_teachers.length - 1 ? " -" : ""}
+                  </h2>
+                ))
               ) : (
                 <LittleLoading />
               )}
-            </h2>
+            </div>
+
             <p className="info-desc-text">
               {kelas ? kelas.descriptions : <LittleLoading />}
             </p>
@@ -191,7 +213,14 @@ const SingleClass = () => {
         </section>
         <div className="additional-datas-wrapper mm-width">
           <div className="right-col">
-            <Teacher_data teacher={teacher} />
+            {kelas_teachers ? (
+              kelas_teachers.map((teacher) => (
+                <Teacher_data teacher={teacher} key={teacher.teacher_id} />
+              ))
+            ) : (
+              <LittleLoading />
+            )}
+
             <Dore_data dore={dore} />
           </div>
           <div className="left-col">

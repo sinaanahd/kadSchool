@@ -39,8 +39,12 @@ const Time_cart_data = ({ kelas }) => {
       </div>
       <h3 className="start-date-title">تاریخ شروع:</h3>
       <span className="start-date">
-        {dore ? (
-          new Date(dore.dore_start_date).toLocaleDateString("fa-ir")
+        {kelas ? (
+          kelas.start_date ? (
+            new Date(kelas.start_date).toLocaleDateString("fa-ir")
+          ) : (
+            <LittleLoading />
+          )
         ) : (
           <LittleLoading />
         )}

@@ -44,9 +44,10 @@ const SingleClass = () => {
           k.slug_name === page_slug_2
       )
     : false;
-  const teacher = teachers
-    ? teachers.find((t) => kelas.teachers[0] === t.teacher_id)
-    : false;
+  const teacher =
+    teachers && kelas
+      ? teachers.find((t) => kelas.teachers[0] === t.teacher_id)
+      : false;
   const kelas_teachers = kelas
     ? teachers
       ? teachers.filter((t) => kelas.teachers.includes(t.teacher_id))

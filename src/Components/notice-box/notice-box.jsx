@@ -42,7 +42,7 @@ const NoticeBox = () => {
       {active ? (
         <div className="pop-image-show-container">
           <div className="pop-up-img-wrapper mm-width">
-            <p className="desc-text">
+            {/* <p className="desc-text">
               کمپین <font className="font-bold">۳۰ درصد تخفیف</font> کلیه کلاس
               های کاد <font className="font-bold">پنجم</font> و{" "}
               <font className="font-bold">ششم</font> بهمن برای راهنمایی بیشتر به
@@ -65,9 +65,10 @@ const NoticeBox = () => {
               >
                 ( {copy ? "کپی شد!" : "کپی"} )
               </font>
-              پیامک دهید.
-            </p>
-            {/* <p className="desc-text font-bold">
+              عدد <font className="font-bold">۳</font>
+              را پیامک دهید.
+            </p> */}
+            <p className="desc-text font-bold">
               میدونستی ما کلی مشاور داریم که منتظر شنیدن صدای شمان ؟
               <br />
               شما میتونی با مشاور های ما تماس بگیری و کلاسی رو که میخوای بخری،
@@ -81,7 +82,7 @@ const NoticeBox = () => {
               <a href="tel:+982162999110" className="call-us-now-btn">
                 {"۰۲۱-" + convert_to_persian(62999110)}
               </a>
-            </span> */}
+            </span>
             <div className="pop-up-btns">
               <button
                 className="close-btn pop-up-btn"

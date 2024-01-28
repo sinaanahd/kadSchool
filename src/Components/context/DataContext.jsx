@@ -235,7 +235,7 @@ const DataProvider = ({ children }) => {
         },
       ];
   useEffect(() => {
-    get_special_kelases_list();
+    // get_special_kelases_list();
     const is_time = last_login_check(last_login, this_time_login);
     // send_cookie();
     // get_user(9166);

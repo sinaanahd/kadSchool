@@ -15,7 +15,7 @@ const NOT_tajrobi = () => {
   const profits_ref = useRef(false);
   const [active_profit, set_active_profit] = useState(0);
   const { kelasses } = useContext(DataContext);
-  const kelas_ids = [51, 52, 53, 54];
+  const kelas_ids = [51, 52, 54];
   const dore_kelasses = kelasses
     ? kelasses.filter((k) => kelas_ids.includes(k.kelas_id))
     : false;
@@ -45,7 +45,6 @@ const NOT_tajrobi = () => {
     setTimeout(() => {
       const page_check =
         decodeURI(window.location.pathname) === "/نکته-و-تست-تجربی";
-      console.log(page_check);
       if (page_check) {
         handle_profit_active_change();
       }
@@ -59,17 +58,24 @@ const NOT_tajrobi = () => {
           name="keywords"
           content="نکته و تست, نکته و تست تجربی, نکته و تست کاد, دوره نکته و تست, نکته و تست کنکور, کنکور تجربی"
         />
+        <meta
+          name="description"
+          content="دوره نکته و تست تجربی، دوره ای مناسب برای جمع بندی دروس اختصاصی رشته تجربی است. این دوره برای تمامی سطح های دانش آموزان کاملا مناسب است و فرصت خوبی برای بدست آوردن بهترین نتایج است"
+        />
       </Helmet>
       <div className="not-landing-wrapper mm-width">
         <section className="landing-intro-wrapper">
           <div className="intro-texts">
             <h1 className="page-title">نکته و تست تجربی</h1>
             <p className="intro-para-text">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-              در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
-              نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-              کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
+              دوره نکته و تست تجربی، دوره ای مناسب برای جمع بندی دروس اختصاصی
+              رشته تجربی است. این دوره برای تمامی سطح های دانش آموزان کاملا
+              مناسب است و فرصت خوبی برای بدست آوردن بهترین نتایج است. دوره نکته
+              و تست تجربی تنها به کمک دانش آموزان قوی فکر نمیکنه. تمامی مباحث از
+              پایه و توضیح داده میشه که بچه های متوسط و ضعیف بتونن سریع مطالب رو
+              متوجه بشن و برای بچه های قوی مروری باشه برای جمع بندی این درس ها.
+              هر هفته تکلیف داریم و هر جلسه کلی تست آموزشی مطابق با منابع امتحان
+              های آموزشی اصلی داریم.
             </p>
           </div>
           <div className="intro-img-wrapper">
@@ -80,67 +86,6 @@ const NOT_tajrobi = () => {
               width={400}
               height={317}
             />
-          </div>
-        </section>
-        <section className="dore-prophits-section">
-          <h2 className="section-title">مزایا دوره نکته و تست تجربی</h2>
-          <div className="all-profits-wrapper" ref={profits_ref}>
-            <div className="profit-wrapper active">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
           </div>
         </section>
         <section className="dore-kelases-section">
@@ -169,6 +114,71 @@ const NOT_tajrobi = () => {
             </div>
           </div>
         </section>
+        <section className="dore-prophits-section">
+          <h2 className="section-title">مزایا دوره نکته و تست تجربی</h2>
+          <div className="all-profits-wrapper" ref={profits_ref}>
+            <div className="profit-wrapper active">
+              <h3 className="profit-title">مناسب تمامی دانش آموزان</h3>
+              <p className="profit-text">
+                این دوره فقط برای دانش آموزان ضعیف یا قوی نیست و همه سطح دانش
+                آموز میتونن درس های اختصاصی رو یاد بگیرن و با خیال راحت به دوره
+                و جمع بندی برسن
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">تکلیف و تمرین</h3>
+              <p className="profit-text">
+                تمامی کلاس های این دوره با خودش تکالیف و تمرین داره که بعد از حل
+                تست تو کلاس ها به راحتی بتونین مطالب رو تمرین کنید و راحت تر به
+                یادگیری و دوره کردن برسید.
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">رفع اشکال سر کلاس</h3>
+              <p className="profit-text">
+                تو کلاس های نکته و تست تجربی شما خیلی راحت میتونید سر کلاس
+                سوالاتتون رو بپرسید و رفع اشکال کنید که مشکلی براتون دیگه باقی
+                نمونه.
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">مطابق با آزمون آزمایشی</h3>
+              <p className="profit-text">
+                این کلاس ها کاملا مطابق آزمون های آزمایشی و برنامه راهبردی درسی
+                شماست. شما بعد از یادگیری و تمرین کاملا برای هر نوع آزمون
+                آزمایشی آماده هستید و بهترین نتایج رو میتونید بگیرید.
+              </p>
+            </div>
+            {/* <div className="profit-wrapper">
+              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
+              <p className="profit-text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
+              <p className="profit-text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
+              <p className="profit-text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
+              <p className="profit-text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است
+              </p>
+            </div> */}
+          </div>
+        </section>
         <section className="special-discount-section">
           <div className="special-text-wrapper">
             <h2 className="section-title">تخفیف ویژه دوره نکته و تست</h2>
@@ -178,8 +188,8 @@ const NOT_tajrobi = () => {
               بگیری!
               <br />
               فقط کافیه با این شماره تماس بگیری :{"   "}
-              <a href="tel:+98203912312938">
-                <bdi>۰۲۱ - ۱۱۲۲۳۳۴۴</bdi>
+              <a href="tel:+982166950624">
+                <bdi>۰۲۱ - ۶۶۹۵۰۶۲۴</bdi>
               </a>
             </p>
           </div>
@@ -212,8 +222,8 @@ const NOT_tajrobi = () => {
               نگران این نباش که قراره تنها بمونی توی این مسیر!
               <br />
               فقط کافیه با این شماره تماس بگیری :{"   "}
-              <a href="tel:+98203912312938">
-                <bdi>۰۲۱ - ۱۱۲۲۳۳۴۴</bdi>
+              <a href="tel:+982162999110">
+                <bdi>۰۲۱ - ۶۲۹۹۹۱۱۰</bdi>
               </a>
             </p>
           </div>

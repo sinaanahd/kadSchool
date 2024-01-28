@@ -23,8 +23,12 @@ const R_SingleTeacher = () => {
   const { teachers, kelasses, doreha, sample_files, handle_cart, cart, user } =
     useContext(DataContext);
   const kelas_ref = useRef(false);
+  const nemone_tadris_ref = useRef(false);
+  const free_course_ref = useRef(false);
   const [file_type, set_file_type] = useState("jozve");
   const [kelas_carousel, set_kelas_carousel] = useState(0);
+  const [nemone_tadris_carousel, set_nemone_tadris_carousel] = useState(0);
+  const [free_course_carousel, set_free_course_carousel] = useState(0);
   const find_slug = () => {
     const page_slug = window.location.pathname.split("/")[2];
     let page_id;
@@ -92,8 +96,8 @@ const R_SingleTeacher = () => {
     sample_files && teacher
       ? sample_files.video_sample_files.filter(
           (sf) =>
-            teacher.sample_files.video_sample_files_ids.includes(sf.file_id) &&
-            sf.file_type === "رزومه ویدیویی استاد"
+            sf.teacher_id === teacher.teacher_id &&
+            sf.file_type === "کلاس رایگان"
         )
       : false;
   const jozveha =
@@ -136,6 +140,41 @@ const R_SingleTeacher = () => {
         c.style.transform = `translateX(${0 * 347}px)`;
       });
       set_kelas_carousel(0);
+    }
+  };
+  const handle_free_course_carousel = (way) => {
+    const children = [...free_course_ref.current.children];
+    if (way === "forward" && free_course_carousel !== free_course.length - 1) {
+      children.forEach((c) => {
+        c.style.transform = `translateX(${(free_course_carousel + 1) * 100}%)`;
+      });
+      set_free_course_carousel(free_course_carousel + 1);
+    } else if (way === "previous" && free_course_carousel !== 0) {
+      children.forEach((c) => {
+        c.style.transform = `translateX(${(free_course_carousel - 1) * 100}%)`;
+      });
+      set_free_course_carousel(free_course_carousel - 1);
+    }
+  };
+  const handle_nemone_tadris_carousel = (way) => {
+    const children = [...nemone_tadris_ref.current.children];
+    if (
+      way === "forward" &&
+      nemone_tadris_carousel !== nemone_tadris.length - 1
+    ) {
+      children.forEach((c) => {
+        c.style.transform = `translateX(${
+          (nemone_tadris_carousel + 1) * 100
+        }%)`;
+      });
+      set_nemone_tadris_carousel(nemone_tadris_carousel + 1);
+    } else if (way === "previous" && nemone_tadris_carousel !== 0) {
+      children.forEach((c) => {
+        c.style.transform = `translateX(${
+          (nemone_tadris_carousel - 1) * 100
+        }%)`;
+      });
+      set_nemone_tadris_carousel(nemone_tadris_carousel - 1);
     }
   };
   return (
@@ -526,7 +565,7 @@ const R_SingleTeacher = () => {
             <h2 className="video-title">
               نمونه تدریس های {slug.replaceAll("-", " ")}
             </h2>
-            <div className="video-need-div">
+            <div className="video-need-div" ref={nemone_tadris_ref}>
               {nemone_tadris ? (
                 nemone_tadris.length !== 0 ? (
                   nemone_tadris.map((v) => (
@@ -539,12 +578,50 @@ const R_SingleTeacher = () => {
                 <LittleLoading />
               )}
             </div>
+            {nemone_tadris ? (
+              nemone_tadris.length < 1 ? (
+                <></>
+              ) : (
+                <span className="move-arrows-wrapper">
+                  <button
+                    className="arrow-wrapper reverse"
+                    onClick={() => {
+                      handle_nemone_tadris_carousel("previous");
+                    }}
+                  >
+                    <img
+                      src={arrow}
+                      alt="بعدی"
+                      width={10}
+                      height={17}
+                      loading="lazy"
+                    />
+                  </button>
+                  <button
+                    className="arrow-wrapper"
+                    onClick={() => {
+                      handle_nemone_tadris_carousel("forward");
+                    }}
+                  >
+                    <img
+                      src={arrow}
+                      alt="بعدی"
+                      width={10}
+                      height={17}
+                      loading="lazy"
+                    />
+                  </button>
+                </span>
+              )
+            ) : (
+              <></>
+            )}
           </div>
           <div className="teacher-video-place">
             <h2 className="video-title">
               درس های رایگان {slug.replaceAll("-", " ")}
             </h2>
-            <div className="video-need-div">
+            <div className="video-need-div" ref={free_course_ref}>
               {free_course ? (
                 free_course.length !== 0 ? (
                   free_course.map((v) => (
@@ -557,6 +634,44 @@ const R_SingleTeacher = () => {
                 <LittleLoading />
               )}
             </div>
+            {free_course ? (
+              free_course.length < 1 ? (
+                <></>
+              ) : (
+                <span className="move-arrows-wrapper">
+                  <button
+                    className="arrow-wrapper reverse"
+                    onClick={() => {
+                      handle_free_course_carousel("previous");
+                    }}
+                  >
+                    <img
+                      src={arrow}
+                      alt="بعدی"
+                      width={10}
+                      height={17}
+                      loading="lazy"
+                    />
+                  </button>
+                  <button
+                    className="arrow-wrapper"
+                    onClick={() => {
+                      handle_free_course_carousel("forward");
+                    }}
+                  >
+                    <img
+                      src={arrow}
+                      alt="بعدی"
+                      width={10}
+                      height={17}
+                      loading="lazy"
+                    />
+                  </button>
+                </span>
+              )
+            ) : (
+              <></>
+            )}
           </div>
         </section>
         <section className="files-section-wrapper">

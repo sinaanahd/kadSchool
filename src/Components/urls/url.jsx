@@ -23,5 +23,6 @@ const urls = {
   wants_ghesti: `${base_site}`,
   password: `${base_site}password/`,
   buy_cart: `${base_site}buyCart/`,
+  specialKelasesList: `${base_site}specialKelasesList/`,
 };
 export default urls;

@@ -161,13 +161,12 @@ const HomeHeader = ({ not_home }) => {
               پشتیبانی
             </Link>
           </li>
-          <li onClick={clear_user}>خروج</li>
-          {/* <li className="new-label">
+          <li className="new-label">
             <BsFire />
             <Link
               onClick={() => {
                 scrollToTop();
-                set_menu(false)
+                set_menu(false);
               }}
               to="/نکته-و-تست-تجربی"
             >
@@ -179,13 +178,14 @@ const HomeHeader = ({ not_home }) => {
             <Link
               onClick={() => {
                 scrollToTop();
-                set_menu(false)
+                set_menu(false);
               }}
               to="/نکته-و-تست-انسانی"
             >
               نکته و تست انسانی
             </Link>
-          </li> */}
+          </li>
+          <li onClick={clear_user}>خروج</li>
         </ul>
       </nav>
     </header>

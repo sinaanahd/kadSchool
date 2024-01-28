@@ -59,17 +59,26 @@ const NOT_ensani = () => {
           name="keywords"
           content="نکته و تست, نکته و تست انسانی, نکته و تست کاد, دوره نکته و تست, نکته و تست کنکور, کنکور انسانی"
         />
+        <meta
+          name="description"
+          content="دوره نکته  و تست انسانی دوره ای برای آموزش دقیق و پایه ای درس های اختصاصی کنکور انسانی برای تمامی سطوح دانش آموزان است"
+        />
       </Helmet>
       <div className="not-landing-wrapper mm-width">
         <section className="landing-intro-wrapper">
           <div className="intro-texts">
             <h1 className="page-title">نکته و تست انسانی</h1>
             <p className="intro-para-text">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-              در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
-              نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-              کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
+              دوره نکته و تست انسانی، دوره ای مناسب برای یادگیری، مرور و جمع
+              بندی درس های اختصاصی رشته انسانی است. در این دوره با وجود اساتید
+              به نام و برتر مثل دکتر هامون سبطی، نیما جواهری،حمید سودیان،مهران
+              ترکمان و آروین حسینی میتونید با خیالی راحت تست زنی هر درس رو به
+              بهترین شکل یاد بگیرید. اساتید این کلاس تمامی سطوح دانش آموزان را
+              به کمک آموزش از پایه برای تست های گزینشی معتبر مثل کنکور،
+              قلمچی،ماز و ... آماده میکنند.
+              <br />
+              نگران درس های اختصاصی انسانیت نباش چون کاد برات بهترین کلاس ها رو
+              آماده کرده.
             </p>
           </div>
           <div className="intro-img-wrapper">
@@ -82,67 +91,7 @@ const NOT_ensani = () => {
             />
           </div>
         </section>
-        <section className="dore-prophits-section">
-          <h2 className="section-title">مزایا دوره نکته و تست انسانی</h2>
-          <div className="all-profits-wrapper" ref={profits_ref}>
-            <div className="profit-wrapper active">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-            <div className="profit-wrapper">
-              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
-              <p className="profit-text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                استفاده از طراحان گرافیک است
-              </p>
-            </div>
-          </div>
-        </section>
+
         <section className="dore-kelases-section">
           <h2 className="section-title" ref={box_ref}>
             کلاس های دوره نکته و تست انسانی
@@ -167,6 +116,73 @@ const NOT_ensani = () => {
               <LandingKelas />
               <LandingKelas /> */}
             </div>
+          </div>
+        </section>
+        <section className="dore-prophits-section">
+          <h2 className="section-title">مزایا دوره نکته و تست انسانی</h2>
+          <div className="all-profits-wrapper" ref={profits_ref}>
+            <div className="profit-wrapper active">
+              <h3 className="profit-title">آموزش نکته های تست زنی</h3>
+              <p className="profit-text">
+                اساتید کلاس های نکته و تست انسانی براتون نکات اصولی تست زدن و
+                آموزش صحیح این درس ها رو آماده کردن تا بهترین نتایج رو بتونید
+                بگیرید.
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">جمع بندی،مرور،تست</h3>
+              <p className="profit-text">
+                جمع بندی،مرور،تست سه نکته اصلی برای یادگیری هرچه بهتر یک درس قبل
+                از کنکور و آزمون های آزمایشی است. کلاس های دوره نکته و تست
+                انسانی به شما کمک میکنند که علاوه بر یادگیری به این موارد به
+                بهترین شکل برسید
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">آمادگی برای آزمون</h3>
+              <p className="profit-text">
+                همونطور که از اسم نکته و تست انسانی مشخص و واضحه قراره به شما
+                آمادگی هرچه بیشتر برای آزمون ها رو بدیم. اساتید این دوره شمارو
+                برای بهترین نتایج آماده میکنند تا با خیالی راحت بتونید عالی ترین
+                نتایج رو بدست بیارید.
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">مناسب برای تمامی دانش آموزان</h3>
+              <p className="profit-text">
+                نکته و تست انسانی فقط برای دانش آموزان قوی نیست بلکه حتی اگه سطح
+                بالای درسی هم ندارید میتونید مطالب رو از پایه یادبگیرید و برای
+                آزمون ها آماده باشید..
+              </p>
+            </div>
+            {/* <div className="profit-wrapper">
+              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
+              <p className="profit-text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
+              <p className="profit-text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
+              <p className="profit-text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است
+              </p>
+            </div>
+            <div className="profit-wrapper">
+              <h3 className="profit-title">لورم ایپسوم متن ساختگی</h3>
+              <p className="profit-text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است
+              </p>
+            </div> */}
           </div>
         </section>
         <section className="special-discount-section">

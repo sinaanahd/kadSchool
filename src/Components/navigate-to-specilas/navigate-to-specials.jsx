@@ -13,35 +13,29 @@ const Navigate_to_specials = () => {
         <br />
         کنکور فرهنگیان
       </Link>
-      <Link className="navigate-link color-2" to="/new-shop/امتحان-نهایی-دهم">
+      <Link className="navigate-link color-2" to="/Shop/امتحان-نهایی-دهم">
         امتحان نهایی
         <br />
         دهم
       </Link>
-      <Link
-        className="navigate-link color-3"
-        to="/new-shop/امتحان-نهایی-یازدهم"
-      >
+      <Link className="navigate-link color-3" to="/Shop/امتحان-نهایی-یازدهم">
         امتحان نهایی
         <br />
         یازدهم
       </Link>
-      <Link
-        className="navigate-link color-4"
-        to="/new-shop/امتحان-نهایی-دوازدهم"
-      >
+      <Link className="navigate-link color-4" to="/Shop/امتحان-نهایی-دوازدهم">
         امتحان نهایی
         <br />
         دوازدهم
       </Link>
-      <Link className="navigate-link color-5" to="/new-shop/آفلاین">
+      <Link className="navigate-link color-5" to="/Shop/آفلاین">
         کلاس های
         <br />
         آفلاین
       </Link>
       <Link
         className="navigate-link color-6"
-        to="/new-shop/نکته-و-تست-کنکور-اختصاصی"
+        to="/Shop/نکته-و-تست-کنکور-اختصاصی"
       >
         نکته و تست
         <br />

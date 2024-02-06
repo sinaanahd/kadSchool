@@ -11,6 +11,11 @@ const HomeHeader = ({ not_home }) => {
   const [menu, set_menu] = useState(false);
   const [sticky, set_sticky] = useState(false);
   const [exit, set_exit] = useState(false);
+  const [open_first_level, set_open_first_level] = useState(false);
+  const [open_dore_sub_menu, set_open_dore_sub_menu] = useState(false);
+  const [open_paye_sub_menu, set_open_paye_sub_menu] = useState(false);
+  const [open_subject_sub_menu, set_open_subject_sub_menu] = useState(false);
+  const { static_doreha, years, subjects } = useContext(DataContext);
   const menu_handler = () => {
     set_menu(!menu);
   };
@@ -28,6 +33,39 @@ const HomeHeader = ({ not_home }) => {
     });
   }, []);
   const { user } = useContext(DataContext);
+  const handle_open_level_1 = (e) => {
+    const classes = [...e.target.classList];
+    if (classes.includes("contains-child") || classes.includes("shop-arrow")) {
+      set_open_first_level(!open_first_level);
+    }
+  };
+  const handle_open_dore = (e) => {
+    const classes = [...e.target.classList];
+    if (
+      classes.includes("inside-header-item") ||
+      classes.includes("has-child-need-arrow")
+    ) {
+      set_open_dore_sub_menu(!open_dore_sub_menu);
+    }
+  };
+  const handle_open_paye = (e) => {
+    const classes = [...e.target.classList];
+    if (
+      classes.includes("inside-header-item") ||
+      classes.includes("has-child-need-arrow")
+    ) {
+      set_open_paye_sub_menu(!open_paye_sub_menu);
+    }
+  };
+  const handle_open_subject = (e) => {
+    const classes = [...e.target.classList];
+    if (
+      classes.includes("inside-header-item") ||
+      classes.includes("has-child-need-arrow")
+    ) {
+      set_open_subject_sub_menu(!open_subject_sub_menu);
+    }
+  };
   return (
     <header
       className={
@@ -65,7 +103,7 @@ const HomeHeader = ({ not_home }) => {
         <span className="menu-text">منو</span>
       </span>
       <nav className={menu ? "links-wrapper home-res-menu" : "links-wrapper"}>
-        <ul>
+        <ul className="main-nav font-bold">
           <li className="vis-in-mobile">
             <Link
               onClick={() => {
@@ -128,16 +166,111 @@ const HomeHeader = ({ not_home }) => {
               سبد خرید
             </Link>
           </li>
-          <li>
-            <Link
-              onClick={() => {
-                scrollToTop();
-                set_menu(false);
-              }}
-              to="/Shop"
-            >
-              فروشگاه
-            </Link>
+          <li
+            className={
+              open_first_level
+                ? "contains-child shop-arrow show-level-1"
+                : "contains-child shop-arrow"
+            }
+            onClick={(e) => {
+              handle_open_level_1(e);
+            }}
+          >
+            فروشگاه
+            <ul className="inside-header-ul">
+              <li className="inside-header-item align-left">
+                <Link
+                  to="/Shop"
+                  onClick={() => {
+                    scrollToTop();
+                    set_menu(false);
+                  }}
+                >
+                  تمامی کلاس ها
+                </Link>
+              </li>
+              <li
+                className={
+                  open_dore_sub_menu
+                    ? "inside-header-item has-child-need-arrow open-dore"
+                    : "inside-header-item has-child-need-arrow"
+                }
+                onClick={(e) => {
+                  handle_open_dore(e);
+                }}
+              >
+                دوره
+                <ul className="level-2-inside-header-ul">
+                  {static_doreha.map((d) => (
+                    <li className="level-2-inside-header-item" key={d.dore_id}>
+                      <Link
+                        to={`/Shop/دوره/${d.dore_title.replaceAll(" ", "-")}`}
+                        onClick={() => {
+                          scrollToTop();
+                          set_menu(false);
+                        }}
+                      >
+                        دوره {d.dore_title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+              <li
+                className={
+                  open_paye_sub_menu
+                    ? "inside-header-item has-child-need-arrow open-paye"
+                    : "inside-header-item has-child-need-arrow"
+                }
+                onClick={(e) => {
+                  handle_open_paye(e);
+                }}
+              >
+                پایه
+                <ul className="level-2-inside-header-ul">
+                  {years.map((y) => (
+                    <li className="level-2-inside-header-item" key={y.id}>
+                      <Link
+                        to={`/Shop/پایه/${y.name}`}
+                        onClick={() => {
+                          scrollToTop();
+                          set_menu(false);
+                        }}
+                      >
+                        پایه {y.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+              <li
+                className={
+                  open_subject_sub_menu
+                    ? "inside-header-item has-child-need-arrow open-subject"
+                    : "inside-header-item has-child-need-arrow"
+                }
+                onClick={(e) => {
+                  handle_open_subject(e);
+                }}
+              >
+                رشته
+                <ul className="level-2-inside-header-ul">
+                  {subjects.map((s) => (
+                    <li className="level-2-inside-header-item" key={s.id}>
+                      <Link
+                        to={`/Shop/رشته/${s.name}`}
+                        onClick={() => {
+                          scrollToTop();
+                          set_menu(false);
+                        }}
+                      >
+                        رشته {s.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            </ul>
           </li>
           <li>
             <Link
@@ -185,7 +318,9 @@ const HomeHeader = ({ not_home }) => {
               نکته و تست انسانی
             </Link>
           </li>
-          <li onClick={clear_user}>خروج</li>
+          <li className="color-black" onClick={clear_user}>
+            خروج
+          </li>
         </ul>
       </nav>
     </header>

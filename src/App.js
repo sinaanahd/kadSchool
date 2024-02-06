@@ -125,8 +125,8 @@ const App = () => {
         <Route path="/Needed-apps" component={NewPanelNotice} />
         {/* <Route path="/Shop/product/:id" exact component={SingleProd} /> */}
         <Route path="/Shop/product/:id" exact component={SingleClass} />
-        <Route path="/Shop/:id" exact component={SemiShop} />
-        <Route path="/Shop" component={Shop} />
+        {/* <Route path="/Shop/:id" exact component={SemiShop} /> */}
+        {/* <Route path="/Shop" component={Shop} /> */}
         {/* <Route path="/Teachers/:id" exact component={SingleTeacher} /> */}
         <Route path="/Teachers/:id" exact component={R_SingleTeacher} />
         <Route path="/Teachers/" component={Teachers} />
@@ -136,8 +136,8 @@ const App = () => {
         {/* 
           re-design / re-factor
         */}
-        <Route path="/new-shop/" component={NewShop} />
-        <Route path="/new-shop/:kind" component={NewShop} />
+        <Route path="/Shop/" component={NewShop} />
+        <Route path="/Shop/:kind" component={NewShop} />
         <Route path="/r-Teachers/:id" component={R_SingleTeacher} />
         <Route path="/r-class/:id" component={SingleClass} />
         <Route path="/r-dore/:id" component={SingleDore} />

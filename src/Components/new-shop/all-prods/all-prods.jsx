@@ -48,7 +48,7 @@ const AllProds = ({ page_kelasses, page_title, disable_filter }) => {
       />
       <div className="all-prods-grid">
         <div className="all-prods-header">
-          <h2 className="semi-title font-bold" ref={box_ref}>
+          <h2 className="semi-title left-align font-bold" ref={box_ref}>
             {page_title.split("|")[1]}
           </h2>
           <span className="all-prods-search">

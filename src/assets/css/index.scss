@@ -937,34 +937,112 @@ input[type=number] {
         display: none;
     }
     .links-wrapper {
-        ul {
+        .main-nav {
             @include flexMixin(row-reverse, flex-end, center);
             gap: 20px;
             flex-wrap: wrap;
-        }
-    
-        li {
-            list-style: none;
-            color: #fff;
-            position: relative;
-            cursor:  pointer;
-            a {
-                transition: $transition;
+            li {
+                list-style: none;
                 color: #fff;
-                display: block;
-                &:hover {
-                    color: $yellowColor;
-                    transform: scale(1.1);
+                position: relative;
+                cursor:  pointer;
+                a {
+                    transition: $transition;
+                    color: #fff;
+                    display: block;
+                    &:hover {
+                        color: $yellowColor;
+                        transform: scale(1.1);
+                    }
+                }
+                svg{
+                    position: absolute;
+                    top: -15px;
+                    right:-15px;
+                    font-size: 20px;
+                    animation: change_color 0.5s linear 0.1s infinite alternate-reverse;
                 }
             }
-            svg{
-                position: absolute;
-                top: -15px;
-                right:-15px;
-                font-size: 20px;
-                animation: change_color 0.5s linear 0.1s infinite alternate-reverse;
+            .inside-header-ul{
+                display: none;
             }
+            .level-2-inside-header-ul{
+                display: none;
+            }
+            .align-left{
+                @include flexMixin(row, flex-start, center);
+            }
+            .shop-arrow{
+                @include flexMixin(row,flex-start,center);
+                gap: 10px;
+                &::after{
+                    width: 0;
+                    height: 0;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-top: 5px solid #fff;
+                    content: "";
+                    display: block;
+                }
+            }
+            .has-child-need-arrow{
+                @include flexMixin(row, space-between, center);
+                gap: 10px;
+                &::after {
+                    width: 0;
+                    height: 0;
+                    border-top: 5px solid transparent;
+                    border-right: 5px solid #fff;
+                    border-bottom: 5px solid transparent;
+                    content: "";
+                    display: block;
+                }
+            }
+            .contains-child{
+                position: relative;
+                &:hover {
+                    .inside-header-ul {
+                        @include flexMixin(column, flex-start, flex-start);
+                        position: absolute;
+                        top: 100%;
+                        right: 0px;
+                        background-color: rgba(7, 20, 50, 0.7);
+                        border-radius: 12px;
+                        gap: 10px;
+                        padding: 10px;
+                        min-width: 150px;
+                    }
+                    .inside-header-item {
+                        border-bottom: 1px solid #fff;
+                        width: 100%;
+                        padding:0 0 5px 0;
+                        position: relative;
+                        text-align: center;
+                        &:hover {
+                            .level-2-inside-header-ul {
+                                top: -10px;
+                                right: calc(100%);
+                                background-color: rgba(7, 20, 50, 0.8);
+                                border-radius: 12px;
+                                padding: 10px;
+                                min-width: 200px;
+                                @include flexMixin(column, flex-start, flex-start);
+                                position: absolute;
+                                gap: 10px;
+                            }
+                            .level-2-inside-header-item{
+                                border-bottom: 1px solid #fff;
+                                width: 100%;
+                                padding: 5px 0;
+                                position: relative;
+                            }
+                        }
+                    }
+                }
+            }
+            
         }
+    
     }
     .login-li{
         position: relative;
@@ -4587,6 +4665,12 @@ input[type=number] {
             background-color: $yellowColor;
             display: block;
             margin: 10px 0 0;
+        }
+    }
+    .left-align{
+        align-items: flex-start;
+        &::after{
+            width: 100%;
         }
     }
     .intro-text{
@@ -10913,6 +10997,107 @@ input[type=number] {
         width: calc(100vw - 30px);
         .links-wrapper{
             display: none;
+            .main-nav {
+                gap: 0;
+                li{
+                    svg{
+                        top: 0px;
+                        right: 0px;
+                    }
+                }
+                .contains-child,.color-black {
+                    color: #000;
+                    &:hover {
+                        .inside-header-ul {
+                            display: none;
+                        }
+                        .inside-header-item{
+                            &:hover {
+                                .level-2-inside-header-ul{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+                .shop-arrow{
+                    @include flexMixin(row,space-between,center);
+                    &::after{
+                        border-top: 5px solid #000;
+                        position: absolute;
+                        top: 25px;
+                        left: 5px;
+                    }
+                }
+                .contains-child.show-level-1{
+                    @include flexMixin(column, flex-start, flex-start);
+                    height: auto!important;
+                    padding: 10px!important;
+                    .inside-header-ul{
+                        @include flexMixin(column,flex-start,flex-start);
+                        gap: 0px!important;
+                        width: 100%;
+                        position: relative!important;
+                        top: 0;
+                        left: 0;
+                        z-index: 99;
+                        background-color: transparent!important;
+                        border-top: 2px solid #000;
+                        border-bottom: 2px solid #000;
+                        border-radius: 0px!important;
+                        color: #000!important;
+                        .inside-header-item{
+                            @include flexMixin(row,space-between,center);
+                            position: relative;
+                            gap: 0px!important;
+                            height: auto!important;
+                            padding: 10px!important;
+                            border: 0px solid transparent!important;
+                            &::after{
+                                border-right : 5px solid #000!important;
+                                position: absolute!important;
+                                top: 15px;
+                                left: 5px;
+                                transform: rotate(-90deg)
+                            }
+                        }
+                        .open-dore.inside-header-item , .open-paye.inside-header-item , .open-subject.inside-header-item{
+                            position: relative;
+                            height: auto!important;
+                            padding: 10px!important;
+                            .level-2-inside-header-ul{
+                                @include flexMixin(column, flex-start, flex-start);
+                                gap: 10px;
+                                width: 100%;
+                                position: relative !important;
+                                top: 0!important;
+                                right: 0!important;
+                                z-index: 99;
+                                background-color: transparent !important;
+                                border-top: 2px solid #000;
+                                border-bottom: 2px solid #000;
+                                border-radius: 0px !important;
+                                color: #000 !important;
+                            }
+                        }
+                    }
+                    .inside-header-item.has-child-need-arrow {
+                        @include flexMixin(column, flex-start, flex-start);
+                        display: flex !important;
+                        gap: 10px;
+                        width: 100%;
+                        position: relative !important;
+                        top: 0;
+                        right: 0;
+                        z-index: 99;
+                        background-color: transparent !important;
+                        border-top: 2px solid #000;
+                        border-bottom: 2px solid #000;
+                        border-radius: 0px !important;
+                        color: #000!important;
+                    }
+                }
+            }
         }
         .home-res-menu{
             display: block;
@@ -10925,6 +11110,7 @@ input[type=number] {
             overflow-y: scroll;
             z-index: 999999;
             border-radius: 5px 0px 0 5px;
+            padding: 0 0 200px;
             ul{
                 @include flexMixin(column,flex-start,flex-start);
                 gap: 0;
@@ -11889,9 +12075,6 @@ input[type=number] {
         }
         .categories-class-wrapper{
             overflow-x: scroll;
-        }
-        .arrow-wrapper{
-            display: none;
         }
         .all-products-wrapper{
             @include flexMixin(column,flex-start,center);

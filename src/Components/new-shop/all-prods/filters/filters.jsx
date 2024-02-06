@@ -145,7 +145,6 @@ const Filters = ({
     set_active_years([]);
     handle_kelas_filter([], [], [], []);
   };
-  console.log(disable_filter === "subject");
   return (
     <aside
       className={mobile_show ? "shop-side-bar show-mobile" : "shop-side-bar"}

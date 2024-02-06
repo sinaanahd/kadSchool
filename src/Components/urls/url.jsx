@@ -24,5 +24,8 @@ const urls = {
   password: `${base_site}password/`,
   buy_cart: `${base_site}buyCart/`,
   specialKelasesList: `${base_site}specialKelasesList/`,
+  singleKelas: `${base_site}singleKelas/`,
+  singleDore: `${base_site}singleDore/`,
+  singleTeacher: `${base_site}singleTeacher/`,
 };
 export default urls;

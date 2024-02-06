@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { DataContext } from "../context/DataContext";
@@ -14,6 +14,8 @@ import Time_cart_data from "./time-cart/time-cart";
 import FAQ_new from "../redesign-faq/re-faq";
 import Kelas_item from "../kelas-item/kelas-item";
 import NewComments from "../new-comments/new-comments";
+import axios from "axios";
+import urls from "../urls/url";
 const SingleClass = () => {
   const { teachers, kelasses, doreha, sample_files } = useContext(DataContext);
   const [similar_carousel, set_similar_carousel] = useState(0);
@@ -22,6 +24,27 @@ const SingleClass = () => {
   const similar_ref = useRef(false);
   const other_ref = useRef(false);
   const mabhasi_ref = useRef(false);
+  const [kelas, set_kelas] = useState(false);
+  useEffect(() => {
+    const kelas = kelasses
+      ? kelasses.find(
+          (k) =>
+            k.kelas_title_and_ostad_name === page_slug ||
+            k.slug_name === page_slug_2
+        )
+      : false;
+    set_kelas(kelas);
+    axios
+      .get(`${urls.singleKelas}${page_slug}`)
+      .then((res) => {
+        // console.log(res.data);
+        set_kelas(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+        set_kelas(kelas);
+      });
+  }, []);
 
   const page_slug = decodeURI(window.location.pathname.split("/")[3])
     .replaceAll("---", " 1 ")
@@ -37,13 +60,6 @@ const SingleClass = () => {
     });
     return is;
   };
-  const kelas = kelasses
-    ? kelasses.find(
-        (k) =>
-          k.kelas_title_and_ostad_name === page_slug ||
-          k.slug_name === page_slug_2
-      )
-    : false;
   const teacher =
     teachers && kelas
       ? teachers.find((t) => kelas.teachers[0] === t.teacher_id)
@@ -86,15 +102,16 @@ const SingleClass = () => {
         )
       : false;
 
-  const similar_kelasses = kelas
-    ? kelasses
-        .filter(
-          (k) =>
-            check_arr_includes(kelas.subject, k.subject) &&
-            k.kelas_id !== kelas.kelas_id
-        )
-        .reverse()
-    : [];
+  const similar_kelasses =
+    kelas && kelasses
+      ? kelasses
+          .filter(
+            (k) =>
+              check_arr_includes(kelas.subject, k.subject) &&
+              k.kelas_id !== kelas.kelas_id
+          )
+          .reverse()
+      : [];
   const other_teachers_kelasses = kelas
     ? kelasses.filter(
         (k) =>

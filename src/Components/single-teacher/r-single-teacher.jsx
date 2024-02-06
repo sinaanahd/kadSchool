@@ -18,6 +18,8 @@ import LittleLoading from "../reuseables/little-loading";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import scrollToTop from "../functions/scroll";
 import FAQ_new from "../redesign-faq/re-faq";
+import axios from "axios";
+import urls from "../urls/url";
 
 const R_SingleTeacher = () => {
   const { teachers, kelasses, doreha, sample_files, handle_cart, cart, user } =
@@ -29,6 +31,7 @@ const R_SingleTeacher = () => {
   const [kelas_carousel, set_kelas_carousel] = useState(0);
   const [nemone_tadris_carousel, set_nemone_tadris_carousel] = useState(0);
   const [free_course_carousel, set_free_course_carousel] = useState(0);
+  const [teacher, set_teacher] = useState(false);
   const find_slug = () => {
     const page_slug = window.location.pathname.split("/")[2];
     let page_id;
@@ -61,17 +64,33 @@ const R_SingleTeacher = () => {
     return final_arr;
   };
   const slug = decodeURIComponent(window.location.pathname.split("/")[2]);
-  const teacher = teachers
-    ? Object.keys({
-        ...teachers.find((t) => t.slug_name === slug || t.teacher_id === slug),
-      }).length !== 0
-      ? {
+  useEffect(() => {
+    const teacher = teachers
+      ? Object.keys({
           ...teachers.find(
             (t) => t.slug_name === slug || t.teacher_id === slug
           ),
-        }
-      : false
-    : false;
+        }).length !== 0
+        ? {
+            ...teachers.find(
+              (t) => t.slug_name === slug || t.teacher_id === slug
+            ),
+          }
+        : false
+      : false;
+    set_teacher(teacher);
+    // console.log(slug.replaceAll("-", " "));
+    axios
+      .get(`${urls.singleTeacher}${slug.replaceAll("-", " ")}`)
+      .then((res) => {
+        // console.log(res.data);
+        set_teacher(res.data);
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
+  }, []);
+
   const teacher_kelasses =
     kelasses && teacher
       ? kelasses.filter((k) => teacher.kelases.includes(k.kelas_id))
@@ -579,7 +598,7 @@ const R_SingleTeacher = () => {
               )}
             </div>
             {nemone_tadris ? (
-              nemone_tadris.length < 1 ? (
+              nemone_tadris.length <= 1 ? (
                 <></>
               ) : (
                 <span className="move-arrows-wrapper">
@@ -635,7 +654,7 @@ const R_SingleTeacher = () => {
               )}
             </div>
             {free_course ? (
-              free_course.length < 1 ? (
+              free_course.length <= 1 ? (
                 <></>
               ) : (
                 <span className="move-arrows-wrapper">

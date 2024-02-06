@@ -12,14 +12,6 @@ const LandingKelas = ({ kelas, handle_active_kelas, box_ref }) => {
     ? teachers.find((t) => t.teacher_id === kelas.teachers[0])
     : false;
   const scroll_to_box = () => {
-    // const y = box_ref.current.clientHeight;
-    // console.log(y);
-    // console.log(box_ref.current.getBoundingClientRect().y);
-    // window.scrollTo({
-    //   // top: box_ref.current.getBoundingClientRect().y + 200,
-    //   // top: y,
-    //   behavior: "smooth",
-    // });
     box_ref.current.scrollIntoView({ block: "start" });
   };
   return (

@@ -4579,6 +4579,7 @@ input[type=number] {
         color: $new-design-blue;
         font-size: 35px;
         text-align: center;
+        @include flexMixin(column,center,center);
         &::after{
             content: " ";
             width: 203px;
@@ -4597,7 +4598,7 @@ input[type=number] {
     .banners-part-wrapper{
         width: 100%;
         @include flexMixin(row,center,center);
-        gap: 50px;
+        gap: 25px;
     }
     .arrow-wrapper{
         flex: 0 0 42px;
@@ -4615,8 +4616,13 @@ input[type=number] {
         width: 100%;
         @include flexMixin(row,flex-start,center);
         overflow: hidden;
-        img{
+        .banner_container{
             flex: 0 0 100%;
+            transition: $transition;
+            transform: translateX(0px);
+        }
+        img{
+            width: 100%;
         }
     }
     .no-banner-ready{
@@ -4660,6 +4666,7 @@ input[type=number] {
         background-color: $new-design-blue;
     }
     .choosen-content-wrapper{
+        width: 100%;
         border-radius: 20px;
         background: rgba(229, 222, 255, 0.30);
         @include flexMixin(column,flex-start,center);
@@ -4668,6 +4675,7 @@ input[type=number] {
         padding: 0 0 40px;
     }
     .choose-intro-texts{
+        width: 100%;
         @include flexMixin(column,flex-start,center);
         gap: 30px;
         border-radius: 20px 20px 0px 0px;
@@ -4693,20 +4701,25 @@ input[type=number] {
         line-height: 35px;
         font-size: 18px;
     }
+    .cat-kelas-carousel-wrapper{
+        width: 100%;
+        @include flexMixin(row,space-between,center);
+        gap: 20px;
+        padding: 0 30px;
+    }
     .categories-class-wrapper{
         width: 100%;
         @include flexMixin(row,flex-start,center);
         gap: 20px;
         overflow: hidden;
-        padding: 0 30px;
     }
     .all-products-wrapper{
         width: 100%;
         @include flexMixin(row,flex-start,flex-start);
-        gap: 40px;
+        gap: 20px;
     }
     .shop-side-bar{
-        flex: 0 0 289px;
+        flex: 0 0 240px;
         @include flexMixin(column,flex-start,center);
         padding: 28px 24px;
         border-radius: 20px;
@@ -4723,12 +4736,22 @@ input[type=number] {
     .filter-header-title{
         font-size: 20px;
         font-weight: bold;
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        img{
+            position: relative;
+            top: 2px;
+        }
+    }
+    .close-filter-title {
+        display: none;
     }
     .reset-filters{
         font-size: 15px;
         text-decoration-line: underline;
         background-color: transparent;
         border: 0px solid #fff;
+        cursor: pointer;
     }
     .all-filters{
         width: 100%;
@@ -4746,6 +4769,13 @@ input[type=number] {
         background-color: transparent;
         cursor: pointer;
         border: none;
+        img{
+            transition: $transition;
+            transform: rotate(0deg);
+        }
+        img.rotate{
+            transform: rotate(180deg);
+        }
     }
     .filter-options{
         width: 100%;
@@ -4761,17 +4791,61 @@ input[type=number] {
         gap: 10px;
         font-size: 16px;
         height: 35px;
-        border-bottom: 1px solid rgba(24, 0, 101, 0.10);
+        border-bottom: 1px solid #1800651a;
+        cursor: pointer;
     }
     .select-btn{
         width: 14px;
         height: 14px;
         border: 2px solid #180065;
-        cursor: pointer;
         background-color: transparent;
         border-radius: 2px;
     }
+    .selected.select-btn{
+        background-color: #180065;
+    }
+    .choosen-filters{
+        margin: 20px 0 0;
+        width: 100%;
+        @include flexMixin(row,flex-start,center);
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+    .choosen-title {
+        flex: 0 0 100%;
+        margin: 0 0 10px;
+    }
+    .choosen-filter{
+        background-color: transparent;
+        border-radius: 20px;
+        padding: 2px 5px;
+        font-size: 12px;
+        cursor: pointer;
+        outline: 0px solid transparent;
+        position: relative;
+        border: 1px solid #180065;
+        &:hover{
+            &::before{
+                background-color: #fff;
+            }
+        }
+        &::before{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #ffffffa3;
+            padding: 2px 0 0;
+            @include flexMixin(row,center,center);
+            content: "x";
+            color: #000;
+            position: absolute;
+            top: -10px;
+            right: -6px;
+            transition: $transition;
+        }
+    }
     .all-prods-grid{
+        width: 100%;
         @include flexMixin(column,flex-start,center);
         gap: 35px;
     }
@@ -4784,6 +4858,67 @@ input[type=number] {
         @include flexMixin(row,flex-start,flex-start);
         flex-wrap: wrap;
         gap: 10px;
+    }
+    .all-prods-search{
+        width: 220px;
+        height: 39px;
+        background-color: #41346AB2;
+        @include flexMixin(row,space-between,center);
+        border-radius: 20px;
+        gap: 10px;
+        color: #fff;
+        padding: 0 10px;
+        svg{
+            flex: 0 0 20px;
+        }
+        input{
+            padding: 2px 10px 0;
+            width: 100%;
+            background-color: transparent;
+            color: #fff;
+            border: 0px solid #fff!important;
+            outline: 0px solid #fff!important;
+            &::placeholder{
+                color: #fff;
+            }
+        }
+    }
+    .all-prods-place{
+        .class-item-single-component{
+            flex: 0 0 340px;
+            .img-dore-place , .class-text-data{
+                justify-content: space-between;
+                height: 100%;
+            }
+            .cours-name-data{
+                font-size: 14px;
+                margin: 0;
+            }
+        }
+    }
+    .pagination-wrapper{
+        width: 100%;
+        @include flexMixin(row,center,center);
+        gap: 5px;
+    }
+    .paginate-item.active{
+        opacity: 1;
+    }
+    .paginate-item{
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        @include flexMixin(row,center,center);
+        background-color: #1B0B4E;
+        opacity: 0.5;
+        border: 0px solid transparent;
+        color: #fff;
+        padding: 2px 0 0;
+    }
+    .no-class-found{
+        font-size: 25px;
+        text-align: center;
+        width: 100%;
     }
 }
 /* shop redesign */
@@ -8406,12 +8541,12 @@ input[type=number] {
         font-weight: 100;
         font-size: 13px;
         color: #FFFFFFB2;
+        text-decoration: line-through;
     }
 
     .real-price {
         font-weight: bold;
     }
-
     .add-to-cart-btn {
         width: 100%;
         @include flexMixin(row, center, center);
@@ -11714,6 +11849,93 @@ input[type=number] {
         .close-btn.pop-up-btn{
             width: 25px;
             height: 25px;
+        }
+    }
+    .shop-redesign-wrapper{
+        .banners-part-wrapper{
+            position: relative;
+        }
+        .arrow-wrapper{
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            img{
+                max-width: 100%!important;
+                width: 6px;
+            }
+        }
+        .rotate-180{
+            left: 35px;
+        }
+        .choose-categories{
+            width: 100%;
+        }
+        .choose-type-btn{
+            padding: 0 10px;
+        }
+        .semi-title{
+            font-size: 25px;
+        }
+        .dynamic-title{
+            font-size: 20px;
+        }
+        .dynamic-title-text{
+            font-size: 15px;
+        }
+        .cat-kelas-carousel-wrapper{
+            padding: 0 10px;
+        }
+        .categories-class-wrapper{
+            overflow-x: scroll;
+        }
+        .arrow-wrapper{
+            display: none;
+        }
+        .all-products-wrapper{
+            @include flexMixin(column,flex-start,center);
+        }
+        .shop-side-bar{
+            width: 100%;
+            flex: unset;
+        }
+        .filter-side-bar-header{
+            border: 0px solid transparent;
+            padding: 0;
+            margin: 0;
+        }
+        .all-filters{
+            display: none;
+        }
+        .all-prods-header{
+            @include flexMixin(column,flex-start,center);
+            gap: 20px;
+        }
+        .all-prods-search{
+            width: 100%;
+        }
+        .shop-side-bar.show-mobile{
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            width: 100vw;
+            height: 100vh;
+            overflow-y: scroll;
+            z-index: 9999;
+            border-radius: 0px;
+            padding-bottom: 150px;
+            .filter-side-bar-header {
+                padding: 0 0 10px;
+                border-bottom: 1px solid #180065;
+                margin: 0 0 10px;
+            }
+            .all-filters{
+                display: flex;
+            }
+            .close-filter-title{
+                display: flex;
+            }
         }
     }
 }

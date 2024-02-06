@@ -5,7 +5,7 @@ import { DataContext } from "../context/DataContext";
 import LittleLoading from "../reuseables/little-loading";
 import split_in_three from "../functions/spilit_in_three";
 import convert_to_persian from "../functions/convert-to-persian";
-const Kelas_item = ({ k }) => {
+const Kelas_item = ({ k, eager_load }) => {
   const { doreha, cart, user, handle_cart } = useContext(DataContext);
   const dore = doreha
     ? doreha.find((d) => d.dore_id === k.parent_dore_id)
@@ -25,7 +25,7 @@ const Kelas_item = ({ k }) => {
           <img
             width={130}
             height={130}
-            loading="lazy"
+            loading={eager_load ? "eager" : "lazy"}
             src={k.image_link}
             alt={k.kelas_title_and_ostad_name}
           />

@@ -43,7 +43,6 @@ import ReferalSignup from './Components/referal/referal-signup';
 import StudyPlan from './Components/study-plan/study-plan';
 import NewPanelNotice from './Components/new-panel-notice/new-panel-notice';
 // context refactor
-import NewShop from './Components/shop/new-shop';
 import R_SingleTeacher from './Components/single-teacher/r-single-teacher';
 import specialDiscount from './Components/special-discount/special-discount';
 import SingleClass from './Components/single-prod/single-class';
@@ -59,6 +58,7 @@ import NOT_ensani from './Components/landing-pages/nokte-o-test/nokte-o-test-ens
 import NOT_tajrobi from './Components/landing-pages/nokte-o-test/nokte-o-test-tajrobi';
 import SemiShop from './Components/shop/semi-shop/semi-shop';
 import NoticeBox from './Components/notice-box/notice-box';
+import NewShop from './Components/new-shop/new-shop';
 // context refactor
 
 const App = () => {
@@ -136,7 +136,8 @@ const App = () => {
         {/* 
           re-design / re-factor
         */}
-        <Route path="/new-shop/:kind/:title" component={NewShop} />
+        <Route path="/new-shop/" component={NewShop} />
+        <Route path="/new-shop/:kind" component={NewShop} />
         <Route path="/r-Teachers/:id" component={R_SingleTeacher} />
         <Route path="/r-class/:id" component={SingleClass} />
         <Route path="/r-dore/:id" component={SingleDore} />

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { DataContext } from "../context/DataContext";
 import LittleLoading from "../reuseables/little-loading";
@@ -13,10 +13,13 @@ import FAQ_new from "../redesign-faq/re-faq";
 import Teachers from "./teachers/teachers";
 import VideosSection from "./videos/videos-section";
 import WhyDore from "./why-dore/why-dore";
+import axios from "axios";
+import urls from "../urls/url";
 const SingleDore = () => {
   const { static_doreha, teachers, kelasses, sample_files } =
     useContext(DataContext);
   const slug_name = decodeURI(window.location.pathname.split("/")[2]);
+  const [s_dore, set_dore] = useState(false);
   const fill_teachers = () => {
     const all_teachers = [];
     dore_kelasses.forEach((kelas) => {
@@ -29,7 +32,20 @@ const SingleDore = () => {
     });
     return all_teachers;
   };
-  const s_dore = static_doreha.find((d) => d.slug_name === slug_name) || false;
+  useEffect(() => {
+    const s_dore =
+      static_doreha.find((d) => d.slug_name === slug_name) || false;
+    set_dore(s_dore);
+    axios
+      .get(`${urls.singleDore}${slug_name.replaceAll("-", " ")}`)
+      .then((res) => {
+        // console.log(res.data);
+        set_dore(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   const dore_kelasses =
     s_dore && kelasses
       ? kelasses.filter((k) => s_dore.kelases.includes(k.kelas_id))

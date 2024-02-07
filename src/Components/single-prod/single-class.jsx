@@ -251,6 +251,34 @@ const SingleClass = () => {
             {/* <section className="banners-place">
               <img src={banner} alt="" />
             </section> */}
+            {kelas ? (
+              kelas.barname_rahbordi_images.length !== 0 ? (
+                <section className="barname-rahbordi-imgs">
+                  <h2 className="class-section-title">
+                    برنامه راهبردی {kelas.kelas_title}
+                  </h2>
+                  <div className="barnme-rahbordri-imgs-wrapper">
+                    {kelas.barname_rahbordi_images.map((br, i) => (
+                      <img
+                        loading="lazy"
+                        width={200}
+                        height={200}
+                        src={br}
+                        key={i++}
+                        alt={`برنامه راهبردی ${kelas.kelas_title}`}
+                        onClick={() => {
+                          window.open(br);
+                        }}
+                      />
+                    ))}
+                  </div>
+                </section>
+              ) : (
+                <></>
+              )
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <section className="classes-wrapper-section mm-width">

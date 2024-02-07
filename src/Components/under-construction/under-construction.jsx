@@ -52,7 +52,10 @@ const UnderConstruction = () => {
         <div className="under-construction mm-width">
           <SideBar />
           <div className="main-content">
-            <h1>{para_text}</h1>
+            <h1>
+              دوست خوبم این صفحه رو داریم برات آماده میکنیم طی چند روز آینده
+              میتونی ازش استفاده کنی ...
+            </h1>
             <img
               width={800}
               height={498}
@@ -65,60 +68,5 @@ const UnderConstruction = () => {
     </>
   );
 };
-
-// export default UnderConstruction;
-// class UnderConstruction2 extends Component {
-//   componentDidMount() {
-//     setInterval(this.handle_para_text, 50);
-//   }
-//   handle_para_text = () => {
-//     const text =
-//       " دوست خوبم این صفحه رو داریم برات آماده میکنیم طی چند روز آینده میتونی ازش استفاده کنی ...";
-//     let para_text = this.state.para_text;
-//     if (text.length !== para_text.length) {
-//       para_text += text[para_text.length];
-//       this.setState({ para_text });
-//     } else {
-//       const counter = this.state.counter;
-//       this.setState({ counter: counter + 1 });
-//       if (counter === 50) {
-//         this.setState({ para_text: "", counter: 0 });
-//       }
-//     }
-//   };
-//   render() {
-//     const { user } = this.props;
-//     return (
-//       <>
-//         <Helmet>
-//           <title>در حال ساخت این صفحه هستیم</title>
-//           <link
-//             rel="preload"
-//             as="image"
-//             href="../../assets/images/under-construction.webp"
-//           />
-//           <meta
-//             name="description"
-//             content="این صفحه در حال طراحی و ساخت است به زودی آماده میشه."
-//           />
-//         </Helmet>
-//         <section className="under-construction-section bgc-wrapper">
-//           <div className="under-construction mm-width">
-//             <SideBar />
-//             <div className="main-content">
-//               <h1>{this.state.para_text}</h1>
-//               <img
-//                 width={800}
-//                 height={498}
-//                 src={banner_img}
-//                 alt="صفحه در حال ساخته شدن است"
-//               />
-//             </div>
-//           </div>
-//         </section>
-//       </>
-//     );
-//   }
-// }
 
 export default UnderConstruction;

@@ -186,6 +186,16 @@ class HomeFooter extends Component {
                     نرم افزار‌های مورد نیاز
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    onClick={() => {
+                      scrollToTop();
+                    }}
+                    to="/wallet"
+                  >
+                    کیف پول
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className="hf-col hf-col-3">

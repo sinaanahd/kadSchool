@@ -59,6 +59,8 @@ import NOT_tajrobi from './Components/landing-pages/nokte-o-test/nokte-o-test-ta
 import SemiShop from './Components/shop/semi-shop/semi-shop';
 import NoticeBox from './Components/notice-box/notice-box';
 import NewShop from './Components/new-shop/new-shop';
+import FixedMenu from './Components/fixed-menu/fixed-menu';
+import Wallet from './Components/wallet/wallet';
 // context refactor
 
 const App = () => {
@@ -154,6 +156,7 @@ const App = () => {
           landing pages 
         */}
 
+        <Route path="/wallet" component={Wallet} />
 
         {/* posts */}
         <Route path="/blogs/:id" component={SinglePost} />
@@ -181,7 +184,8 @@ const App = () => {
           check_page === "/SetPassword" ? <></> : 
           <HomeFooter not_home="f-not-home" />
         }
-        <NoticeBox />
+        {/* <NoticeBox /> */}
+        <FixedMenu />
     </> );
 }
 export default App;

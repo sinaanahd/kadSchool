@@ -21,6 +21,17 @@ const Wallet = () => {
     <>
       <Helmet>
         <title>کاد | کیف پول </title>
+        <meta
+          name="keywords"
+          content="کیف پول کاد, جایزه ثبت نام, تخفیف کاد, مسابقه, جایزه ثبت نام کاد,"
+        />
+        <meta
+          name="description"
+          content="
+            ما توی کاد یه قابلیت جدید اضافه کردیم به اسم کیف پول و براتون کلی
+            جایزه آماده کردیم. اینجا کلی تخفیف و جایزه داریم که منتظر شما دانش
+            آموزای خوب کاد هستن.از مسابقه و جشنواره تا نگه داشتن مبلغ خریدتون توی کیف پول."
+        />
       </Helmet>
       <div className="wallet-page">
         <section className="page-intro mm-width">
@@ -143,7 +154,7 @@ const Wallet = () => {
               درصد مبلغ پرداختیت بمونه توی کیف پولت.
               <br />
               با سر زدن به{" "}
-              <Link to="/Shop" className="font-bold">
+              <Link to="/Shop" className="font-bold" onClick={scrollToTop}>
                 فروشگاه کاد
               </Link>{" "}
               و انتخاب کلاس هایی که میخوای از الان ۱۰ درصد مبلغ خریدتو برای خودت

@@ -180,7 +180,9 @@ const Cart = () => {
                   {split_in_three(
                     convert_to_persian(
                       cart && user
-                        ? cart.final_price - calcute_user_wallet()
+                        ? cart.final_price - calcute_user_wallet() >= 0
+                          ? cart.final_price - calcute_user_wallet()
+                          : 0
                         : 0
                     )
                   )}{" "}
@@ -236,7 +238,9 @@ const Cart = () => {
                           <span className="ghest-num num-data">
                             {split_in_three(
                               convert_to_persian(
-                                g[0] - Math.ceil(calcute_user_wallet() / 2)
+                                g[0] - Math.ceil(calcute_user_wallet() / 2) >= 0
+                                  ? g[0] - Math.ceil(calcute_user_wallet() / 2)
+                                  : 0
                               )
                             )}{" "}
                             <span className="toman">تومان</span>

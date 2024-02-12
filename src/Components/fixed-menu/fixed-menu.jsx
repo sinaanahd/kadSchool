@@ -89,7 +89,7 @@ const FixedMenu = () => {
       {show_gift ? (
         <div className="pop-image-show-container">
           <div className="pop-up-img-wrapper mm-width">
-            <p className="desc-text font-bold">
+            {/* <p className="desc-text font-bold">
               آخرین تخفیف سال ۱۴۰۲ کاد منتظر شماست !
               <br />
               <font className="color-red-notice">۳۵ درصد</font>
@@ -122,6 +122,21 @@ const FixedMenu = () => {
               >
                 {!copy ? "کپی" : "کپی شد"}
               </span>
+            </span> */}
+            <p className="desc-text font-bold">
+              میدونستی ما کلی مشاور داریم که منتظر شنیدن صدای شمان ؟
+              <br />
+              شما میتونی با مشاور های ما تماس بگیری و کلاسی رو که میخوای بخری،
+              خیلی سریع توضیحاتشو داشته باشی. کلی تخفیف و هدیه منتظرته ! پس همین
+              الان با شماره های زیر تماس بگیر :
+            </p>
+            <span className="btn-wrappers">
+              <a href="tel:+982166950624" className="call-us-now-btn">
+                {"۰۲۱-" + convert_to_persian(66950624)}
+              </a>
+              <a href="tel:+982162999110" className="call-us-now-btn">
+                {"۰۲۱-" + convert_to_persian(62999110)}
+              </a>
             </span>
             <p className="desc-text font-bold">
               همچنین می توانید با استفاده از کیف پول خود از جایزه ۱۰۰ هزار

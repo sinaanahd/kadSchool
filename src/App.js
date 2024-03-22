@@ -61,6 +61,7 @@ import NoticeBox from './Components/notice-box/notice-box';
 import NewShop from './Components/new-shop/new-shop';
 import FixedMenu from './Components/fixed-menu/fixed-menu';
 import Wallet from './Components/wallet/wallet';
+import TaleTestIntro from './Components/tale-test-intro/tale-test-intro';
 // context refactor
 
 const App = () => {
@@ -157,6 +158,7 @@ const App = () => {
         */}
 
         <Route path="/wallet" component={Wallet} />
+        <Route path="/tale-o-test-intro" component={TaleTestIntro} />
 
         {/* posts */}
         <Route path="/blogs/:id" component={SinglePost} />

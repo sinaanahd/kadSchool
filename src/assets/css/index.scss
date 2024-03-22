@@ -10038,6 +10038,21 @@ input[type=number] {
     }
     
 }
+/* tale o test intro page */
+.tale-test-page-wrapper{
+    width: 100%;
+    background-color: #e5eaff;
+    padding: 150px 0;
+    margin: -70px 0 0;
+    @include flexMixin(column,flex-start,center);
+    gap: 30px;
+    .page-title{
+        font-size: 40px;
+    }
+}
+/* tale o test intro page */
+
+
 /* landings : nokte o test */
 @keyframes change_bgc {
     from {

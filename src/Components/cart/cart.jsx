@@ -212,7 +212,7 @@ const Cart = () => {
                       نقدی
                     </span>
                   )}
-                  {ghest_pause ? (
+                  {/* {ghest_pause ? (
                     <span className="option-btn">
                       <LittleLoading />
                     </span>
@@ -220,7 +220,7 @@ const Cart = () => {
                     <span className="option-btn" onClick={calculate_ghest}>
                       قسطی
                     </span>
-                  )}
+                  )} */}
                 </span>
                 {ghests ? (
                   <>

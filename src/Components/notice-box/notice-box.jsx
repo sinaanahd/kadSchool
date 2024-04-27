@@ -42,7 +42,7 @@ const NoticeBox = () => {
       {active ? (
         <div className="pop-image-show-container">
           <div className="pop-up-img-wrapper mm-width">
-            {/* <p className="desc-text">
+            <p className="desc-text">
               کمپین <font className="font-bold">۳۰ درصد تخفیف</font> کلیه کلاس
               های کاد <font className="font-bold">پنجم</font> و{" "}
               <font className="font-bold">ششم</font> بهمن برای راهنمایی بیشتر به
@@ -67,20 +67,19 @@ const NoticeBox = () => {
               </font>
               عدد <font className="font-bold">۳</font>
               را پیامک دهید.
-            </p> */}
-            <p className="desc-text font-bold">
+            </p>
+            {/* <p className="desc-text font-bold">
               میدونستی ما کلی مشاور داریم که منتظر شنیدن صدای شمان ؟
               <br />
               شما میتونی با مشاور های ما تماس بگیری و کلاسی رو که میخوای بخری،
               خیلی سریع توضیحاتشو داشته باشی. کلی تخفیف و هدیه منتظرته ! پس همین
-              {/* الان با شماره های زیر تماس بگیر : */}
               الان با آیدی زیر با ما در ارتباط باش :
             </p>
             <span className="btn-wrappers">
               <a href="tel:+982166950624" className="call-us-now-btn">
                 @Kad_team
               </a>
-            </span>
+            </span> */}
 
             {/* <span className="btn-wrappers">
               <a href="tel:+982166950624" className="call-us-now-btn">

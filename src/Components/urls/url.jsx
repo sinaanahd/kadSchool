@@ -27,5 +27,7 @@ const urls = {
   singleKelas: `${base_site}singleKelas/`,
   singleDore: `${base_site}singleDore/`,
   singleTeacher: `${base_site}singleTeacher/`,
+  check_login_land: `${base_site}SpecialDates
+`,
 };
 export default urls;

@@ -34,10 +34,11 @@ const SingleClass = () => {
         )
       : false;
     set_kelas(kelas);
+    console.log(page_slug);
+    // console.log(kelasses.map((k) => k.kelas_title_and_ostad_name));
     axios
       .get(`${urls.singleKelas}${page_slug}`)
       .then((res) => {
-        // console.log(res.data);
         set_kelas(res.data);
       })
       .catch((e) => {
@@ -247,7 +248,8 @@ const SingleClass = () => {
               taklifha={taklifha}
               azmonha={azmonha}
             />
-            <Time_cart_data kelas={kelas} />
+            {kelas ? <Time_cart_data kelas={kelas} /> : <LittleLoading />}
+
             {/* <section className="banners-place">
               <img src={banner} alt="" />
             </section> */}

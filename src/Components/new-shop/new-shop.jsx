@@ -204,6 +204,23 @@ const NewShop = () => {
       disable_filter: "year",
       banners_name: false,
     },
+    {
+      id: 10,
+      title: "کلاس های اورژانسی کاد | تمامی کلاس های اورژانسی کاد",
+      one_look: "منتخب کلاس های اورژانسی",
+      seo: {
+        keywords:
+          "کلاس‌های اورژانسی, اورژانسی کاد, دم امتحان, کلاس های اورژانسی, کلاس های اورژانسی دم امتحان, آمادگی امتحان",
+        desc: "فکر این نباش که دیر شده! کلاس‌های اورژانسی کاد برای شما این فرصت رو فراهم کرده که خیلی سریع و اورژانسی تا دیر نشده به درک درستی از مفاهیم و به آمادگی کامل برسی.",
+      },
+
+      desc_text: [
+        "فکر این نباش که دیر شده! کلاس‌های اورژانسی کاد برای شما این فرصت رو فراهم کرده که خیلی سریع و اورژانسی تا دیر نشده به درک درستی از مفاهیم و به آمادگی کامل برسی.",
+      ],
+      specials: [],
+      disable_filter: "none",
+      banners_name: false,
+    },
   ];
   let page_content = "";
   let option = false;
@@ -229,6 +246,9 @@ const NewShop = () => {
       break;
     case "نکته-و-تست-کنکور-اختصاصی":
       page_content = page_contents[4];
+      break;
+    case "کلاس-های-اورژانسی":
+      page_content = page_contents[9];
       break;
     case "آفلاین":
       page_content = page_contents[5];
@@ -259,6 +279,7 @@ const NewShop = () => {
     const nahaei_12 = [34, 67, 22, 26, 24, 39, 62, 23];
     const nokte_konkor = [55, 57, 56, 58, 59, 54, 53, 52, 51];
     const offline = [68, 47, 48, 49, 50, 27, 28, 29, 18, 19, 20];
+    const emergency = [96, 97, 98, 99, 100, 101];
     switch (option) {
       case "":
         return kelasses;
@@ -270,6 +291,8 @@ const NewShop = () => {
         return kelasses.filter((k) => nahaei_12.includes(k.kelas_id));
       case "نکته-و-تست-کنکور-اختصاصی":
         return kelasses.filter((k) => nokte_konkor.includes(k.kelas_id));
+      case "کلاس-های-اورژانسی":
+        return kelasses.filter((k) => emergency.includes(k.kelas_id));
       case "آفلاین":
         return kelasses.filter((k) => offline.includes(k.kelas_id));
       case "دوره":

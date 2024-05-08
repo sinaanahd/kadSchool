@@ -7,6 +7,8 @@ import HomeHeader from "../home/header/home-header";
 import HomeFooter from "../home/footer/home-footer";
 import TopSiteSlider from "../top-site-slider/top-site-slider";
 import urls from "../urls/url";
+const last_land_on_page =
+  JSON.parse(localStorage.getItem("emergency")) || false;
 const kelasses_data = JSON.parse(localStorage.getItem("kelasses")) || false;
 const teachers_data = JSON.parse(localStorage.getItem("teachers")) || false;
 const doreha_data = JSON.parse(localStorage.getItem("doreha")) || false;
@@ -297,7 +299,39 @@ const DataProvider = ({ children }) => {
           slug_name: "نکته-و-تست-تجربی",
         },
       ];
+
+  const check_user_in = () => {
+    const page_slug = decodeURIComponent(window.location.pathname);
+    const slug = "/shop/کلاس-های-اورژانسی";
+    const day_amount = 86400000;
+    if (page_slug === slug) {
+      const today = new Date();
+      const stamp = today.getTime();
+      const last_time = parseInt(last_land_on_page);
+      if (last_time) {
+        if (Math.abs(last_time - stamp) >= day_amount) {
+          send_land_request(stamp);
+        } else {
+          localStorage.setItem("emergency", stamp);
+        }
+      } else {
+        localStorage.setItem("emergency", stamp);
+        send_land_request(stamp);
+      }
+    }
+  };
+  const send_land_request = (stamp) => {
+    axios
+      .post(urls.check_login_land, [stamp])
+      .then((res) => {
+        // console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   useEffect(() => {
+    check_user_in();
     // get_special_kelases_list();
     const is_time = last_login_check(last_login, this_time_login);
     // send_cookie();

@@ -7,11 +7,11 @@ const Navigate_to_specials = () => {
       <Link
         onClick={scrollToTop}
         className="navigate-link color-1"
-        to="/shop/product/دوره-جامع-کنکور-فرهنگیان-1403-استاد-کنفچیان"
+        to="/shop/کلاس-های-اورژانسی"
       >
-        جامع
+        کلاس‌های
         <br />
-        کنکور فرهنگیان
+        اورژانسی
       </Link>
       <Link className="navigate-link color-2" to="/Shop/امتحان-نهایی-دهم">
         امتحان نهایی

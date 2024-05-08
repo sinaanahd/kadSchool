@@ -1,12 +1,10 @@
 // DataContext.js
 import axios from "axios";
-import { createContext, useState, useEffect } from "react";
-import last_login_check from "../functions/last-login-check";
+import { createContext, useEffect, useState } from "react";
 import convert_to_persian from "../functions/convert-to-persian";
-import HomeHeader from "../home/header/home-header";
-import HomeFooter from "../home/footer/home-footer";
-import TopSiteSlider from "../top-site-slider/top-site-slider";
+import last_login_check from "../functions/last-login-check";
 import urls from "../urls/url";
+const first_slug = JSON.parse(localStorage.getItem("first-entery")) || false;
 const last_land_on_page =
   JSON.parse(localStorage.getItem("emergency")) || false;
 const kelasses_data = JSON.parse(localStorage.getItem("kelasses")) || false;
@@ -304,20 +302,27 @@ const DataProvider = ({ children }) => {
     const page_slug = decodeURIComponent(window.location.pathname);
     const slug = "/shop/کلاس-های-اورژانسی";
     const day_amount = 86400000;
-    if (page_slug === slug) {
-      const today = new Date();
-      const stamp = today.getTime();
-      const last_time = parseInt(last_land_on_page);
+    let slug_check = first_slug ? first_slug : slug === page_slug;
+    localStorage.setItem("first-entery", JSON.stringify(slug_check));
+    const last_time = last_land_on_page ? parseInt(last_land_on_page) : 0;
+    const today = new Date();
+    const stamp = today.getTime();
+    localStorage.setItem("emergency", stamp);
+    if (last_time && Math.abs(last_time - stamp) >= day_amount) {
+      slug_check = slug === page_slug;
+      localStorage.setItem("first-entery", JSON.stringify(slug_check));
+    }
+    if (slug_check) {
       if (last_time) {
         if (Math.abs(last_time - stamp) >= day_amount) {
           send_land_request(stamp);
-        } else {
-          localStorage.setItem("emergency", stamp);
         }
       } else {
-        localStorage.setItem("emergency", stamp);
         send_land_request(stamp);
       }
+    } else {
+      const temp = page_slug === slug;
+      localStorage.setItem("first-entery", JSON.stringify(temp));
     }
   };
   const send_land_request = (stamp) => {
@@ -325,6 +330,7 @@ const DataProvider = ({ children }) => {
       .post(urls.check_login_land, [stamp])
       .then((res) => {
         // console.log(res.data);
+        console.log("done");
       })
       .catch((e) => {
         console.log(e);

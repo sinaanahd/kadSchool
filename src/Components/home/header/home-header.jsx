@@ -294,7 +294,7 @@ const HomeHeader = ({ not_home }) => {
               پشتیبانی
             </Link>
           </li>
-          <li className="new-label">
+          {/* <li className="new-label">
             <BsFire />
             <Link
               onClick={() => {
@@ -317,7 +317,7 @@ const HomeHeader = ({ not_home }) => {
             >
               نکته و تست انسانی
             </Link>
-          </li>
+          </li> */}
           <li className="color-black" onClick={clear_user}>
             خروج
           </li>

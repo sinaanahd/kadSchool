@@ -1,24 +1,15 @@
-import React, {
-  Component,
-  useState,
-  useRef,
-  useEffect,
-  useContext,
-} from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Lottie from "react-lottie";
-import scrollToTop from "../functions/scroll";
-import withWebsiteData from "../hoc/with-website-data";
 import axios from "axios";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet";
+import Lottie from "react-lottie";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import scrollToTop from "../functions/scroll";
 import LittleLoading from "../reuseables/little-loading";
-import HomeHeader from "./header/home-header";
-import HomeFooter from "./footer/home-footer";
 
-import rocket from "../lotties/rocket.json";
 import astronut from "../lotties/astronot.json";
-import astronut_laptop from "../lotties/space-developer.json";
 import hero_animation from "../lotties/hero-animation.json";
+import rocket from "../lotties/rocket.json";
+import astronut_laptop from "../lotties/space-developer.json";
 
 // import mainLogo from "../../assets/images/main-logo-white-1.webp";
 import leftIcon from "../../assets/images/CaretLeft.webp";
@@ -32,9 +23,12 @@ import hero_little_icon from "../../assets/images/space-ship-new.webp";
 
 // sample teacher
 
-import teacher_img_6 from "../../assets/images/kad-teacher-6.webp";
-
 import good_students_1 from "../../assets/images/rotbe-bartar/rotbe-1.webp";
+import good_students_10 from "../../assets/images/rotbe-bartar/rotbe-10.webp";
+import good_students_11 from "../../assets/images/rotbe-bartar/rotbe-11.webp";
+import good_students_12 from "../../assets/images/rotbe-bartar/rotbe-12.webp";
+import good_students_13 from "../../assets/images/rotbe-bartar/rotbe-13.webp";
+import good_students_14 from "../../assets/images/rotbe-bartar/rotbe-14.webp";
 import good_students_2 from "../../assets/images/rotbe-bartar/rotbe-2.webp";
 import good_students_3 from "../../assets/images/rotbe-bartar/rotbe-3.webp";
 import good_students_4 from "../../assets/images/rotbe-bartar/rotbe-4.webp";
@@ -43,15 +37,10 @@ import good_students_6 from "../../assets/images/rotbe-bartar/rotbe-6.webp";
 import good_students_7 from "../../assets/images/rotbe-bartar/rotbe-7.webp";
 import good_students_8 from "../../assets/images/rotbe-bartar/rotbe-8.webp";
 import good_students_9 from "../../assets/images/rotbe-bartar/rotbe-9.webp";
-import good_students_10 from "../../assets/images/rotbe-bartar/rotbe-10.webp";
-import good_students_11 from "../../assets/images/rotbe-bartar/rotbe-11.webp";
-import good_students_12 from "../../assets/images/rotbe-bartar/rotbe-12.webp";
-import good_students_13 from "../../assets/images/rotbe-bartar/rotbe-13.webp";
-import good_students_14 from "../../assets/images/rotbe-bartar/rotbe-14.webp";
-import urls from "../urls/url";
-import Navigate_to_specials from "../navigate-to-specilas/navigate-to-specials";
 import { DataContext } from "../context/DataContext";
 import Kelas_item from "../kelas-item/kelas-item";
+import Navigate_to_specials from "../navigate-to-specilas/navigate-to-specials";
+import urls from "../urls/url";
 
 const len = 8;
 const user = JSON.parse(localStorage.getItem("user-kad"))

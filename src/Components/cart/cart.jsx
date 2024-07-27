@@ -25,7 +25,7 @@ const Cart = () => {
   const get_naghd_link = () => {
     set_cash_pause(true);
     axios
-      .get(`${urls.sale}${user.user_id}-0-true`)
+      .get(`${urls.sale}${user.user_id}-0-false`)
       .then((res) => {
         // console.log(res.data);
         const { error, response, result } = res.data;
@@ -44,7 +44,7 @@ const Cart = () => {
   const get_ghest_link = () => {
     set_ghest_pay_pause(true);
     axios
-      .get(`${urls.sale}${user.user_id}-2-true`)
+      .get(`${urls.sale}${user.user_id}-2-false`)
       .then((res) => {
         // console.log(res.data);
         const { error, response, result } = res.data;
@@ -162,7 +162,7 @@ const Cart = () => {
                   تومان
                 </span>
               </span>
-              <span className="final-data-item">
+              {/* <span className="final-data-item">
                 <span className="item-title">اعتبار کیف پول</span>
                 <span className="item-num">
                   <bdi>
@@ -173,15 +173,15 @@ const Cart = () => {
                     تومان
                   </bdi>
                 </span>
-              </span>
+              </span> */}
               <span className="final-data-item sumation">
                 <span className="item-title">جمع سبد خرید</span>
                 <span className="item-num">
                   {split_in_three(
                     convert_to_persian(
                       cart && user
-                        ? cart.final_price - calcute_user_wallet() >= 0
-                          ? cart.final_price - calcute_user_wallet()
+                        ? cart.final_price >= 0
+                          ? cart.final_price
                           : 0
                         : 0
                     )

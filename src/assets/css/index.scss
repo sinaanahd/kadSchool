@@ -7884,9 +7884,23 @@ input[type=number] {
         @include flexMixin(column,flex-start,center);
         gap: 15px;
         transition: $transition;
+        overflow: hidden;
         img{
             border-radius: 20px;
         }
+        .class-for-1404 {
+            position: absolute;
+            width: 150px;
+            background-color: $yellowColor;
+            color: #fff;
+            height: 30px;
+            border-radius: 12px;
+            @include flexMixin(row, center, center);
+            transform: rotate(45deg);
+            top: 20px;
+            right: -40px;
+        }
+        
     }
     .class-name{
         font-size: 15px;
@@ -8573,12 +8587,27 @@ input[type=number] {
     padding: 15px 10px;
     position: relative;
     height: 206px;
+    overflow: hidden;
 
     img {
         width: 130px;
         border-radius: 15px;
     }
     transition: $transition;
+
+    .class-for-1404{
+        position: absolute;
+        width: 150px;
+        background-color: $yellowColor;
+        color: #fff;
+        height: 30px;
+        border-radius: 12px;
+        @include flexMixin(row,center,center);
+        transform: rotate(45deg);
+        top: 20px;
+        right: -40px;
+    }
+
     .img-dore-place {
         flex: 0 0 130px;
         @include flexMixin(column, flex-start, center);

@@ -448,6 +448,11 @@ const R_SingleTeacher = () => {
                         "-"
                       )}`}
                     >
+                      {k.isFor1404 ? (
+                        <span className="class-for-1404 font-bold">۱۴۰۴</span>
+                      ) : (
+                        <></>
+                      )}
                       <img
                         src={k.image_link}
                         alt={k.kelas_title}

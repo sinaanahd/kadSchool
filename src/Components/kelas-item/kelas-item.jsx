@@ -12,6 +12,11 @@ const Kelas_item = ({ k, eager_load }) => {
     : false;
   return (
     <div className="class-item-single-component">
+      {k.isFor1404 ? (
+        <span className="class-for-1404 font-bold">۱۴۰۴</span>
+      ) : (
+        <></>
+      )}
       <div className="img-dore-place">
         <Link
           onClick={scrollToTop}
